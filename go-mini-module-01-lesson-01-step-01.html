@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f9fc">
+  <meta name="description" content="Добро пожаловать на курс Go-шечка (mini). На связи Ролан.">
+  <title>Go-шечка (mini) — модуль 01, урок 01, шаг 01</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #151925;
+      --muted: #71798b;
+      --paper: #f8f9fc;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font: inherit; }
+
+    .page {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.98) 0, rgba(255,255,255,.77) 37%, transparent 70%),
+        radial-gradient(ellipse at 12% 12%, rgba(125,190,255,.2), transparent 36%),
+        radial-gradient(ellipse at 89% 78%, rgba(196,164,255,.17), transparent 38%),
+        var(--paper);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      padding: 54px 24px 70px;
+    }
+
+    .greetings,
+    .emoji-rain {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .greetings {
+      z-index: 0;
+      perspective: 900px;
+      perspective-origin: 50% 48%;
+      transform-style: preserve-3d;
+    }
+
+    .word {
+      position: absolute;
+      display: block;
+      color: var(--word-color);
+      opacity: 0;
+      font-size: var(--font-size, 27px);
+      font-weight: 760;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+      user-select: none;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      animation: fly-past var(--duration) linear var(--delay) infinite;
+    }
+
+    @keyframes fly-past {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 0, -560px) scale(.52);
+      }
+      12% { opacity: .13; }
+      72% { opacity: .12; }
+      100% {
+        opacity: 0;
+        transform: translate3d(var(--dx), 0, 120px) scale(1.8);
+      }
+    }
+
+    .intro {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1000px);
+      padding: 0 16px;
+      text-align: center;
+      animation: arrive .85s cubic-bezier(.2,.75,.2,1) both;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 84px);
+      font-weight: 770;
+      letter-spacing: -.075em;
+      line-height: 1.06;
+    }
+
+    .course-name {
+      margin: 7px 0 0;
+      color: transparent;
+      background: linear-gradient(105deg, #128fdc 8%, #5369ed 55%, #8759dc 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      font-size: clamp(44px, 7vw, 84px);
+      font-weight: 770;
+      letter-spacing: -.075em;
+      line-height: 1.08;
+    }
+
+    .course-name small {
+      font-size: .62em;
+      letter-spacing: -.05em;
+      white-space: nowrap;
+    }
+
+    .byline {
+      margin: 23px 0 0;
+      color: #71798b;
+      font-size: 18px;
+      font-weight: 520;
+      letter-spacing: -.02em;
+    }
+
+    .course-copy {
+      max-width: 650px;
+      margin: 16px auto 0;
+      color: #555e6f;
+      font-size: clamp(17px, 1.9vw, 20px);
+      font-weight: 430;
+      letter-spacing: -.025em;
+      line-height: 1.65;
+    }
+
+    .emoji-rain { z-index: 0; }
+
+    .rain-hand {
+      position: absolute;
+      top: -64px;
+      left: var(--x);
+      display: block;
+      opacity: 0;
+      font-size: var(--size, 40px);
+      filter: drop-shadow(0 5px 10px rgba(35,45,75,.1));
+      will-change: transform, opacity;
+      animation: fall-gently var(--duration, 9s) linear var(--delay, 0s) both;
+    }
+
+    @keyframes fall-gently {
+      0% {
+        opacity: 0;
+        transform: translate3d(0,-12vh,0) rotate(-12deg) scale(.78);
+      }
+      12% { opacity: .46; }
+      36% {
+        transform: translate3d(var(--sway-a),28vh,0) rotate(8deg) scale(.96);
+      }
+      68% {
+        transform: translate3d(var(--sway-b),68vh,0) rotate(-8deg) scale(1.02);
+      }
+      86% { opacity: .4; }
+      100% {
+        opacity: 0;
+        transform: translate3d(var(--sway-end),116vh,0) rotate(12deg) scale(.9);
+      }
+    }
+
+    .hello-again {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 26px;
+      padding: 11px 16px;
+      border: 1px solid rgba(46,57,84,.1);
+      border-radius: 999px;
+      color: #485064;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 5px 20px rgba(44,60,99,.07);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .hello-again:hover {
+      transform: translateY(-2px);
+      background: #fff;
+      box-shadow: 0 9px 26px rgba(44,60,99,.12);
+    }
+
+    .hello-again:focus-visible {
+      outline: 3px solid rgba(69,112,245,.42);
+      outline-offset: 3px;
+    }
+
+    .hello-again span[aria-hidden="true"] { font-size: 18px; }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(16px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding: 42px 16px 58px; }
+      .intro { padding: 0 6px; }
+      h1, .course-name { font-size: clamp(39px, 9vw, 64px); letter-spacing: -.07em; }
+      .byline { margin-top: 18px; font-size: 16px; }
+      .course-copy { max-width: 500px; margin-top: 14px; font-size: 17px; }
+      .word { font-size: clamp(20px, 5vw, 30px); }
+      .rain-hand { font-size: var(--mobile-size, 30px); }
+      .hello-again { margin-top: 22px; }
+    }
+
+    @media (max-width: 390px) {
+      h1, .course-name { font-size: 36px; }
+      .course-copy { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .word { opacity: .08; transform: none; }
+      .rain-hand { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="hero">
+      <div class="greetings" id="greetings" aria-hidden="true"></div>
+      <div class="emoji-rain" id="emojiRain" aria-hidden="true"></div>
+
+      <section class="intro">
+        <h1>Добро пожаловать<br>на курс</h1>
+        <p class="course-name">Go-шечка <small>(mini)</small></p>
+        <p class="byline">На связи Ролан.</p>
+        <p class="course-copy">Друзья, рад видеть вас всех на этом курсе! Мы начнём с первых команд на Go, а дальше научимся хранить данные, выбирать действия с помощью условий, повторять их в циклах и собирать код в функции. После каждой темы сразу перейдём к задачам. А в конце объединим всё, что узнали, в небольшом проекте. Поехали?</p>
+        <button class="hello-again" id="helloAgain" type="button" aria-label="Повторно показать приветственные смайлики">
+          <span aria-hidden="true">👋</span>
+          <span>Привет ещё раз</span>
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const greetingWords = [
+      'HELLO', '¡HOLA!', 'CIAO', 'BONJOUR', '你好', 'こんにちは', '안녕하세요', 'SALUT',
+      'Привет', 'HALLO', 'مرحبا', 'OLÁ', 'Здравствуй', 'やあ', 'สวัสดี', 'नमस्ते',
+      'HEJ', 'MERHABA', 'ΓΕΙΑ', 'CZEŚĆ', 'AHOJ', 'SHALOM', 'SAWUBONA', 'KIA ORA',
+      'JUMBO', 'HABARI', 'BULA', 'SALAM', 'OLA', '안녕'
+    ];
+    const wordColors = ['#347de7', '#d96e8d', '#38a88e', '#8064d9', '#e28c43', '#4196b8', '#d56c50', '#6557d6'];
+    const greetings = document.querySelector('#greetings');
+    const rain = document.querySelector('#emojiRain');
+    const helloAgain = document.querySelector('#helloAgain');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    greetingWords.forEach((text, index) => {
+      const word = document.createElement('span');
+      const lane = index % 5;
+      const column = [5, 20, 35, 50, 65, 80][Math.floor(index / 5)];
+      const row = [11, 30, 49, 68, 86][lane];
+      word.className = 'word';
+      word.textContent = text;
+      word.style.left = `${column + Math.random() * 5}%`;
+      word.style.top = `${row}%`;
+      word.style.setProperty('--word-color', wordColors[index % wordColors.length]);
+      word.style.setProperty('--font-size', `${20 + Math.round(Math.random() * 15)}px`);
+      word.style.setProperty('--dx', `${Math.round(Math.random() * 14 - 7)}vw`);
+      word.style.setProperty('--duration', `${10 + Math.random() * 8}s`);
+      word.style.setProperty('--delay', `${-Math.random() * 18}s`);
+      greetings.append(word);
+    });
+
+    const helloHands = ['👋', '👋🏻', '👋🏼', '👋🏽', '👋🏾', '👋🏿'];
+
+    function showGreetingRain() {
+      if (reduceMotion.matches) return;
+
+      const positions = Array.from({ length: 10 }, (_, index) => index * 10 + Math.random() * 8);
+      for (let index = positions.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [positions[index], positions[swapIndex]] = [positions[swapIndex], positions[index]];
+      }
+
+      for (let index = 0; index < 10; index += 1) {
+        const hand = document.createElement('span');
+        hand.className = 'rain-hand';
+        hand.textContent = helloHands[index % helloHands.length];
+        hand.style.setProperty('--x', `${positions[index]}%`);
+        hand.style.setProperty('--sway-a', `${Math.round(Math.random() * 46 - 23)}px`);
+        hand.style.setProperty('--sway-b', `${Math.round(Math.random() * 54 - 27)}px`);
+        hand.style.setProperty('--sway-end', `${Math.round(Math.random() * 50 - 25)}px`);
+        hand.style.setProperty('--duration', `${8 + Math.random() * 3}s`);
+        hand.style.setProperty('--delay', `${Math.random() * 3500}ms`);
+        hand.style.setProperty('--size', `${29 + Math.round(Math.random() * 13)}px`);
+        hand.style.setProperty('--mobile-size', `${25 + Math.round(Math.random() * 9)}px`);
+        hand.addEventListener('animationend', () => hand.remove(), { once: true });
+        rain.append(hand);
+      }
+    }
+
+    showGreetingRain();
+    helloAgain.addEventListener('click', showGreetingRain);
+  </script>
+</body>
+</html>
