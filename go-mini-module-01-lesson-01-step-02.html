@@ -49,7 +49,7 @@
       top: 50%;
       left: 50%;
       width: var(--track-width);
-      height: var(--track-height);
+      aspect-ratio: 1;
       border: 1px solid #edf2f8;
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -57,22 +57,19 @@
     }
 
     .orbit-track--outer {
-      --track-width: min(94vw, 940px);
-      --track-height: min(96svh, 800px);
+      --track-width: min(94vw, 820px);
       --plane-color: #2481f2;
     }
 
     .orbit-track--middle {
-      --track-width: min(86vw, 860px);
-      --track-height: min(88svh, 760px);
+      --track-width: min(86vw, 760px);
       --plane-color: #7566e9;
       border-style: solid;
       border-color: #eef2f8;
     }
 
     .orbit-track--inner {
-      --track-width: min(78vw, 780px);
-      --track-height: min(82svh, 720px);
+      --track-width: min(78vw, 700px);
       --plane-color: #20a1d8;
       border-color: #f2f5f9;
     }
@@ -81,34 +78,28 @@
       position: absolute;
       top: var(--plane-top, 50%);
       left: var(--plane-left, 50%);
-      display: grid;
-      width: var(--plane-size, 58px);
-      height: var(--plane-size, 58px);
-      place-items: center;
-      border: 1px solid #edf2f8;
-      border-radius: 21px;
-      background: #fff;
-      box-shadow: 0 10px 30px rgba(37, 79, 142, .1);
+      width: var(--plane-size, 34px);
+      height: var(--plane-size, 34px);
       color: var(--plane-color);
       transform: translate(-50%, -50%);
     }
 
-    .plane-badge svg { width: 30px; height: 30px; }
+    .plane-badge svg { display: block; width: 100%; height: 100%; }
 
     .orbit-track--outer .plane-badge { --plane-left: 83%; --plane-top: 84%; }
     .orbit-track--middle .plane-badge { --plane-left: 7%; --plane-top: 75%; }
     .orbit-track--inner .plane-badge { --plane-left: 47%; --plane-top: 1%; }
 
     @media (max-width: 600px) {
-      .orbit-track--outer { --track-width: 88vw; --track-height: 96svh; }
-      .orbit-track--middle { --track-width: 84vw; --track-height: 88svh; }
-      .orbit-track--inner { --track-width: 80vw; --track-height: 80svh; }
+      .orbit-track--outer { --track-width: min(98vw, 390px); }
+      .orbit-track--middle { --track-width: min(94vw, 375px); }
+      .orbit-track--inner { --track-width: min(90vw, 360px); }
     }
 
     .content {
       position: relative;
       z-index: 1;
-      width: min(100% - 40px, 660px);
+      width: min(100% - 40px, 580px);
       padding: 36px 24px;
       text-align: center;
     }
@@ -171,11 +162,12 @@
     .channel-link svg { width: 20px; height: 20px; }
 
     @media (max-width: 600px) {
-      .plane-badge { --plane-size: 48px; border-radius: 18px; }
-      .plane-badge svg { width: 25px; height: 25px; }
-      .content { width: min(70vw, 520px); padding-inline: 10px; }
-      h1 { font-size: clamp(27px, 8.8vw, 34px); }
-      .copy { margin-top: 20px; font-size: 17px; }
+      .plane-badge { --plane-size: 30px; }
+      .content { width: min(60vw, 280px); padding: 14px 0; }
+      h1 { font-size: clamp(24px, 7vw, 28px); }
+      .copy { margin-top: 12px; font-size: 14px; line-height: 1.45; }
+      .channel-link { min-height: 44px; gap: 8px; margin-top: 16px; padding-inline: 16px; font-size: 14px; }
+      .channel-link svg { width: 17px; height: 17px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
