@@ -38,60 +38,71 @@
       background: var(--paper);
     }
 
-    .orbit {
+    .orbits {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .orbit-track {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: min(70vw, 660px);
-      aspect-ratio: 1;
+      width: var(--track-width);
+      height: var(--track-height);
       border: 1px solid #edf2f8;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
 
-    .orbit::before,
-    .orbit::after {
-      position: absolute;
-      inset: 9%;
-      border: 1px dashed #eef2f8;
-      border-radius: inherit;
-      content: "";
+    .orbit-track--outer {
+      --track-width: min(94vw, 940px);
+      --track-height: min(96svh, 800px);
+      --plane-color: #2481f2;
     }
 
-    .orbit::after {
-      inset: 18%;
+    .orbit-track--middle {
+      --track-width: min(86vw, 860px);
+      --track-height: min(88svh, 760px);
+      --plane-color: #7566e9;
       border-style: solid;
-      border-color: #f4f6fa;
+      border-color: #eef2f8;
     }
 
-    .orbit-rotator {
-      position: absolute;
-      inset: 0;
-      animation: orbit 24s linear infinite;
-      will-change: transform;
+    .orbit-track--inner {
+      --track-width: min(78vw, 780px);
+      --track-height: min(82svh, 720px);
+      --plane-color: #20a1d8;
+      border-color: #f2f5f9;
     }
 
     .plane-badge {
       position: absolute;
-      top: 0;
-      left: 50%;
+      top: var(--plane-top, 50%);
+      left: var(--plane-left, 50%);
       display: grid;
-      width: 62px;
-      height: 62px;
+      width: var(--plane-size, 58px);
+      height: var(--plane-size, 58px);
       place-items: center;
       border: 1px solid #edf2f8;
-      border-radius: 22px;
+      border-radius: 21px;
       background: #fff;
       box-shadow: 0 10px 30px rgba(37, 79, 142, .1);
-      color: var(--blue);
-      transform: translate(-50%, -50%) rotate(90deg);
+      color: var(--plane-color);
+      transform: translate(-50%, -50%);
     }
 
-    .plane-badge svg { width: 31px; height: 31px; }
+    .plane-badge svg { width: 30px; height: 30px; }
 
-    @keyframes orbit {
-      to { transform: rotate(1turn); }
+    .orbit-track--outer .plane-badge { --plane-left: 83%; --plane-top: 84%; }
+    .orbit-track--middle .plane-badge { --plane-left: 7%; --plane-top: 75%; }
+    .orbit-track--inner .plane-badge { --plane-left: 47%; --plane-top: 1%; }
+
+    @media (max-width: 600px) {
+      .orbit-track--outer { --track-width: 88vw; --track-height: 96svh; }
+      .orbit-track--middle { --track-width: 84vw; --track-height: 88svh; }
+      .orbit-track--inner { --track-width: 80vw; --track-height: 80svh; }
     }
 
     .content {
@@ -160,13 +171,10 @@
     .channel-link svg { width: 20px; height: 20px; }
 
     @media (max-width: 600px) {
-      .orbit { width: min(88vw, 430px); }
-      .orbit::before { inset: 8%; }
-      .orbit::after { inset: 18%; }
-      .plane-badge { width: 52px; height: 52px; border-radius: 19px; }
-      .plane-badge svg { width: 27px; height: 27px; }
-      .content { width: min(100% - 24px, 520px); padding-inline: 10px; }
-      h1 { font-size: clamp(42px, 11vw, 62px); }
+      .plane-badge { --plane-size: 48px; border-radius: 18px; }
+      .plane-badge svg { width: 25px; height: 25px; }
+      .content { width: min(70vw, 520px); padding-inline: 10px; }
+      h1 { font-size: clamp(27px, 8.8vw, 34px); }
       .copy { margin-top: 20px; font-size: 17px; }
     }
 
@@ -182,8 +190,22 @@
 </head>
 <body>
   <main class="page">
-    <div class="orbit" aria-hidden="true">
-      <div class="orbit-rotator">
+    <div class="orbits" aria-hidden="true">
+      <div class="orbit-track orbit-track--outer" data-orbit data-duration="36" data-phase="0.12" data-direction="1">
+        <div class="plane-badge">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21.3 3.2 18 20.1c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.7-8.8c.4-.4-.1-.6-.6-.3L5 13.1l-5.1-1.6c-1.1-.3-1.1-1.1.2-1.6L19.7 2c.9-.3 1.7.2 1.6 1.2Z" fill="currentColor" transform="translate(2 0) scale(.9)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="orbit-track orbit-track--middle" data-orbit data-duration="31" data-phase="0.42" data-direction="-1">
+        <div class="plane-badge">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21.3 3.2 18 20.1c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.7-8.8c.4-.4-.1-.6-.6-.3L5 13.1l-5.1-1.6c-1.1-.3-1.1-1.1.2-1.6L19.7 2c.9-.3 1.7.2 1.6 1.2Z" fill="currentColor" transform="translate(2 0) scale(.9)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="orbit-track orbit-track--inner" data-orbit data-duration="26" data-phase="0.74" data-direction="1">
         <div class="plane-badge">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M21.3 3.2 18 20.1c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.7-8.8c.4-.4-.1-.6-.6-.3L5 13.1l-5.1-1.6c-1.1-.3-1.1-1.1.2-1.6L19.7 2c.9-.3 1.7.2 1.6 1.2Z" fill="currentColor" transform="translate(2 0) scale(.9)"/>
@@ -203,5 +225,34 @@
       </a>
     </section>
   </main>
+  <script>
+    (() => {
+      const flights = [...document.querySelectorAll('[data-orbit]')].map(track => ({
+        track,
+        plane: track.querySelector('.plane-badge'),
+        duration: Number(track.dataset.duration) * 1000,
+        phase: Number(track.dataset.phase),
+        direction: Number(track.dataset.direction),
+      }));
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const movePlanes = time => {
+        flights.forEach(({ track, plane, duration, phase, direction }) => {
+          const angle = 2 * Math.PI * (phase + direction * time / duration);
+          plane.style.left = `${50 + Math.cos(angle) * 50}%`;
+          plane.style.top = `${50 + Math.sin(angle) * 50}%`;
+        });
+      };
+
+      movePlanes(0);
+      if (!prefersReducedMotion) {
+        const animate = time => {
+          movePlanes(time);
+          requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      }
+    })();
+  </script>
 </body>
 </html>
