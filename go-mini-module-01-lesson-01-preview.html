@@ -24,9 +24,10 @@
   <script>
     const frame=document.querySelector('#preview');
     const tabs=[...document.querySelectorAll('[data-step]')];
-    function openStep(id){const button=tabs.find(b=>b.dataset.step===id);if(!button)return;tabs.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const url='go-mini-module-01-lesson-01-step-'+id+'.html';frame.src=url;frame.title='Предпросмотр шага: '+button.textContent;document.querySelector('#open-page').href=url;history.replaceState(null,'','#'+id);}
+    const heights={'01':620,'02':720,'03':700,'04':700,'05':860,'06':600};
+    function openStep(id){const button=tabs.find(b=>b.dataset.step===id);if(!button)return;tabs.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const url='go-mini-module-01-lesson-01-step-'+id+'.html';frame.src=url;frame.style.height=heights[id]+'px';frame.title='Предпросмотр шага: '+button.textContent;document.querySelector('#open-page').href=url;history.replaceState(null,'','#'+id);}
     tabs.forEach(b=>b.addEventListener('click',()=>openStep(b.dataset.step)));
-    if(/^#0[1-6]$/.test(location.hash))openStep(location.hash.slice(1));
+    openStep(/^#0[1-6]$/.test(location.hash)?location.hash.slice(1):'03');
     document.querySelector('#phone-toggle').addEventListener('click',event=>{const on=document.body.classList.toggle('phone');event.currentTarget.setAttribute('aria-pressed',String(on));event.currentTarget.textContent=on?'Полная ширина':'Телефон';});
   </script>
 </body>

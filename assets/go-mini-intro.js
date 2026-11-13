@@ -24,7 +24,6 @@
   };
   const icon = name => '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="' + (paths[name] || paths.spark) + '"/></svg>';
   document.querySelectorAll('[data-icon]').forEach(node => { node.innerHTML = icon(node.dataset.icon); });
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const state = {
     read(key, fallback) { try { return JSON.parse(localStorage.getItem('go-mini-intro:' + key)) ?? fallback; } catch { return fallback; } },
     write(key, value) { try { localStorage.setItem('go-mini-intro:' + key, JSON.stringify(value)); } catch { /* State is optional inside embedded pages. */ } }
@@ -100,34 +99,49 @@
     });
   }
 
-  function celebrate() {
-    if (reduced.matches) return;
-    const layer = document.querySelector('.celebration');
-    const colors = ['#74b6ec','#b3a1eb','#77c9b4','#edbd83','#e8a7be'];
-    for (let i = 0; i < 32; i++) {
-      const piece = document.createElement('i');
-      piece.className = 'confetti';
-      const values = {
-        '--x':Math.random()*100+'%', '--w':4+Math.random()*5+'px', '--h':7+Math.random()*8+'px',
-        '--c':colors[i%colors.length], '--drift':(Math.random()-.5)*180+'px',
-        '--fall':layer.clientHeight+60+'px', '--turn':(Math.random()-.5)*640+'deg',
-        '--duration':3+Math.random()*2+'s', '--delay':Math.random()*.9+'s'
-      };
-      Object.entries(values).forEach(([key,value]) => piece.style.setProperty(key,value));
-      piece.addEventListener('animationend', () => piece.remove(), {once:true});
-      layer.append(piece);
-    }
-  }
-
   function launch() {
     const button = document.querySelector('#launch-button');
-    const output = document.querySelector('#launch-output');
-    button.addEventListener('click', () => {
-      document.querySelector('.launch').classList.add('started');
-      output.hidden = false;
-      button.innerHTML = icon('check') + 'Поехали ещё раз';
-      celebrate();
+    const slider = document.querySelector('#continue-slider');
+    let drag = null, progress = 0, completed = false;
+    const travel = () => Math.max(1,slider.clientWidth-button.offsetWidth-12);
+    function move(value) {
+      progress=Math.max(0,Math.min(1,value));
+      slider.style.setProperty('--drag',progress*travel()+'px');
+      slider.style.setProperty('--progress',progress);
+    }
+    function complete() {
+      if(completed)return;
+      completed=true;drag=null;move(1);
+      slider.classList.remove('is-dragging');slider.classList.add('is-complete');
+      document.querySelector('#continue-label').textContent='Переходим…';
+      button.innerHTML=icon('check');button.disabled=true;
+      document.querySelector('#continue-link').click();
+    }
+    button.addEventListener('pointerdown',event=>{
+      if(completed||event.button!==0)return;
+      drag={x:event.clientX,start:progress,id:event.pointerId};
+      button.setPointerCapture(event.pointerId);slider.classList.add('is-dragging');
     });
+    button.addEventListener('pointermove',event=>{
+      if(drag&&event.pointerId===drag.id)move(drag.start+(event.clientX-drag.x)/travel());
+    });
+    button.addEventListener('pointerup',event=>{
+      if(!drag||event.pointerId!==drag.id)return;
+      const accepted=progress>=.94;
+      drag=null;slider.classList.remove('is-dragging');
+      if(button.hasPointerCapture(event.pointerId))button.releasePointerCapture(event.pointerId);
+      if(accepted)complete();else move(0);
+    });
+    function cancel() {if(!completed){drag=null;slider.classList.remove('is-dragging');move(0);}}
+    button.addEventListener('pointercancel',cancel);
+    button.addEventListener('lostpointercapture',()=>{if(drag)cancel();});
+    button.addEventListener('click',event=>{if(event.detail===0)complete();});
+    button.addEventListener('keydown',event=>{
+      if(event.key==='ArrowRight'||event.key==='ArrowLeft'){
+        event.preventDefault();move(progress+(event.key==='ArrowRight'?.15:-.15));
+      }else if(event.key==='Escape'||event.key==='Home'){event.preventDefault();move(0);}
+    });
+    window.addEventListener('resize',()=>{if(!completed)move(0);});
   }
 
   function roadmap() {
@@ -143,7 +157,8 @@
     const freeButton = document.querySelector('#free-filter');
     const savedRaw = state.read('route', []);
     let saved = new Set(Array.isArray(savedRaw) ? savedRaw.filter(id => courses.has(id)) : []);
-    let trackId = 'all', view = 'map', freeOnly = false, scale = 1, size = {width:1340,height:790}, activeCourse = null;
+    let trackId = 'all', view = 'map', freeOnly = false, scale = 1, size = {width:1340,height:790}, activeCourse = null, listPage = 0;
+    const embedded = document.documentElement.classList.contains('embedded');
     const styles = track => '--track-color:'+track.color+';--track-tint:'+track.tint+';--track-line:'+track.line;
     const cover = course => '<span class="cover-frame"><img class="course-cover" src="assets/course-covers/'+course.id+(course.current?'.svg':'.png')+'" alt="" width="160" height="160" decoding="async"></span>';
     const marks = {go:'Go',web:'</>',backend:'{ }',tools:'⌘',ai:'✳',fullstack:'WH',other:'Aa'};
@@ -217,10 +232,14 @@
     function fit() { setScale(Math.min((viewport.clientWidth-30)/size.width,(viewport.clientHeight-30)/size.height,1),false);viewport.scrollLeft=0;viewport.scrollTop=0; }
     function renderList() {
       const selected=filtered();
-      list.innerHTML=selected.length?'<div class="list-grid">'+selected.map(course=>{
+      const pageSize=embedded?(window.innerWidth<=480?3:6):Math.max(1,selected.length);
+      const pages=Math.max(1,Math.ceil(selected.length/pageSize));
+      listPage=Math.min(listPage,pages-1);
+      const visible=selected.slice(listPage*pageSize,(listPage+1)*pageSize);
+      list.innerHTML=selected.length?'<div class="list-grid">'+visible.map(course=>{
         const t=tracks.get(course.track);
         return '<button type="button" class="list-course" data-course="'+course.id+'" style="'+styles(t)+'">'+cover(course)+'<span class="list-copy"><span class="list-track">'+safe(t.title)+'</span><strong>'+safe(course.title)+'</strong><small class="'+(course.free?'free':'')+'">'+(course.current?'Вы здесь':course.free?'Бесплатно':'Платный курс')+(saved.has(course.id)?' · В маршруте':'')+'</small></span><span class="list-arrow" aria-hidden="true">'+icon('arrow')+'</span></button>';
-      }).join('')+'</div>':'<div class="empty-state">Ничего не нашлось. Попробуйте другое название или уберите фильтр.</div>';
+      }).join('')+'</div>'+(pages>1?'<nav class="catalog-pagination" aria-label="Страницы каталога"><button type="button" data-catalog-page="'+(listPage-1)+'"'+(listPage===0?' disabled':'')+'>← Назад</button><span aria-live="polite">'+(listPage+1)+' / '+pages+'</span><button type="button" data-catalog-page="'+(listPage+1)+'"'+(listPage===pages-1?' disabled':'')+'>Дальше →</button></nav>':''):'<div class="empty-state">Ничего не нашлось. Попробуйте другое название или уберите фильтр.</div>';
       document.querySelector('#result-status').textContent='Найдено: '+selected.length+' '+plural(selected.length,'курс','курса','курсов');
     }
     function renderRoute() {
@@ -275,14 +294,16 @@
     const tabs=document.querySelector('#track-filters');
     tabs.innerHTML='<button type="button" data-track="all" aria-pressed="true">Все направления</button>'+catalog.tracks.map(t=>'<button type="button" data-track="'+t.id+'" aria-pressed="false" style="'+styles(t)+'">'+safe(t.title)+'</button>').join('');
     document.addEventListener('click',event=>{
+      const pagination=event.target.closest('[data-catalog-page]');
+      if(pagination){listPage=Number(pagination.dataset.catalogPage);renderList();list.querySelector('.list-course')?.focus({preventScroll:true});return;}
       const course=event.target.closest('[data-course]');
       if(course){openCourse(course.dataset.course);return;}
       const track=event.target.closest('[data-track]');
-      if(track){trackId=track.dataset.track;search.value='';render(true);}
+      if(track){trackId=track.dataset.track;search.value='';listPage=0;render(true);}
     });
     document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{view=button.dataset.view;if(view==='map')search.value='';render(true);}));
-    search.addEventListener('input',()=>render(false));
-    freeButton.addEventListener('click',()=>{freeOnly=!freeOnly;render(true);});
+    search.addEventListener('input',()=>{listPage=0;render(false);});
+    freeButton.addEventListener('click',()=>{freeOnly=!freeOnly;listPage=0;render(true);});
     document.querySelector('#zoom-in').addEventListener('click',()=>setScale(scale+.15,true));
     document.querySelector('#zoom-out').addEventListener('click',()=>setScale(scale-.15,true));
     document.querySelector('#fit-map').addEventListener('click',fit);
@@ -302,6 +323,8 @@
     viewport.addEventListener('pointermove',event=>{if(drag){viewport.scrollLeft=drag.left-(event.clientX-drag.x);viewport.scrollTop=drag.top-(event.clientY-drag.y);}});
     const stop=()=>{drag=null;viewport.classList.remove('dragging');};
     viewport.addEventListener('pointerup',stop);viewport.addEventListener('pointercancel',stop);
+    let resizeFrame;
+    window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>render(true));});
     render(true);
   }
   const page=document.body.dataset.page;

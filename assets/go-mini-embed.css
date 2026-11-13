@@ -1,0 +1,135 @@
+/* Keep the page edge indistinguishable from the white Stepik lesson. */
+html,body{background:#fff}
+.launch-glow{display:none}
+.map-panel{background:#fff;border:0;border-radius:0;box-shadow:none}
+.map-viewport{background:#fff;scrollbar-width:none}
+.map-viewport::-webkit-scrollbar{display:none}
+
+.embedded body{height:100svh}
+.embedded .page{width:calc(100% - 40px);max-width:1100px;padding:22px 0}
+.embedded .page-head h1{font-size:clamp(34px,5.2vw,56px)}
+.embedded .page-head .lede{margin-top:12px;font-size:16px;line-height:1.55}
+
+/* Welcome: no viewport-height minimum plus extra padding below it. */
+.embedded body:not([data-page])>.page{width:100%;max-width:none;height:100svh;min-height:0;padding:0}
+.embedded .hero{height:100%;min-height:0;padding:24px 20px}
+.embedded .intro h1,.embedded .course-name{font-size:clamp(36px,6.4vw,70px)}
+.embedded .intro{max-width:960px;padding:0}
+.embedded .byline{margin-top:18px;font-size:16px}
+.embedded .course-copy{margin-top:14px;font-size:17px;line-height:1.6}
+.embedded .hello-again{margin-top:20px}
+
+/* Telegram: all three complete circular orbits fit within the panel. */
+.embedded .orbit-track--outer{--track-width:min(90vw,calc(100svh - 40px),680px)}
+.embedded .orbit-track--middle{--track-width:min(76vw,calc(100svh - 142px),570px)}
+.embedded .orbit-track--inner{--track-width:min(62vw,calc(100svh - 244px),460px)}
+.embedded .content{padding:20px 12px}
+.embedded .content h1{font-size:clamp(28px,6.4vw,64px)}
+.embedded .content .copy{margin-top:18px;font-size:17px}
+.embedded .channel-link{margin-top:22px;min-height:50px}
+
+/* Survey: the actual submitted answer stays in Stepik's native input. */
+.embedded .survey-layout{gap:28px;margin-top:22px;grid-template-columns:minmax(0,1fr) 230px}
+.embedded .source-card{min-height:76px;padding:14px;gap:11px;border-radius:16px}
+.embedded .source-icon{width:34px;height:34px;border-radius:11px}
+.embedded .source-icon .icon{width:18px;height:18px}
+.embedded .source-label{font-size:14px}
+.embedded .field-label{margin:18px 0 9px}
+.embedded textarea{min-height:72px;height:82px;resize:none}
+.embedded .answer-preview{padding:0;background:#fff;margin-top:14px}
+.embedded .answer-preview>.note,.embedded .answer-text{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.embedded .answer-preview .button{min-height:44px;padding:10px 17px}
+.embedded .answer-preview .status{margin-top:8px;font-size:12px;line-height:1.5}
+.embedded .journey-visual{min-height:280px}
+.embedded .journey-visual svg.route-art{height:230px}
+
+/* One expanded rule at a time keeps the entire page in the same panel. */
+.embedded .rules-layout{margin-top:20px;gap:28px;grid-template-columns:minmax(0,1fr) 260px}
+.embedded .rule summary{padding:13px 0;font-size:16px;gap:12px}
+.embedded .rule-mark{width:34px;height:34px;border-radius:11px}
+.embedded .rule-body{padding:0 12px 16px 46px;font-size:14px;line-height:1.6}
+.embedded .question-example{padding:8px 10px;margin-top:6px;font-size:12px}
+.embedded .agreement{padding:22px 20px;top:20px}
+.embedded .community-art{height:92px;margin-bottom:12px}
+.embedded .person{width:54px;height:54px;font-size:19px}
+.embedded .agreement h2{font-size:19px;margin-bottom:10px}
+.embedded .agreement p{font-size:13px;margin-bottom:16px}
+.embedded .agreement .status{min-height:0;margin:10px 0 0}
+.embedded .agreement .status:empty{display:none}
+
+/* The map is a pan/zoom canvas. The catalogue has pages, not a long inner scroll. */
+.embedded .roadmap-page{height:100svh;display:flex;flex-direction:column}
+.embedded .roadmap-toolbar{margin-top:18px;margin-bottom:10px}
+.embedded .track-filters{flex:none;padding-bottom:10px}
+.embedded .map-panel{display:flex;flex:1;min-height:0;flex-direction:column;overflow:visible}
+.embedded .map-viewport{height:auto;min-height:0;flex:1}
+.embedded .map-caption{padding:10px 0 0;border-top:0;flex:none}
+.embedded .catalog-list{padding:8px 0;min-height:0;flex:1}
+.embedded .list-grid{gap:12px}
+.embedded .list-course{min-height:124px;padding:15px;gap:14px;border-radius:19px}
+.embedded .list-course .cover-frame{width:80px;height:80px}
+.embedded .list-course strong{font-size:16px;margin:8px 0}
+.embedded .route-tray{position:relative;flex:none;margin-top:12px}
+.embedded .route-tray summary{padding:12px 0}
+.embedded .saved-route{position:absolute;bottom:100%;left:0;right:0;z-index:4;max-height:260px;overflow:auto;padding:16px;background:#fff;border:1px solid #e9edf4;border-radius:16px;box-shadow:0 -12px 35px #263d6412;scrollbar-width:none}
+.catalog-pagination{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:16px;color:#7786a0;font-size:12px}
+.catalog-pagination button{border:0;border-radius:10px;background:#f1f5fc;color:#55729d;padding:9px 14px;min-height:36px}
+.catalog-pagination button:disabled{opacity:.4}
+
+/* Continuing changes the top-level lesson, never the size of this panel. */
+.embedded .launch{height:100svh;min-height:0;padding:22px 20px}
+.embedded .launch-content{width:100%;max-width:760px}
+.embedded .go-art{width:min(100% - 70px,360px);height:116px;margin-bottom:20px}
+.embedded .go-letter{font-size:clamp(44px,7.5vw,65px)}
+.embedded .launch h1{font-size:clamp(40px,6vw,64px)}
+.embedded .launch .lede{margin-top:18px;font-size:16px;line-height:1.6}
+.embedded .launch .button{margin-top:20px;min-height:50px}
+.embedded .launch-copy{margin-top:14px;font-size:12px}
+.embedded .continue-slider{margin-top:22px}
+
+@media(max-width:800px){
+  .embedded .page{width:calc(100% - 32px);padding:18px 0}
+  .embedded .survey-layout{grid-template-columns:1fr;margin-top:20px}
+  .embedded .rules-layout{grid-template-columns:1fr;gap:18px}
+  .embedded .rule-body{padding-left:0}
+  .embedded .agreement{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding:16px;text-align:left}
+  .embedded .agreement .community-art,.embedded .agreement>p:not(.status){display:none}
+  .embedded .agreement h2{font-size:16px;margin:0;max-width:180px}
+  .embedded .agreement .button{width:auto;flex:none;min-height:44px;font-size:13px;padding:10px 14px}
+  .embedded .agreement .status{display:none}
+  .embedded .list-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .embedded .hero{padding:18px 16px}
+  .embedded .intro h1,.embedded .course-name{font-size:36px}
+  .embedded .byline{font-size:14px;margin-top:14px}
+  .embedded .course-copy{font-size:15px;line-height:1.55}
+  .embedded .hello-again{font-size:14px;margin-top:16px}
+  .embedded .content{width:min(62vw,280px);padding:12px 0}
+  .embedded .content h1{font-size:clamp(23px,7vw,30px)}
+  .embedded .content .copy{font-size:14px;line-height:1.45;margin-top:12px}
+  .embedded .channel-link{font-size:14px;min-height:44px;margin-top:16px}
+  .embedded .source-card{min-height:76px;flex-direction:row;align-items:center;padding:12px 10px;gap:9px}
+  .embedded .source-label{font-size:12px}
+  .embedded .source-icon{width:28px;height:28px;flex:none}
+  .embedded .rule summary{font-size:14px;padding:11px 0;gap:9px}
+  .embedded .rule-body{padding-left:0;font-size:13px}
+  .embedded .rule-mark{width:32px;height:32px}
+  .embedded .agreement{padding:14px 12px;gap:10px}
+  .embedded .agreement h2{font-size:14px;max-width:135px}
+  .embedded .agreement .button{font-size:12px;padding:10px 12px;gap:7px}
+  .embedded .agreement .button .icon{width:15px;height:15px}
+  .embedded .roadmap-page .catalog-count{margin-top:12px}
+  .embedded .roadmap-toolbar{margin-top:14px;gap:6px}
+  .embedded .map-caption{gap:6px}
+  .embedded .map-caption p{display:none}
+  .embedded .list-grid{grid-template-columns:1fr}
+  .embedded .list-course{min-height:114px;padding:12px}
+  .embedded .list-course .cover-frame{width:74px;height:74px}
+  .embedded .catalog-pagination{margin-top:10px}
+  .embedded .go-art{height:100px;margin-bottom:16px;transform:none}
+  .embedded .go-letter{font-size:44px}
+  .embedded .launch h1{font-size:44px}
+  .embedded .launch .lede{margin-top:14px;font-size:15px;line-height:1.55}
+  .embedded .launch .button{margin-top:18px}
+}
