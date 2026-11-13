@@ -10,10 +10,10 @@ http.createServer(async (req,res) => {
   try {
     if (!['GET','HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
     const pathname = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-    const relative = pathname === '/' ? 'go-mini-module-01-lesson-01-preview.html' : pathname.replace(/^\/+/,'');
+    const relative = pathname === '/' ? 'go-mini-module-01-lesson-01-preview.html' : /^\/information\/?$/.test(pathname) ? 'go-mini-module-02-lesson-01-preview.html' : pathname.replace(/^\/+/,'');
     const file = path.resolve(root,relative);
     const ext = path.extname(file);
-    if (!file.startsWith(root+path.sep) || relative.split('/').some(p=>p.startsWith('.')) || !types[ext] || !(relative.startsWith('assets/') || /^go-mini-module-01-lesson-01-(step-0[1-6]|preview)\.html$/.test(relative))) {
+    if (!file.startsWith(root+path.sep) || relative.split('/').some(p=>p.startsWith('.')) || !types[ext] || !(relative.startsWith('assets/') || /^go-mini-module-01-lesson-01-(step-0[1-6]|preview)\.html$/.test(relative) || /^go-mini-module-02-lesson-01-(step-(0[1-9]|10)|preview)\.html$/.test(relative))) {
       res.writeHead(404);res.end('Not found');return;
     }
     if (!(await stat(file)).isFile()) throw new Error('not_file');
