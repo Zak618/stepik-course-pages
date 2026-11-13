@@ -54,20 +54,30 @@
     const visual = document.querySelector('.journey-visual');
     const saved = state.read('source', {});
     options.forEach(input => { input.checked = input.value === saved.source; });
-    detail.value = typeof saved.detail === 'string' ? saved.detail : '';
+    let currentSource = options.find(input => input.checked)?.value || '';
+    const restoredPrefix = options.find(input => input.checked)?.dataset.answer || '';
+    detail.value = typeof saved.answer === 'string' ? saved.answer : [restoredPrefix,typeof saved.detail === 'string' ? saved.detail : ''].filter(Boolean).join('\n\n');
     function update() {
       const choice = options.find(input => input.checked);
-      const comment = detail.value.trim();
-      preview.hidden = !choice && !comment;
-      const label = choice?.dataset.answer || '';
-      output.textContent = [label, comment].filter(Boolean).join('\n');
+      const answer = detail.value.trim();
+      preview.hidden = !answer;
+      output.textContent = answer;
       visual.classList.toggle('has-choice', !!choice);
       document.querySelector('#journey-source').textContent = choice ? choice.dataset.label + ' → Go-шечка (mini)' : 'Go-шечка (mini)';
       status.textContent = '';
       button.innerHTML = icon('copy') + 'Скопировать ответ';
-      state.write('source', {source:choice?.value || '', detail:detail.value});
+      state.write('source', {source:choice?.value || '', answer:detail.value});
     }
-    options.forEach(input => input.addEventListener('change', update));
+    options.forEach(input => input.addEventListener('change', () => {
+      const previousPrefix = options.find(option => option.value === currentSource)?.dataset.answer;
+      let personalText = detail.value;
+      if(previousPrefix && personalText.startsWith(previousPrefix))personalText=personalText.slice(previousPrefix.length).replace(/^\s*\n\s*/, '');
+      const nextPrefix=input.dataset.answer;
+      detail.value=personalText.startsWith(nextPrefix)?personalText:nextPrefix+'\n\n'+personalText;
+      currentSource=input.value;
+      detail.scrollTop=0;
+      update();
+    }));
     detail.addEventListener('input', update);
     button.addEventListener('click', async () => {
       try {

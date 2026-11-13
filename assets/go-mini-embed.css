@@ -30,12 +30,12 @@ html,body{background:#fff}
 
 /* Survey: the actual submitted answer stays in Stepik's native input. */
 .embedded .survey-layout{gap:28px;margin-top:22px;grid-template-columns:minmax(0,1fr) 230px}
-.embedded .source-card{min-height:76px;padding:14px;gap:11px;border-radius:16px}
+.embedded .source-card{min-height:72px;padding:14px;gap:11px;border-radius:16px}
 .embedded .source-icon{width:34px;height:34px;border-radius:11px}
 .embedded .source-icon .icon{width:18px;height:18px}
 .embedded .source-label{font-size:14px}
 .embedded .field-label{margin:18px 0 9px}
-.embedded textarea{min-height:72px;height:82px;resize:none}
+.embedded textarea{min-height:72px;height:100px;resize:none}
 .embedded .answer-preview{padding:0;background:#fff;margin-top:14px}
 .embedded .answer-preview>.note,.embedded .answer-text{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .embedded .answer-preview .button{min-height:44px;padding:10px 17px}
@@ -109,7 +109,7 @@ html,body{background:#fff}
   .embedded .content h1{font-size:clamp(23px,7vw,30px)}
   .embedded .content .copy{font-size:14px;line-height:1.45;margin-top:12px}
   .embedded .channel-link{font-size:14px;min-height:44px;margin-top:16px}
-  .embedded .source-card{min-height:76px;flex-direction:row;align-items:center;padding:12px 10px;gap:9px}
+  .embedded .source-card{min-height:72px;flex-direction:row;align-items:center;padding:12px 10px;gap:9px}
   .embedded .source-label{font-size:12px}
   .embedded .source-icon{width:28px;height:28px;flex:none}
   .embedded .rule summary{font-size:14px;padding:11px 0;gap:9px}
