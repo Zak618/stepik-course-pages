@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Как вы узнали о курсе Go-шечка (mini)? Давайте познакомимся.">
+  <title>Как вы нашли курс — Go-шечка (mini), шаг 03</title>
+  <link rel="stylesheet" href="assets/go-mini-intro.css">
+  <script defer src="assets/go-mini-intro.js"></script>
+</head>
+<body data-page="survey">
+  <main class="page survey">
+    <header class="page-head">
+      <h1>Как вы нашли<br><span class="gradient">этот курс?</span></h1>
+      <p class="lede">Откуда вы о нас узнали и что хотите освоить?</p>
+    </header>
+    <div class="survey-layout">
+      <section aria-label="Ваш ответ">
+        <fieldset class="source-grid">
+          <legend class="sr-only">Откуда вы узнали о курсе?</legend>
+          <label class="source-card">
+            <input type="radio" name="source" value="stepik" data-label="Каталог Stepik" data-answer="Нашёл курс в каталоге Stepik.">
+            <span class="source-icon" data-icon="compass"></span><span class="source-label">В каталоге Stepik</span><span class="source-check" data-icon="check"></span>
+          </label>
+          <label class="source-card">
+            <input type="radio" name="source" value="telegram" data-label="Telegram" data-answer="Узнал о курсе в Telegram.">
+            <span class="source-icon" data-icon="plane" style="--tile:#eaf7ff;--tile-ink:#2796c9"></span><span class="source-label">В Telegram</span><span class="source-check" data-icon="check"></span>
+          </label>
+          <label class="source-card">
+            <input type="radio" name="source" value="search" data-label="Поиск" data-answer="Нашёл курс через поисковик.">
+            <span class="source-icon" data-icon="search" style="--tile:#f2edff;--tile-ink:#8863cc"></span><span class="source-label">Через поиск</span><span class="source-check" data-icon="check"></span>
+          </label>
+          <label class="source-card">
+            <input type="radio" name="source" value="friend" data-label="Совет друга" data-answer="Курс посоветовали знакомые.">
+            <span class="source-icon" data-icon="people" style="--tile:#ecf8ef;--tile-ink:#54a16c"></span><span class="source-label">Посоветовали знакомые</span><span class="source-check" data-icon="check"></span>
+          </label>
+          <label class="source-card">
+            <input type="radio" name="source" value="course" data-label="Другой наш курс" data-answer="Пришёл с другого вашего курса.">
+            <span class="source-icon" data-icon="code" style="--tile:#fff4e8;--tile-ink:#b88c49"></span><span class="source-label">С другого нашего курса</span><span class="source-check" data-icon="check"></span>
+          </label>
+          <label class="source-card">
+            <input type="radio" name="source" value="other" data-label="Другой источник" data-answer="Узнал о курсе другим способом.">
+            <span class="source-icon" data-icon="spark" style="--tile:#fceff4;--tile-ink:#c27c99"></span><span class="source-label">Другое</span><span class="source-check" data-icon="check"></span>
+          </label>
+        </fieldset>
+        <label class="field-label" for="source-detail">Что хотите изучить?</label>
+        <textarea id="source-detail" maxlength="1000" placeholder="Что хотите научиться делать? Это ваш первый язык или уже писали код?"></textarea>
+        <div class="answer-preview" id="answer-preview" hidden>
+          <p class="note">Ваш ответ</p>
+          <p class="answer-text" id="answer-text"></p>
+          <button class="button" id="copy-answer" type="button"><span data-icon="copy"></span>Скопировать ответ</button>
+          <p class="status" id="survey-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+      <aside class="journey-visual" aria-hidden="true">
+        <svg class="route-art" viewBox="0 0 270 270" fill="none">
+          <circle cx="205" cy="78" r="56" fill="#eef0ff"/>
+          <circle cx="78" cy="197" r="42" fill="#eef5ff"/>
+          <path d="M70 63H151C202 63 217 128 164 128H114C63 128 45 194 102 194H195" stroke="#e0e4f0" stroke-width="2" stroke-linecap="round"/>
+          <path class="journey-route" pathLength="260" d="M70 63H151C202 63 217 128 164 128H114C63 128 45 194 102 194H195" stroke="#9d91df" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="70" cy="63" r="18" fill="white" stroke="#e1e7f4"/>
+          <g class="journey-origin" stroke="currentColor" stroke-width="1.5"><circle cx="70" cy="60" r="4"/><path d="M63 70c0-7 14-7 14 0"/></g>
+          <rect x="170" y="169" width="50" height="50" rx="17" fill="white" stroke="#e2e8f5"/>
+          <text x="195" y="201" text-anchor="middle" fill="#4d8fcb" font-family="system-ui,sans-serif" font-size="24" font-weight="750" letter-spacing="-2">go</text>
+          <circle cx="199" cy="115" r="4" fill="#c9c2f0"/>
+          <circle cx="64" cy="160" r="3" fill="#c4d8f2"/>
+        </svg>
+        <p class="journey-label"><strong id="journey-source">Go-шечка (mini)</strong></p>
+      </aside>
+    </div>
+    <noscript><p class="note">Напишите ответ в поле Stepik под страницей.</p></noscript>
+  </main>
+</body>
+</html>

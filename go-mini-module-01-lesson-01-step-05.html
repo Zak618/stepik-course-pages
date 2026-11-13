@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Интерактивная карта курсов WEB HACKER: выберите направление и соберите свой маршрут.">
+  <title>Карта курсов — Go-шечка (mini), шаг 05</title>
+  <link rel="stylesheet" href="assets/go-mini-intro.css">
+  <script defer src="assets/go-mini-course-catalog.js"></script>
+  <script defer src="assets/go-mini-intro.js"></script>
+</head>
+<body data-page="roadmap">
+  <main class="page roadmap-page">
+    <header class="page-head roadmap-top">
+      <div><h1>Карта <span class="gradient">курсов.</span></h1><p class="lede">Выберите своё направление.</p></div>
+      <span class="catalog-count" id="catalog-count">Курсы WEB HACKER</span>
+    </header>
+    <div class="roadmap-toolbar">
+      <label class="search"><span data-icon="search"></span><span class="sr-only">Найти курс по названию</span><input id="course-search" type="search" placeholder="Найти свой курс…" autocomplete="off"></label>
+      <div class="view-toggle" role="group" aria-label="Отображение курсов"><button type="button" data-view="map" aria-pressed="true">Карта</button><button type="button" data-view="list" aria-pressed="false">Все курсы</button></div>
+      <button type="button" class="filter-button" id="free-filter" aria-pressed="false">Только бесплатные</button>
+    </div>
+    <div class="track-filters" id="track-filters" role="group" aria-label="Направления обучения"></div>
+    <section class="map-panel" aria-label="Карта курсов">
+      <div class="map-viewport" id="map-viewport" tabindex="0" aria-label="Карта: выберите направление. Доступны прокрутка и изменение масштаба."><div class="map-space" id="map-space"><div class="map-world" id="map-world"></div></div></div>
+      <div class="catalog-list" id="catalog-list" hidden></div>
+      <footer class="map-caption" id="map-caption"><p>Нажмите на ветку или курс · Карту можно перетаскивать</p><div class="zoom-controls"><button type="button" id="zoom-out" aria-label="Уменьшить карту"><span data-icon="minus"></span></button><span class="zoom-value" id="zoom-value">100%</span><button type="button" id="zoom-in" aria-label="Увеличить карту"><span data-icon="plus"></span></button><button type="button" class="fit" id="fit-map">Уместить</button></div></footer>
+    </section>
+    <p class="sr-only" id="result-status" role="status" aria-live="polite"></p>
+    <details class="route-tray"><summary><span>Мой маршрут <span id="saved-count">0</span></span><span data-icon="bookmark"></span></summary><div class="saved-route" id="saved-route"></div></details>
+    <noscript><p class="note">Для интерактивной карты включите JavaScript. Все опубликованные курсы доступны в <a href="https://stepik.org/users/647088271/teach" target="_blank" rel="noopener noreferrer">профиле WEB HACKER на Stepik</a>.</p></noscript>
+  </main>
+  <dialog class="course-dialog" id="course-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Закрыть карточку"><span data-icon="close"></span></button>
+    <div class="dialog-art" id="dialog-art"></div>
+    <p class="eyebrow" id="dialog-track"></p><h2 id="dialog-title"></h2><span class="dialog-tag" id="dialog-price"></span><p id="dialog-description"></p>
+    <div class="dialog-actions"><a class="button" id="course-link" target="_blank" rel="noopener noreferrer">Открыть курс</a><button class="button secondary" id="save-course" type="button" aria-pressed="false">В мой маршрут</button></div>
+  </dialog>
+</body>
+</html>
