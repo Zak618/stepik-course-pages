@@ -28,10 +28,11 @@ await writeFile(`.local-publication/stepik-before-${Date.now()}.json`,JSON.strin
 const uploaded=[];
 for(const article of plan.articles){
   const old=existing.find(source=>source.position===article.position);
-  if(old)assert.equal(old.block.name,article.block.name,'Refusing to change an existing step type');
+  if(old)assert.ok(old.block.name===article.block.name||(article.position===5&&old.block.name==='string'&&old.needs_plan==='basic_paid'&&article.block.name==='choice'),'Refusing to change an unrelated step type');
   const result=await api(old?`step-sources/${old.id}`:'step-sources',old?'PUT':'POST',{stepSource:{lesson:2706555,position:article.position,block:article.block}});
   const source=result['step-sources'][0];assert.equal(source.lesson,2706555);assert.equal(source.position,article.position);assert.equal(source.block.name,article.block.name);
-  if(source.status===1010||source.error)throw new Error(`Step ${source.id} failed validation: ${JSON.stringify(source.error||source.reason_of_failure)}`);
+  if(source.status===1010||source.status==='error'||source.error?.text||source.error?.code)throw new Error(`Step ${source.id} failed validation: ${JSON.stringify(source.error||source.reason_of_failure)}`);
+  assert.equal(source.is_enabled,true,`Step ${source.id} requires a paid plan`);
   const beforeFrames=(article.block.text.match(/<iframe/g)||[]).length;
   assert.equal((source.block.text.match(/<iframe/g)||[]).length,beforeFrames,'Stepik stripped an experiment');
   assert.ok(source.block.text.length>article.block.text.length*.7,'Stepik stripped too much content');
@@ -41,7 +42,6 @@ for(const article of plan.articles){
 }
 const verify=await getSources();assert.equal(verify.length,10);
 for(const source of verify){const expected=plan.articles.find(article=>article.position===source.position);assert.equal(source.block.name,expected.block.name);assert.ok(!source.block.text.includes('GoSearch'));}
-if(lesson.is_draft)await api('lessons/2706555','PUT',{lesson:{title:lesson.title,is_draft:false}});
-const finalLesson=(await api('lessons/2706555')).lessons[0];assert.equal(finalLesson.steps.length,10);assert.equal(finalLesson.is_draft,false);
+const finalLesson=(await api('lessons/2706555')).lessons[0];assert.equal(finalLesson.steps.length,10);assert.equal(finalLesson.is_draft,lesson.is_draft,'Course draft state must remain unchanged');
 const afterCourse=(await api('courses/305666')).courses[0];assert.equal(afterCourse.is_public,course.is_public);assert.equal(afterCourse.is_enabled,course.is_enabled);
 console.log(JSON.stringify({url:'https://stepik.org/lesson/2706555/step/1?unit=2746570',steps:uploaded,courseVisibilityUnchanged:true},null,2));

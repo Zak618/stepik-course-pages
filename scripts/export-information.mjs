@@ -91,7 +91,7 @@ try{
     },{step,heights,published,version,filename:filename(step)});
     const finalTask={
       4:{name:'number',prompt:'Прочитайте двоичное число 00101. В ответе укажите его десятичное значение.',source:{options:[{answer:'5',max_error:'0'}]}},
-      5:{name:'string',prompt:'Представьте число 14 ровно пятью битами. Введите только пять нулей и единиц без пробелов.',source:{pattern:'01110',use_re:false,match_substring:false,case_sensitive:true}},
+      5:{name:'choice',prompt:'Как записать число 14 ровно пятью битами? Выберите одну запись.',source:{is_multiple_choice:false,is_always_correct:false,sample_size:4,preserve_order:true,is_html_enabled:false,is_options_feedback:false,options:[{text:'01110',is_correct:true,feedback:''},{text:'11100',is_correct:false,feedback:''},{text:'00111',is_correct:false,feedback:''},{text:'01101',is_correct:false,feedback:''}]}},
       7:{name:'number',prompt:'В сообщении 6 байтов. Сколько это битов? Введите только число.',source:{options:[{answer:'48',max_error:'0'}]}},
       9:{name:'choice',prompt:'Вы получили байт 01000001. Можно ли по одним этим битам установить, хотел ли автор сохранить число, букву или яркость?',source:{is_multiple_choice:false,is_always_correct:false,sample_size:3,preserve_order:true,is_html_enabled:false,is_options_feedback:false,options:[{text:'Да: автор обязательно сохранил число 65.',is_correct:false,feedback:''},{text:'Нет: нужно знать формат и правила интерпретации.',is_correct:true,feedback:''},{text:'Да: автор обязательно сохранил букву A.',is_correct:false,feedback:''}]}}
     }[step];
