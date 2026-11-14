@@ -98,18 +98,18 @@ function variantSource(source,from,to) {
   const re=new RegExp(pattern);if(!re.test(source))return null;return source.replace(re,()=>to);
 }
 function bindTask(task) {
-  const editor=$('#code-source');let version=0,running=false,hints=0,request;
+  const editor=$('#code-source'),localRunner=['localhost','127.0.0.1'].includes(location.hostname);let version=0,running=false,hints=0,request;
   const gutter=()=>{$('.code-gutter').textContent=Array.from({length:editor.value.split('\n').length},(_,i)=>i+1).join('\n');$('.code-gutter').scrollTop=editor.scrollTop;};
   const verdict=(text,result='')=>{const node=$('#code-verdict');node.textContent=text;node.dataset.result=result;};
   const edit=()=>{version++;request?.abort();running=false;$('#code-run').disabled=false;$('#code-check').disabled=false;drafts.set(step,editor.value);solved.delete(step);persist();updateNav();verdict('');$('#code-artifact').hidden=true;gutter();};
   on('#code-source','input',edit);on('#code-source','scroll',gutter);
-  on('#code-source','keydown',e=>{if(e.key==='Tab'){e.preventDefault();editor.setRangeText('    ',editor.selectionStart,editor.selectionEnd,'end');edit();}if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();execute(false);}});
+  on('#code-source','keydown',e=>{if(!localRunner)return;if(e.key==='Tab'){e.preventDefault();editor.setRangeText('    ',editor.selectionStart,editor.selectionEnd,'end');edit();}if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();execute(false);}});
   on('#code-hint','click',()=>{const p=document.createElement('p');p.textContent=task.hints[Math.min(hints++,task.hints.length-1)];$('#code-hints').replaceChildren(p);});
   on('#code-reset','click',()=>{if(editor.value!==task.starter&&!confirm('Вернуть заготовку? Набранное решение этого шага будет заменено.'))return;editor.value=task.starter;edit();hints=0;$('#code-hints').replaceChildren();$('#code-output').textContent='Ещё не запускали';});
   // GitHub Pages is static. Hosted previews link to the native Go task;
   // never offer a broken API call or silently pretend a model executed Go.
-  if(!['localhost','127.0.0.1'].includes(location.hostname)){
-    editor.readOnly=true;$('#code-run').hidden=true;$('#code-check').hidden=true;$('#code-reset').hidden=true;
+  if(!localRunner){
+    editor.readOnly=true;$('#code-run').remove();$('#code-check').remove();$('#code-reset').remove();
     const shortcut=$('.editor-shortcut');if(shortcut)shortcut.textContent='';
     const link=document.createElement('a');link.className='button';link.textContent='Решить на Stepik ↗';link.href=`https://stepik.org/lesson/2706560/step/${step}?unit=2746575`;link.target='_blank';link.rel='noopener';$('.code-actions').prepend(link);gutter();return;
   }

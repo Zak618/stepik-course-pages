@@ -13,6 +13,9 @@ assert.equal(plan.articles.reduce((sum,a)=>sum+a.cost,0),90);
 assert.deepEqual(plan.articles.map(a=>a.position),Array.from({length:16},(_,i)=>i+1));
 const token=JSON.parse(await readFile('.env.stepik-webhacker-session','utf8')).access_token;
 const hash=value=>createHash('sha256').update(value).digest('hex');
+// Stepik strips unsupported CSS; HTML byte counts do not measure lost theory.
+// Compare the readable content instead, normalizing only HTML/whitespace.
+const readable=html=>html.replace(/<[^>]*>/g,'').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity)=>entity[0]==='#'?String.fromCodePoint(entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1))):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[entity.toLowerCase()]).replace(/\s+/g,' ').trim();
 const sourceHash=items=>hash(JSON.stringify(items.map(({id,position,cost,block,update_date,is_enabled})=>({id,position,cost,block,update_date,is_enabled}))));
 async function api(path,method='GET',body){
   const response=await fetch('https://stepik.org/api/'+path,{method,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(30000)});
@@ -89,7 +92,7 @@ for(const article of plan.articles){
   assert.ok(['ready',1000].includes(checked.status),JSON.stringify({status:checked.status,error:checked.error}));
   assert.ok(!checked.error?.text&&!checked.error?.code);
   assert.equal((checked.block.text.match(/<iframe/g)||[]).length,article.cost?0:1);
-  assert.ok(checked.block.text.length>article.block.text.length*.8);
+  assert.equal(readable(checked.block.text),readable(article.block.text),'Stepik removed or changed readable content');
   assert.ok(!/рад видеть|localhost:|10 баллов|Команда WEB HACKER/.test(checked.block.text));
   if(article.block.name==='code'){
     for(const key of ['code','templates_data','execution_time_limit','execution_memory_limit','samples_count'])assert.deepEqual(checked.block.source[key],article.block.source[key]);
