@@ -1,0 +1,142 @@
+/* Only standalone experiments get embedded. The complete article stays native in Stepik. */
+html.fragment {background:#fff;scroll-behavior:auto}
+.fragment .site-header {display:none}
+.fragment .standalone .v2-lesson {width:100%;max-width:800px;margin:0 auto;padding:7px 5px 10px}
+.fragment .experiment {margin:0;width:100%;max-width:none;position:static}
+.fragment .message-world,.fragment .locker-world,.fragment .find-world {padding:20px 16px;border:0}
+.fragment .message-stage {grid-template-columns:minmax(0,1fr) minmax(72px,.5fr) minmax(0,1fr)}
+.fragment .monitor-screen {height:115px}
+.fragment .data-wire {height:115px}
+.fragment .message-controls {margin-top:18px;gap:14px}
+.fragment .scene-status {font-size:16px;margin-top:16px;line-height:1.6}
+.fragment .byte-ribbon {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:430px;margin:13px auto 0}
+.fragment .ribbon-byte {padding:8px 6px;justify-content:center;gap:5px}
+.fragment .ribbon-byte b {font-size:14px}
+.fragment .ribbon-byte small {font-size:10px}
+.byte-page-nav {display:flex;align-items:center;justify-content:center;gap:16px;margin:12px auto 0;color:#5c6c87;font-size:14px}
+.byte-page-nav button {background:white;border:1px solid #d7dfef;border-radius:10px;min-width:44px;min-height:40px;color:#4666a6}
+.fragment .message-world {position:relative}
+.fragment #show-bytes {display:block;margin:16px auto 0}
+.fragment dialog.message-payload {width:calc(100% - 26px);max-width:550px;border:1px solid #d9e1f3;border-radius:22px;padding:24px 15px;margin:auto;background:#fff;text-align:center}
+.fragment dialog.message-payload::backdrop {background:#eef4ffe8;backdrop-filter:blur(5px)}
+.fragment dialog.message-payload>.chip {margin-top:20px}
+.fragment .locker-world .small-question>p {min-height:100px;margin-bottom:0}
+.fragment .lockers {max-width:520px;gap:8px;margin-top:20px}
+.fragment .locker {height:76px;border-width:3px}
+.fragment .locker-door>.mono {font-size:16px}
+.fragment .locker-controls {gap:15px}
+.fragment .small-question {font-size:17px;margin-top:20px;padding-top:17px}
+.fragment .small-question>p {font-size:16px}
+.fragment .scale-world {max-width:680px;margin:auto;padding:16px 10px}
+.fragment .weight-rack {gap:12px}
+.fragment .ticket-world {max-width:680px;margin:auto}
+.fragment .carry-story {margin:0;padding:22px 15px;border:0;font-size:17px}
+.fragment .carry-row {gap:16px}
+.fragment .carry-story>p {min-height:82px;max-width:550px;margin-inline:auto}
+.fragment .shipping-world {max-width:680px;margin:auto}
+.fragment .shipping-shelf {grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fragment .byte-package {min-height:80px;padding:12px 7px}
+.fragment .package-tape {font-size:10px}
+.fragment .package-cells {gap:3px}
+.fragment .printer-desk {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;max-width:640px;margin:22px auto}
+.fragment .printer {width:100%;max-width:100%;padding:20px 18px 23px}
+.fragment .printer-display {height:90px;font-size:65px}
+.fragment .printer-button {font-size:14px;padding:10px 8px;min-height:44px;max-width:100%}
+.fragment .receipt-space {width:100%;max-width:100%;min-height:255px}
+.fragment .receipt {padding:19px 15px}
+.fragment .receipt-byte {gap:5px}
+.fragment .receipt-byte .mono {font-size:20px;letter-spacing:0}
+.fragment .receipt-byte>span {font-size:12px}
+.fragment .receipt-heading {font-size:11px}
+.fragment .receipt-total {font-size:12px;line-height:1.6}
+.fragment .receipt-placeholder strong {font-size:22px}
+.fragment .receipt-placeholder span {font-size:16px}
+.fragment .meaning-world {max-width:680px;margin:auto}
+.fragment .pixel-lab {max-width:680px;margin:0 auto}
+.fragment .find-world {max-width:760px;margin:auto}
+.fragment .index-cards {grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+.fragment .index-card {padding:24px 15px 16px}
+.fragment .index-card h3 {font-size:19px;line-height:1.4}
+.fragment .index-card p {font-size:16px;line-height:1.55}
+.fragment .index-card .card-verdict {font-size:12px}
+.fragment .find-results {font-size:17px}
+.fragment .find-results p {font-size:16px;line-height:1.6;margin:12px 0 0}
+.fragment .index-cards {display:block}
+.fragment .index-card {display:none;min-height:210px;max-width:620px;margin:0 auto}
+.fragment .index-card.current,.fragment .index-cards:not(:has(.current)) .index-card:first-child {display:block}
+.fragment .byte-world {position:relative}
+.fragment .byte-warning {position:absolute;inset:14px;z-index:3;background:#fff5e8;border:1px solid #e5be96;border-radius:20px;margin:0;padding:20px;flex-direction:column;text-align:center;gap:12px}
+.fragment .byte-warning p {font-size:17px;line-height:1.65}
+.fragment .byte-warning .ninth-bit {flex:none}
+.fragment .prediction-line>span {display:none}
+.fragment .prediction-line .choices {flex-wrap:nowrap;gap:6px}
+.fragment .prediction-line .chip {font-size:13px;padding:9px 11px;white-space:nowrap}
+.fragment .message-controls {flex-wrap:nowrap;gap:10px}
+.fragment .message-controls .choices {gap:5px;flex-wrap:nowrap}
+.fragment .message-controls .chip {font-size:13px;padding:8px 10px;min-height:40px}
+.fragment .message-controls .button {font-size:14px;padding:10px 12px;min-height:42px;gap:7px}
+.fragment .message-controls .button span {display:none}
+.fragment .answer-form {flex-wrap:nowrap;gap:9px}
+.fragment .answer-input {min-width:0;flex:1;max-width:230px;font-size:20px;padding:12px 9px}
+.fragment .answer-form .button {font-size:15px;padding:12px 16px}
+.fragment .ticket-world .tools {flex-wrap:nowrap;gap:10px}
+.fragment .ticket-world .text-button {font-size:14px;line-height:1.6}
+.find-task {margin:20px auto 26px;max-width:660px;color:#345381;text-align:left}
+.find-task h2 {font-size:24px;line-height:1.4;letter-spacing:-.03em;margin:0 0 12px}
+.find-task ol {margin:0;padding-left:24px;font-size:17px;line-height:1.75}
+.find-task li+li {margin-top:5px}
+.find-task code {color:#7840b4;font-size:1.05em}
+@media(max-width:650px){
+  .fragment .message-stage {grid-template-columns:1fr 1fr;gap:15px}
+  .fragment .wire-wrap {grid-column:1/-1;grid-row:2;margin:0 auto;width:50%;height:60px}
+  .fragment .receiver {grid-column:2;grid-row:1}
+  .fragment .data-wire {height:60px}
+  .fragment .wire-caption {display:none}
+  .fragment .monitor-screen {height:110px;padding:8px}
+  .fragment .monitor-screen input,.fragment .monitor-screen output {font-size:23px}
+  .fragment .computer-labels {font-size:12px;margin-bottom:14px}
+  .fragment .locker-controls {display:grid;grid-template-columns:1fr auto}
+  .fragment .locker-controls .capacity {grid-column:2;grid-row:1/3;flex-direction:column;gap:0;text-align:center}
+  .fragment .capacity output {font-size:48px}
+  .fragment .capacity span {max-width:70px;font-size:13px}
+  .fragment .lockers {gap:6px}
+  .fragment .locker {height:67px}
+  .fragment .locker-door>.mono {font-size:13px;letter-spacing:0}
+  .fragment .locker-door>i {right:4px}
+  .fragment .shipping-shelf {grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .fragment .byte-package {min-height:70px;padding:9px 4px;border-radius:8px}
+  .fragment .package-cells {grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}
+  .fragment .package-cells i {height:9px}
+  .fragment .package-tape {font-size:8px;padding:4px 2px}
+  .fragment .printer-desk {gap:12px;align-items:start}
+  .fragment .printer {padding:17px 10px 19px;border-radius:24px 24px 15px 15px}
+  .fragment .printer-display {height:68px;font-size:52px}
+  .fragment .printer-top {font-size:11px;margin-bottom:14px}
+  .fragment .printer-button {font-size:12px;padding:8px 5px}
+  .fragment .receipt {padding:16px 7px;border-radius:0}
+  .fragment .receipt-byte .mono {font-size:17px}
+  .fragment .receipt-byte>span {font-size:10px}
+  .fragment .receipt-byte {flex-wrap:wrap;padding-bottom:5px}
+  .fragment .receipt-heading {font-size:9px;letter-spacing:0}
+  .fragment .receipt-total {font-size:10px}
+  .fragment .receipt-placeholder {padding:20px 4px}
+  .fragment .receipt-placeholder strong {font-size:19px}
+  .fragment .receipt-placeholder span {font-size:15px}
+  .fragment .index-card {padding:21px 11px 14px}
+  .fragment .index-card h3 {font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+  .fragment .index-card p {font-size:15px;line-height:1.5}
+  .fragment .index-card {min-height:215px;padding:24px 19px 18px}
+  .fragment .index-card h3 {font-size:20px}
+  .fragment .index-card p {font-size:17px}
+  .fragment .byte-warning {inset:10px;padding:16px}
+  .fragment .byte-world {padding:20px 15px}
+  .fragment .byte-readout {gap:12px}
+  .fragment .shipping-toolbar {gap:14px;flex-wrap:nowrap}
+  .fragment .shipping-toolbar .object-label {font-size:12px}
+  .fragment .shipping-toolbar .chip {font-size:13px;padding:9px 12px}
+  .fragment .shipping-world .scene-status {font-size:15px}
+  .fragment .shipping-shelf {margin:20px 0}
+  .fragment .unpacked .package-cells {margin-top:8px}
+  .fragment .find-world {padding:18px 10px}
+  .fragment .find-input input {font-size:22px}
+}
