@@ -1,0 +1,81 @@
+/* Only object panels use these dimensions. The full article remains native
+   Stepik text, with its own real answer controls on the graded steps. */
+.algorithm-fragment .standalone .v2-lesson{max-width:640px;padding:8px}
+.algorithm-fragment .algorithm-scene .lab-status{height:78px;min-height:78px;display:flex;align-items:center;justify-content:center;margin-top:14px;font-size:16px;line-height:24px}
+.algorithm-fragment .search-lab,.algorithm-fragment .coffee-lab,.algorithm-fragment .branch-lab,.algorithm-fragment .loop-lab,.algorithm-fragment .debug-lab,.algorithm-fragment .assembler-lab{padding:20px 14px 16px}
+.algorithm-fragment .trace-query>div{flex-direction:column;gap:10px}
+.algorithm-fragment .trace-query .button{width:100%;height:49px}
+.algorithm-fragment .trace-query input{font-size:22px;height:52px}
+.algorithm-fragment .machine-grid{grid-template-columns:1fr 1fr;gap:23px 14px;max-width:500px;margin:30px auto 24px}
+.algorithm-fragment .search-cassette{grid-column:1/-1;grid-row:1;max-width:350px;width:100%;justify-self:center;padding:12px}
+.algorithm-fragment .cassette-bed{padding:3px;gap:10px}
+.algorithm-fragment .trace-record{height:44px;min-height:44px;font-size:15px;line-height:21px}
+.algorithm-fragment .machine-source,.algorithm-fragment .machine-output{align-self:start}
+.algorithm-fragment .machine-source .device-label,.algorithm-fragment .machine-output .device-label{margin-bottom:14px}
+.algorithm-fragment .query-envelope{height:119px;min-height:119px;padding:15px 10px}
+.algorithm-fragment .query-envelope>strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:21px}
+.algorithm-fragment .trace-summary{min-height:145px;border:1px solid #72bca8;background:linear-gradient(140deg,#e1fbef,#bdebdc);border-radius:0 15px 15px;padding:12px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;box-shadow:0 5px 0 #8ccbb9;color:#386c5b}
+.algorithm-fragment .trace-summary>span{font-size:13px}.algorithm-fragment .trace-summary output{font-size:42px;font-weight:650;line-height:46px}
+.algorithm-fragment .trace-summary button{font-size:14px;padding:9px 12px;min-height:39px;border-color:#9dcebd;color:#37735d}
+.algorithm-fragment .time-control{font-size:12px;gap:8px;height:30px}
+.algorithm-fragment .coffee-layout,.algorithm-fragment .assembler-layout{grid-template-columns:1fr;gap:18px}
+.algorithm-fragment .coffee-stage{max-width:500px;width:100%;margin:auto}
+.algorithm-fragment .coffee-art{height:190px;max-height:190px;width:100%}
+.algorithm-fragment .coffee-state{height:26px;line-height:22px;margin:0 auto 10px}
+.algorithm-fragment .program-paper{padding:17px 12px;max-width:570px;width:100%;margin:auto}
+.algorithm-fragment .command-list>li{height:92px;padding:10px 8px;gap:8px}
+.algorithm-fragment .command-name{font-size:16px;line-height:23px}
+.algorithm-fragment .command-symbol{min-width:28px;height:30px}
+.algorithm-fragment .command-arrows button{width:31px;height:30px}
+.algorithm-fragment .branch-layout{grid-template-columns:1fr;gap:17px;margin:24px auto 15px}
+.algorithm-fragment .branch-map{height:332px;max-width:440px}
+.algorithm-fragment .branch-map svg{top:37px}
+.algorithm-fragment .flow-question{top:85px}.algorithm-fragment .flow-milk,.algorithm-fragment .flow-black{top:182px}.algorithm-fragment .flow-choice{top:142px}
+.algorithm-fragment .branch-glass{padding-top:0;min-height:170px}
+.algorithm-fragment .glass-cup{width:132px;height:110px}.algorithm-fragment .glass-handle{top:10px}
+.algorithm-fragment .milk-carton{right:calc(50% - 125px);top:0;height:68px;width:45px}
+.algorithm-fragment .milk-carton span{font-size:9px;margin:8px 10px}.algorithm-fragment .branch-glass p{margin-top:15px}
+.algorithm-fragment .order-switch span{font-size:16px;padding:10px 15px}
+.algorithm-fragment .loop-order{flex-direction:column;gap:12px;margin-bottom:20px}
+.algorithm-fragment .loop-order label{font-size:16px;gap:12px}
+.algorithm-fragment .loop-order input{width:100%;max-width:260px;height:30px}
+.algorithm-fragment .loop-layout{grid-template-columns:1fr;gap:22px}
+.algorithm-fragment .loop-program{max-width:520px;width:100%;margin:auto}
+.algorithm-fragment .loop-program>p,.algorithm-fragment .loop-body p{height:70px;min-height:70px;font-size:16px;line-height:23px;gap:7px;padding:10px}
+.algorithm-fragment .loop-body{margin-left:12px;padding-left:11px}
+.algorithm-fragment .condition-readout{flex-wrap:nowrap;gap:7px 12px;height:36px;margin-top:20px;font-size:14px}
+.algorithm-fragment .condition-readout strong{font-size:24px}
+.algorithm-fragment .cup-conveyor{max-width:380px;width:100%;margin:auto}
+.algorithm-fragment .cup-parking{min-height:247px;height:247px}
+.algorithm-fragment .loop-lab .lab-actions{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:10px;max-width:420px;margin:auto}
+.algorithm-fragment .loop-lab .lab-actions .button{font-size:15px;padding:12px 10px}
+.algorithm-fragment #loop-reset{grid-column:1/-1;padding:9px;min-height:42px}
+.algorithm-fragment .debug-toolbar{height:34px;margin-bottom:30px;font-size:16px}
+.algorithm-fragment .debug-records{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 14px;margin-top:10px}
+.algorithm-fragment .debug-note{height:133px;min-height:133px;padding:14px 10px}
+.algorithm-fragment .debug-note h3{font-size:17px;line-height:24px;margin-bottom:11px}
+.algorithm-fragment .debug-state{padding:13px 12px;gap:7px}
+.algorithm-fragment .debug-state>span{font-size:12px;line-height:18px;min-height:66px}
+.algorithm-fragment .debug-state strong{display:block;line-height:26px;margin:4px 0 0}
+.algorithm-fragment .debug-lines{font-size:16px;padding:16px 12px;line-height:25px}
+.algorithm-fragment .debug-lines .indented{margin-left:8px}
+.algorithm-fragment .missing-command{height:74px;margin-left:8px;padding:10px;gap:8px;align-items:center}
+.algorithm-fragment .debug-lab .lab-actions{flex-wrap:nowrap;gap:10px}
+.algorithm-fragment .debug-lab .lab-actions .button{font-size:16px;padding:12px}
+.algorithm-fragment .debug-lab .lab-actions .outline-button{font-size:15px;padding:12px}
+.algorithm-fragment .algorithm-sheet{padding:17px 10px;max-width:570px;width:100%;margin:auto}
+.algorithm-fragment .sheet-heading{font-size:15px;height:25px;margin-bottom:17px}
+.algorithm-fragment .sheet-heading>span:last-child{font-size:11px}
+.algorithm-fragment .algorithm-sheet .command-list>li{height:92px;padding:8px 7px;gap:7px}
+.algorithm-fragment .algorithm-sheet .command-name{font-size:15px;line-height:22px}
+.algorithm-fragment .algorithm-sheet .command-symbol{min-width:23px;font-size:18px}
+.algorithm-fragment .algorithm-sheet li[data-command=match]{margin-left:10px}
+.algorithm-fragment .assembler-lab .lab-status{height:88px;min-height:88px;line-height:22px}
+.algorithm-fragment .algorithm-dialog{width:calc(100% - 30px);max-width:530px;max-height:calc(100vh - 30px);margin:auto;padding:22px 17px;border:1px solid #c3d3ed;border-radius:21px;background:#fff;box-shadow:0 20px 70px #2c4e7d22}
+.algorithm-fragment .algorithm-dialog::backdrop{background:#eff5ffe8;backdrop-filter:blur(5px)}
+.algorithm-fragment .algorithm-dialog>.outline-button{display:block;margin:20px auto 0}
+.algorithm-fragment .algorithm-dialog .trace-folder{height:auto;min-height:145px;margin-top:10px}
+.algorithm-fragment .algorithm-dialog .trace-folder p{font-size:17px;padding:10px;line-height:26px}
+.algorithm-fragment .algorithm-dialog .test-bench{padding:0}
+.algorithm-fragment .algorithm-dialog .test-bench h3{font-size:21px}
+.algorithm-fragment .algorithm-dialog .test-case{padding:13px 11px;margin-bottom:10px}
