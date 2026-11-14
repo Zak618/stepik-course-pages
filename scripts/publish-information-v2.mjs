@@ -42,12 +42,12 @@ for(const article of plan.articles){
   let source;
   for(let attempt=0;attempt<25;attempt++){
     source=(await api(`step-sources/${old.id}`))['step-sources'][0];
-    if(source.status!==10)break;
+    if(source.status!==10&&source.status!=='preparing')break;
     await new Promise(resolve=>setTimeout(resolve,800));
   }
   assert.equal(source.id,old.id);assert.equal(source.position,article.position);assert.equal(source.block.name,article.block.name);assert.equal(source.cost,article.cost);
   assert.equal(source.is_enabled,true,`Step ${source.id} is not available on the free plan`);
-  assert.ok(source.status===1000&&!source.error?.code&&!source.error?.text,`Step ${source.id} failed validation or is not ready`);
+  assert.ok((source.status===1000||source.status==='ready')&&!source.error?.code&&!source.error?.text,`Step ${source.id} failed validation or is not ready`);
   assert.equal((source.block.text.match(/<iframe/g)||[]).length,(article.block.text.match(/<iframe/g)||[]).length,'An experiment was stripped');
   assert.ok(source.block.text.includes('v='+plan.version));assert.ok(source.block.text.length>article.block.text.length*.7,'Content was stripped');
   if(article.cost){assert.ok(source.block.text.includes('10 баллов'));assert.deepEqual(source.block.source,article.block.source,'Native checker differs from the exported checker');}

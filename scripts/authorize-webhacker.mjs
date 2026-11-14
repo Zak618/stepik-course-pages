@@ -1,13 +1,13 @@
-/* Local callback: never replace another account's saved session. */
+/* Authenticate the course owner; never replace another account's saved session. */
 import http from 'node:http';
 import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const raw=await readFile('.env.stepik','utf8');
 const env=Object.fromEntries(raw.split('\n').filter(line=>/^\w+=/.test(line)).map(line=>[line.slice(0,line.indexOf('=')),line.slice(line.indexOf('=')+1).trim().replace(/^['"]|['"]$/g,'')]));
 let busy=false;
-async function exchange(code){
-  const r=await fetch('https://stepik.org/oauth2/token/',{method:'POST',headers:{Authorization:'Basic '+Buffer.from(env.STEPIK_CLIENT_ID+':'+env.STEPIK_CLIENT_SECRET).toString('base64'),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',code,redirect_uri:'http://localhost:8765/callback'})});
-  if(!r.ok)throw new Error(`OAuth HTTP ${r.status}. Откройте ссылку авторизации заново.`);
+async function authenticate(parameters){
+  const r=await fetch('https://stepik.org/oauth2/token/',{method:'POST',headers:{Authorization:'Basic '+Buffer.from(env.STEPIK_CLIENT_ID+':'+env.STEPIK_CLIENT_SECRET).toString('base64'),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(parameters)});
+  if(!r.ok){let reason='OAuth failed';try{reason=(await r.json()).error||reason;}catch{}throw new Error(`OAuth HTTP ${r.status}: ${reason}. Проверьте grant type приложения; повторять ту же ссылку не нужно.`);}
   const session=await r.json();
   const api=async path=>{const response=await fetch('https://stepik.org/api/'+path,{headers:{Authorization:'Bearer '+session.access_token}});if(!response.ok)throw new Error(`Stepik ${path}: HTTP ${response.status}`);return response.json();};
   const id=(await api('stepics/1')).stepics[0].user;
@@ -16,7 +16,9 @@ async function exchange(code){
   await writeFile('.env.stepik-webhacker-session',JSON.stringify({...session,expires_at:Date.now()+session.expires_in*1000},null,2),{mode:0o600});
   console.log('Authorized WEB HACKER (647088271); session saved separately.');
 }
-if(process.argv.includes('--stdin')){
+const exchange=code=>authenticate({grant_type:'authorization_code',code,redirect_uri:'http://localhost:8765/callback'});
+if(process.argv.includes('--client-credentials'))await authenticate({grant_type:'client_credentials'});
+else if(process.argv.includes('--stdin')){
   let input='';for await(const chunk of process.stdin)input+=chunk;
   const code=input.trim().startsWith('http')?new URL(input.trim()).searchParams.get('code'):input.trim();
   assert.match(code||'',/^[A-Za-z0-9_-]{10,200}$/);await exchange(code);
