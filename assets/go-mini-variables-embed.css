@@ -1,0 +1,69 @@
+/* A consistent object-only layout in Stepik. No hidden document overflow and
+   no viewport-height filler: frame sizes are measured across every state. */
+.scene-only .lesson{width:100%;max-width:480px;padding:0;margin:auto;font-size:17px}
+.scene-only .world{margin:0;padding:3px 6px 2px}
+.scene-only .world>.status{font-size:15px;line-height:24px;height:48px;margin-top:15px;overflow:visible}
+.scene-only .experiment-caption{min-height:48px;margin-bottom:15px}
+.scene-only .world-query .experiment-caption{height:56px}
+.scene-only .world-query .experiment-caption p{font-size:16px;line-height:24px}
+.scene-only .query-switch{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.scene-only .query-switch .pill{font-size:13px;line-height:20px;height:60px;padding:8px 10px}
+.scene-only .query-network{grid-template-columns:1fr;gap:16px;padding:8px 4px}
+.scene-only .query-origin{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:17px;align-items:center}
+.scene-only .query-origin .field{font-size:14px;line-height:20px;grid-template-rows:40px 46px;gap:6px}
+.scene-only .query-origin input{height:46px;font-size:16px;padding:10px 11px}
+.scene-only .query-orb{width:128px;height:128px;aspect-ratio:auto;margin:0;padding:14px;justify-self:center}
+.scene-only .query-orb strong{font-size:20px;line-height:24px;margin:9px 0}
+.scene-only .query-orb>span{font-size:12px}.scene-only .query-orb small{font-size:10px}
+.scene-only .query-connections{display:none}.scene-only .query-destinations{gap:10px}
+.scene-only .query-destination{padding:10px 12px;min-height:148px;height:148px}
+.scene-only .query-destination>span{font-size:10px;line-height:15px}
+.scene-only .query-destination p{font-size:16px;line-height:24px;margin:4px 0 7px;min-height:48px}
+.scene-only .query-destination code{font-size:12px;line-height:20px;min-height:40px}
+.scene-only .query-source{display:grid;gap:7px;padding:12px 0;margin-top:8px;min-height:82px;align-content:center}
+.scene-only .query-source code{font-size:16px;line-height:24px}.scene-only .query-source>span{font-size:13px;line-height:22px}
+.scene-only .query-source code[hidden]{display:block;visibility:hidden}
+.scene-only .query-result{grid-template-columns:1fr;gap:5px;padding:13px 0 0}.scene-only .query-result pre{font-size:21px;line-height:29px;min-height:29px}
+.scene-only .query-result>span{font-size:12px;line-height:20px}
+.scene-only .world-query>.actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:15px}.scene-only .world-query>.actions .button{width:100%;min-height:46px}.scene-only .world-query>.actions .text-button{justify-self:start;padding-top:4px;padding-bottom:4px}
+.scene-only .prediction{min-height:88px;align-content:start;gap:8px;margin-bottom:16px}.scene-only .prediction>span{width:100%;line-height:22px}.scene-only .prediction button{font-size:12px;line-height:18px;padding:8px 9px}
+.scene-only .film-strip{grid-template-columns:1fr 1fr;gap:10px;padding:4px 0}.scene-only .film-frame{height:180px;min-height:180px;padding:10px;gap:10px}
+.scene-only .film-frame code{font-size:14px;line-height:21px}.scene-only .film-frame small{font-size:10px;line-height:15px;min-height:30px}.scene-only .film-frame .frame-value{font-size:22px;line-height:27px}
+.scene-only .film-state{grid-template-columns:1fr;gap:14px;margin-top:22px}.scene-only .film-memory{height:120px;padding:18px 22px}.scene-only .film-memory strong{font-size:27px;line-height:34px;margin-top:14px}
+.scene-only .film-paper{height:128px;padding:16px 20px}.scene-only .film-paper pre{font-size:20px;line-height:30px;margin-top:10px;min-height:60px}
+.scene-only .world-timeline>.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.scene-only #trace-next{grid-column:1/-1}.scene-only .world-timeline .button{font-size:15px;padding:10px 13px;min-height:46px}.scene-only .world-timeline .text-button{font-size:14px}
+.scene-only .scale-controls{min-height:81px;align-content:start;gap:9px}.scene-only .scale-controls>span{width:100%;margin-left:0;line-height:21px}
+.scene-only .scale-stage{margin:0 auto;width:100%;height:205px}.scene-only .scale-stage svg{width:100%;height:205px}
+.scene-only .scale-formula{margin:3px 0 23px}.scene-only .scale-formula code{font-size:24px;line-height:32px}.scene-only .scale-formula p{font-size:15px;line-height:24px;min-height:48px;margin-top:8px}
+.scene-only .types-assignment h3{font-size:22px;line-height:28px}.scene-only .types-assignment>p{font-size:15px;line-height:24px;min-height:48px}
+.scene-only .token-tray{gap:10px;padding:12px 0 23px;min-height:132px;max-width:310px;margin:auto;align-content:start}
+.scene-only .value-token{font-size:19px;line-height:25px;padding:9px 13px}
+.scene-only .world-types .type-slots{grid-template-columns:1fr;gap:12px}.scene-only .world-types .type-slot{height:84px;grid-template-columns:1fr 1fr;gap:5px 15px;padding:13px 15px}
+.scene-only .type-slot>span:not(.slot-well){grid-column:1;font-size:12px;line-height:17px}.scene-only .type-slot b{grid-column:1;grid-row:2;font-size:22px;line-height:27px}
+.scene-only .world-types .type-slot>.slot-well{grid-column:2;grid-row:1/3;font-size:21px;line-height:26px;padding:8px 4px;min-height:50px}
+.scene-only .type-equation{font-size:15px;line-height:23px;height:53px;margin-top:18px;padding:14px}
+.scene-only .conveyor-heading{height:100px;padding:10px 0}.scene-only .conveyor-heading>div:first-child strong{font-size:28px}.scene-only .conveyor-counter strong{font-size:48px;min-width:84px;padding:9px 14px}
+.scene-only .conveyor-stage{height:215px;margin-top:15px}.scene-only .conveyor-card{width:68%;left:3%;height:148px;padding:15px 14px}.scene-only .conveyor-card h3{font-size:20px;line-height:25px;min-height:50px;margin:8px 0}.scene-only .conveyor-card p{font-size:13px;line-height:20px}.scene-only .conveyor-card small{font-size:10px;line-height:15px}
+.scene-only .conveyor-sensor{right:4%;width:65px;border-width:11px;height:156px;top:0}.scene-only .conveyor-sensor span{right:-21px;font-size:14px;padding:3px 6px}.scene-only .conveyor-arrow{display:none}
+.scene-only .conveyor-bottom{grid-template-columns:1fr;gap:16px}.scene-only .paper-folder{min-height:62px;margin-top:15px}.scene-only .counter-equation{text-align:left;font-size:22px;line-height:30px;min-height:30px}
+.scene-only .world-conveyor>.actions{margin-top:18px}.scene-only .world-conveyor .button{font-size:15px;padding:11px 15px}.scene-only .world-conveyor .text-button{font-size:14px}
+.scene-only .remaining-lab{margin-top:24px;padding-top:21px}.scene-only .remaining-lab h3{font-size:21px;line-height:27px;min-height:54px;margin-bottom:16px}
+.scene-only .remaining-inputs{gap:18px}.scene-only .remaining-dots{height:51px;align-content:start;gap:6px}.scene-only .remaining-dots i{height:20px;width:16px}
+.scene-only .remaining-lab>p{font-size:16px;line-height:25px;margin-top:16px;min-height:44px}.scene-only .remaining-lab>p strong{font-size:32px;line-height:40px}
+.scene-only .camera-composition{grid-template-columns:1fr 1fr;gap:23px 18px;max-width:360px;padding:16px 9px 21px;margin:auto}
+.scene-only .camera-subject{grid-column:1;grid-row:1;height:145px;min-height:145px;padding:17px 13px}.scene-only .camera-subject strong{font-size:24px;line-height:31px;margin:18px 0}
+.scene-only .instant-camera{grid-column:2;grid-row:1}.scene-only .camera-body{height:120px;border-width:7px}.scene-only .camera-lens{width:86px;height:86px;border-width:6px}.scene-only .camera-lens>div{width:56px;height:56px}
+.scene-only .camera-top{height:31px;padding:0 9px}.scene-only .camera-top i{width:28px;height:7px}.scene-only .camera-viewfinder{width:18px;height:12px;left:5px;top:5px}.scene-only .camera-badge{right:4px;top:12px;font-size:10px}
+.scene-only .instant-photo{grid-column:1/-1;grid-row:2;width:200px;padding:10px 10px 14px;justify-self:center}.scene-only .photo-image{height:130px;min-height:130px;padding:15px 7px}.scene-only .photo-image strong{font-size:27px}.scene-only .photo-image>span{font-size:10px}.scene-only .photo-caption{font-size:13px;line-height:20px;margin-top:13px}
+.scene-only .camera-code{display:grid;grid-template-columns:1fr;gap:7px;padding-top:15px}.scene-only .camera-code code{font-size:14px;line-height:22px;padding:9px 12px}
+.scene-only .world-camera>.actions{margin-top:18px}.scene-only .world-camera .button{font-size:15px}
+.scene-only .zero-dashboard-top{padding:13px 15px}.scene-only .zero-dashboard-top>span:last-child{font-size:10px}
+.scene-only .zero-instruments{grid-template-columns:1fr;padding:12px 18px}.scene-only .zero-instrument{border-right:0;border-bottom:1px solid #dfebe6;height:165px;min-height:165px;padding:16px 5px}.scene-only .instrument-name{font-size:14px;line-height:22px}
+.scene-only .instrument-cover{inset:42px 0 12px}.scene-only .world-zero .drawer-inside{min-height:100px}.scene-only .world-zero .zero-code{font-size:15px;line-height:24px;min-height:75px}
+.scene-only .empty-lab{margin-top:25px}.scene-only .empty-lab h3{font-size:21px;line-height:28px;min-height:56px;margin-bottom:16px}.scene-only .empty-lab>p{font-size:15px;line-height:24px;min-height:48px}
+.scene-only .press-composition{max-width:390px;padding:12px 0 15px}.scene-only .print-receipt{height:145px;padding:20px 16px 25px}.scene-only .print-receipt pre{font-size:23px;line-height:34px;white-space:pre}
+.scene-only .world-press .typesetter{margin:0 8px;padding:18px 14px 22px}.scene-only .world-press .letter-rail{font-size:20px;padding:13px 10px;min-height:60px}.scene-only .world-press .line-result{font-size:13px;line-height:22px;margin-top:18px;min-height:44px}
+.scene-only .world-press .typesetter-controls{justify-content:flex-start;min-height:110px;align-content:start;gap:12px}.scene-only .typesetter-controls label{width:100%;font-size:14px;line-height:22px}.scene-only .world-press>.actions{justify-content:flex-start;margin-top:15px}
+.scene-only .heading-lab{margin-top:24px;padding-top:21px}.scene-only .heading-lab h3{font-size:22px;line-height:28px}.scene-only .heading-lab>code{font-size:14px;line-height:23px}
+.scene-only .heading-values{grid-template-columns:1fr;gap:19px;margin:20px 0}.scene-only .heading-values>div{gap:7px}.scene-only .heading-values strong{font-size:23px;line-height:32px}
+.scene-only .heading-lab>.actions{display:grid;grid-template-columns:1fr;gap:10px}.scene-only .heading-lab>p{font-size:15px;line-height:24px;min-height:48px}
