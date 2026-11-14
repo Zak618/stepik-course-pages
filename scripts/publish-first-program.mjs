@@ -26,7 +26,14 @@ for(const article of plan.articles){
   const fresh=await sources(2706559),old=fresh.find(s=>s.position===article.position);
   assert.ok(fresh.every(s=>existing.some(e=>e.id===s.id)||journal.uploaded.some(e=>e.id===s.id)),'Concurrent lesson edit');
   if(old){const prior=journal.uploaded.find(e=>e.id===old.id);assert.ok(prior);if(prior.update_date)assert.equal(old.update_date,prior.update_date);}
-  if(textOnly){assert.ok(old);assert.equal(old.block.name,article.block.name);assert.equal(old.cost,article.cost);if(old.block.text===article.block.text){console.log(`Step ${article.position}: unchanged`);continue;}}
+  if(textOnly){
+    assert.ok(old);assert.equal(old.block.name,article.block.name);assert.equal(old.cost,article.cost);
+    // Stepik normalizes HTML, so raw exporter HTML is not a safe no-op test.
+    // This mode is restricted to object frames and removal of the final signature.
+    if(old.cost&&old.position!==10){console.log(`Step ${article.position}: grader and text untouched`);continue;}
+    if(old.position===10&&!old.block.text.includes('Команда WEB HACKER')){console.log('Step 10: signature already absent');continue;}
+    if(!old.cost&&old.block.text.includes('v='+plan.version)){const height=old.block.text.match(/<iframe\b[^>]*height="(\d+)"/);assert.equal(Number(height?.[1]),plan.heights[old.position]);console.log(`Step ${article.position}: current frame version already published`);continue;}
+  }
   const block=textOnly?{...article.block,source:old.block.source,feedback_correct:old.block.feedback_correct||'',feedback_wrong:old.block.feedback_wrong||''}:article.block;
   // Never blindly retry POST. Reconcile exact IDs with the journal after errors.
   const result=await api(old?`step-sources/${old.id}`:'step-sources',old?'PUT':'POST',{stepSource:{lesson:2706559,position:article.position,cost:article.cost,block}});
