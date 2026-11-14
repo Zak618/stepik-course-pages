@@ -1,22 +1,23 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import vm from 'node:vm';
-import{origin,file,browserOptions,exercise,frameSteps}from'./lib/first-program-browser.mjs';
+import{origin,file,browserOptions,exercise,frameSteps,sceneGeometry}from'./lib/first-program-browser.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-tools-M279ew/node_modules/playwright-core/index.mjs');
 const context={window:{}};vm.runInNewContext(await readFile('assets/go-mini-first-program-content.js','utf8'),context);
 const content=context.window.FirstProgramContent;
 const tasks=JSON.parse(await readFile('.local-publication/first-program-tasks.json','utf8')).tasks;
-const base='https://zak618.github.io/stepik-course-pages/',version='first-program-20261114';
+const base='https://zak618.github.io/stepik-course-pages/',version='first-program-20261114-spacing-2';
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const errors=[],heights={},measurements=[];page.on('pageerror',e=>errors.push(e.message));
 try{
   for(const step of frameSteps)for(const width of [320,390,420,640]){
     await page.setViewportSize({width,height:1800});await page.goto(`${origin}/${file(step)}?panel=scene&runtime=model`);await page.locator('.scene').waitFor();
-    const measure=async state=>{const m=await page.locator('main').evaluate(n=>({height:Math.ceil(n.getBoundingClientRect().height),overflow:document.documentElement.scrollWidth-innerWidth,overlapping:[...n.querySelectorAll('.anatomy-explanation,.source-sheet,.program-artifact,.lab-status,.printer-paper')].filter(e=>e.scrollHeight>e.clientHeight+1).map(e=>e.className)}));assert.ok(m.overflow<=0,`Overflow ${step}/${width}/${state}`);assert.deepEqual(m.overlapping,[],`Clipping ${step}/${width}/${state}`);heights[step]=Math.max(heights[step]||0,m.height+2);measurements.push({step,width,state,height:m.height});};
+    const measure=async state=>{const m=await page.evaluate(sceneGeometry);assert.ok(m.x<=0,`Overflow ${step}/${width}/${state}`);assert.deepEqual(m.overflow,[],`Clipping ${step}/${width}/${state}`);heights[step]=Math.max(heights[step]||0,m.main+2);measurements.push({step,width,state,height:m.main,inkBottom:m.inkBottom});};
     await measure('initial');await exercise(page,step,measure);
   }
   await mkdir('.local-publication',{recursive:true});await writeFile('.local-publication/first-program-measurements.json',JSON.stringify({heights,measurements},null,2));
   for(const m of measurements)assert.ok(heights[m.step]-m.height<=40,`Blank tail ${m.step}/${m.width}/${m.state}: ${heights[m.step]-m.height}`);
+  for(const m of measurements)assert.ok(heights[m.step]-m.inkBottom<=50,`Empty visible space ${m.step}/${m.width}/${m.state}: ${heights[m.step]-m.inkBottom}`);
   const articles=[];
   for(let step=1;step<=10;step++){
     await page.setViewportSize({width:1024,height:1600});await page.goto(`${origin}/${file(step)}?runtime=model`);await page.locator('.story').first().waitFor();

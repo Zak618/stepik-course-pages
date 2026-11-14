@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import{readFile,writeFile,mkdir}from'node:fs/promises';
 import{createHash}from'node:crypto';
-const apply=process.argv.includes('--apply'),plan=JSON.parse(await readFile('.local-publication/first-program.json','utf8'));
+const apply=process.argv.includes('--apply'),textOnly=process.argv.includes('--text-only'),plan=JSON.parse(await readFile('.local-publication/first-program.json','utf8'));
 assert.equal(plan.course,305666);assert.equal(plan.lesson,2706559);assert.equal(plan.unit,2746574);assert.equal(plan.articles.length,10);assert.equal(plan.articles.reduce((s,a)=>s+a.cost,0),50);
 const token=JSON.parse(await readFile('.env.stepik-webhacker-session','utf8')).access_token;
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -13,6 +13,7 @@ const account=(await api('stepics/1')).stepics[0].user;assert.equal(account,6470
 const course=(await api('courses/305666')).courses[0],lesson=(await api('lessons/2706559')).lessons[0],unit=(await api('units/2746574')).units[0];
 assert.equal(course.owner,account);assert.equal(lesson.owner,account);assert.equal(lesson.title,'Первая программа');assert.ok(lesson.courses.includes(305666));assert.ok(lesson.units.includes(2746574));assert.equal(unit.lesson,2706559);
 const existing=await sources(2706559),untouched={};for(const id of[2706555,2706556])untouched[id]=await sources(id);
+if(textOnly)assert.equal(existing.length,10,'Content-only update requires the existing full lesson');
 let journal={lesson:2706559,uploaded:[]};try{journal=JSON.parse(await readFile('.local-publication/first-program-upload.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 assert.equal(journal.lesson,2706559);assert.equal(new Set(existing.map(s=>s.position)).size,existing.length);assert.ok(existing.length<=10);
 for(const s of existing){const entry=journal.uploaded.find(e=>e.id===s.id&&e.position===s.position),expected=plan.articles.find(a=>a.position===s.position);assert.ok(entry&&expected,'Unrelated lesson content: no changes');assert.equal(s.block.name,expected.block.name);if(entry.update_date)assert.equal(s.update_date,entry.update_date,'Concurrent step edit');}
@@ -25,8 +26,10 @@ for(const article of plan.articles){
   const fresh=await sources(2706559),old=fresh.find(s=>s.position===article.position);
   assert.ok(fresh.every(s=>existing.some(e=>e.id===s.id)||journal.uploaded.some(e=>e.id===s.id)),'Concurrent lesson edit');
   if(old){const prior=journal.uploaded.find(e=>e.id===old.id);assert.ok(prior);if(prior.update_date)assert.equal(old.update_date,prior.update_date);}
+  if(textOnly){assert.ok(old);assert.equal(old.block.name,article.block.name);assert.equal(old.cost,article.cost);if(old.block.text===article.block.text){console.log(`Step ${article.position}: unchanged`);continue;}}
+  const block=textOnly?{...article.block,source:old.block.source,feedback_correct:old.block.feedback_correct||'',feedback_wrong:old.block.feedback_wrong||''}:article.block;
   // Never blindly retry POST. Reconcile exact IDs with the journal after errors.
-  const result=await api(old?`step-sources/${old.id}`:'step-sources',old?'PUT':'POST',{stepSource:{lesson:2706559,position:article.position,cost:article.cost,block:article.block}});
+  const result=await api(old?`step-sources/${old.id}`:'step-sources',old?'PUT':'POST',{stepSource:{lesson:2706559,position:article.position,cost:article.cost,block}});
   const source=result['step-sources'][0],entry={id:source.id,position:article.position,type:article.block.name,cost:article.cost,update_date:source.update_date};
   journal.uploaded=journal.uploaded.filter(e=>e.position!==article.position).concat(entry).sort((a,b)=>a.position-b.position);await writeFile('.local-publication/first-program-upload.json',JSON.stringify(journal,null,2));
   let checked;for(let attempt=0;attempt<40;attempt++){checked=(await api('step-sources/'+source.id))['step-sources'][0];if(!['preparing',10].includes(checked.status))break;await new Promise(r=>setTimeout(r,900));}
@@ -40,6 +43,7 @@ for(const article of plan.articles){
   console.log(`Step ${article.position}: ${checked.id}, ${checked.block.name}, ${checked.cost} points, ready`);
 }
 const after=await sources(2706559),afterLesson=(await api('lessons/2706559')).lessons[0],afterCourse=(await api('courses/305666')).courses[0];
+if(textOnly){assert.deepEqual(after.map(s=>s.id),existing.map(s=>s.id));for(const old of existing.filter(s=>s.cost)){const changed=after.find(s=>s.id===old.id);assert.equal(changed.cost,old.cost);assert.equal(changed.block.name,old.block.name);assert.deepEqual(changed.block.source,old.block.source,'Grader was changed');if(old.position!==10)assert.equal(sourceHash([changed]),sourceHash([old]),'Unrelated graded step was rewritten');}}
 assert.equal(after.length,10);assert.equal(after.reduce((s,a)=>s+a.cost,0),50);assert.equal(after.filter(s=>s.block.name==='code').length,2);assert.equal(afterLesson.is_draft,lesson.is_draft);assert.equal(afterLesson.title,lesson.title);assert.deepEqual(afterLesson.units,lesson.units);assert.equal(afterCourse.is_public,course.is_public);assert.equal(afterCourse.is_enabled,course.is_enabled);
 for(const id of[2706555,2706556])assert.equal(sourceHash(await sources(id)),sourceHash(untouched[id]),`Unrelated lesson ${id} changed`);
 await writeFile('.local-publication/first-program-verified.json',JSON.stringify({lesson:2706559,unit:2746574,sources:after},null,2));

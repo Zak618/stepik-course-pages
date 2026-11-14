@@ -16,14 +16,14 @@ html.first-fragment,html.first-fragment body{background:#fff}
 .first-fragment .monitor-object{padding-bottom:49px}
 .first-fragment .launch-result{min-height:22px}
 .first-fragment .keyboard{max-width:290px}
-.first-fragment .lab-status{min-height:80px;max-width:100%;margin-top:16px;font-size:16px;line-height:1.65}
+.first-fragment .lab-status{height:27px;min-height:27px;max-width:100%;margin-top:16px;font-size:16px;line-height:1.65}
 .first-fragment .anatomy-lab{padding:12px;gap:16px}
 .first-fragment .anatomy-line{font-size:16px;line-height:1.65;padding:10px 7px;gap:10px}
 .first-fragment .anatomy-explanation{min-height:0;padding:20px;height:237px}
 .first-fragment .anatomy-explanation .role-symbol{font-size:29px;margin-bottom:10px}
 .first-fragment .anatomy-explanation h3{font-size:22px}
 .first-fragment .anatomy-explanation p{font-size:18px;line-height:1.65}
-.first-fragment #anatomy-diagnostic{padding:0;border:0;margin:0;background:transparent;min-height:57px;font-size:14px;line-height:1.65}
+.first-fragment #anatomy-diagnostic{padding:0;border:0;margin:0;background:transparent;min-height:0;font-size:14px;line-height:1.65}
 .first-fragment .print-layout{gap:12px}
 .first-fragment .print-commands{gap:9px}
 .first-fragment .print-commands li{padding:12px 14px}
@@ -52,13 +52,13 @@ html.first-fragment,html.first-fragment body{background:#fff}
 .first-fragment .debug-head{display:block}
 .first-fragment .debug-head>p{min-height:55px}
 .first-fragment .debug-indicator{margin-top:5px}
-.first-fragment .debug-hint{min-height:80px;margin-top:12px}
-.first-fragment .debug-hint:empty{display:block}
+.first-fragment .debug-hint{min-height:0;margin:0}
+.first-fragment .debug-hint:empty{display:none}
 .first-fragment .editor textarea{resize:none;height:252px;font-size:16px;line-height:1.8}
 .first-fragment .editor-gutter span{height:28.8px}
 .first-fragment .runner-out{min-height:111px}
-.first-fragment .compiler-message{min-height:137px;margin-top:14px}
-.first-fragment .compiler-message:empty{display:block;border:0;background:transparent}
+.first-fragment .compiler-message{min-height:0;margin-top:0}
+.first-fragment .compiler-message:empty{display:none;border:0;background:transparent}
 .first-fragment .compiler-message pre{font-size:13px;line-height:1.6;overflow:visible;max-height:none}
 .first-fragment .actions .button{font-size:16px;padding:12px 16px}
 .first-fragment .actions .text-button{font-size:15px}
