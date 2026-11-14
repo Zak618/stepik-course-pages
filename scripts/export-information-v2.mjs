@@ -4,13 +4,14 @@ import {mkdir,writeFile} from 'node:fs/promises';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright-core');
 const origin=process.env.STEPIK_PREVIEW_ORIGIN||'http://localhost:8767';
 const published='https://zak618.github.io/stepik-course-pages/';
-const version='information-v2-20261114';
+const version='information-v2-spacing-20261114';
 const file=n=>`go-mini-module-02-lesson-01-v2-step-${String(n).padStart(2,'0')}.html`;
 const panels=n=>['scene',...(n===6?['carry']:n===9?['rgb']:[])];
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
 const page=await browser.newPage({reducedMotion:'reduce'});
 const errors=[];page.on('pageerror',error=>errors.push(error.message));
 const heights={},measurements=[];
+async function dismiss(){for(const dialog of await page.locator('dialog[open]').all())await dialog.getByRole('button',{name:'Продолжить',exact:true}).click();}
 const choice=options=>({is_multiple_choice:false,is_always_correct:false,sample_size:options.length,preserve_order:true,is_html_enabled:false,is_options_feedback:false,options:options.map(([text,is_correct])=>({text,is_correct,feedback:''}))});
 const tasks={
   4:{name:'number',prompt:'Прочитайте двоичное число 00101. В ответе укажите его десятичное значение.',source:{options:[{answer:'5',max_error:'0'}]},correct:'Верно: 4 + 1 = 5. Нули не добавляют ничего к сумме.',wrong:'Подпишите веса 16, 8, 4, 2, 1. Сложите только те, над которыми стоит единица.'},
@@ -22,11 +23,11 @@ async function size(step,panel,width,state){
   const result=await page.evaluate(()=>({height:Math.ceil(document.querySelector('main').getBoundingClientRect().height),overflow:document.documentElement.scrollWidth-innerWidth}));
   assert.ok(result.overflow<=0,`Horizontal overflow: ${step}/${panel}/${width}/${state}: ${result.overflow}`);
   measurements.push({step,panel,width,state,height:result.height});
-  heights[`${step}-${panel}`]=Math.max(heights[`${step}-${panel}`]||0,result.height+16);
+  heights[`${step}-${panel}`]=Math.max(heights[`${step}-${panel}`]||0,result.height+2);
 }
 try{
   for(let step=1;step<=10;step++)for(const panel of panels(step))for(const width of [320,390,768,1024]){
-    await page.setViewportSize({width,height:1000});
+    await page.setViewportSize({width:panel==='rgb'?Math.min(width,620):width,height:1000});
     await page.goto(`${origin}/${file(step)}?panel=${panel}`);await page.locator('html.fragment').waitFor();
     await size(step,panel,width,'initial');
     if(panel==='carry')for(let i=0;i<5;i++){await page.locator('#carry-next').click();await size(step,panel,width,'carry-'+i);}
@@ -41,26 +42,30 @@ try{
         assert.match(await page.locator('.byte-page-nav').textContent(),/43–48 из 48/);
         await page.getByRole('button',{name:'К компьютерам',exact:true}).click();
       }
-      if(step===2){await page.locator('[data-count="4"]').click();await page.locator('[data-capacity-answer="yes"]').click();}
+      if(step===2){await page.locator('[data-count="4"]').click();await page.locator('[data-capacity-answer="yes"]').click();await dismiss();}
       if(step===3){for(const weight of [8,4,1])await page.locator(`[data-weight="${weight}"]`).click();}
       if([4,5,7].includes(step)){
         await page.locator('#answer').fill('abc');await page.locator('#answer-form').evaluate(form=>form.requestSubmit());await size(step,panel,width,'invalid');
+        await dismiss();
         await page.locator('#answer').fill(step===5?'11111':'999');await page.locator('#answer-form').evaluate(form=>form.requestSubmit());
+        await dismiss();
       }
       if(step===6){await page.locator('#all-one').click();await page.locator('#byte-add').click();}
-      if(step===7){for(let i=0;i<5;i++)await page.locator('#add-box').click();await page.locator('#unpack').click();await page.locator('#answer-form').evaluate(form=>form.requestSubmit());}
+      if(step===7){for(let i=0;i<5;i++)await page.locator('#add-box').click();await page.locator('#unpack').click();await page.locator('#answer-form').evaluate(form=>form.requestSubmit());await dismiss();}
       if(step===8){await page.locator('[data-char="👋"]').click();await page.locator('#print').click();await page.locator('#xray').click();}
-      if(step===9){await page.locator('[data-mode="text"]').click();await page.locator('[data-meaning-answer="no"]').click();}
+      if(step===9){await page.locator('[data-mode="text"]').click();await page.locator('[data-meaning-answer="no"]').click();await dismiss();}
       if(step===10){
-        for(let i=0;i<4;i++)await page.locator('#scan-next').click();await size(step,panel,width,'no-results');
-        await page.locator('#ignore-case').check();for(let i=0;i<4;i++)await page.locator('#scan-next').click();
-        assert.equal(await page.locator('.index-card.matched').count(),2);
-        await page.locator('#query').fill('');for(let i=0;i<4;i++)await page.locator('#scan-next').click();
+        for(const [query,count]of[['цикл',2],['пицца',0],['и',4]]){
+          await page.locator('#query').fill(query);await page.locator('#find-form').evaluate(form=>form.requestSubmit());
+          assert.equal(await page.locator('.search-note.matched').count(),count);await size(step,panel,width,'results-'+count);
+        }
+        await page.locator('#query').fill('');await page.locator('#find-form').evaluate(form=>form.requestSubmit());await size(step,panel,width,'empty-query');
       }
       await size(step,panel,width,'expanded');
     }
   }
-  for(const key of Object.keys(heights))heights[key]=Math.ceil(heights[key]/10)*10;
+  for(const key of Object.keys(heights))heights[key]=Math.ceil(heights[key]);
+  for(const m of measurements)assert.ok(heights[`${m.step}-${m.panel}`]-m.height<=36,`Excessive blank iframe tail: step ${m.step}/${m.panel}, width ${m.width}, ${m.state}`);
   const articles=[];
   for(let step=1;step<=10;step++){
     await page.setViewportSize({width:1024,height:1000});await page.goto(`${origin}/${file(step)}`);await page.locator('.story').first().waitFor();
@@ -68,11 +73,12 @@ try{
       const root=document.createElement('div');
       const iframe=panel=>{
         const el=document.createElement('iframe');el.src=`${published}${filename}?panel=${panel}&v=${version}`;el.width='100%';el.height=heights[`${step}-${panel}`];el.title=panel==='carry'?'Двоичный перенос: от семи к восьми':panel==='rgb'?'Смешайте красный, зелёный и синий свет':'Интерактивный опыт: '+window.InformationV2Content[step].nav;
-        el.loading='lazy';el.style.cssText='border:0;display:block;width:100%;max-width:100%;background:#fff;margin:16px 0;';return el;
+        if(panel==='rgb')el.style.width='min(100%,620px)';
+        el.loading='lazy';el.style.cssText=`border:0;display:block;vertical-align:top;width:${panel==='rgb'?'min(100%,620px)':'100%'};max-width:100%;background:#fff;margin:4px auto;`;return el;
       };
       const header=document.querySelector('.lesson-header').cloneNode(true);header.querySelector('.lesson-kicker').remove();root.append(...header.childNodes);
       const flow=document.querySelector('.lesson-flow').cloneNode(true);
-      if(graded){const note=document.createElement('p');note.textContent='В опыте можно потренироваться. Ответ для зачёта отправьте в поле Stepik в конце этого шага.';flow.querySelector('.experiment').before(note);}
+      if(graded){const note=document.createElement('p');note.textContent='Потренируйтесь в опыте, а затем ответьте на вопрос в конце шага.';flow.querySelector('.experiment').before(note);}
       if(step===10)flow.querySelector('.experiment').before(document.querySelector('.find-task').cloneNode(true));
       flow.querySelector('.experiment').replaceWith(iframe('scene'));
       for(const box of [...flow.querySelectorAll('.duo-layout,article')])box.replaceWith(...box.childNodes);
@@ -93,10 +99,11 @@ try{
         if(styles[element.tagName])element.setAttribute('style',styles[element.tagName]);
         if(worked||guide)element.setAttribute('style','padding:22px 24px;background:#f3f7ff;border-radius:18px;margin:22px 0;');
       }
+      for(const frame of root.querySelectorAll('iframe')){const next=frame.nextElementSibling;if(next?.tagName==='H2')next.style.marginTop='10px';}
       return root.innerHTML;
     },{step,heights,published,version,filename:file(step),graded:Boolean(tasks[step])});
     const task=tasks[step];
-    const taskHtml=task?`<h2 style="font-size:28px;line-height:1.4;margin:32px 0 16px;">Задание Stepik · 10 баллов</h2><p style="font-size:20px;line-height:1.8;">${task.prompt}</p>`:'';
+    const taskHtml=task?`<h2 style="font-size:28px;line-height:1.4;margin:32px 0 16px;">Проверим знания</h2><p style="font-size:20px;line-height:1.8;">${task.prompt}</p>`:'';
     articles.push({position:step,cost:task?10:0,block:{name:task?.name||'text',text:html+taskHtml,source:task?.source||{},feedback_correct:task?.correct||'',feedback_wrong:task?.wrong||''}});
   }
   assert.deepEqual(errors,[]);assert.equal(articles.reduce((sum,a)=>sum+a.cost,0),40);

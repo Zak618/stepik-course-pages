@@ -50,12 +50,13 @@ for(const article of plan.articles){
   assert.ok((source.status===1000||source.status==='ready')&&!source.error?.code&&!source.error?.text,`Step ${source.id} failed validation or is not ready`);
   assert.equal((source.block.text.match(/<iframe/g)||[]).length,(article.block.text.match(/<iframe/g)||[]).length,'An experiment was stripped');
   assert.ok(source.block.text.includes('v='+plan.version));assert.ok(source.block.text.length>article.block.text.length*.7,'Content was stripped');
-  if(article.cost){assert.ok(source.block.text.includes('10 баллов'));assert.deepEqual(source.block.source,article.block.source,'Native checker differs from the exported checker');}
+  if(article.cost){assert.ok(source.block.text.includes('Проверим знания'));assert.deepEqual(source.block.source,article.block.source,'Native checker differs from the exported checker');}
   uploaded.push({position:source.position,id:source.id,type:source.block.name,cost:source.cost});
   await writeFile('.local-publication/stepik-v2-upload.json',JSON.stringify({lesson:2706555,unit:2746570,uploaded},null,2));
   console.log(`Step ${source.position}: ${source.id}, ${source.block.name}, ${source.cost} points`);
 }
 const after=await sources();assert.equal(after.length,10);assert.equal(after.reduce((sum,s)=>sum+s.cost,0),40);
+await writeFile('.local-publication/stepik-v2-verified.json',JSON.stringify({lesson:2706555,sources:after},null,2));
 for(const s of after){assert.equal(s.id,ids[s.position-1]);assert.equal(s.cost,[4,5,7,9].includes(s.position)?10:0);assert.equal(s.is_enabled,true);}
 const afterCourse=(await api('courses/305666')).courses[0],afterLesson=(await api('lessons/2706555')).lessons[0];
 assert.equal(afterCourse.is_public,course.is_public);assert.equal(afterCourse.is_enabled,course.is_enabled);assert.equal(afterLesson.is_draft,lesson.is_draft);assert.deepEqual(afterLesson.steps,lesson.steps);

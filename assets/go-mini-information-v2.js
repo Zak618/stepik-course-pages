@@ -28,7 +28,7 @@
     7:()=>`<div class="shipping-world"><div class="shipping-toolbar"><div><span class="object-label">Байтов в посылке</span><div class="quantity"><button id="remove-box" aria-label="Убрать байт">−</button><output id="box-count">3</output><button id="add-box" aria-label="Добавить байт">+</button></div></div><button class="chip" id="unpack">Раскрыть коробки</button></div><div class="shipping-shelf" id="shipping-shelf"></div>${numberForm('Сколько битов?')}<p class="scene-status" id="shipping-status" role="status">Каждая коробка вмещает восемь битов.</p></div>`,
     8:()=>`<div class="printer-world"><div class="choices centered">${['A','Я','👋'].map(char=>`<button class="chip char-chip" data-char="${char}" aria-pressed="${char==='A'}">${char}</button>`).join('')}</div><div class="printer-desk"><div class="printer"><div class="printer-top"><span class="printer-led" aria-hidden="true"></span><span>UTF‑8</span></div><div class="printer-display" id="printer-char">A</div><div class="printer-mouth" aria-hidden="true"></div><button id="print" class="printer-button">Напечатать байты ↓</button></div><div class="receipt-space"><div class="receipt-placeholder" id="receipt-placeholder"><strong>Один символ.</strong><span>Сколько байтов будет на чеке?</span></div><div class="receipt" id="receipt" hidden><span class="receipt-heading">UTF‑8 / ДАННЫЕ</span><div id="receipt-bytes"></div><div class="receipt-total" id="receipt-total"></div><span class="receipt-tear" aria-hidden="true"></span></div></div></div><p class="scene-status" id="unicode-status">Unicode: U+0041 · номер 65</p><div class="tools"><button class="chip" id="xray" aria-pressed="false">Выделить служебные биты</button></div><div class="utf-legend" id="utf-legend" hidden><span>служебные</span><span>номер символа</span></div><div class="word-comparison"><span>Go <b>2 байта</b></span><span>Го <b>4 байта</b></span></div></div>`,
     9:()=>`<div class="meaning-world"><div class="choices centered">${[['number','Число'],['text','Текст'],['color','Цвет']].map(([id,text],i)=>`<button class="chip" data-mode="${id}" aria-pressed="${i===0}">${text}</button>`).join('')}</div><div class="meaning-desk"><div class="sealed-parcel"><span>СОДЕРЖИМОЕ</span><b class="mono">01000001</b><div class="parcel-string" aria-hidden="true"></div></div><span class="meaning-arrow" aria-hidden="true">→</span><div class="meaning-reveal" id="meaning-reveal"></div></div><p class="scene-status" id="meaning-caption" role="status"></p><div class="pixel-lab"><div class="pixel-screen"><div id="pixel-color" class="pixel-color"></div><div class="subpixels" aria-hidden="true"><i></i><i></i><i></i></div></div><div class="pixel-controls">${[['r','Красный'],['g','Зелёный'],['b','Синий']].map(([id,text])=>`<label class="rgb-${id}"><span>${text}</span><input data-channel="${id}" type="range" min="0" max="255" value="65" aria-label="${text} свет"><output id="rgb-${id}">65</output></label>`).join('')}<p class="mono" id="pixel-status" role="status">RGB(65, 65, 65) · 24 бита</p></div></div><div class="small-question"><strong>По одним битам можно узнать, что хотел сохранить автор?</strong><div class="choices"><button class="chip" data-meaning-answer="yes">Можно</button><button class="chip" data-meaning-answer="no">Нужна договорённость</button></div><p id="meaning-answer" role="status"></p></div></div>`,
-    10:()=>`<div class="find-world"><div class="find-brand">Go-шечка <em>Find</em></div><label class="find-input"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span class="sr-only">Поисковый запрос</span><input id="query" value="go" maxlength="64" autocomplete="off" spellcheck="false"></label><label class="case-control"><input type="checkbox" id="ignore-case"><span>Не учитывать регистр: Go = go</span></label><div class="index-cards" id="index-cards"></div><div class="scanner-status"><span class="scanner-lens" aria-hidden="true"></span><p id="find-status" role="status" aria-live="polite"></p></div><div class="tools"><button class="button" id="scan-next">Следующая карточка →</button><button class="text-button" id="scan-reset">Начать заново</button></div><div class="find-results" id="find-results"></div></div>`
+    10:()=>`<div class="find-world notes-world"><div class="find-brand">Go-шечка <em>Find</em></div><form class="notes-search" id="find-form"><label class="find-input"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span class="sr-only">Тема заметки</span><input id="query" value="цикл" maxlength="64" autocomplete="off" spellcheck="false" placeholder="Тема заметки"></label><button class="button" id="find-submit" type="submit">Найти</button></form><div class="notes-examples"><span>Попробуйте:</span>${['цикл','функц','пицца'].map(query=>`<button class="chip" type="button" data-search="${query}">${query}</button>`).join('')}</div><div class="notes-board" id="notes-board" aria-label="Наши заметки"></div><p class="notes-progress" id="find-status" role="status" aria-live="polite">Нажмите «Найти» — посмотрим, какие заметки подойдут.</p><section class="notes-folder" aria-labelledby="folder-title"><div class="folder-tab" aria-hidden="true"></div><header><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5h7l2 2h9v13H3Z"/></svg><h3 id="folder-title">Результаты</h3><output id="find-count">—</output></header><div class="folder-content" id="find-results"><p class="folder-empty">Здесь соберём найденные заметки.</p></div></section></div>`
   };
   function show(){
     generation++;cancelAnimationFrame(frame);abort.abort();abort=new AbortController();
@@ -54,7 +54,7 @@
     root.innerHTML=`<header class="lesson-header"><p class="lesson-kicker">Основы вычислений <span>${String(step).padStart(2,'0')} / 10</span></p>${data.welcome?`<p class="welcome-line">${data.welcome}</p>`:''}<h1>${data.title}</h1><p class="lesson-question">${data.question}</p><p class="lesson-intro">${data.intro}</p></header><div class="lesson-flow">${flow}</div><nav class="lesson-bottom" aria-label="Переход между шагами">${step>1?`<a href="${go(step-1)}">← Назад</a>`:'<span>Команда WEB HACKER</span>'}${step<10?`<a class="button" href="${go(step+1)}">Дальше →</a>`:'<a href="go-mini-module-02-lesson-01-v2-preview.html">К началу урока ↗</a>'}</nav>`;
     if(step===10){
       const task=document.createElement('aside');task.className='find-task';task.setAttribute('aria-labelledby','find-task-title');
-      task.innerHTML='<h2 id="find-task-title">Найдите две записи про Go.</h2><ol><li>Оставьте запрос <code>go</code> и проверьте все четыре карточки.</li><li>Включите «Не учитывать регистр» и проверьте их ещё раз.</li><li>Сравните результаты. Почему они изменились?</li></ol>';
+      task.innerHTML='<h2 id="find-task-title">Найдём заметки про циклы.</h2><p>В поле уже есть слово <strong>цикл</strong>. Нажмите «Найти» и посмотрите, какие записи попадут в папку. А что произойдёт, если поискать пиццу?</p>';
       $('.find-brand').after(task);
     }
     document.title=data.title+' · Go-шечка (mini)';
@@ -70,7 +70,7 @@
         busy=false;$('#send').disabled=false;$('#message').disabled=false;$$('[data-word]').forEach(b=>b.disabled=false);
         $('#message-world').dataset.phase='received';$('#received').textContent=text;$('#receiver-placeholder').hidden=true;
         $('#wire-packets').replaceChildren();$('.screen-letters')?.remove();$('#message-world').setAttribute('aria-busy','false');$('#wire-caption').textContent=encoded.length+' Б';
-        $('#message-status').textContent=(guess===2?'Да, передали код. ':guess!==null?'Посмотрите: между экранами были байты. ':'')+`Получатель прочитал ${encoded.length} ${plural(encoded.length,'байт','байта','байтов')} и восстановил сообщение.`;
+        $('#message-status').textContent=embedded?`Получено: ${encoded.length} ${plural(encoded.length,'байт','байта','байтов')}. Сообщение восстановлено.`:(guess===2?'Да, передали код. ':guess!==null?'Посмотрите: между экранами были байты. ':'')+`Получатель прочитал ${encoded.length} ${plural(encoded.length,'байт','байта','байтов')} и восстановил сообщение.`;
         $('#message-payload').hidden=false;
         const signs=glyphs(text).length;
         $('#message-payload').innerHTML=`<div class="payload-caption"><strong>${signs}</strong> ${plural(signs,'видимый знак','видимых знака','видимых знаков')} <span>→</span> <strong id="byte-count">${encoded.length}</strong> ${plural(encoded.length,'байт','байта','байтов')} UTF‑8</div><div class="byte-ribbon">${encoded.map((n,i)=>`<span class="ribbon-byte" style="--i:${i%6}"><small>${i+1}</small><b class="mono">${bin(n)}</b></span>`).join('')}</div>`;
@@ -81,6 +81,7 @@
           const close=document.createElement('button');close.className='chip';close.textContent='К компьютерам';
           close.addEventListener('click',()=>$('#message-payload').close(),{signal:abort.signal});$('#message-payload').append(close);
           $('#show-bytes').hidden=false;
+          $('#show-bytes').disabled=false;
           const paintBytes=()=>{
             $('.byte-ribbon').innerHTML=encoded.slice(first,first+6).map((n,i)=>`<span class="ribbon-byte"><small>${first+i+1}</small><b class="mono">${bin(n)}</b></span>`).join('');
             pager.replaceChildren();
@@ -95,11 +96,11 @@
         flash($('#received'),[{opacity:0,transform:'translateY(10px) scale(.92)'},{opacity:1,transform:'none'}],{duration:650});
       };
       on('#send','click',()=>{
-        if(busy)return;const text=$('#message').value;if(!text){$('#message-status').textContent='В сообщении пока нет знаков. Можно отправить слово или хотя бы пробел.';return;}
+        if(busy)return;const text=$('#message').value;if(!text){$('#message-status').textContent=embedded?'Сообщение пустое. Введите слово.':'В сообщении пока нет знаков. Можно отправить слово или хотя бы пробел.';return;}
         const encoded=bytes(text);if(!motion()){finish(text,encoded);return;}
         busy=true;run++;const currentRun=run,ownGeneration=generation;$('#send').disabled=true;$('#message').disabled=true;$$('[data-word]').forEach(b=>b.disabled=true);
         $('#message-payload').hidden=true;$('#received').textContent='';$('#receiver-placeholder').hidden=false;$('#receiver-placeholder').textContent='Получаю…';$('#message-world').dataset.phase='encoding';$('#message-world').setAttribute('aria-busy','true');
-        if(embedded)$('#show-bytes').hidden=true;
+        if(embedded)$('#show-bytes').disabled=true;
         $('.screen-bits').textContent=encoded.slice(0,2).map(n=>bin(n)).join('\n');
         const letters=document.createElement('div');letters.className='screen-letters';letters.setAttribute('aria-hidden','true');glyphs(text).slice(0,12).forEach((char,i)=>{const letter=document.createElement('span');letter.textContent=char;letter.style.setProperty('--letter-i',i);letters.append(letter);});$('.sender .monitor-screen').append(letters);
         $('#message-status').textContent='Записываем сообщение байтами…';
@@ -107,7 +108,7 @@
         const cards=encoded.slice(0,5).map((n,index)=>{const group=document.createElementNS(svgNS,'g');const rect=document.createElementNS(svgNS,'rect');rect.setAttribute('x','-43');rect.setAttribute('y','-13');rect.setAttribute('width','86');rect.setAttribute('height','26');rect.setAttribute('rx','9');const label=document.createElementNS(svgNS,'text');label.setAttribute('text-anchor','middle');label.setAttribute('y','4');label.textContent=bin(n);group.append(rect,label);group.style.opacity='0';group.dataset.index=index;stream.append(group);return group;});
         const start=performance.now(),length=path.getTotalLength();
         const tick=now=>{if(generation!==ownGeneration||run!==currentRun)return;const elapsed=now-start;
-          if(elapsed>500){$('#message-world').dataset.phase='travelling';$('#message-status').textContent='Передаём данные. Буквы на другом экране ещё не появились.';}
+          if(elapsed>500){$('#message-world').dataset.phase='travelling';$('#message-status').textContent=embedded?'Передаём байты на второй компьютер…':'Передаём данные. Буквы на другом экране ещё не появились.';}
           cards.forEach((card,index)=>{const progress=(elapsed-500-index*200)/1450;const visible=progress>=0&&progress<=1;card.style.opacity=visible?String(Math.min(1,progress*8,(1-progress)*8)):'0';if(visible){const point=path.getPointAtLength(progress*length);card.setAttribute('transform',`translate(${point.x} ${point.y})`);}});
           if(elapsed>3000){finish(text,encoded);return;}frame=requestAnimationFrame(tick);
         };frame=requestAnimationFrame(tick);
@@ -167,9 +168,21 @@
       on('#start-carry','click',()=>{carry=0;$('#carry-story').hidden=false;showCarry();});on('#carry-next','click',()=>{carry=(carry+1)%5;showCarry();});paint();
     }
     if(step===7){
-      let count=3,open=false;
-      const paint=()=>{$('#box-count').textContent=count;$('#remove-box').disabled=count===1;$('#add-box').disabled=count===8;$('#shipping-shelf').classList.toggle('unpacked',open);$('#shipping-shelf').innerHTML=Array.from({length:count},(_,i)=>`<div class="byte-package" style="--pack-i:${i}"><div class="package-tape"><span>БАЙТ ${i+1}</span></div><div class="package-cells">${'<i></i>'.repeat(8)}</div></div>`).join('');$('#unpack').textContent=open?'Закрыть коробки':'Раскрыть коробки';$('#shipping-status').textContent=open?`Коробок: ${count}. В каждой видно восемь мест. Можно пересчитать.`:'Каждая коробка вмещает восемь битов.';$('#feedback').textContent='';};
-      on('#add-box','click',()=>{if(count<8)count++;paint();});on('#remove-box','click',()=>{if(count>1)count--;paint();});on('#unpack','click',()=>{open=!open;paint();});on('#answer-form','submit',event=>{event.preventDefault();const input=$('#answer').value.trim();if(!/^\d+$/.test(input)){say('Введите число битов.');return;}const correct=Number(input)===count*8;say(correct?`${count} × 8 = ${count*8} битов. Верно.`:'В каждой коробке восемь мест. Умножьте число коробок на восемь.',correct);});paint();
+      let count=3,open=false,parcelPage=0;
+      const paint=()=>{
+        $('#box-count').textContent=count;$('#remove-box').disabled=count===1;$('#add-box').disabled=count===8;
+        $('#shipping-shelf').classList.toggle('unpacked',open);
+        $('#shipping-shelf').innerHTML=Array.from({length:count},(_,i)=>`<div class="byte-package" style="--pack-i:${i}"><div class="package-tape"><span>БАЙТ ${i+1}</span></div><div class="package-cells">${'<i></i>'.repeat(8)}</div></div>`).join('');
+        if(embedded){
+          parcelPage=Math.min(parcelPage,Math.floor((count-1)/4));const first=parcelPage*4;
+          $$('.byte-package').forEach((box,i)=>box.hidden=i<first||i>=first+4);
+          let pager=$('#shipping-pager');if(!pager){pager=document.createElement('div');pager.id='shipping-pager';pager.className='byte-page-nav';$('#shipping-shelf').after(pager);}
+          pager.innerHTML=`<button aria-label="Предыдущие коробки" ${first===0?'disabled':''}>←</button><span>${first+1}–${Math.min(first+4,count)} из ${count}</span><button aria-label="Следующие коробки" ${first+4>=count?'disabled':''}>→</button>`;
+          pager.firstElementChild.addEventListener('click',()=>{parcelPage--;paint();},{signal:abort.signal});pager.lastElementChild.addEventListener('click',()=>{parcelPage++;paint();},{signal:abort.signal});
+        }
+        $('#unpack').textContent=open?'Закрыть коробки':'Раскрыть коробки';$('#shipping-status').textContent=open?`Коробок: ${count}. В каждой — восемь мест.`:'В каждой коробке восемь мест.';$('#feedback').textContent='';
+      };
+      on('#add-box','click',()=>{if(count<8)count++;parcelPage=Math.floor((count-1)/4);paint();});on('#remove-box','click',()=>{if(count>1)count--;paint();});on('#unpack','click',()=>{open=!open;paint();});on('#answer-form','submit',event=>{event.preventDefault();const input=$('#answer').value.trim();if(!/^\d+$/.test(input)){say('Введите число битов.');return;}const correct=Number(input)===count*8;say(correct?`${count} × 8 = ${count*8} битов. Верно.`:'В каждой коробке восемь мест. Умножьте число коробок на восемь.',correct);});paint();
     }
     if(step===8){
       let selected='A',printed=false,xray=false;
@@ -183,17 +196,33 @@
       const color=()=>{const values=$$('[data-channel]').map(input=>Number(input.value));$$('[data-channel]').forEach(input=>$(`#rgb-${input.dataset.channel}`).textContent=input.value);$('#pixel-color').style.backgroundColor=`rgb(${values.join(',')})`;$('#pixel-color').setAttribute('aria-label',`Цвет RGB: ${values.join(', ')}`);$('#pixel-status').textContent=`RGB(${values.join(', ')}) · 24 бита`;};on('[data-channel]','input',color);color();on('[data-meaning-answer]','click',event=>{$('#meaning-answer').textContent=event.currentTarget.dataset.meaningAnswer==='no'?'Именно. Значение байта вычислить можно, а его назначение задаёт договорённость.':'65 — числовое значение байта. Но автор мог записать букву или яркость. Без формата этого не узнать.';});
     }
     if(step===10){
-      const records=[{title:'Go: первые команды',text:'Выводим текст и запускаем программу.'},{title:'Go-шечка Find: поиск по записям',text:'Собираем маленький поисковик на Go.'},{title:'Го: настольная игра',text:'Камни, доска и правила хода.'},{title:'Циклы и повторения',text:'Одна инструкция работает много раз.'}];let scanned=0;
-      const match=record=>{const normalize=text=>$('#ignore-case').checked?text.toLocaleLowerCase('ru'):text;return normalize(record.title+' '+record.text).includes(normalize($('#query').value));};
-      const paint=()=>{const reviewed=records.slice(0,scanned).filter(match);
-        $('#index-cards').innerHTML=records.map((record,i)=>`<article class="index-card ${i<scanned?(match(record)?'matched':'skipped'):''} ${i===scanned-1?'current':''}" style="--card-i:${i}"><span class="card-tab">${String(i+1).padStart(2,'0')}</span><h3>${esc(record.title)}</h3><p>${esc(record.text)}</p><span class="card-verdict">${i<scanned?(match(record)?'Нашли':'Пропускаем'):'Ещё не смотрели'}</span></article>`).join('');
-        $('#find-status').textContent=scanned?`Проверено ${scanned} из 4. Найдено: ${reviewed.length}.${scanned===4?' Поиск завершён.':''}`:'Сначала проверим первую карточку. Затем пройдём остальные — одну за другой.';
-        $('#scan-next').disabled=scanned===4;
-        $('#scan-next').textContent=scanned===4?'Все карточки проверены':scanned===0?'Проверить первую карточку →':`Проверить карточку ${scanned+1} из 4 →`;
-        const hint=$('#query').value==='go'&&!$('#ignore-case').checked?'В записях написано Go, а мы искали go. Включите «Не учитывать регистр» и повторите проверку.':'Ничего не нашлось. Попробуйте другое слово или измените правило сравнения.';
-        $('#find-results').innerHTML=scanned===4?`<strong>Результат: ${reviewed.length}</strong><p>${reviewed.length?reviewed.map(record=>esc(record.title)).join('<br>'):hint}</p>`:'';
+      const records=[{title:'Циклы в Go',text:'Повторяем команды.'},{title:'Список покупок',text:'Хлеб, молоко, яблоки.'},{title:'Функции в Go',text:'Группируем команды.'},{title:'Цикл без конца',text:'Проверяем условие.'}];
+      const normalize=text=>text.toLocaleLowerCase('ru');let run=0;
+      $('#notes-board').innerHTML=records.map((record,i)=>`<article class="search-note" data-note="${i}"><span class="note-corner" aria-hidden="true"></span><h3>${esc(record.title)}</h3><p>${esc(record.text)}</p><span class="note-seal" aria-hidden="true">✓</span><span class="note-lens" aria-hidden="true"></span></article>`).join('');
+      const stop=()=>{run++;cancelAnimationFrame(frame);$$('.note-flight').forEach(node=>{node.getAnimations().forEach(animation=>animation.cancel());node.remove();});$('.notes-world').setAttribute('aria-busy','false');$('#find-submit').disabled=false;$('#find-submit').textContent='Найти';};
+      const reset=()=>{stop();$$('.search-note').forEach(node=>node.className='search-note');$('#find-count').textContent='—';$('#find-results').innerHTML='<p class="folder-empty">Здесь соберём найденные заметки.</p>';$('#find-status').textContent='Нажмите «Найти» — посмотрим, какие заметки подойдут.';};
+      const fly=note=>{
+        if(!motion())return;
+        const world=$('.notes-world'),a=note.getBoundingClientRect(),b=$('.notes-folder').getBoundingClientRect(),base=world.getBoundingClientRect();
+        const sheet=document.createElement('span');sheet.className='note-flight';sheet.textContent='✓';sheet.setAttribute('aria-hidden','true');sheet.style.left=`${a.left-base.left+a.width/2-14}px`;sheet.style.top=`${a.top-base.top+a.height/2-18}px`;world.append(sheet);
+        const animation=sheet.animate([{transform:'translate(0,0) rotate(-8deg)',opacity:1},{transform:`translate(${b.left+b.width/2-a.left-a.width/2}px,${b.top+60-a.top-a.height/2}px) rotate(8deg) scale(.6)`,opacity:0}],{duration:550,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});animation.onfinish=()=>sheet.remove();
       };
-      const reset=()=>{scanned=0;paint();};on('#query','input',reset);on('#ignore-case','change',reset);on('#scan-reset','click',reset);on('#scan-next','click',()=>{scanned=Math.min(scanned+1,4);paint();const card=$$('.index-card')[scanned-1];if(card)flash(card,[{transform:'translateY(-12px) rotate(-2deg)'},{transform:'none'}],{duration:650});});paint();
+      const search=()=>{
+        reset();const query=normalize($('#query').value.trim()),token=run,current=generation;let scanned=0,found=0;
+        if(!query){$('#find-status').textContent='Введите тему заметки. Например, цикл.';$('#query').focus();return;}
+        $('.notes-world').setAttribute('aria-busy','true');$('#find-submit').disabled=true;$('#find-submit').textContent='Ищем…';$('#find-count').textContent='0';$('#find-results').innerHTML='<p class="folder-empty">Просматриваем заметки…</p>';
+        const visit=()=>{const note=$$('.search-note')[scanned];note.classList.add('searching');$('#find-status').textContent=`Проверяем заметку ${scanned+1} из 4…`;};
+        const review=()=>{
+          const record=records[scanned],note=$$('.search-note')[scanned],matched=normalize(record.title+' '+record.text).includes(query);note.classList.remove('searching');note.classList.add(matched?'matched':'skipped');
+          if(matched){if(!found)$('#find-results').replaceChildren();found++;const row=document.createElement('p');row.className='folder-result';row.innerHTML='<span aria-hidden="true">✓</span><span></span>';row.lastElementChild.textContent=record.title;$('#find-results').append(row);fly(note);flash(row,[{opacity:0,transform:'translateY(-8px)'},{opacity:1,transform:'none'}]);}
+          scanned++;$('#find-count').textContent=String(found);
+        };
+        const finish=()=>{$('.notes-world').setAttribute('aria-busy','false');$('#find-submit').disabled=false;$('#find-submit').textContent='Найти';$('#find-status').textContent=`Готово: ${found} ${plural(found,'заметка','заметки','заметок')}. Проверены все четыре.`;if(!found)$('#find-results').innerHTML='<p class="folder-empty">Ничего не нашли.<br>Попробуйте другую тему.</p>';};
+        if(!motion()){while(scanned<records.length)review();finish();return;}
+        visit();let start=performance.now();
+        const tick=now=>{if(token!==run||current!==generation)return;if(now-start>=550){review();if(scanned===records.length){finish();return;}visit();start=now;}frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);
+      };
+      on('#query','input',reset);on('#find-form','submit',event=>{event.preventDefault();search();});on('[data-search]','click',event=>{$('#query').value=event.currentTarget.dataset.search;search();});
     }
     if(embedded){
       document.body.dataset.panel=panel;
@@ -205,7 +234,7 @@
         root.replaceChildren(experiment);
         if(step===1){
           const dialog=document.createElement('dialog');dialog.id='message-payload';dialog.className='message-payload';dialog.hidden=true;dialog.setAttribute('aria-label','Байты отправленного сообщения');$('#message-payload').replaceWith(dialog);
-          const open=document.createElement('button');open.id='show-bytes';open.className='chip';open.textContent='Посмотреть байты';open.hidden=true;
+          const open=document.createElement('button');open.id='show-bytes';open.className='chip';open.textContent='Байты сообщения';open.disabled=true;
           open.addEventListener('click',()=>dialog.showModal(),{signal:abort.signal});$('#message-status').after(open);
         }
         if(step===6){
@@ -215,6 +244,18 @@
         }
         if(step===9)$('.pixel-lab').remove();
         if(step===10)$('.find-task').remove();
+      }
+      const wrapDialog=(node,label)=>{
+        const dialog=document.createElement('dialog');dialog.className='experiment-dialog';dialog.setAttribute('aria-label',label);
+        node.before(dialog);dialog.append(node);const close=document.createElement('button');close.className='chip';close.textContent='Продолжить';close.addEventListener('click',()=>dialog.close(),{signal:abort.signal});dialog.append(close);return dialog;
+      };
+      if([4,5,7].includes(step)){
+        const dialog=wrapDialog($('#feedback'),'Результат проверки');
+        root.addEventListener('submit',()=>{if($('#feedback').textContent&&!dialog.open)dialog.showModal();},{signal:abort.signal});
+      }
+      for(const [answer,trigger] of [['#capacity-answer','[data-capacity-answer]'],['#meaning-answer','[data-meaning-answer]']]){
+        if(!$(answer))continue;const dialog=wrapDialog($(answer),'Разберём ответ');
+        root.addEventListener('click',event=>{if(event.target.closest(trigger)&&!dialog.open)dialog.showModal();},{signal:abort.signal});
       }
     }
   }

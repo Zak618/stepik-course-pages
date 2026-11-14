@@ -27,7 +27,16 @@ try{
   await go(7);equal(await text('#box-count'),'3');await submit('24');equal(await page.locator('#feedback').getAttribute('class'),'feedback success');for(let i=0;i<5;i++)await page.locator('#add-box').click();equal(await text('#box-count'),'8');equal(await page.locator('#add-box').isDisabled(),true);await page.locator('#unpack').click();equal(await page.locator('.package-cells i').count(),64);await submit('64');equal(await page.locator('#feedback').getAttribute('class'),'feedback success');
   await go(8);equal(await page.locator('#receipt').isHidden(),true);await page.locator('#print').click();equal(await page.locator('.receipt-byte').count(),1);await page.locator('[data-char="Я"]').click();equal(await page.locator('#receipt').isHidden(),true);await page.locator('#xray').click();equal(await page.locator('.prefix').count(),5);equal(await page.locator('.payload').count(),11);equal(parseInt((await page.locator('.payload').allTextContents()).join(''),2),1071);await page.locator('[data-char="👋"]').click();await page.locator('#print').click();equal(await page.locator('.receipt-byte').count(),4);equal(parseInt((await page.locator('.payload').allTextContents()).join(''),2),128075);
   await go(9);await page.locator('[data-mode="text"]').click();equal(await text('.letter-block strong'),'A');await page.locator('[data-mode="color"]').click();equal(await page.locator('.gray-sample').count(),1);for(const [channel,value]of[['r',255],['g',0],['b',0]])await page.locator(`[data-channel="${channel}"]`).evaluate((input,value)=>{input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));},value);equal(await page.locator('#pixel-color').evaluate(node=>node.style.backgroundColor),'rgb(255, 0, 0)');equal(await text('.sealed-parcel b'),'01000001');
-  await go(10);for(let i=0;i<4;i++)await page.locator('#scan-next').click();equal(await page.locator('.index-card.matched').count(),0);await page.locator('#ignore-case').check();for(let i=0;i<4;i++)await page.locator('#scan-next').click();equal(await page.locator('.index-card.matched').count(),2);equal(await page.locator('#scan-next').isDisabled(),true);await page.locator('#query').fill('го');for(let i=0;i<4;i++)await page.locator('#scan-next').click();equal(await page.locator('.index-card.matched').count(),2);await page.locator('#query').fill('<img src=x>');equal(await page.locator('.index-cards img').count(),0);equal(await page.locator('.index-card.current').count(),0);
+  await go(10);equal(await page.locator('.search-note').count(),4);
+  for(const [query,count]of[['цикл',2],['функц',1],['пицца',0],['ЦИКЛ',2],['  цикл  ',2],['go',2],['и',4],['<img src=x>',0]]){
+    await page.locator('#query').fill(query);await page.locator('#find-form').evaluate(form=>form.requestSubmit());
+    equal(await page.locator('.search-note.matched').count(),count);equal(await page.locator('.folder-result').count(),count);equal(await text('#find-count'),String(count));equal(await page.locator('#find-submit').isEnabled(),true);
+  }
+  equal(await page.locator('.notes-world img').count(),0);await page.locator('#query').fill('   ');await page.locator('#query').press('Enter');assert.match(await text('#find-status'),/Введите тему/);checks++;equal(await page.locator('.search-note.matched').count(),0);
+  await page.locator('[data-search="цикл"]').click();equal(await text('#find-count'),'2');
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('[data-search="функц"]').click();await page.locator('.search-note.searching').waitFor();equal(await page.locator('#find-submit').isDisabled(),true);await page.locator('#query').fill('цикл');await page.waitForTimeout(700);equal(await page.locator('.search-note.searching').count(),0);equal(await page.locator('.folder-result').count(),0);
+  await page.locator('#find-submit').click();await page.waitForTimeout(800);await page.locator('.experiment').screenshot({path:screenshots+'/find-searching.png'});await page.locator('.notes-world[aria-busy="false"]').waitFor();equal(await text('#find-count'),'2');equal(await page.locator('.search-note.searching').count(),0);await page.waitForTimeout(600);equal(await page.locator('.note-flight').count(),0);
+  await page.emulateMedia({reducedMotion:'reduce'});
   for(const width of [1280,768,390,320]){
     await page.setViewportSize({width,height:950});
     for(let step=1;step<=10;step++){
@@ -37,6 +46,7 @@ try{
       if(step===6){await page.locator('#all-one').click();await page.locator('#byte-add').click();await page.locator('#start-carry').click();}
       if(step===7){for(let i=0;i<5;i++)await page.locator('#add-box').click();await page.locator('#unpack').click();}
       if(step===8){await page.locator('[data-char="👋"]').click();await page.locator('#print').click();await page.locator('#xray').click();}
+      if(step===10)await page.locator('#find-submit').click();
       await page.locator('.extra summary').click();
       equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
       equal(await page.locator('iframe').count(),0);
