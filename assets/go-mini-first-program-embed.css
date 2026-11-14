@@ -1,0 +1,69 @@
+/* Only the experiment belongs in an iframe; the story stays native to Stepik. */
+html.first-fragment,html.first-fragment body{background:#fff}
+.first-fragment .site-header{display:none}
+.first-fragment .standalone .first-lesson{width:100%;max-width:640px;margin:0 auto}
+.first-fragment .scene{margin:0}
+.first-fragment .launch-lab,.first-fragment .build-lab,.first-fragment .print-lab,.first-fragment .debug-lab{background:#fff;border:0;border-radius:0;padding:16px 12px 8px}
+.first-fragment .launch-grid,.first-fragment .anatomy-lab,.first-fragment .print-layout{grid-template-columns:minmax(0,1fr)}
+.first-fragment .launch-grid{gap:20px}
+.first-fragment .desktop-computer{max-width:355px;width:100%;margin:auto}
+.first-fragment .code-window pre{font-size:17px;min-height:218px}
+.first-fragment .greeting-edit{display:block;margin-top:15px}
+.first-fragment .greeting-edit label{display:block;margin-bottom:8px}
+.first-fragment .greeting-edit input{width:100%}
+.first-fragment .monitor-display{height:156px}
+.first-fragment .monitor-display pre{font-size:22px;line-height:1.5;max-height:none;overflow:visible;overflow-wrap:anywhere}
+.first-fragment .monitor-object{padding-bottom:49px}
+.first-fragment .launch-result{min-height:22px}
+.first-fragment .keyboard{max-width:290px}
+.first-fragment .lab-status{min-height:80px;max-width:100%;margin-top:16px;font-size:16px;line-height:1.65}
+.first-fragment .anatomy-lab{padding:12px;gap:16px}
+.first-fragment .anatomy-line{font-size:16px;line-height:1.65;padding:10px 7px;gap:10px}
+.first-fragment .anatomy-explanation{min-height:0;padding:20px;height:237px}
+.first-fragment .anatomy-explanation .role-symbol{font-size:29px;margin-bottom:10px}
+.first-fragment .anatomy-explanation h3{font-size:22px}
+.first-fragment .anatomy-explanation p{font-size:18px;line-height:1.65}
+.first-fragment #anatomy-diagnostic{padding:0;border:0;margin:0;background:transparent;min-height:57px;font-size:14px;line-height:1.65}
+.first-fragment .print-layout{gap:12px}
+.first-fragment .print-commands{gap:9px}
+.first-fragment .print-commands li{padding:12px 14px}
+.first-fragment .print-commands li>code{font-size:18px;margin-bottom:9px}
+.first-fragment .printer{max-width:350px;width:100%;margin:auto;padding-top:19px}
+.first-fragment .printer-paper{height:190px;min-height:190px}
+.first-fragment .printer-paper pre{font-size:22px}
+.first-fragment .print-lab .actions{min-height:48px}
+.first-fragment .build-world{grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);gap:9px}
+.first-fragment .compiler-chip{height:50px;font-size:20px;border-radius:13px;border-width:4px;box-shadow:0 0 0 3px #d9e7ff}
+.first-fragment .compiler-chip:before,.first-fragment .compiler-chip:after{width:10px}
+.first-fragment .compiler-chip:before{right:calc(100% + 5px)}
+.first-fragment .compiler-chip:after{left:calc(100% + 5px)}
+.first-fragment .source-sheet,.first-fragment .program-artifact{height:168px;min-height:168px;padding:14px 10px}
+.first-fragment .source-sheet:before{font-size:26px}
+.first-fragment .source-sheet strong{font-size:12px}
+.first-fragment .source-sheet code,.first-fragment .program-artifact code{font-size:12px}
+.first-fragment .program-artifact>span{font-size:11px;margin-bottom:11px}
+.first-fragment .program-artifact strong{font-size:17px}
+.first-fragment .artifact-play{display:none}
+.first-fragment .model-detail{grid-template-columns:minmax(0,1fr);gap:7px}
+.first-fragment .model-detail p{line-height:1.6}
+.first-fragment .pipeline-steps li{font-size:10px}
+.first-fragment .model-terminal{min-height:86px}
+.first-fragment .model-terminal pre{font-size:18px}
+.first-fragment .debug-head{display:block}
+.first-fragment .debug-head>p{min-height:55px}
+.first-fragment .debug-indicator{margin-top:5px}
+.first-fragment .debug-hint{min-height:80px;margin-top:12px}
+.first-fragment .debug-hint:empty{display:block}
+.first-fragment .editor textarea{resize:none;height:252px;font-size:16px;line-height:1.8}
+.first-fragment .editor-gutter span{height:28.8px}
+.first-fragment .runner-out{min-height:111px}
+.first-fragment .compiler-message{min-height:137px;margin-top:14px}
+.first-fragment .compiler-message:empty{display:block;border:0;background:transparent}
+.first-fragment .compiler-message pre{font-size:13px;line-height:1.6;overflow:visible;max-height:none}
+.first-fragment .actions .button{font-size:16px;padding:12px 16px}
+.first-fragment .actions .text-button{font-size:15px}
+.first-fragment .code-window pre{height:300px;line-height:1.65}
+.first-fragment .launch-lab>.actions{display:grid;grid-template-columns:1fr 1fr}
+.first-fragment .build-lab>.actions{display:flex;flex-direction:column;align-items:flex-start}
+.first-fragment .print-lab .actions,.first-fragment .debug-lab>.actions{display:grid;grid-template-columns:1fr 1fr}
+.first-fragment #print-run,.first-fragment #debug-run{grid-column:1/-1}
