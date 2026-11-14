@@ -1,0 +1,57 @@
+/* Only the interactive object is framed; the lesson prose stays in Stepik. */
+.scene-only .lesson{max-width:420px;width:100%;padding:0;margin:0 auto}
+.scene-only .world{margin:0;border-radius:18px}
+.scene-only .sky-caption,.scene-only .harbor-top,.scene-only .rail-heading{padding:20px 20px 0}
+.scene-only .sky-caption strong,.scene-only .harbor-top strong,.scene-only .rail-heading strong{display:block;font-size:24px;line-height:30px;min-height:60px}
+.scene-only .landscape{margin-top:0}
+.scene-only .sky-reading{margin:0 16px;display:block;padding:13px 15px}
+.scene-only .sky-reading>span{display:block}
+.scene-only .sky-reading output{display:block;min-height:60px;margin-top:8px;font-size:21px;line-height:28px;text-align:left}
+.scene-only .sky-world .white-controls{margin:16px 14px 0}
+.scene-only .scene-controls{display:flex;flex-direction:column;align-items:stretch;padding:20px;gap:14px}
+.scene-only .field{flex:none;gap:8px}
+.scene-only .field>span{font-size:14px;line-height:21px;min-height:42px}
+.scene-only .field input{font-size:17px;padding:12px;min-height:48px}
+.scene-only .scene-controls>.primary{flex:none;width:100%;min-height:50px;font-size:16px}
+.scene-only .scene-controls>.quiet{align-self:start;padding:8px 0}
+.scene-only .presets{gap:8px}
+.scene-only .presets button{font-size:13px;padding:8px 10px}
+.scene-only .sky-world .presets{min-height:68px;align-content:start}
+.scene-only .scene-status{font-size:15px;line-height:24px;min-height:92px;padding:18px 20px 20px}
+.scene-only .execution{margin:0 20px}
+.scene-only .execution li{display:block;min-height:77px;padding:11px 13px}
+.scene-only .execution code{font-size:12px;line-height:20px}
+.scene-only .execution li span{display:block;font-size:12px;line-height:20px;margin-top:6px;max-width:none}
+.scene-only .machine-world{padding:24px 20px 0}
+.scene-only .machine-grid{grid-template-columns:1fr;gap:25px}
+.scene-only .scanner-device{padding:25px 20px 20px}
+.scene-only .paper-source strong{display:block;font-size:18px;line-height:24px;min-height:48px}
+.scene-only .machine-actions>button{min-height:85px;padding:13px 13px 13px 49px}
+.scene-only .machine-actions>button code{font-size:14px;line-height:21px}
+.scene-only .machine-actions>button b{left:13px}
+.scene-only .machine-actions>button span{font-size:12px}
+.scene-only .variable-pocket{min-height:117px}
+.scene-only .variable-pocket output{font-size:20px;line-height:27px}
+.scene-only .machine-world .scene-controls{padding:24px 0 8px}
+.scene-only .machine-world .scene-status{padding-inline:0}
+.scene-only .rail-view{height:225px}
+.scene-only .rail-station{top:15px}
+.scene-only .train-world>.presets{padding:0 20px 18px;min-height:53px}
+.scene-only .receipt{margin:0 20px;padding:16px;min-height:192px}
+.scene-only .receipt output{font-size:20px;line-height:27px;min-height:81px}
+.scene-only .receipt small{display:block;font-size:13px;line-height:21px;min-height:42px}
+.scene-only .history-pockets{margin:0 16px;gap:10px;grid-template-columns:1fr 1fr}
+.scene-only .history-pockets>div{padding:15px 12px}
+.scene-only .history-pockets small{font-size:11px;line-height:17px;min-height:34px}
+.scene-only .history-pockets output{font-size:20px;line-height:27px;min-height:81px}
+.scene-only .lighthouse-world .scene-controls>.field{flex-basis:auto}
+.scene-only .find-world{padding:24px 20px 0}
+.scene-only .find-composition{grid-template-columns:1fr;gap:25px}
+.scene-only .find-inputs{gap:14px}
+.scene-only .find-inputs .field>span{min-height:21px}
+.scene-only .terminal-body{min-height:297px;padding:17px 12px;font-size:16px;line-height:27px}
+.scene-only .terminal-line{padding:5px 6px}
+.scene-only .terminal-chrome{padding:14px 12px}
+.scene-only .terminal-chrome>span{font-size:11px}
+.scene-only .origin-key{gap:12px;font-size:12px;margin-top:20px;line-height:21px}
+.scene-only .find-world .scene-status{padding-inline:0}
