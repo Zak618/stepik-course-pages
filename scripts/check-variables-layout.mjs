@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import {readFile,mkdtemp} from 'node:fs/promises';
 import {origin,browserOptions,exercise,geometry} from './lib/variables-browser.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-tools-M279ew/node_modules/playwright-core/index.mjs');
-const published=process.argv.includes('--published');
-const input=JSON.parse(await readFile(published?'.local-publication/variables-verified.json':'.local-publication/variables.json','utf8'));
-const articles=published?input.sources:input.articles;
+const published=process.argv.includes('--published'),partial=process.argv.includes('--partial');
+const input=JSON.parse(await readFile(published?'.local-publication/variables-verified.json':partial?'.local-publication/variables-partial.json':'.local-publication/variables.json','utf8'));
+const articles=published||partial?input.sources:input.articles;
+if(!partial)assert.equal(articles.length,16);
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const screenshots=await mkdtemp('/tmp/stepik-variables-native-'),records=[],errors=[];
 page.on('pageerror',error=>errors.push(error.message));
@@ -43,5 +44,5 @@ try{
     }
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({publishedMarkup:published,checks:records.length,maxGap:Math.max(...records.map(r=>r.gap)),maxTail:Math.max(...records.map(r=>r.tail)),errors,screenshots},null,2));
+  console.log(JSON.stringify({publishedMarkup:published||partial,steps:articles.length,checks:records.length,maxGap:Math.max(...records.map(r=>r.gap)),maxTail:Math.max(...records.map(r=>r.tail)),errors,screenshots},null,2));
 }finally{await browser.close();}

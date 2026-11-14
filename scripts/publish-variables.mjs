@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {target} from './lib/variables-browser.mjs';
 
-const apply=process.argv.includes('--apply');
+const apply=process.argv.includes('--apply'),refreshText=process.argv.includes('--refresh-text');
 const plan=JSON.parse(await readFile('.local-publication/variables.json','utf8'));
 for(const key of ['course','lesson','unit','account','title'])assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,16);
@@ -15,7 +15,8 @@ const token=JSON.parse(await readFile('.env.stepik-webhacker-session','utf8')).a
 const hash=value=>createHash('sha256').update(value).digest('hex');
 // Stepik strips unsupported CSS; HTML byte counts do not measure lost theory.
 // Compare the readable content instead, normalizing only HTML/whitespace.
-const readable=html=>html.replace(/<[^>]*>/g,'').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity)=>entity[0]==='#'?String.fromCodePoint(entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1))):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[entity.toLowerCase()]).replace(/\s+/g,' ').trim();
+const readable=html=>html.replace(/<[^>]*>/g,'').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity)=>entity[0]==='#'?String.fromCodePoint(entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1))):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[entity.toLowerCase()]).replace(/\s+/g,'');
+function assertTextRefresh(source,expected){assert.ok(refreshText,'Plan changed after a partial publication');assert.equal(readable(source.block.text),readable(expected.block.text),'A text refresh may only change formatting');assert.deepEqual(source.block.source,expected.block.source,'A text refresh may not change the grader');}
 const sourceHash=items=>hash(JSON.stringify(items.map(({id,position,cost,block,update_date,is_enabled})=>({id,position,cost,block,update_date,is_enabled}))));
 async function api(path,method='GET',body){
   const response=await fetch('https://stepik.org/api/'+path,{method,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(30000)});
@@ -51,7 +52,7 @@ for(const source of existing){
   assert.ok(entry&&expected,'Unrelated lesson content: refusing to overwrite');
   assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);
   assert.equal(source.update_date,entry.update_date,'Concurrent edit: refusing to overwrite');
-  assert.equal(entry.planHash,hash(JSON.stringify(expected)),'Plan changed after a partial publication');
+  if(entry.planHash!==hash(JSON.stringify(expected)))assertTextRefresh(source,expected);
 }
 console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existingSteps:existing.length,plannedSteps:16,codeTasks:8,choiceTasks:1,points:90,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
@@ -70,7 +71,12 @@ for(const article of plan.articles){
   if(current){
     const prior=journal.uploaded.find(e=>e.id===current.id);
     assert.equal(current.update_date,prior.update_date,'Concurrent step edit');
-    assert.equal(prior.planHash,hash(JSON.stringify(article)));
+    if(prior.planHash!==hash(JSON.stringify(article))){
+      assertTextRefresh(current,article);
+      const result=await api('step-sources/'+current.id,'PUT',{stepSource:{lesson:target.lesson,...article}});
+      current=result['step-sources'][0];prior.update_date=current.update_date;prior.planHash=hash(JSON.stringify(article));
+      await writeFile('.local-publication/variables-upload.json',JSON.stringify(journal,null,2));
+    }
   }else{
     // A failed POST is not retried automatically: reconcile its ID before resuming.
     const result=await api('step-sources','POST',{stepSource:{lesson:target.lesson,...article}});
