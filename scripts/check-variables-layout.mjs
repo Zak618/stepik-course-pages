@@ -20,6 +20,7 @@ try{
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Native text overflows');
     assert.ok(!/рад видеть|10 баллов|Команда WEB HACKER/.test(text));
     assert.equal(await page.locator('h1').count(),1);
+    if(step===5){const labels=page.locator('h2>code');assert.deepEqual(await labels.allTextContents(),['string','int','bool']);assert.ok(await labels.evaluateAll(ns=>ns.every(n=>parseFloat(getComputedStyle(n).fontSize)>=28)),'Native type headings lost their size');}
     if(article.cost){assert.equal(await page.locator('iframe,form,input,button,textarea').count(),0);continue;}
     const iframe=page.locator('iframe');await iframe.scrollIntoViewIfNeeded();
     const child=await(await iframe.elementHandle()).contentFrame();

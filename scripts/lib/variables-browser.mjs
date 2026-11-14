@@ -3,7 +3,7 @@ export const version='variables-20261114-publish-1';
 export const target={course:305666,lesson:2706560,unit:2746575,account:647088271,title:'Переменные, типы и операции'};
 export const frameSteps=[1,3,5,7,9,11,13];
 export const filename=n=>`go-mini-module-03-lesson-02-step-${String(n).padStart(2,'0')}.html`;
-export const files=['go-mini-module-03-lesson-02-preview.html',...Array.from({length:16},(_,i)=>filename(i+1)),...['.css','-v2.css','-embed.css','.js','-content.js','-tasks.js','-worlds.js'].map(s=>'assets/go-mini-variables'+s)];
+export const files=['go-mini-module-03-lesson-02-preview.html',...Array.from({length:16},(_,i)=>filename(i+1)),...['.css','-v2.css','-embed.css','-clarity.css','.js','-content.js','-tasks.js','-worlds.js'].map(s=>'assets/go-mini-variables'+s)];
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']};
 export function geometry(){
   const root=document.querySelector('main'),scene=root.querySelector('.world');let inkBottom=0;
@@ -14,7 +14,7 @@ export function geometry(){
 }
 export async function exercise(page,n,measure){
   const click=async(s,label=s)=>{await page.locator(s).click();await measure(label);};
-  if(n===1){await click('#manual-replace','manual-stale');await click('#query-send','variable');for(const text of['циклы','функции','W'.repeat(18),'👋'.repeat(9),'']){await page.fill('#query-input',text);await measure('edited-'+text.length);await click('#query-send','run-'+text.length);}await click('#query-reset','reset');}
+  if(n===1){await click('[data-query-edit="0"]','edit-one');await click('#query-send','manual-stale');for(const i of[1,2])await click(`[data-query-edit="${i}"]`,'edit-'+i);await click('#query-send','manual-complete');await click('[data-query-mode=variable]','variable');for(const text of['циклы','функции','W'.repeat(18),'👋'.repeat(9),'']){await page.fill('#query-input',text);await measure('edited-'+text.length);await click('#query-send','run-'+text.length);}await click('#query-reset','reset');}
   if(n===3){await click('[data-prediction=same]','prediction');for(let i=1;i<=4;i++)await click('#trace-next','frame-'+i);await page.locator('#trace-time').fill('1');await measure('rewind');await click('#trace-reset','reset');}
   if(n===5){await click('[data-scale=strings]','strings');await click('[data-scale=numbers]','numbers');for(let t=0;t<6;t++){await click(`[data-token="${t}"]`,'token-'+t);for(const s of['query','found','exact'])await click(`[data-slot=${s}]`,'token-'+t+'-slot-'+s);}}
   if(n===7){for(let i=0;i<6;i++)await click('#count-next','record-'+i);await click('#count-reset','reset');for(const total of[1,12,24]){await page.locator('#remaining-total').fill(String(total));await measure('total-'+total);for(const checked of[0,total]){await page.locator('#remaining-checked').fill(String(checked));await measure('checked-'+checked);}}}

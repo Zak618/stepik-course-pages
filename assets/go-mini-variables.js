@@ -1,6 +1,6 @@
-import {articles, research} from './go-mini-variables-content.js';
+import {articles, research} from './go-mini-variables-content.js?v=clarity-2';
 import {tasks, quiz} from './go-mini-variables-tasks.js';
-import {sceneMarkup, bindWorlds} from './go-mini-variables-worlds.js';
+import {sceneMarkup, bindWorlds} from './go-mini-variables-worlds.js?v=clarity-2';
 
 const root = document.querySelector('#variables-lesson');
 const preview = document.body.dataset.preview === 'true';

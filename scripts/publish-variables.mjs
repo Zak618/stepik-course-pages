@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {target} from './lib/variables-browser.mjs';
 
-const apply=process.argv.includes('--apply'),refreshText=process.argv.includes('--refresh-text');
+const apply=process.argv.includes('--apply'),refreshText=process.argv.includes('--refresh-text'),updatePages=process.argv.includes('--update-pages');
 const plan=JSON.parse(await readFile('.local-publication/variables.json','utf8'));
 for(const key of ['course','lesson','unit','account','title'])assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,16);
@@ -16,7 +16,11 @@ const hash=value=>createHash('sha256').update(value).digest('hex');
 // Stepik strips unsupported CSS; HTML byte counts do not measure lost theory.
 // Compare the readable content instead, normalizing only HTML/whitespace.
 const readable=html=>html.replace(/<[^>]*>/g,'').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity)=>entity[0]==='#'?String.fromCodePoint(entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1))):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[entity.toLowerCase()]).replace(/\s+/g,'');
-function assertTextRefresh(source,expected){assert.ok(refreshText,'Plan changed after a partial publication');assert.equal(readable(source.block.text),readable(expected.block.text),'A text refresh may only change formatting');assert.deepEqual(source.block.source,expected.block.source,'A text refresh may not change the grader');}
+function assertTextRefresh(source,expected){
+  if(updatePages){assert.ok([1,5,7].includes(source.position),'Only the three approved text steps may change');assert.equal(source.cost,0);assert.equal(source.block.name,'text');}
+  else{assert.ok(refreshText,'Plan changed after a partial publication');assert.equal(readable(source.block.text),readable(expected.block.text),'A text refresh may only change formatting');}
+  assert.deepEqual(source.block.source,expected.block.source,'A page update may not change the grader');
+}
 const sourceHash=items=>hash(JSON.stringify(items.map(({id,position,cost,block,update_date,is_enabled})=>({id,position,cost,block,update_date,is_enabled}))));
 async function api(path,method='GET',body){
   const response=await fetch('https://stepik.org/api/'+path,{method,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(30000)});
@@ -115,6 +119,7 @@ const afterCourse=(await api('courses/'+target.course)).courses[0],afterUnit=(aw
 assert.equal(after.length,16);assert.equal(after.reduce((s,a)=>s+a.cost,0),90);
 assert.equal(after.filter(s=>s.block.name==='code').length,8);
 assert.equal(after.filter(s=>s.block.name==='choice').length,1);
+if(updatePages)for(const source of existing.filter(s=>![1,5,7].includes(s.position)))assert.equal(sourceHash([after.find(s=>s.id===source.id)]),sourceHash([source]),'An unrelated step changed');
 assert.equal(afterLesson.is_draft,lesson.is_draft);assert.equal(afterLesson.title,lesson.title);
 assert.deepEqual(afterLesson.units,lesson.units);assert.deepEqual(afterCourse.sections,course.sections);
 assert.equal(afterCourse.is_public,course.is_public);assert.equal(afterCourse.is_enabled,course.is_enabled);
