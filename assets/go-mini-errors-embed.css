@@ -1,0 +1,22 @@
+/* Keep the iframe's compact layout consistent between phone and desktop. */
+.is-embed .error-world .controls{flex-wrap:nowrap;gap:10px}
+.is-embed .error-world .controls label{min-width:0;flex:1;font-size:15px}
+.is-embed .error-world .controls button{max-width:52%;font-size:15px;padding:12px 14px}
+.is-embed .error-world .error-status{font-size:17px;line-height:1.5;min-height:51px}
+.is-embed .error-world .error-line{font-size:15px;line-height:1.5;padding:13px}
+.is-embed .error-world .letter{height:auto;min-height:34px}
+.is-embed .error-world.machine .error-port strong{display:block;font-size:clamp(17px,3vw,25px);min-height:50px}
+.is-embed .error-world.find .controls{display:grid;grid-template-columns:1.5fr 1fr}
+.is-embed .error-world.find .controls label{min-width:0}
+.is-embed .error-world.find .controls button{grid-column:1/-1;justify-self:end;width:220px;max-width:100%}
+.is-embed .error-world .find-folder{min-height:118px}
+.is-embed .error-world .find-folder strong{font-size:18px}
+.is-embed .error-world .mail-scene{grid-template-columns:140px minmax(0,1fr);gap:20px}
+.is-embed .error-world .mailbox{padding:30px 12px 16px}
+.is-embed .error-world .mailbox .envelope{width:95px}
+.is-embed .error-world .mail-card{padding:13px 12px}
+.is-embed .error-world .mail-card strong{font-size:20px}
+.is-embed .error-world .mail-readout strong{font-size:21px}
+.is-embed .error-world .bakery-counter{grid-template-columns:160px minmax(0,330px);gap:22px}
+.is-embed .error-world .bread-plate{grid-template-columns:repeat(4,minmax(0,1fr));min-height:140px;padding:20px 10px}
+@media(max-width:420px){.is-embed .error-world .mail-scene{grid-template-columns:115px minmax(0,1fr);gap:14px}.is-embed .error-world .mailbox .envelope{width:80px}.is-embed .error-world .mail-card strong{font-size:18px}.is-embed .error-world .bakery-counter{grid-template-columns:135px minmax(0,1fr);gap:14px}.is-embed .error-world .bread-plate{grid-template-columns:1fr 1fr}}
