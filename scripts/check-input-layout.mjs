@@ -28,6 +28,8 @@ try{
       await child.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
       const inner=await child.evaluate(geometry);
       assert.ok(inner.x<=0&&inner.y<=1&&inner.main<=inner.viewport+1,`Scroll ${step}/${width}/${state}: ${JSON.stringify(inner)}`);
+      assert.ok(inner.width>=Math.min(width,1024)-1,`Scene compressed ${step}/${width}: ${inner.width}`);
+      assert.deepEqual(inner.clipped,[],`Clipped content ${step}/${width}/${state}`);
 
       const gap=await iframe.evaluate((frame,bottom)=>{
         const next=frame.parentElement.nextElementSibling;

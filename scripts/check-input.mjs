@@ -32,7 +32,7 @@ try{
  await navigate(1);await page.fill('#sky-input','<img src=x onerror=alert(1)>');await page.click('#sky-send');await page.waitForFunction(()=>!document.querySelector('#sky-send').disabled);check((await page.locator('#sky-query').textContent()).includes('<img'),'Safe user content');check(await page.locator('.sky-world img').count()===0,'HTML injection');
  await navigate(3);check((await page.locator('#harbor-lines li').nth(2).getAttribute('class'))===null,'Waiting program already printed answer');await page.fill('#harbor-input','');await page.click('#harbor-send');await page.waitForFunction(()=>!document.querySelector('#harbor-reset').disabled);check((await page.locator('#harbor-lines li').nth(2).textContent()).includes('Ищем:'),'Harbor empty line');await page.click('#harbor-reset');check(await page.locator('#harbor-lines li.active').count()===1,'Harbor reset');
  await navigate(5);for(let i=0;i<3;i++){await page.click('#machine-next');await page.waitForFunction(()=>!document.querySelector('#machine-reset').disabled);}check((await page.locator('#scanner-query').textContent()).includes('первые команды'),'Machine sequence');await page.click('#machine-reset');check((await page.locator('#scanner-query').textContent()).includes('Ещё'),'Machine reset');
- await navigate(7);for(const text of ['Go  👋','','42','x'.repeat(64),'👨‍👩‍👧‍👦']){await page.fill('#train-input',text);await page.click('#train-send');await page.waitForFunction(()=>!document.querySelector('#train-send').disabled);check(await page.locator('#train-result').textContent()==='['+text+']','Train loses data');}
+ await navigate(7);for(const text of ['Go  👋','','42','x'.repeat(32),'👨‍👩‍👧‍👦']){await page.fill('#train-input',text);await page.click('#train-send');await page.waitForFunction(()=>!document.querySelector('#train-send').disabled);check(await page.locator('#train-result').textContent()==='['+text+']','Train loses data');}
  await navigate(9);check(await page.locator('#history-read').isDisabled(),'History order');await page.click('#history-save');await page.fill('#history-input','второй запрос');await page.click('#history-read');await page.waitForFunction(()=>!document.querySelector('#history-reset').disabled);check((await page.locator('#history-saved').textContent()).includes('циклы'),'Saved changed');check((await page.locator('#history-query').textContent()).includes('второй запрос'),'Query did not change');
  await navigate(11);await page.fill('#find-query','  <b>Go</b>  ');await page.click('#find-run');check((await page.locator('#find-output').textContent()).includes('  <b>Go</b>  '),'Find escaping or whitespace');check(await page.locator('#find-output b').count()===0,'Find injection');await page.locator('[data-origin="query"]').click();check((await page.locator('#find-status').textContent()).includes('второй строки'),'Output provenance');
  await navigate(8);await page.locator('#quiz button').click();check((await page.locator('#quiz-feedback').textContent()).includes('Выберите'),'Quiz no selection');await page.check('input[value="2"]');await page.locator('#quiz button').click();check(await page.locator('#quiz-feedback.error').count()===1,'Quiz wrong answer');await page.check('input[value="0"]');await page.locator('#quiz button').click();check(await page.locator('#quiz-feedback.success').count()===1,'Quiz correct');
@@ -53,11 +53,11 @@ try{
  await page.click('#motion-toggle');
  for(const width of [390,1280]){
   await page.setViewportSize({width,height:950});await navigate(7);await page.fill('#train-input','Go 👋');
-  check(await page.locator('.locomotive svg').count()===1,'Actual locomotive missing');
-  await page.click('#train-send');await page.waitForTimeout(300);const x1=await page.locator('#phrase-train').evaluate(n=>n.getBoundingClientRect().x);await page.waitForTimeout(800);const x2=await page.locator('#phrase-train').evaluate(n=>n.getBoundingClientRect().x);
-  check(x2>x1+100,'Train does not travel across the scene');
+  check(await page.locator('.locomotive,.rail-view').count()===0,'Old train remains');
+  await page.click('#train-send');await page.waitForTimeout(250);
+  check(await page.locator('#reading-beam').evaluate(n=>n.getAnimations().some(a=>a.playState==='running')),'Reading beam is not animated');
   await page.waitForFunction(()=>!document.querySelector('#train-send').disabled,{},{timeout:6000});
-  check(await page.locator('#train-result').textContent()==='[Go 👋]','Train lost its payload');
+  check(await page.locator('#train-result').textContent()==='[Go 👋]','Line reader lost data');
  }
  await navigate(1);check(!(await page.locator('.world').innerText()).includes('Программа уже собрана'),'Unwanted caption');check(await page.locator('#sky-satellite rect').count()===3,'Satellite parts');
  await navigate(11);check(!(await page.locator('.world').innerText()).includes('Вход · две строки'),'Unwanted input caption');

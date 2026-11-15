@@ -1,5 +1,5 @@
-import {steps,tasks} from './go-mini-input-content.js?v=input-publish-1';
-import {world,mountWorld,esc} from './go-mini-input-worlds.js?v=input-publish-1';
+import {steps,tasks} from './go-mini-input-content.js?v=wide-2';
+import {world,mountWorld,esc} from './go-mini-input-worlds.js?v=wide-2';
 const preview=document.body.dataset.preview==='true';
 const sceneOnly=new URLSearchParams(location.search).get('panel')==='scene';
 const localRunnerHost=['localhost','127.0.0.1'].includes(location.hostname);

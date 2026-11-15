@@ -7,9 +7,9 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-too
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const heights={},measurements=[],errors=[];page.on('pageerror',e=>errors.push(e.message));
 try{
- for(const step of frameSteps)for(const width of[320,360,390,420]){
+ for(const step of frameSteps)for(const width of[320,390,600,768,1024]){
   await page.setViewportSize({width,height:1800});await page.goto(`${origin}/${filename(step)}?panel=scene`);await page.waitForSelector('.scene-only .world');
-  const measure=async state=>{await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));const m=await page.evaluate(geometry);assert.ok(m.x<=0,`Horizontal overflow ${step}/${width}/${state}`);heights[step]=Math.max(heights[step]||0,m.main,m.inkBottom+4);measurements.push({step,width,state,...m});};
+  const measure=async state=>{await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));const m=await page.evaluate(geometry);assert.ok(m.x<=0,`Horizontal overflow ${step}/${width}/${state}`);assert.ok(m.width>=width-1,`Scene compressed ${step}/${width}: ${m.width}`);assert.ok(m.inkBottom<=m.main+1,`Content below scene ${step}/${width}/${state}`);assert.deepEqual(m.clipped,[],`Clipped content ${step}/${width}/${state}`);heights[step]=Math.max(heights[step]||0,m.main,m.inkBottom+4);measurements.push({step,width,state,...m});};
   await measure('initial');await exercise(page,step,measure);
  }
  const exported=[];
@@ -23,7 +23,7 @@ try{
   const text=await page.evaluate(({item,task,height,filename,version})=>{
    const root=document.createElement('div');
    const h=document.createElement('h1');h.textContent=item.title;root.append(h);
-   if(item.kind==='scene')root.insertAdjacentHTML('beforeend',item.lead+`<div data-visual="true"><iframe src="https://zak618.github.io/stepik-course-pages/${filename}?panel=scene&v=${version}" title="${item.title}" width="100%" height="${height}" style="border:0;display:block;width:100%;max-width:420px;background:#fff;margin:0 auto;vertical-align:top;"></iframe></div>`+item.after);
+   if(item.kind==='scene')root.insertAdjacentHTML('beforeend',item.lead+`<div data-visual="true"><iframe src="https://zak618.github.io/stepik-course-pages/${filename}?panel=scene&v=${version}&r=wide-2" title="${item.title}" width="100%" height="${height}" style="border:0;display:block;width:100%;max-width:100%;background:#fff;margin:0 auto;vertical-align:top;"></iframe></div>`+item.after);
    else if(task){const p=document.createElement('p');p.textContent=task.text;root.append(p);}
    else{const p=document.createElement('p'),pre=document.createElement('pre');p.textContent=item.prompt;pre.textContent=item.program;root.append(p,pre);}
    for(const pre of root.querySelectorAll('pre')){const box=document.createElement('div');box.dataset.code='true';for(const line of pre.textContent.split('\n')){const row=document.createElement('div'),c=document.createElement('code'),indent=line.match(/^\s*/)[0];row.dataset.indent=String(indent.replace(/\t/g,'    ').length);c.textContent=line.slice(indent.length);if(c.textContent)row.append(c);else row.append(document.createElement('br'));box.append(row,document.createTextNode('\n'));}pre.replaceWith(box);}

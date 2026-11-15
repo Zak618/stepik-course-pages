@@ -1,0 +1,53 @@
+.line-world{padding:28px;background:#fff7e9}
+.line-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+.line-presets{padding:18px 0}
+.line-workbench{display:grid;grid-template-rows:minmax(160px,1fr) 32px minmax(120px,.75fr);gap:10px;padding:6px 0 12px}
+.line-paper{position:relative;isolation:isolate;overflow:clip;border:1px solid #f0dab7;background:#fff;border-radius:18px;padding:22px 24px;box-shadow:0 5px 0 #efd7b4;display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+.line-label{display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:15px;color:#6d6d6e}
+.line-label code{font-size:20px;background:transparent;color:#745325;padding:0}
+.line-tokens{display:flex;flex-wrap:wrap;gap:5px;align-items:center;min-height:44px}
+.line-token{font-size:26px;line-height:42px;min-width:30px;padding:0 5px;border-radius:8px;text-align:center;background:var(--token-color);font-weight:700;color:#24313f;transition:transform .3s}
+.line-token.space-token{background:#fff2cc;color:#ae6f0d;border:1px dashed #d59727}
+.line-tokens.read .line-token{transform:translateY(-3px)}
+.empty-line{font-size:22px;color:#86693e}
+.line-end{display:flex;align-items:center;justify-content:flex-end;gap:12px;font-size:13px;color:#89795e}
+.line-end kbd{background:#f5ead7;color:#785629;padding:7px 12px;border-radius:7px;font:14px monospace}
+.reading-beam{position:absolute;top:0;left:0;right:0;height:10px;background:#ffac28;box-shadow:0 0 28px 10px #ffba4f66;opacity:0;pointer-events:none;z-index:2}
+.line-transfer{font-size:30px;line-height:32px;text-align:center;color:#d7912d}
+.line-result{border-radius:18px;background:#e7fbf3;padding:22px 24px;border:1px solid #c3eddc;display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0}
+.line-result .line-label code{color:#187f61}
+.line-result output{display:block;font:27px/1.4 monospace;color:#166950;white-space:pre-wrap;overflow-wrap:anywhere}
+.line-result small{color:#55796a;font-size:14px;line-height:22px}
+.line-world>.scene-status{padding-inline:0}
+.copy-world{padding:32px;background:linear-gradient(135deg,#eff5ff,#f8f0ff);display:flex;flex-direction:column;gap:24px}
+.copy-board{display:grid;grid-template-columns:minmax(0,1fr) 125px minmax(0,1fr);align-items:center;gap:20px;padding:18px 0}
+.copy-card{border-radius:22px;background:#e9f2ff;border:1px solid #c5d9f5;padding:26px;box-shadow:0 7px 0 #c3d6f2;display:flex;flex-direction:column;justify-content:space-between;gap:26px;min-height:240px;min-width:0}
+.saved-card{background:#f4eaff;border-color:#dbc5f3;box-shadow:0 7px 0 #d9c4f2}
+.copy-label{display:flex;flex-direction:column;gap:9px;color:#5e7090;font-size:15px}
+.copy-label code{font-size:26px;font-weight:700;background:transparent;padding:0;color:#2856ba}
+.saved-card .copy-label code{color:#8546ba}
+.copy-card output{font-size:32px;line-height:1.3;font-weight:750;overflow-wrap:anywhere;color:#234e9b}
+.saved-card output{color:#7b3fa4}
+.copy-card-code{font-size:13px;line-height:21px;color:#667c9f}
+.copy-card-code code{font-size:14px;background:transparent;padding:0}
+.copy-bridge{text-align:center;color:#a079c7;min-width:0}
+.copy-bridge>span{display:block;font-size:60px;line-height:1;margin-bottom:12px}
+.copy-bridge code{font-size:12px;background:transparent;padding:0;white-space:nowrap}
+.copy-controls{display:flex;flex-direction:column;gap:22px}
+.copy-controls .field{flex:none}
+.copy-buttons{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.copy-world>.scene-status{padding:0;font-size:18px;line-height:27px}
+@container lesson (max-width:600px){
+ .line-world{padding:20px}.line-controls{grid-template-columns:1fr;gap:16px}
+ .line-paper,.line-result{padding:18px}.line-label{font-size:12px;gap:8px}.line-label code{font-size:17px}
+ .line-paper{gap:14px}.line-token{font-size:20px;line-height:32px;min-width:23px;padding:0 4px}
+ .line-workbench{grid-template-rows:minmax(265px,1fr) 25px minmax(160px,.65fr)}
+ .line-end{font-size:11px}.line-end kbd{font-size:12px;padding:6px 8px}
+ .line-result output{font-size:22px}.line-result small{font-size:13px;line-height:20px}
+ .copy-world{padding:22px;gap:20px}.copy-board{grid-template-columns:1fr;grid-template-rows:1fr 42px 1fr;gap:12px;padding:0}
+ .copy-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:18px;min-height:120px;border-radius:17px;align-items:center}
+ .copy-label{font-size:12px;gap:7px}.copy-label code{font-size:23px}.copy-card output{font-size:23px}.copy-card-code{display:none}
+ .copy-bridge{display:flex;align-items:center;justify-content:center;gap:20px}.copy-bridge>span{font-size:38px;transform:rotate(90deg);margin:0;line-height:42px}
+ .copy-controls{gap:17px}.copy-buttons{gap:12px}.copy-buttons>.primary{width:100%;font-size:16px}.copy-buttons>.quiet{padding:5px 0}
+ .copy-world>.scene-status{font-size:16px;line-height:25px}
+}

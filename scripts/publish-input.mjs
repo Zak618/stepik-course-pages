@@ -17,7 +17,7 @@ const hash=value=>createHash('sha256').update(value).digest('hex');
 // Compare the readable content instead, normalizing only HTML/whitespace.
 const readable=html=>html.replace(/<[^>]*>/g,'').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,entity)=>entity[0]==='#'?String.fromCodePoint(entity[1].toLowerCase()==='x'?parseInt(entity.slice(2),16):Number(entity.slice(1))):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[entity.toLowerCase()]).replace(/\s+/g,'');
 function assertTextRefresh(source,expected){
-  if(updatePages){assert.ok([1,5,7].includes(source.position),'Only the three approved text steps may change');assert.equal(source.cost,0);assert.equal(source.block.name,'text');}
+  if(updatePages){assert.ok([1,3,5,7,9,11].includes(source.position),'Only the six approved text steps may change');assert.equal(source.cost,0);assert.equal(source.block.name,'text');}
   else{assert.ok(refreshText,'Plan changed after a partial publication');assert.equal(readable(source.block.text),readable(expected.block.text),'A text refresh may only change formatting');}
   assert.deepEqual(source.block.source,expected.block.source,'A page update may not change the grader');
 }
@@ -120,7 +120,7 @@ const afterCourse=(await api('courses/'+target.course)).courses[0],afterUnit=(aw
 assert.equal(after.length,12);assert.equal(after.reduce((s,a)=>s+a.cost,0),60);
 assert.equal(after.filter(s=>s.block.name==='code').length,5);
 assert.equal(after.filter(s=>s.block.name==='choice').length,1);
-if(updatePages)for(const source of existing.filter(s=>![1,5,7].includes(s.position)))assert.equal(sourceHash([after.find(s=>s.id===source.id)]),sourceHash([source]),'An unrelated step changed');
+if(updatePages)for(const source of existing.filter(s=>![1,3,5,7,9,11].includes(s.position)))assert.equal(sourceHash([after.find(s=>s.id===source.id)]),sourceHash([source]),'An unrelated step changed');
 assert.equal(afterLesson.is_draft,lesson.is_draft);assert.equal(afterLesson.title,lesson.title);
 assert.deepEqual(afterLesson.units,lesson.units);assert.deepEqual(afterCourse.sections,course.sections);
 assert.equal(afterCourse.is_public,course.is_public);assert.equal(afterCourse.is_enabled,course.is_enabled);
