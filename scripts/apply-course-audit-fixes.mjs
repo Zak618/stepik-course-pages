@@ -42,10 +42,13 @@ const changes=before.sources.filter(s=>allowed.has(s.id)).map(s=>{
  }else if(inputs.has(s.id)){
   assert.equal(s.lesson,2706561);assert.equal(s.position,inputs.get(s.id));assert.equal(s.block.name,'code');assert.equal(s.block.source.samples_count,1);
   const tests=JSON.parse(s.block.source.code.match(/^TESTS = (.+)$/m)[1]),task=inputData.tasks[inputData.steps[s.position-1].task];assert.deepEqual(tests,task.tests);
-  next.block.source.samples_count=tests.length;reason='show all '+tests.length+' existing samples';
+  next.block.source.samples_count=tests.length;
+  // Stepik regenerates the public options when examples are opened.
+  next.block.options.samples=tests;reason='show all '+tests.length+' existing samples';
  }else{
   assert.equal(s.lesson,2706569);assert.equal(s.position,8);assert.equal(s.block.name,'code');const old='// Используйте printTitles, findTitles и printFound из своих решений.';assert.ok(s.block.source.templates_data.includes(old));
   next.block.source.templates_data=next.block.source.templates_data.replace(old,'// Используйте printTitles и findTitles из прошлых шагов.\n    // Выведите найденные записи и их количество по условию.');
+  next.block.options.code_templates.go=next.block.options.code_templates.go.replace(old,'// Используйте printTitles и findTitles из прошлых шагов.\n    // Выведите найденные записи и их количество по условию.');
   assert.equal(next.block.source.templates_data,'::go\n'+project.tasks.searchSession.starter);reason='remove reference to an unassigned helper';
  }
  return {id:s.id,lesson:s.lesson,position:s.position,reason,block:next.block,cost:s.cost};
@@ -54,7 +57,7 @@ const sourceState=s=>pick(s,['id','lesson','position','cost','block','is_enabled
 function verifyStep(s,c){
  const original=before.sources.find(s=>s.id===c.id);assert.deepEqual(pick(s,['id','lesson','position','cost','is_enabled']),pick(original,['id','lesson','position','cost','is_enabled']));
  assert.equal(s.block.name,c.block.name);assert.deepEqual(s.block.source,c.block.source);
- assert.deepEqual(pick(s.block,Object.keys(original.block).filter(k=>!['text','source'].includes(k))),pick(original.block,Object.keys(original.block).filter(k=>!['text','source'].includes(k))));
+ assert.deepEqual(pick(s.block,Object.keys(original.block).filter(k=>!['text','source'].includes(k))),pick(c.block,Object.keys(original.block).filter(k=>!['text','source'].includes(k))));
  assert.equal(readable(s.block.text),readable(c.block.text));assert.deepEqual(s.block.text.match(/<iframe\b[^>]*>/g)||[],original.block.text.match(/<iframe\b[^>]*>/g)||[]);
  assert.ok(['ready',1000].includes(s.status));assert.equal(s.needs_plan,null);assert.ok(!s.error?.text&&!s.error?.code);
 }
