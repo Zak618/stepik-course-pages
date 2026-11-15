@@ -1,5 +1,5 @@
 import {steps,tasks} from './go-mini-functions-content.js';
-import {mountWorld,escapeHTML as E} from './go-mini-functions-worlds.js?v=compact-2';
+import {mountWorld,escapeHTML as E} from './go-mini-functions-worlds.js?v=compact-3';
 const main=document.querySelector('main'),preview=document.body.dataset.preview==='true',params=new URLSearchParams(location.search),sceneOnly=params.get('panel')==='scene';
 const file=n=>`go-mini-module-05-lesson-01-step-${String(n).padStart(2,'0')}.html`;
 const read=(key,fallback='')=>{try{return localStorage.getItem('go-functions:'+key)??fallback;}catch{return fallback;}};

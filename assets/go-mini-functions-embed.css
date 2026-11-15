@@ -13,7 +13,7 @@ body.is-embed .fn-world{margin:0}
 .fn-world .fn-terminal:empty{display:none}
 .fn-world .fn-terminal::before{display:none}
 /* Output replaces the initial prompt instead of adding another tall section. */
-.fn-world:not(.copy):not(.trace):has(>.fn-terminal:not(:empty))>.status{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;overflow:hidden;clip-path:inset(50%)}
+.fn-world:not(.copy):not(.trace):not(.empty-query):has(>.fn-terminal:not(:empty))>.status{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;overflow:hidden;clip-path:inset(50%)}
 .fn-world.copy .fn-terminal{display:none}
 .fn-world.copy>.status{position:static;width:auto;height:auto;min-height:72px;clip-path:none;overflow:visible;margin-top:16px}
 .fn-world.find .fn-terminal{font-size:16px;line-height:1.4}
@@ -178,3 +178,9 @@ body.is-embed .fn-world{margin:0}
 .fn-world .search-fn-pod{min-height:130px;padding:12px}
 .fn-world .search-fn-pod code{font-size:15px}
 .fn-world .search-fn-pod p{font-size:14px;line-height:1.5;margin:8px 0 0}
+.fn-world.trace #trace-output{padding:0;background:none;white-space:normal;line-height:1.4;font-size:17px;margin:18px 0 0;color:#8bffe2}
+.fn-world.trace:has(#trace-output:not(:empty)) #trace-caption{display:none}
+.fn-world.find.empty-query>.status{position:static;width:auto;height:auto;min-height:96px;clip-path:none;overflow:visible;margin:16px 0 0}
+.fn-world.find.empty-query #find-output{display:none}
+.fn-world .function-shell .fn-port,.fn-world .search-main-board>.fn-port{min-height:145px}
+.fn-world .sky-body .flow-ports>.fn-port{min-height:135px}

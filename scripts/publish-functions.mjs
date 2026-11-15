@@ -35,7 +35,7 @@ const existing=await sources(target.lesson);
 let journal={lesson:target.lesson,version:plan.version,uploaded:[]};
 try{journal=JSON.parse(await readFile('.local-publication/functions-upload.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 assert.equal(journal.lesson,target.lesson);
-if(journal.version!==plan.version)assert.ok(refreshScenes&&journal.version==='functions-20261115-publish-1','Unexpected publication version');
+if(journal.version!==plan.version)assert.ok(refreshScenes&&['functions-20261115-publish-1','functions-20261115-compact-2'].includes(journal.version),'Unexpected publication version');
 function assertSceneRefresh(source,article){
  assert.ok(refreshScenes&&frameSteps.includes(source.position),'Only approved scene frames may change');
  assert.equal(source.block.name,'text');assert.equal(article.block.name,'text');assert.equal(source.cost,0);assert.equal(article.cost,0);
