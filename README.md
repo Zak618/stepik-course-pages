@@ -48,6 +48,18 @@ node scripts/preview-loops.mjs
 на ширинах 320–1440 px, интерактивные состояния, пустой ввод, границы,
 черновики, раскрытие данных, навигация и отсутствие внешних запросов.
 
+Подготовка Stepik: `node scripts/export-loops.mjs`, затем
+`node scripts/check-loops-graders.mjs` и `node scripts/check-loops-layout.mjs`.
+Экспорт хранится в игнорируемой `.local-publication/`. Нативный checker
+учитывает нормализацию краевых пробелов самой платформой; локальный runner
+проверяет исходный вывод строго. [Официальная реализация Stepik](https://github.com/StepicOrg/stepik-plugins/blob/master/stepic_plugins/quizzes/code/__init__.py)
+передаёт checker-у уже нормализованный stdout, поэтому он не должен
+отклонять правильные программы на строках с пробелами по краям.
+`scripts/publish-loops.mjs` по умолчанию выполняет только read-only preflight;
+`--apply` создаёт шаги исключительно в уроке 2706564 после проверки файлов
+на GitHub Pages. Снимки и журнал позволяют продолжить подтверждённые записи
+без повторных POST, чужое содержимое не перезаписывается.
+
 Источники идей: [видимое состояние программы](https://worrydream.com/LearnableProgramming/),
 [управляемое время и механизмы](https://ciechanow.ski/mechanical-watch/),
 [пошаговый разбор алгоритмов](https://www.redblobgames.com/pathfinding/a-star/introduction.html),
