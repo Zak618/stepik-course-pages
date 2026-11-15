@@ -45,7 +45,18 @@ for(const n of [20,21,22])assert.equal(plan.articles[n-1].block.source.templates
 assert.equal(cases,148);
 console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existingSteps:existing.length,plannedSteps:22,points:140,openInputCases:cases,otherLessons:Object.keys(untouched).length,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
-await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-errors[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|go-mini-module-05-lesson-03-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
+// CDN readiness checks are GET-only; mutations below are never blindly retried.
+async function checkPage(file){
+ assert.ok(/^(assets\/go-mini-errors[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|go-mini-module-05-lesson-03-[\w-]+\.html)$/.test(file));
+ const expected=hash(await readFile(file));
+ for(let attempt=0;attempt<4;attempt++){
+  const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});
+  if(r.ok&&hash(Buffer.from(await r.arrayBuffer()))===expected)return;
+  if(attempt===3)throw Error('Pages not ready: '+file+' HTTP '+r.status);
+  await new Promise(resolve=>setTimeout(resolve,1000*(attempt+1)));
+ }
+}
+for(let start=0;start<plan.files.length;start+=4)await Promise.all(plan.files.slice(start,start+4).map(checkPage));
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/errors-before-${Date.now()}.json`,JSON.stringify({lesson,structure:beforeStructure,sources:existing,untouched},null,2));
 journal.version=plan.version;
