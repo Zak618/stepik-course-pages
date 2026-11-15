@@ -7,6 +7,14 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-too
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const heights={},measurements=[],errors=[];page.on('pageerror',e=>errors.push(e.message));
 try{
+ if(process.argv.includes('--text-only')){
+  // Reuse already validated scene geometry when changing native task prose
+  // only. The preserved graders are checked again by the publisher.
+  const prior=JSON.parse(await readFile('.local-publication/conditions.json','utf8'));
+  assert.equal(prior.version,version);assert.equal(prior.lesson,target.lesson);
+  for(const step of frameSteps)assert.ok(prior.heights[step]>=300&&prior.heights[step]<=1800);
+  Object.assign(heights,prior.heights);measurements.push(...prior.measurements);
+ }else{
  for(const step of frameSteps){
  let height=step===19?1050:900;
  for(const width of [320,390,600,768,1024]){
@@ -24,6 +32,7 @@ try{
  }
  heights[step]=height;console.log('Measured scene',step,height);
  }
+ }
  const articles=[];
  for(let position=1;position<=steps.length;position++){
  const item=steps[position-1],task=tasks[item.task];let block;
@@ -35,11 +44,8 @@ try{
  const text=await page.evaluate(({item,task,height,file,version})=>{
   const root=document.createElement('div'),h=document.createElement('h1');h.textContent=item.title;root.append(h);
   if(item.kind==='scene')root.insertAdjacentHTML('beforeend',item.lead+`<div data-visual="true"><iframe src="https://zak618.github.io/stepik-course-pages/${file}?panel=scene&amp;embed=1&amp;v=${version}" title="${item.title}" width="100%" height="${height}" style="border:0;display:block;width:100%;max-width:100%;background:#fff;margin:0 auto;vertical-align:top;"></iframe></div>`+item.after);
-  else if(task){
-   const p=document.createElement('p');p.textContent=task.text;root.append(p);const title=document.createElement('h2');title.textContent='Примеры для проверки';root.append(title);
-   const info=document.createElement('p');info.textContent='Все проверочные наборы открыты. В точной записи \\n обозначает перенос строки; пробелы внутри кавычек сохраняются.'+' '+String.fromCharCode(92)+'u0020 обозначает один пробел.';root.append(info);
-   task.tests.forEach(([stdin,stdout],i)=>{const h=document.createElement('h3');h.textContent='Пример '+(i+1);root.append(h);for(const [label,value] of [['Входные данные',stdin],['Ожидаемый вывод',stdout]]){const p=document.createElement('p'),pre=document.createElement('pre');p.textContent=label;pre.textContent=value||'(пустой ввод: ни одной строки)';root.append(p,pre);{const exact=document.createElement('p');exact.textContent='Точная запись: '+JSON.stringify(value).replaceAll(' ',String.fromCharCode(92)+'u0020');root.append(exact);}}});
-  }else{const p=document.createElement('p'),pre=document.createElement('pre');p.textContent=item.prompt;pre.textContent=item.program;root.append(p,pre);}
+  else if(task){const p=document.createElement('p');p.textContent=task.text;root.append(p);}
+  else{const p=document.createElement('p'),pre=document.createElement('pre');p.textContent=item.prompt;pre.textContent=item.program;root.append(p,pre);}
   for(const pre of root.querySelectorAll('pre')){const box=document.createElement('div');box.dataset.code='true';for(const line of pre.textContent.replace(/\r\n/g,'\n').split('\n')){const row=document.createElement('div'),c=document.createElement('code'),indent=line.match(/^\s*/)[0];row.dataset.indent=String(indent.replace(/\t/g,'    ').length);c.textContent=line.slice(indent.length);if(c.textContent)row.append(c);else row.append(document.createElement('br'));box.append(row,document.createTextNode('\n'));}pre.replaceWith(box);}
   const styles={H1:'font-size:38px;line-height:1.2;font-weight:700;margin:20px 0 22px;color:#17243a;',H2:'font-size:28px;line-height:1.4;font-weight:650;margin:26px 0 16px;color:#24334a;',H3:'font-size:23px;line-height:1.4;font-weight:650;margin:24px 0 14px;color:#24334a;',P:'font-size:20px;line-height:1.8;margin:0 0 20px;color:#26364f;overflow-wrap:anywhere;',CODE:'font-size:18px;line-height:1.8;color:#305bb0;overflow-wrap:anywhere;',STRONG:'font-weight:700;',ASIDE:'font-size:17px;line-height:1.7;padding:10px 0 10px 18px;border-left:3px solid #c8d9ec;color:#536780;margin:22px 0;'};
   for(const n of root.querySelectorAll('*')){if(n.tagName==='IFRAME')continue;const{visual,code,indent}=n.dataset;for(const a of [...n.attributes])n.removeAttribute(a.name);if(styles[n.tagName])n.style.cssText=styles[n.tagName];if(visual)n.style.cssText='margin:4px 0 0;font-size:0;line-height:0;text-align:center;';if(code)n.style.cssText='padding:18px 20px;background:#f3f6fc;margin:14px 0 22px;overflow-wrap:anywhere;';if(indent!==undefined)n.style.cssText=`margin:0 0 4px ${Number(indent)*8}px;font-size:18px;line-height:1.8;overflow-wrap:anywhere;`;}

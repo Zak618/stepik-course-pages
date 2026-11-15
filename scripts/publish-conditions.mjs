@@ -5,6 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 const target={course:305666,lesson:2706562,unit:2746577,account:647088271,title:'Условия и логика'};
 const apply=process.argv.includes('--apply');
+const compactExamples=process.argv.includes('--compact-examples');
 const plan=JSON.parse(await readFile('.local-publication/conditions.json','utf8'));
 for(const key of Object.keys(target))assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,20);assert.equal(plan.articles.reduce((n,a)=>n+a.cost,0),110);
@@ -37,9 +38,13 @@ let journal={lesson:target.lesson,version:plan.version,uploaded:[]};
 try{journal=JSON.parse(await readFile('.local-publication/conditions-upload.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 assert.equal(journal.lesson,target.lesson);assert.equal(journal.version,plan.version);
 assert.ok(existing.length<=20);assert.equal(new Set(existing.map(s=>s.position)).size,existing.length);
-for(const source of existing){const entry=journal.uploaded.find(e=>e.id===source.id&&e.position===source.position),expected=plan.articles.find(a=>a.position===source.position);assert.ok(entry&&expected,'Unrelated lesson content; refusing overwrite');assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);assert.equal(entry.planHash,hash(JSON.stringify(expected)),'Plan changed after partial publication');assert.equal(source.update_date,entry.update_date,'Concurrent step edit');}
+function assertCompact(source,expected){
+ assert.ok(compactExamples,'Plan changed after publication');assert.equal(source.block.name,'code');assert.equal(expected.block.name,'code');assert.equal(source.cost,expected.cost);assert.deepEqual(source.block.source,expected.block.source,'A formatting update may not change tests/templates/visibility');
+ assert.ok(source.block.text.includes('Примеры для проверки'),'Only remove the known duplicate examples');assert.ok(!/Примеры для проверки|Точная запись|<h[23]/.test(expected.block.text),'Only the original task condition may remain');assert.ok(readable(source.block.text).startsWith(readable(expected.block.text)),'Task condition may not change');
+}
+for(const source of existing){const entry=journal.uploaded.find(e=>e.id===source.id&&e.position===source.position),expected=plan.articles.find(a=>a.position===source.position);assert.ok(entry&&expected,'Unrelated lesson content; refusing overwrite');assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);if(entry.planHash!==hash(JSON.stringify(expected)))assertCompact(source,expected);assert.equal(source.update_date,entry.update_date,'Concurrent step edit');}
 const testsOf=a=>JSON.parse(a.block.source.code.match(/^TESTS = (.+)/)[1]);
-let cases=0;for(const a of plan.articles.filter(a=>a.block.name==='code')){const tests=testsOf(a);assert.equal(a.block.source.samples_count,tests.length,'Every grader input must be open');assert.ok(tests.length>=10);assert.equal(new Set(tests.map(t=>t[0])).size,tests.length);assert.ok(a.block.text.includes('Пример '+tests.length),'Every example must be visible in task text');cases+=tests.length;}
+let cases=0;for(const a of plan.articles.filter(a=>a.block.name==='code')){const tests=testsOf(a);assert.equal(a.block.source.samples_count,tests.length,'Every grader input must be open');assert.ok(tests.length>=10);assert.equal(new Set(tests.map(t=>t[0])).size,tests.length);assert.ok(!/Примеры для проверки|Точная запись/.test(a.block.text),'Do not duplicate native samples');cases+=tests.length;}
 console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existingSteps:existing.length,plannedSteps:20,points:110,openInputCases:cases,otherLessons: Object.keys(untouched).length,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
 // Fail before creating any Stepik step if one static dependency is stale.
@@ -49,7 +54,7 @@ await writeFile(`.local-publication/conditions-before-${Date.now()}.json`,JSON.s
 for(const article of plan.articles){
  const fresh=await sources(target.lesson);assert.ok(fresh.every(s=>journal.uploaded.some(e=>e.id===s.id)),'Concurrent lesson edit');
  let current=fresh.find(s=>s.position===article.position);
- if(current){const entry=journal.uploaded.find(e=>e.id===current.id);assert.equal(current.update_date,entry.update_date,'Concurrent step edit');}
+ if(current){const entry=journal.uploaded.find(e=>e.id===current.id);assert.equal(current.update_date,entry.update_date,'Concurrent step edit');if(entry.planHash!==hash(JSON.stringify(article))){assertCompact(current,article);const result=await api('step-sources/'+current.id,'PUT',{stepSource:{lesson:target.lesson,...article}});current=result['step-sources'][0];entry.planHash=hash(JSON.stringify(article));entry.update_date=current.update_date;await writeFile('.local-publication/conditions-upload.json',JSON.stringify(journal,null,2));}}
  else{
   const created=await api('step-sources','POST',{stepSource:{lesson:target.lesson,...article}});current=created['step-sources'][0];
   journal.uploaded.push({id:current.id,position:article.position,update_date:current.update_date,planHash:hash(JSON.stringify(article)),type:article.block.name,cost:article.cost});
@@ -69,6 +74,7 @@ for(const article of plan.articles){
  console.log(`Step ${article.position}: ${checked.id}, ${checked.block.name}, ${checked.cost} points, ready`);
 }
 const after=await sources(target.lesson),afterLesson=(await api('lessons/'+target.lesson)).lessons[0];
+if(compactExamples)for(const prior of existing.filter(s=>s.block.name!=='code'))assert.equal(sourceHash([after.find(s=>s.id===prior.id)]),sourceHash([prior]),'An unrelated step changed');
 assert.equal(after.length,20);assert.equal(after.reduce((n,s)=>n+s.cost,0),110);assert.equal(after.filter(s=>s.block.name==='code').length,10);assert.equal(after.filter(s=>s.block.name==='choice').length,1);
 assert.equal(afterLesson.title,lesson.title);assert.equal(afterLesson.is_draft,lesson.is_draft);assert.deepEqual(afterLesson.units,lesson.units);assert.deepEqual(await structure(),beforeStructure,'Course structure/visibility changed');
 for(const [id,items]of Object.entries(untouched))assert.equal(sourceHash(await sources(id)),sourceHash(items),'Unrelated lesson changed: '+id);
