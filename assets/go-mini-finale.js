@@ -1,0 +1,79 @@
+const main=document.querySelector('main');
+const preview=document.body.dataset.preview==='true';
+const embedded=!preview&&new URLSearchParams(location.search).get('embed')==='1';
+if(embedded)document.body.classList.add('scene-only');
+let view=document.body.dataset.view||(new URLSearchParams(location.search).get('step')==='2'?'pro':'theatre');
+let controller;
+const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const skins=['#dca88b','#a66f54','#f1c5a1','#805243','#e8b68b','#ba8464','#f5d4af','#966044','#d4a187'];
+const coats=['#302841','#354464','#3c2c4b','#314f56','#472e4c','#303552','#5b3648','#293e4b','#4c3860'];
+const audience=skins.map((skin,i)=>`<div class="spectator" style="--skin:${skin};--coat:${coats[i]};--row:${i%2?9:0}px"><span class="head"></span><span class="body"></span><span class="seat"></span></div>`).join('');
+const theatreHTML=`<section class="finale-page" aria-label="Финал Go-шечки"><div class="theatre"><div class="stage-back"><div class="stage-stars"></div><div class="spotlight left"></div><div class="spotlight right"></div><div class="stage-floor"></div><div class="stage-pedestal"></div></div><div class="stage-copy"><div class="find-name">Go-шечка <span>Find</span></div><h1>Вы это сделали.</h1><p>Написали свою программу на Go.</p></div><div class="footlights" aria-hidden="true">${'<i></i>'.repeat(11)}</div><div class="curtain curtain-left" aria-hidden="true"></div><div class="curtain curtain-right" aria-hidden="true"></div><svg class="valance" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="velvet" x2="0" y2="1"><stop stop-color="#671334"/><stop offset=".55" stop-color="#a92b4a"/><stop offset="1" stop-color="#4d0b29"/></linearGradient></defs><path d="M0 0H1000V38Q930 101 830 52Q690 113 500 50Q310 113 170 52Q70 101 0 38Z" fill="url(#velvet)"/><path d="M0 38Q70 101 170 52Q310 113 500 50Q690 113 830 52Q930 101 1000 38" fill="none" stroke="#d5aa69" stroke-width="3"/></svg><div class="stage-dimmer" aria-hidden="true"></div><div class="audience" aria-hidden="true">${audience}</div><div class="encore-message" aria-hidden="true"><span class="tiny-star" aria-hidden="true">✦</span><h2>Это был<br>первый акт.</h2><p>Но не конец истории.</p></div></div><div class="theatre-followup" hidden><p class="theatre-caption" id="theatre-caption" role="status" aria-live="polite">Куда идти дальше — в следующем шаге.</p><div class="theatre-controls"><a class="primary-link" id="finale-next" href="go-mini-module-06-lesson-02-step-01.html">Что дальше →</a></div></div></section>`;
+const city=`<svg class="city-svg" viewBox="0 0 760 370" aria-hidden="true"><defs><linearGradient id="city-sky" x2="0" y2="1"><stop stop-color="#dfd5ff"/><stop offset="1" stop-color="#d4fff0"/></linearGradient><linearGradient id="server-front" x2="1" y2="1"><stop stop-color="#5269c0"/><stop offset="1" stop-color="#293e80"/></linearGradient><linearGradient id="parcel-front" x2="0" y2="1"><stop stop-color="#ffdc8b"/><stop offset="1" stop-color="#ed9b58"/></linearGradient></defs><circle cx="611" cy="84" r="37" fill="#ffe399"/><g class="city-cloud"><path d="M110 77Q95 55 115 47Q139 27 151 48Q179 41 183 63Q199 82 178 85H116Z"/><path d="M443 38Q432 23 448 18Q461 7 473 20Q497 14 503 31Q513 44 493 46H452Z"/></g><ellipse cx="384" cy="304" rx="329" ry="51" fill="#b6e6d6"/><path d="M103 307C185 350 275 324 349 307S506 281 638 310" class="city-road"/><path d="M103 307C185 350 275 324 349 307S506 281 638 310" class="city-lane"/><g class="city-building" data-building="shop"><path d="M77 129L153 93L230 130V278H77Z" fill="#e19b78"/><path d="M77 129H230L154 85Z" fill="#ad5c7c"/><path d="M90 137H217V266H90Z" fill="#ffd6a0"/><path d="M84 155H224V178H84Z" fill="#fff0c2"/><path d="M84 155H104V178H84ZM124 155H144V178H124ZM164 155H184V178H164ZM204 155H224V178H204Z" fill="#ee7f84"/><rect x="103" y="194" width="45" height="44" rx="5" fill="#85d5d9" stroke="#fff4d6" stroke-width="6"/><rect x="169" y="192" width="30" height="74" rx="5" fill="#bd7c80"/><circle cx="191" cy="231" r="3" fill="#ffe9ad"/><path d="M67 278H239" stroke="#b68572" stroke-width="8" stroke-linecap="round"/></g><g class="city-building" data-building="server"><path d="M301 101L347 79L435 102L393 123Z" fill="#9ab5ed"/><path d="M393 123L435 102V256L393 277Z" fill="#283c78"/><path d="M301 101L393 123V277L301 256Z" fill="url(#server-front)"/><path d="M314 128L380 144V174L314 158ZM314 175L380 191V221L314 205ZM314 222L380 238V257L314 241Z" fill="#26366e"/><path d="M324 141L351 148M324 188L351 195M324 233L351 240" stroke="#9faee5" stroke-width="4" stroke-linecap="round"/><g class="server-lights" fill="#b3ffe2"><circle cx="371" cy="157" r="4"/><circle cx="371" cy="204" r="4"/><circle cx="371" cy="249" r="4"/></g><path d="M293 266L391 290L446 263" stroke="#8b91bd" stroke-width="8" fill="none" stroke-linecap="round"/></g><g class="city-building" data-building="home"><path d="M533 141L599 96L663 141V278H533Z" fill="#a193dc"/><path d="M518 149L599 85L679 149" stroke="#6865aa" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="548" y="166" width="34" height="40" rx="5" fill="#ffedaa" stroke="#ddd6ff" stroke-width="6"/><rect x="611" y="166" width="34" height="40" rx="5" fill="#ffedaa" stroke="#ddd6ff" stroke-width="6"/><path d="M548 225H582V257H548ZM611 225H645V257H611Z" fill="#d0c7ee"/><path d="M584 231Q599 213 614 231V278H584Z" fill="#606ca7"/><path d="M527 279H670" stroke="#8f8ab8" stroke-width="8" stroke-linecap="round"/></g><g fill="#5eaa8c"><path d="M49 249Q23 212 50 196Q77 214 49 249Z"/><path d="M707 247Q684 211 706 196Q733 212 707 247Z"/></g><path d="M49 237V278M707 238V278" stroke="#659e84" stroke-width="5" stroke-linecap="round"/><path class="city-route" d="M160 167C193 35 284 33 344 117S534 121 599 169"/><circle class="city-signal" cx="160" cy="167" r="8" fill="#ffe28d" stroke="#fff" stroke-width="3"/><path id="delivery-path" d="M103 307C185 350 275 324 349 307S506 281 638 310" fill="none"/><g class="delivery-courier" transform="translate(103 307)"><ellipse cx="0" cy="13" rx="29" ry="7" fill="#365d732e"/><circle cx="-20" cy="5" r="12" fill="#263b59" stroke="#e1e8f9" stroke-width="4"/><circle cx="21" cy="5" r="12" fill="#263b59" stroke="#e1e8f9" stroke-width="4"/><path d="M-19 5L-8-16L8 5H-19L-3-9L19-15L21 5M-8-16H-17M19-15L16-24H9" stroke="#d87159" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-3-33L-7-17L5-9L8 3M-1-27L11-18L19-19" stroke="#3f629f" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="0" cy="-43" r="9" fill="#d7a486"/><path d="M-10-46Q-7-59 5-53L11-46Z" fill="#6b51b8"/><rect x="-35" y="-33" width="22" height="21" rx="3" fill="url(#parcel-front)"/><path d="M-24-33V-12" stroke="#fff1bd" stroke-width="5"/></g></svg>`;
+const proHTML=`<section class="finale-page pro-page"><div class="pro-hero"><p class="pro-kicker">Продолжение Go-шечки</p><div class="pro-title">Go-шечка <span>(pro)</span></div><h1>Дальше — свои сервисы.</h1><div class="city-wrap">${city}<button class="city-replay" aria-label="Повторить анимацию города">↺</button></div><div class="city-topics"><span>HTTP</span><span>SQL</span><span>Docker</span></div><p class="city-status" role="status">Один запрос — и город приходит в движение.</p></div><div class="pro-story"><p>Find работает. Теперь можно взяться за проект побольше. В Go-шечке (pro) будем собирать сервис городской доставки: принимать запросы, хранить данные и проверять, что всё работает.</p><p class="keep-find">Сохраните свой Find. Попробуйте добавить в него ещё одну команду. А когда захочется пойти дальше — загляните в программу pro.</p><div class="pro-action"><a class="primary-link" href="https://stepik.org/course/300562/promo" target="_blank" rel="noopener noreferrer">Посмотреть Go-шечку (pro) <span aria-hidden="true">↗</span></a><p class="paid-note">Это отдельный платный курс.</p></div><section class="team-note" aria-labelledby="team-title"><h2 id="team-title">Спасибо, что были с нами.</h2><p>Мы старались сделать этот курс простым и полезным. Объяснить сложные вещи обычными словами. Дать время разобраться, поэкспериментировать и написать код самому.</p><p>С этой Go-шечкой мы попробовали новый для нас формат: уроки, которые можно потрогать. Хотелось, чтобы вы не просто смотрели на код, а видели, что он делает. Меняли что-нибудь — и сразу замечали разницу.</p><p>Спасибо, что прошли этот путь с нами. Теперь у вас есть свой Find — и основа, с которой можно идти дальше.</p><p class="team-signature">Команда WEB HACKER</p></section></div></section>`;
+
+function previewLinks(){
+  if(!preview)return;
+  document.querySelector('.preview-bar')?.remove();
+  const bar=document.createElement('header');bar.className='preview-bar';bar.innerHTML=`<span class="preview-brand">Финал Go-шечки</span><nav aria-label="Два новых шага"><a href="?step=1" ${view==='theatre'?'aria-current="page"':''}>13 · Финал</a><a href="?step=2" ${view==='pro'?'aria-current="page"':''}>Что дальше</a></nav>`;document.body.prepend(bar);
+  bar.querySelectorAll('a').forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();navigate(i===0?'theatre':'pro');}));
+}
+function navigate(next){
+  if(!preview){location.href=next==='pro'?'go-mini-module-06-lesson-02-step-01.html':'go-mini-module-06-lesson-01-step-13.html';return;}
+  view=next;history.pushState(null,'','?step='+(view==='pro'?2:1));render();window.scrollTo({top:0,behavior:'instant'});
+}
+async function animate(el,frames,options,signal){
+  if(signal.aborted)return false;if(reduced())return true;
+  const a=el.animate(frames,options);try{await a.finished;return !signal.aborted;}catch{return false;}
+}
+function mountTheatre(signal){
+  const $=s=>main.querySelector(s);let started=false;
+  const finish=async()=>{
+    if(signal.aborted)return;
+    $('.curtain-left').style.transform='translateX(0)';$('.curtain-right').style.transform='translateX(0)';$('.stage-dimmer').style.opacity='.83';$('.stage-copy').style.opacity='0';$('.valance').style.opacity='.25';$('.audience').style.opacity='.3';main.querySelectorAll('.spotlight').forEach(el=>el.style.opacity='0');
+    const message=$('.encore-message');message.style.visibility='visible';message.style.opacity='1';message.setAttribute('aria-hidden','false');
+    await animate(message,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:650,easing:'ease-out'},signal);
+    if(!signal.aborted)$('.theatre-followup').hidden=false;
+  };
+  const play=async()=>{
+    if(started||signal.aborted)return;started=true;
+    if(reduced()){await finish();return;}
+    const easing='cubic-bezier(.4,0,.18,1)',movements=[];
+    movements.push(animate($('.curtain-left'),[{transform:'translateX(-88%)'},{transform:'translateX(.6%)',offset:.94},{transform:'translateX(0)'}],{duration:3000,delay:1500,easing,fill:'forwards'},signal));
+    movements.push(animate($('.curtain-right'),[{transform:'translateX(88%)'},{transform:'translateX(-.6%)',offset:.94},{transform:'translateX(0)'}],{duration:3000,delay:1500,easing,fill:'forwards'},signal));
+    movements.push(animate($('.stage-dimmer'),[{opacity:0},{opacity:.03,offset:.3},{opacity:.83}],{duration:6000,easing:'ease-in',fill:'forwards'},signal));
+    movements.push(animate($('.stage-copy'),[{opacity:1},{opacity:0}],{duration:1800,delay:1500,fill:'forwards'},signal));
+    movements.push(animate($('.valance'),[{opacity:1},{opacity:.25}],{duration:6000,fill:'forwards'},signal));
+    movements.push(animate($('.audience'),[{opacity:1},{opacity:1,offset:.6},{opacity:.3}],{duration:6000,fill:'forwards'},signal));
+    main.querySelectorAll('.spotlight').forEach(el=>movements.push(animate(el,[{opacity:1},{opacity:0}],{duration:6000,fill:'forwards'},signal)));
+    await Promise.all(movements);await finish();
+  };
+  if(embedded){$('#finale-next').href='https://stepik.org/lesson/2713291/step/1?unit=2753290';$('#finale-next').target='_top';}
+  $('#finale-next').addEventListener('click',e=>{if(preview){e.preventDefault();navigate('pro');}},{signal});
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)&&!started){observer.disconnect();play();}},{threshold:.3});observer.observe($('.theatre'));signal.addEventListener('abort',()=>observer.disconnect(),{once:true});
+}
+async function travel(group,path,duration,signal){
+  if(signal.aborted)return false;const length=path.getTotalLength();
+  const set=t=>{const p=path.getPointAtLength(length*t);group.setAttribute('transform',`translate(${p.x} ${p.y})`);};
+  if(reduced()){set(1);return true;}
+  return new Promise(resolve=>{let frame,start;const stop=()=>{cancelAnimationFrame(frame);resolve(false);};signal.addEventListener('abort',stop,{once:true});const tick=time=>{start??=time;const t=reduced()?1:Math.min(1,(time-start)/duration);set(t*t*(3-2*t));if(t<1)frame=requestAnimationFrame(tick);else{signal.removeEventListener('abort',stop);resolve(true);}};frame=requestAnimationFrame(tick);});
+}
+function mountPro(signal){
+  const $=s=>main.querySelector(s);let busy=false,started=false;
+  const play=async()=>{if(busy||signal.aborted)return;started=true;busy=true;$('.city-replay').disabled=true;$('.delivery-courier').setAttribute('transform','translate(103 307)');$('.city-status').textContent='Заказ принят. Отправляем курьера.';
+    const buildings=[...main.querySelectorAll('.city-building')];await Promise.all(buildings.map((el,i)=>animate(el,[{transform:'translateY(23px) scale(.94)',opacity:0},{transform:'translateY(-5px) scale(1.02)',opacity:1,offset:.7},{transform:'translateY(0) scale(1)',opacity:1}],{duration:700,delay:i*150,easing:'cubic-bezier(.2,.7,.2,1)'},signal)));
+    if(signal.aborted)return;const dot=$('.city-signal');dot.style.opacity='1';const route=$('.city-route');const routeGroup=document.createElementNS('http://www.w3.org/2000/svg','g');routeGroup.append(dot);route.after(routeGroup);dot.setAttribute('cx','0');dot.setAttribute('cy','0');await travel(routeGroup,route,1450,signal);dot.style.opacity='0';routeGroup.before(dot);dot.setAttribute('cx','160');dot.setAttribute('cy','167');routeGroup.remove();if(signal.aborted)return;
+    await pulseLights();if(signal.aborted)return;await travel($('.delivery-courier'),$('#delivery-path'),2300,signal);if(signal.aborted)return;$('.city-status').textContent='Доставлено. Всё это можно собрать на Go.';$('.city-replay').disabled=false;busy=false;
+  };
+  const pulseLights=()=>animate($('.server-lights'),[{opacity:.3},{opacity:1,offset:.45},{opacity:.6}],{duration:450,easing:'ease-out'},signal);
+  $('.city-replay').addEventListener('click',play,{signal});const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)&&!started){observer.disconnect();play();}},{threshold:.25});observer.observe($('.pro-hero'));signal.addEventListener('abort',()=>observer.disconnect(),{once:true});
+}
+function render(){
+  controller?.abort();main.getAnimations({subtree:true}).forEach(a=>a.cancel());controller=new AbortController();const {signal}=controller;
+  main.innerHTML=view==='theatre'?theatreHTML:proHTML;document.title=(view==='theatre'?'Первый акт':'Что дальше')+' · Go-шечка';previewLinks();if(view==='theatre')mountTheatre(signal);else mountPro(signal);
+  const media=matchMedia('(prefers-reduced-motion: reduce)');media.addEventListener('change',()=>{if(media.matches)main.getAnimations({subtree:true}).forEach(a=>a.finish());},{signal});
+  signal.addEventListener('abort',()=>main.getAnimations({subtree:true}).forEach(a=>a.cancel()),{once:true});
+}
+window.addEventListener('popstate',()=>{if(preview){view=new URLSearchParams(location.search).get('step')==='2'?'pro':'theatre';render();}});
+window.addEventListener('pagehide',()=>controller?.abort());
+render();
