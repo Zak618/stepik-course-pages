@@ -1,31 +1,180 @@
 /* The iframe contains only the scene, not the reading page. */
-body.is-embed .lesson,body.is-embed .reading,body.is-embed #step-content{width:100%;height:100vh;min-height:0;margin:0;padding:0}
-body.is-embed .fn-world{height:100vh;display:flex;flex-direction:column;min-height:0;margin:0}
-body.is-embed .fn-world>*{flex-shrink:0;min-width:0}
-body.is-embed .fn-world>.status{margin-top:auto;padding-top:17px}
-body.is-embed .extract-workbench{flex:1;min-height:340px}
-body.is-embed .extract .fn-terminal{max-height:150px;overflow:auto}
-body.is-embed .plug-board{flex:1;min-height:370px}
-body.is-embed .return-routing{flex:1;min-height:350px}
-body.is-embed .execution-building{flex:1;min-height:430px;align-items:center}
-body.is-embed .trace .fn-terminal{max-height:120px;overflow:auto}
-body.is-embed .night-observatory{flex:1;min-height:240px}
-body.is-embed .sky-body>.status{padding-top:18px}
-body.is-embed .sky-body .scene-code{margin-top:15px}
-body.is-embed .copy-workshop{flex:1;min-height:250px;align-items:center}
-body.is-embed .return-corridor{flex:1;min-height:270px;align-content:center}
-body.is-embed .fn-find-machine{flex:1;min-height:400px}
-body.is-embed .find .fn-terminal{max-height:240px;overflow:auto}
-body.is-embed .fn-world textarea{min-height:100px;height:110px}
-body.is-embed .fn-world .scene-code{margin-top:16px}
-@media(max-width:650px){
- body.is-embed .extract-workbench{min-height:500px}
- body.is-embed .plug-board{min-height:560px}
- body.is-embed .return-routing{min-height:490px}
- body.is-embed .execution-building{min-height:730px;align-items:stretch}
- body.is-embed .fn-world .scene-code{font-size:13px;line-height:1.65;padding:15px}
- body.is-embed .copy-workshop{min-height:220px}
- body.is-embed .return-corridor{min-height:430px}
- body.is-embed .fn-find-machine{min-height:610px}
- body.is-embed .fn-world .fn-terminal{font-size:15px;line-height:1.6;min-height:70px}
+body.is-embed .lesson,body.is-embed .reading,body.is-embed #step-content{width:100%;min-height:0;margin:0;padding:0}
+body.is-embed .fn-world{margin:0}
+/* No viewport stretching. Detailed source is already in the article below. */
+.fn-world .scene-code,.fn-world .extract-handle{display:none}
+.fn-world{padding:22px;position:relative}
+.fn-world .controls{gap:10px;padding-bottom:16px;align-items:end}
+.fn-world .controls label{flex:1;min-width:0}
+.fn-world .controls input:not([type=range]){width:100%;min-width:0}
+.fn-world .controls button{min-height:46px}
+.fn-world .status{margin:16px 0 0;line-height:1.5;min-height:52px}
+.fn-world .fn-terminal{min-height:0;padding:14px 18px;font-size:17px;line-height:1.5;margin-top:18px;max-height:none;overflow:visible}
+.fn-world .fn-terminal:empty{display:none}
+.fn-world .fn-terminal::before{display:none}
+/* Output replaces the initial prompt instead of adding another tall section. */
+.fn-world:not(.copy):not(.trace):has(>.fn-terminal:not(:empty))>.status{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;overflow:hidden;clip-path:inset(50%)}
+.fn-world.copy .fn-terminal{display:none}
+.fn-world.copy>.status{position:static;width:auto;height:auto;min-height:72px;clip-path:none;overflow:visible;margin-top:16px}
+.fn-world.find .fn-terminal{font-size:16px;line-height:1.4}
+.fn-world.trace>.status{position:static;width:auto;height:auto;min-height:52px;clip-path:none;overflow:visible;margin-top:16px}
+.fn-world .fn-value{font-size:21px}
+.fn-world .fn-kicker{margin-bottom:8px;letter-spacing:.02em}
+.fn-world .fn-port{padding:12px}
+.fn-world .fn-port small{overflow-wrap:anywhere}
+.fn-world .extract-workbench,.fn-world .plug-board,.fn-world .execution-building,.fn-world .copy-workshop,.fn-world .fn-find-machine{padding:8px 0 16px;gap:20px}
+.fn-world .code-strip{padding:12px 14px}
+.fn-world .code-strip small{margin-bottom:6px}
+.fn-world .fold-module{padding:20px 16px;transform:none}
+.fn-world .fold-module h3{margin:0 0 14px;font-size:23px}
+.fn-world .fold-led{display:none}
+.fn-world .argument-plug,.fn-world .function-shell,.fn-world .execution-room,.fn-world .search-main-board{padding:16px}
+.fn-world .function-shell h3,.fn-world .execution-room h3{font-size:23px;margin:0 0 14px}
+.fn-world .execution-return{margin:18px 0 0}
+.fn-world .flow-ports{gap:8px;margin:12px 0 0}
+.fn-world .trace-progress{margin-top:14px}
+.fn-world .night-observatory{height:240px;min-height:0}
+.fn-world.sky{padding:0}
+.fn-world.sky .controls,.fn-world .sky-body{padding:20px 22px}
+.fn-world.sky .controls{padding-bottom:12px}
+.fn-world .glass-label{margin-bottom:12px}
+.fn-world .glass-vessel{min-height:165px;padding:20px}
+.fn-world .copy-result{margin-top:12px;padding:12px 16px}
+.fn-world .return-corridor{padding:8px 0 24px}
+.fn-world .logic-gate{padding:18px 12px}
+.fn-world .logic-gate b{font-size:23px;margin-bottom:10px}
+.fn-world .guard-answer{padding:12px 16px;gap:12px}
+.fn-world .find-current{min-height:0}
+.fn-world .find-counters{margin-top:14px;gap:8px}
+.fn-world .find-count{padding:10px}
+.fn-world .find-count strong{font-size:26px;margin-top:4px}
+.fn-world .find-data{margin:0 0 12px}
+.fn-world .find-data summary{font-size:16px;cursor:pointer;color:#405b80}
+.fn-world textarea{height:130px;min-height:130px;margin-top:12px}
+.fn-world .mode-choice{display:flex;gap:8px;align-items:center;margin:0 0 16px;font-size:16px}
+.fn-world .mode-choice input{width:20px;height:20px;accent-color:#7252df}
+.fn-world .fn-float{box-shadow:0 0 0 5px #fff3,0 12px 26px #18194f40}
+.fn-world .fn-float::after{content:'';position:absolute;inset:-8px;border:2px solid var(--token);border-radius:inherit;opacity:.35}
+.fn-flight-path{position:absolute;left:0;top:0;pointer-events:none;z-index:19;overflow:visible}
+.fn-flight-path path{fill:none;stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 5px #7252df50)}
+@container(max-width:650px){
+ .fn-world{padding:18px}
+ .fn-world .controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}
+ .fn-world .controls button{white-space:normal;padding:11px 12px;font-size:15px}
+ .fn-world .controls label{font-size:15px}
+ .fn-world .controls input{font-size:16px}
+ .fn-world .extract-workbench,.fn-world .plug-board{gap:14px}
+ .fn-world .call-sites{gap:10px}
+ .fn-world .code-strip{padding:9px 12px}
+ .fn-world .fold-module{padding:13px 15px;box-shadow:0 6px 0 #432b95}
+ .fn-world .fold-module h3{font-size:21px;margin:0 0 6px}
+ .fn-world .fold-module .fn-kicker{display:none}
+ .fn-world .argument-plugs{grid-template-columns:1fr 1fr;gap:12px}
+ .fn-world .argument-plug{padding:12px;min-height:100px}
+ .fn-world .plug-pin{display:none}
+ .fn-world .function-shell{padding:14px}
+ .fn-world .function-shell h3{font-size:22px;margin:0 0 10px}
+ .fn-world .function-shell .fn-port{display:inline-block;vertical-align:top;width:calc(50% - 5px);min-height:100px}
+ .fn-world .fn-value{font-size:18px}
+ .fn-world .return-arrow{display:none}
+ .fn-world .result-engine{padding:14px}
+ .fn-world .result-engine h3{margin:0 0 10px}
+ .fn-world .result-engine .fn-wire,.fn-world .result-engine>span{display:none}
+ .fn-world .result-destinations{grid-template-columns:1fr 1fr;gap:10px}
+ .fn-world .screen-printer pre{font-size:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+ .fn-world .execution-building{gap:14px}
+ .fn-world .execution-room{padding:12px}
+ .fn-world .execution-room h3{font-size:20px;margin:0 0 8px}
+ .fn-world .execution-room .fn-kicker{font-size:12px;margin:0 0 6px}
+ .fn-world .fn-code-lines{font-size:14px;gap:3px}
+ .fn-world .fn-code-lines>div{padding:4px 8px}
+ .fn-world.trace .fn-port{padding:8px}
+ .fn-world.trace .fn-value{font-size:17px}
+ .fn-world.sky .controls,.fn-world .sky-body{padding:18px}
+ .fn-world .fn-pill{font-size:13px;padding:7px 10px}
+ .fn-world .glass-vessel{min-height:140px;padding:16px}
+ .fn-world .scalar-orb{width:76px;height:76px;font-size:32px}
+ .fn-world .return-corridor{gap:13px;padding-bottom:16px}
+ .fn-world .logic-gate{padding:10px 14px;display:grid;grid-template-columns:32px 1fr;gap:4px 8px}
+ .fn-world .logic-gate b{font-size:20px;grid-row:span 2;margin:0}
+ .fn-world .logic-gate code{font-size:16px}
+ .fn-world .logic-gate .fn-kicker{font-size:12px;margin:0}
+ .fn-world .logic-gate::after{display:none}
+ .fn-world .fn-find-machine{gap:16px}
+ .fn-world .search-main-board{padding:14px}
+ .fn-world .search-main-board>.fn-port{display:inline-block;width:calc(50% - 5px);vertical-align:top;min-height:100px}
+ .fn-world .search-main-board .fn-wire{display:none}
+ .fn-world .search-fn-pod{padding:12px}
+ .fn-world .search-fn-pod p{font-size:14px;margin:8px 0 0}
+ .fn-world .fn-terminal{font-size:16px}
 }
+/* Stepik keeps a numeric iframe height, but strips container queries on its
+   wrapper. Keep the same compact vertical story at every screen width. */
+.fn-world .controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}
+.fn-world .controls button{white-space:normal;font-size:15px;padding:11px 12px}
+.fn-world .controls>button:nth-child(n){grid-column:auto}
+.fn-world .controls input{font-size:16px}
+.fn-world.extract .controls>label,.fn-world.return .controls>label,.fn-world.sky .controls>label,.fn-world.find .controls>label{grid-column:1/-1}
+.fn-world.extract .controls>button,.fn-world.sky .controls>button,.fn-world.find .controls>button{grid-column:auto}
+.fn-world.early .controls>button:nth-child(n){grid-column:1/-1}
+.fn-world .status{min-height:96px;font-size:16px;line-height:1.5;display:flex;align-items:center}
+.fn-world .fn-value{font-size:18px}
+.fn-world .extract-workbench{grid-template-columns:1fr;gap:14px}
+.fn-world .code-strip{min-height:90px;padding:12px 14px}
+.fn-world .code-strip code{display:block;font-size:16px}
+.fn-world .fold-module{min-height:120px;padding:14px 16px}
+.fn-world .fold-module h3{font-size:22px;margin:0 0 8px}
+.fn-world .fold-module .fn-kicker{display:none}
+.fn-world .plug-board{grid-template-columns:1fr;gap:16px}
+.fn-world .argument-plugs{grid-template-columns:1fr 1fr;gap:12px}
+.fn-world .argument-plug{min-height:130px;padding:12px}
+.fn-world .plug-pin{display:none}
+.fn-world .function-shell{padding:14px}
+.fn-world .function-shell .fn-kicker{display:none}
+.fn-world .function-shell h3{font-size:22px;margin:0 0 12px}
+.fn-world .function-shell .fn-port{display:inline-block;vertical-align:top;width:calc(50% - 5px);min-height:120px}
+.fn-world .return-routing{grid-template-columns:1fr;gap:14px}
+.fn-world .result-engine{min-height:120px;padding:14px}
+.fn-world .result-engine h3{font-size:22px;margin:0 0 10px}
+.fn-world .result-engine .fn-wire,.fn-world .result-engine>span,.fn-world .return-arrow{display:none}
+.fn-world .result-destinations{grid-template-columns:1fr 1fr;gap:10px}
+.fn-world .value-pocket,.fn-world .screen-printer{min-height:150px;padding:14px}
+.fn-world .screen-printer pre{font-size:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.fn-world .execution-building{grid-template-columns:1fr;gap:16px}
+.fn-world .execution-room{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(80px,1fr);gap:0 12px;padding:14px;min-height:220px}
+.fn-world .execution-room>.fn-kicker,.fn-world .execution-room>h3{grid-column:1/-1}
+.fn-world .execution-room>.fn-kicker{font-size:12px;margin:0 0 6px}
+.fn-world .execution-room>h3{font-size:20px;margin:0 0 10px}
+.fn-world .execution-room .fn-code-lines{font-size:14px;gap:4px}
+.fn-world .execution-room .fn-code-lines>div{padding:4px 8px}
+.fn-world .execution-room .flow-ports{display:grid;grid-template-columns:1fr;gap:7px;margin:0}
+.fn-world.trace .fn-port{padding:7px}
+.fn-world.trace .fn-port small{font-size:12px;margin-bottom:3px}
+.fn-world.trace .fn-value{font-size:17px}
+.fn-world.sky .controls,.fn-world .sky-body{padding:18px 22px}
+.fn-world .night-observatory{height:240px}
+.fn-world .sky-body .flow-ports>.fn-port{min-height:110px}
+.fn-world .sky-return-status{min-height:84px;align-content:center}
+.fn-world .copy-workshop{gap:16px}
+.fn-world .glass-label{font-size:14px;min-height:34px;margin-bottom:10px}
+.fn-world .glass-vessel{min-height:160px;padding:18px}
+.fn-world .scalar-orb{width:86px;height:86px;font-size:34px}
+.fn-world .copy-result{min-height:64px}
+.fn-world.copy>.status{min-height:96px}
+.fn-world .return-corridor{grid-template-columns:1fr;gap:14px}
+.fn-world .logic-gate{padding:10px 14px;display:grid;grid-template-columns:32px 1fr;gap:4px 8px;min-height:85px}
+.fn-world .logic-gate b{font-size:20px;grid-row:span 2;margin:0}
+.fn-world .logic-gate code{font-size:16px}
+.fn-world .logic-gate .fn-kicker{font-size:12px;margin:0}
+.fn-world .logic-gate::after{display:none}
+.fn-world .guard-answer{min-height:90px;flex-direction:row;flex-wrap:wrap;align-items:center}
+.fn-world .fn-find-machine{grid-template-columns:1fr;gap:16px}
+.fn-world .search-main-board{padding:14px}
+.fn-world .search-main-board>.fn-kicker{display:none}
+.fn-world .search-main-board>h3{font-size:23px;margin:0 0 12px}
+.fn-world .search-main-board>.fn-port{display:inline-block;vertical-align:top;width:calc(50% - 5px);min-height:110px}
+.fn-world .search-main-board .fn-wire{display:none}
+.fn-world .search-side-modules{grid-template-columns:1fr 1fr;gap:12px}
+.fn-world .search-fn-pod{min-height:130px;padding:12px}
+.fn-world .search-fn-pod code{font-size:15px}
+.fn-world .search-fn-pod p{font-size:14px;line-height:1.5;margin:8px 0 0}

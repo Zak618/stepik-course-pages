@@ -2,8 +2,8 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {target} from './lib/functions-browser.mjs';
-const apply=process.argv.includes('--apply');
+import {target,frameSteps} from './lib/functions-browser.mjs';
+const apply=process.argv.includes('--apply'),refreshScenes=process.argv.includes('--refresh-scenes');
 const plan=JSON.parse(await readFile('.local-publication/functions.json','utf8'));
 for(const key of Object.keys(target))assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,22);assert.equal(plan.articles.reduce((n,a)=>n+a.cost,0),140);
@@ -34,9 +34,17 @@ const untouched={};for(const id of [...new Set(beforeStructure.units.map(u=>u.le
 const existing=await sources(target.lesson);
 let journal={lesson:target.lesson,version:plan.version,uploaded:[]};
 try{journal=JSON.parse(await readFile('.local-publication/functions-upload.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
-assert.equal(journal.lesson,target.lesson);assert.equal(journal.version,plan.version);
+assert.equal(journal.lesson,target.lesson);
+if(journal.version!==plan.version)assert.ok(refreshScenes&&journal.version==='functions-20261115-publish-1','Unexpected publication version');
+function assertSceneRefresh(source,article){
+ assert.ok(refreshScenes&&frameSteps.includes(source.position),'Only approved scene frames may change');
+ assert.equal(source.block.name,'text');assert.equal(article.block.name,'text');assert.equal(source.cost,0);assert.equal(article.cost,0);
+ assert.deepEqual(source.block.source,article.block.source);assert.equal(readable(source.block.text),readable(article.block.text),'Preserve all theory');
+ const frames=s=>[...s.matchAll(/<iframe[^>]*\bsrc="([^"]+)"/g)].map(m=>m[1].replaceAll('&amp;','&').replace(/&v=[^&"]+/g,''));
+ assert.deepEqual(frames(source.block.text),frames(article.block.text),'Preserve page destinations');
+}
 assert.ok(existing.length<=22);assert.equal(new Set(existing.map(s=>s.position)).size,existing.length);
-for(const source of existing){const entry=journal.uploaded.find(e=>e.id===source.id&&e.position===source.position),expected=plan.articles.find(a=>a.position===source.position);assert.ok(entry&&expected,'Unrelated content; refusing overwrite');assert.equal(entry.planHash,hash(JSON.stringify(expected)),'Plan changed after publication');assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);assert.equal(source.update_date,entry.update_date,'Concurrent step edit');}
+for(const source of existing){const entry=journal.uploaded.find(e=>e.id===source.id&&e.position===source.position),expected=plan.articles.find(a=>a.position===source.position);assert.ok(entry&&expected,'Unrelated content; refusing overwrite');if(entry.planHash!==hash(JSON.stringify(expected)))assertSceneRefresh(source,expected);assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);assert.equal(source.update_date,entry.update_date,'Concurrent step edit');}
 const testsOf=a=>JSON.parse(a.block.source.code.match(/^TESTS = (.+)/)[1]);
 let cases=0;for(const a of plan.articles.filter(a=>a.block.name==='code')){const tests=testsOf(a);assert.equal(a.block.source.samples_count,tests.length);assert.ok(tests.length>=12);assert.equal(new Set(tests.map(t=>t[0])).size,tests.length);assert.ok(!/Примеры для проверки|Точная запись|<pre|<h[23]/.test(a.block.text),'Only native samples');cases+=tests.length;}
 for(const n of [20,21,22])assert.equal(plan.articles[n-1].block.source.templates_data.trim(),'::go\npackage main\n\nfunc main() {\n}','Last tasks must be independent');
@@ -46,10 +54,11 @@ if(!apply)process.exit(0);
 await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-functions[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|go-mini-module-05-lesson-01-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/functions-before-${Date.now()}.json`,JSON.stringify({lesson,structure:beforeStructure,sources:existing,untouched},null,2));
+journal.version=plan.version;
 for(const article of plan.articles){
  const fresh=await sources(target.lesson);assert.ok(fresh.every(s=>journal.uploaded.some(e=>e.id===s.id)),'Concurrent lesson edit');
  let current=fresh.find(s=>s.position===article.position);
- if(current){const entry=journal.uploaded.find(e=>e.id===current.id);assert.equal(current.update_date,entry.update_date,'Concurrent step edit');}
+ if(current){const entry=journal.uploaded.find(e=>e.id===current.id);assert.equal(current.update_date,entry.update_date,'Concurrent step edit');if(entry.planHash!==hash(JSON.stringify(article))){assertSceneRefresh(current,article);const result=await api('step-sources/'+current.id,'PUT',{stepSource:{lesson:target.lesson,...article}});current=result['step-sources'][0];entry.planHash=hash(JSON.stringify(article));entry.update_date=current.update_date;await writeFile('.local-publication/functions-upload.json',JSON.stringify(journal,null,2));}}
  else{
   const created=await api('step-sources','POST',{stepSource:{lesson:target.lesson,...article}});current=created['step-sources'][0];
   journal.uploaded.push({id:current.id,position:article.position,update_date:current.update_date,planHash:hash(JSON.stringify(article)),type:article.block.name,cost:article.cost});
@@ -71,6 +80,7 @@ for(const article of plan.articles){
 const after=await sources(target.lesson),afterLesson=(await api('lessons/'+target.lesson)).lessons[0];
 assert.equal(after.length,22);assert.equal(after.reduce((n,s)=>n+s.cost,0),140);assert.equal(after.filter(s=>s.block.name==='code').length,12);assert.equal(after.filter(s=>s.block.name==='choice').length,2);
 assert.equal(afterLesson.title,lesson.title);assert.equal(afterLesson.is_draft,lesson.is_draft);assert.deepEqual(afterLesson.units,lesson.units);assert.deepEqual(await structure(),beforeStructure,'Course structure/visibility changed');
+if(refreshScenes)for(const source of existing.filter(s=>!frameSteps.includes(s.position)))assert.equal(sourceHash([after.find(s=>s.id===source.id)]),sourceHash([source]),'A graded step changed');
 for(const[id,items]of Object.entries(untouched))assert.equal(sourceHash(await sources(id)),sourceHash(items),'Unrelated lesson changed: '+id);
 await writeFile('.local-publication/functions-verified.json',JSON.stringify({lesson:target.lesson,unit:target.unit,sources:after},null,2));
 console.log(JSON.stringify({url:`https://stepik.org/lesson/${target.lesson}/step/1?unit=${target.unit}`,steps:22,points:140,openInputCases:cases,allCasesOpen:true,visibilityUnchanged:true,otherLessonsUnchanged:true},null,2));
