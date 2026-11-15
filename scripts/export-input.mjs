@@ -17,7 +17,7 @@ try{
   const item=steps[position-1],task=tasks[item.task];let block;
   if(task){
    const grader=`TESTS = ${JSON.stringify(task.tests)}\n\ndef generate():\n    return [(data, answer) for data, answer in TESTS]\n\ndef solve(dataset):\n    return dict(TESTS)[dataset]\n\ndef check(reply, clue):\n    return reply.replace("\\r\\n", "\\n").rstrip("\\n") == clue.replace("\\r\\n", "\\n").rstrip("\\n")\n`;
-   block={name:'code',source:{code:grader,execution_time_limit:5,execution_memory_limit:256,samples_count:1,templates_data:'::go\n'+task.starter,is_time_limit_scaled:false,is_memory_limit_scaled:false,manual_time_limits:[],manual_memory_limits:[],test_archive:[]},feedback_correct:'',feedback_wrong:''};
+   block={name:'code',source:{code:grader,execution_time_limit:5,execution_memory_limit:256,samples_count:task.tests.length,templates_data:'::go\n'+task.starter,is_time_limit_scaled:false,is_memory_limit_scaled:false,manual_time_limits:[],manual_memory_limits:[],test_archive:[]},feedback_correct:'',feedback_wrong:''};
   }else if(item.kind==='quiz')block={name:'choice',source:{is_multiple_choice:false,is_always_correct:false,sample_size:4,preserve_order:true,is_html_enabled:true,is_options_feedback:false,options:item.options.map((text,i)=>({text:text.split('\n').map(line=>line.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')).join('<br>'),is_correct:i===item.answer,feedback:''}))},feedback_correct:item.explanation,feedback_wrong:'Каждый Scan читает очередную строку целиком. Затем проследите порядок Println.'};
   else block={name:'text',source:{}};
   const text=await page.evaluate(({item,task,height,filename,version})=>{

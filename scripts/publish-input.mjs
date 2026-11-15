@@ -108,10 +108,12 @@ for(const article of plan.articles){
     for(const key of ['code','templates_data','execution_time_limit','execution_memory_limit','samples_count'])assert.deepEqual(checked.block.source[key],article.block.source[key]);
     const publicStep=(await api('steps/'+checked.id)).steps[0];
     assert.deepEqual(Object.keys(publicStep.block.options.code_templates),['go']);
-    assert.ok(publicStep.block.options.limits.go);assert.equal(publicStep.block.options.samples.length,1);
     const tests=JSON.parse(article.block.source.code.match(/^TESTS = (.+)/)[1]);
-    assert.equal(publicStep.block.options.samples[0][0].replace(/\r\n/g,'\n'),tests[0][0]);
-    assert.equal(publicStep.block.options.samples[0][1].replace(/\r\n/g,'\n').replace(/\n+$/,''),tests[0][1].replace(/\n+$/,''));
+    assert.ok(publicStep.block.options.limits.go);assert.equal(article.block.source.samples_count,tests.length);assert.equal(publicStep.block.options.samples.length,tests.length);
+    for(let i=0;i<tests.length;i++){
+      assert.equal(publicStep.block.options.samples[i][0].replace(/\r\n/g,'\n'),tests[i][0]);
+      assert.equal(publicStep.block.options.samples[i][1].replace(/\r\n/g,'\n').replace(/\n+$/,''),tests[i][1].replace(/\n+$/,''));
+    }
   }else if(article.cost)assert.deepEqual(checked.block.source,article.block.source);
   console.log(`Step ${article.position}: ${checked.id}, ${checked.block.name}, ${checked.cost} points, ready`);
 }
