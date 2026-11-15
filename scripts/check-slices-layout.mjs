@@ -7,6 +7,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-too
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const errors=[],measurements=[];page.on('pageerror',e=>errors.push(e.message));
 try{
+ await page.goto(origin+'/slices');
  for(const width of[390,640,1024]){
   await page.setViewportSize({width,height:1200});
   for(const n of frameSteps){
