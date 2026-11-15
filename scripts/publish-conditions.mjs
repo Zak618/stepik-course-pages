@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 const target={course:305666,lesson:2706562,unit:2746577,account:647088271,title:'Условия и логика'};
 const apply=process.argv.includes('--apply');
 const compactExamples=process.argv.includes('--compact-examples');
+const formatText=process.argv.includes('--format-text');
 const plan=JSON.parse(await readFile('.local-publication/conditions.json','utf8'));
 for(const key of Object.keys(target))assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,20);assert.equal(plan.articles.reduce((n,a)=>n+a.cost,0),110);
@@ -39,6 +40,7 @@ try{journal=JSON.parse(await readFile('.local-publication/conditions-upload.json
 assert.equal(journal.lesson,target.lesson);assert.equal(journal.version,plan.version);
 assert.ok(existing.length<=20);assert.equal(new Set(existing.map(s=>s.position)).size,existing.length);
 function assertCompact(source,expected){
+ if(formatText){assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);assert.deepEqual(source.block.source,expected.block.source);assert.equal(readable(source.block.text),readable(expected.block.text),'Formatting must preserve all text');const frames=h=>[...h.matchAll(/<iframe[^>]*\bsrc="([^"]+)"/g)].map(m=>m[1].replaceAll('&amp;','&'));assert.deepEqual(frames(source.block.text),frames(expected.block.text),'Formatting may not change embedded pages');return;}
  assert.ok(compactExamples,'Plan changed after publication');assert.equal(source.block.name,'code');assert.equal(expected.block.name,'code');assert.equal(source.cost,expected.cost);assert.deepEqual(source.block.source,expected.block.source,'A formatting update may not change tests/templates/visibility');
  assert.ok(source.block.text.includes('Примеры для проверки'),'Only remove the known duplicate examples');assert.ok(!/Примеры для проверки|Точная запись|<h[23]/.test(expected.block.text),'Only the original task condition may remain');assert.ok(readable(source.block.text).startsWith(readable(expected.block.text)),'Task condition may not change');
 }
