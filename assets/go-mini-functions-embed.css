@@ -1,0 +1,31 @@
+/* The iframe contains only the scene, not the reading page. */
+body.is-embed .lesson,body.is-embed .reading,body.is-embed #step-content{width:100%;height:100vh;min-height:0;margin:0;padding:0}
+body.is-embed .fn-world{height:100vh;display:flex;flex-direction:column;min-height:0;margin:0}
+body.is-embed .fn-world>*{flex-shrink:0;min-width:0}
+body.is-embed .fn-world>.status{margin-top:auto;padding-top:17px}
+body.is-embed .extract-workbench{flex:1;min-height:340px}
+body.is-embed .extract .fn-terminal{max-height:150px;overflow:auto}
+body.is-embed .plug-board{flex:1;min-height:370px}
+body.is-embed .return-routing{flex:1;min-height:350px}
+body.is-embed .execution-building{flex:1;min-height:430px;align-items:center}
+body.is-embed .trace .fn-terminal{max-height:120px;overflow:auto}
+body.is-embed .night-observatory{flex:1;min-height:240px}
+body.is-embed .sky-body>.status{padding-top:18px}
+body.is-embed .sky-body .scene-code{margin-top:15px}
+body.is-embed .copy-workshop{flex:1;min-height:250px;align-items:center}
+body.is-embed .return-corridor{flex:1;min-height:270px;align-content:center}
+body.is-embed .fn-find-machine{flex:1;min-height:400px}
+body.is-embed .find .fn-terminal{max-height:240px;overflow:auto}
+body.is-embed .fn-world textarea{min-height:100px;height:110px}
+body.is-embed .fn-world .scene-code{margin-top:16px}
+@media(max-width:650px){
+ body.is-embed .extract-workbench{min-height:500px}
+ body.is-embed .plug-board{min-height:560px}
+ body.is-embed .return-routing{min-height:490px}
+ body.is-embed .execution-building{min-height:730px;align-items:stretch}
+ body.is-embed .fn-world .scene-code{font-size:13px;line-height:1.65;padding:15px}
+ body.is-embed .copy-workshop{min-height:220px}
+ body.is-embed .return-corridor{min-height:430px}
+ body.is-embed .fn-find-machine{min-height:610px}
+ body.is-embed .fn-world .fn-terminal{font-size:15px;line-height:1.6;min-height:70px}
+}
