@@ -70,4 +70,3 @@ function render(){
  main.querySelector('#prev')?.addEventListener('click',()=>navigate(current-1),{signal});main.querySelector('#next')?.addEventListener('click',()=>navigate(current+1),{signal});
 }
 render();
-
