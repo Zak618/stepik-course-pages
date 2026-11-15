@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {origin,browserOptions,frameSteps,exercise,geometry} from './lib/project-browser.mjs';
 const plan=JSON.parse(await readFile('.local-publication/project.json','utf8'));
+const published=process.argv.includes('--published')?JSON.parse(await readFile('.local-publication/project-verified.json','utf8')):null;
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-tools-M279ew/node_modules/playwright-core/index.mjs');
 const browser=await chromium.launch(browserOptions),page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true});
 const project=[],measurements=[];page.on('pageerror',e=>project.push(e.message));
@@ -11,7 +12,7 @@ try{
  for(const width of[390,640,1024]){
   await page.setViewportSize({width,height:1200});
   for(const n of frameSteps){
-   const article=plan.articles[n-1].block.text.replaceAll('https://zak618.github.io/stepik-course-pages',origin);
+   const article=(published?published.sources.find(s=>s.position===n).block.text:plan.articles[n-1].block.text).replaceAll('https://zak618.github.io/stepik-course-pages',origin);
    await page.setContent('<style>body{margin:0;font-family:Arial,sans-serif}iframe{border:0}h1,h2,h3,p{overflow-wrap:anywhere}</style><main>'+article+'</main>');
    const frame=page.frames().find(f=>f!==page.mainFrame());await frame.waitForSelector('.world');
    const measure=async state=>{
