@@ -1,4 +1,5 @@
 @import url('./go-mini-conditions.css');
+@import url('./go-mini-slices-embed.css?v=slices-20261115-compact-2');
 :root{--slice-violet:#7142ec;--slice-cyan:#0eafbb;--slice-pink:#ed5584}
 .slice-world{padding:24px;overflow:clip;position:relative;isolation:isolate;background:#f6f3ff}
 .slice-world .controls{padding:0;margin:0 0 20px;gap:12px;align-items:end}

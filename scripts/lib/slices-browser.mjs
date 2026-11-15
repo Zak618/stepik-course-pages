@@ -1,9 +1,9 @@
 export const origin=process.env.STEPIK_SLICES_URL||'http://localhost:8781';
-export const version='slices-20261115-publish-1';
+export const version='slices-20261115-compact-2';
 export const target={course:305666,lesson:2706567,unit:2746582,account:647088271,title:'Срезы и обработка данных'};
 export const frameSteps=[1,3,5,7,10,13,15,19];
 export const filename=n=>`go-mini-module-05-lesson-02-step-${String(n).padStart(2,'0')}.html`;
-export const files=['go-mini-module-05-lesson-02-preview.html',...Array.from({length:22},(_,i)=>filename(i+1)),...['.css','.js','-content.js','-worlds.js'].map(s=>'assets/go-mini-slices'+s),'assets/go-mini-conditions.css'];
+export const files=['go-mini-module-05-lesson-02-preview.html',...Array.from({length:22},(_,i)=>filename(i+1)),...['.css','-embed.css','.js','-content.js','-worlds.js'].map(s=>'assets/go-mini-slices'+s),'assets/go-mini-conditions.css'];
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']};
 export function geometry(){
  const scene=document.querySelector('.world');let bottom=0;const walker=document.createTreeWalker(scene,NodeFilter.SHOW_TEXT);

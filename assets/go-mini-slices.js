@@ -1,5 +1,5 @@
 import {steps,tasks} from './go-mini-slices-content.js';
-import {mountWorld,escapeHTML as E} from './go-mini-slices-worlds.js?v=slices-20261115-publish-1';
+import {mountWorld,escapeHTML as E} from './go-mini-slices-worlds.js?v=slices-20261115-compact-2';
 const main=document.querySelector('main'),preview=document.body.dataset.preview==='true',params=new URLSearchParams(location.search),sceneOnly=params.get('panel')==='scene';
 const file=n=>`go-mini-module-05-lesson-02-step-${String(n).padStart(2,'0')}.html`;
 const read=(key,fallback='')=>{try{return localStorage.getItem('go-slices:'+key)??fallback;}catch{return fallback;}};

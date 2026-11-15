@@ -17,7 +17,7 @@ try{
  }else{
  for(const step of frameSteps){
  let height=1600;const sizes=[];
- for(const width of [390,1024]){
+ for(const width of [390,640,1024]){
   await page.setViewportSize({width,height});await page.goto(`${origin}/${filename(step)}?panel=scene&embed=1`);await page.waitForSelector('.is-embed .world');
   const measure=async state=>{
    let m;
@@ -31,8 +31,8 @@ try{
   const begin=measurements.length;await measure('initial');await exercise(page,step,measure);
   sizes.push({width,height:Math.ceil(Math.max(...measurements.slice(begin).map(m=>Math.max(m.sceneBottom,m.inkBottom))))+8});
  }
- // Stepik retains numeric heights, not container-query CSS. The scenes use
- // a stable compact composition across widths; measure every visible state.
+ // Stepik retains numeric heights. Measure compact embed compositions rather
+ // than exporting the much taller stacked local-preview phone layout.
  heights[step]=Math.max(...sizes.map(s=>s.height));frameStyles[step]='';console.log('Measured scene',step,JSON.stringify(sizes));
  }
  }

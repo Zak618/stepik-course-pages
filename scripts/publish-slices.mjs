@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {target,frameSteps} from './lib/slices-browser.mjs';
-const apply=process.argv.includes('--apply'),refreshScenes=false;
+const apply=process.argv.includes('--apply'),refreshScenes=process.argv.includes('--refresh-scenes');
 const plan=JSON.parse(await readFile('.local-publication/slices.json','utf8'));
 for(const key of Object.keys(target))assert.equal(plan[key],target[key]);
 assert.equal(plan.articles.length,22);assert.equal(plan.articles.reduce((n,a)=>n+a.cost,0),140);
@@ -35,8 +35,16 @@ const existing=await sources(target.lesson);
 let journal={lesson:target.lesson,version:plan.version,uploaded:[]};
 try{journal=JSON.parse(await readFile('.local-publication/slices-upload.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 assert.equal(journal.lesson,target.lesson);
-assert.equal(journal.version,plan.version,'Unexpected publication version');
-function assertSceneRefresh(){throw Error('Existing content differs; refusing overwrite');}
+if(journal.version!==plan.version)assert.ok(refreshScenes&&journal.version==='slices-20261115-publish-1'&&plan.version==='slices-20261115-compact-2','Unexpected publication version');
+function assertSceneRefresh(source,article){
+ assert.ok(refreshScenes&&frameSteps.includes(source.position),'Only scene layout may change');
+ assert.equal(source.block.name,'text');assert.equal(article.block.name,'text');
+ assert.equal(source.cost,0);assert.equal(article.cost,0);
+ assert.deepEqual(source.block.source,article.block.source);
+ assert.equal(readable(source.block.text),readable(article.block.text),'Preserve all theory');
+ const frames=s=>[...s.matchAll(/<iframe[^>]*\bsrc="([^"]+)"/g)].map(m=>m[1].replaceAll('&amp;','&').replace(/&v=[^&"]+/g,''));
+ assert.deepEqual(frames(source.block.text),frames(article.block.text),'Preserve scene destinations');
+}
 assert.ok(existing.length<=22);assert.equal(new Set(existing.map(s=>s.position)).size,existing.length);
 for(const source of existing){const entry=journal.uploaded.find(e=>e.id===source.id&&e.position===source.position),expected=plan.articles.find(a=>a.position===source.position);assert.ok(entry&&expected,'Unrelated content; refusing overwrite');if(entry.planHash!==hash(JSON.stringify(expected)))assertSceneRefresh(source,expected);assert.equal(source.block.name,expected.block.name);assert.equal(source.cost,expected.cost);assert.equal(source.update_date,entry.update_date,'Concurrent step edit');}
 const testsOf=a=>JSON.parse(a.block.source.code.match(/^TESTS = (.+)/)[1]);
@@ -49,7 +57,7 @@ await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-slice
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/slices-before-${Date.now()}.json`,JSON.stringify({lesson,structure:beforeStructure,sources:existing,untouched},null,2));
 journal.version=plan.version;
-for(const article of plan.articles){
+for(const article of plan.articles.filter(a=>!refreshScenes||frameSteps.includes(a.position))){
  const fresh=await sources(target.lesson);assert.ok(fresh.every(s=>journal.uploaded.some(e=>e.id===s.id)),'Concurrent lesson edit');
  let current=fresh.find(s=>s.position===article.position);
  if(current){const entry=journal.uploaded.find(e=>e.id===current.id);assert.equal(current.update_date,entry.update_date,'Concurrent step edit');if(entry.planHash!==hash(JSON.stringify(article))){assertSceneRefresh(current,article);const result=await api('step-sources/'+current.id,'PUT',{stepSource:{lesson:target.lesson,...article}});current=result['step-sources'][0];entry.planHash=hash(JSON.stringify(article));entry.update_date=current.update_date;await writeFile('.local-publication/slices-upload.json',JSON.stringify(journal,null,2));}}
