@@ -1,6 +1,7 @@
-/* Public Stepik catalogue checked 2026-11-13. Drafts excluded, except the current course. */
+/* Public Stepik catalogue checked 2026-11-13. Go mini and Python journey updated 2026-11-16. */
 window.INTRO_CATALOG = {
   checkedAt: '2026-11-13',
+  updatedAt: '2026-11-16',
   tracks: [
     {id:'go',title:'Go',symbol:'go',color:'#178ba9',tint:'#eaf8fc',line:'#cce8ef',description:'От первой программы к собственному сервису.',stages:[
       {title:'Ваш первый Go-код',note:'Начните здесь',courses:[305666]},
@@ -14,7 +15,7 @@ window.INTRO_CATALOG = {
       {title:'React',note:'Выберите формат после основ JavaScript',courses:[218079,216887,200517,290177]}
     ]},
     {id:'backend',title:'Backend',symbol:'{ }',color:'#278c67',tint:'#edf8f1',line:'#cfeadb',description:'Выберите язык. Освоив основы, переходите к приложениям.',stages:[
-      {title:'Python',note:'Основы → практика → продолжение',courses:[181030,181396,300361]},
+      {title:'Python',note:'Калининград → Казань → Урал',courses:[300153,300361,181030,181396]},
       {title:'PHP',note:'Самостоятельная ветка',courses:[181092]},
       {title:'C#',note:'Основы, затем отдельные специализации',courses:[290060,290330,290261,290423]}
     ]},
@@ -55,6 +56,7 @@ window.INTRO_CATALOG = {
     {id:290177,title:'React Exclusive',track:'web',free:false,description:'Современный React, компоненты и хуки. Курс предполагает твёрдые знания JavaScript ES6+.'},
     {id:181030,title:'Python',track:'backend',free:false,description:'Начальный курс Python для знакомства с логикой программирования и написанием программ.'},
     {id:181396,title:'Python Exclusive',track:'backend',free:false,description:'Практика Python и простые проекты. По требованиям курса пригодятся базовые знания языка.'},
+    {id:300153,title:'Python Exclusive: от Калининграда до Казани',track:'backend',free:true,description:'Python с нуля в путешествии по России. Условия, циклы, коллекции и функции — на задачах о поездках. В Казани соберёте свой «Путевой журнал»: записи, поиск, расстояния и расходы.'},
     {id:300361,title:'Python Exclusive: путешествие по Уралу',track:'backend',free:false,description:'Продолжение путешествия с Python: задачи с данными, базами данных и итоговым приложением. Нужны условия, циклы, коллекции и функции.'},
     {id:181092,title:'PHP (pro)',track:'backend',free:false,description:'Основы PHP и создание динамических веб-приложений. Это отдельная языковая ветка.'},
     {id:290060,title:'C#: Основы',track:'backend',free:false,description:'От переменных и циклов к классам, интерфейсам и структурам. Стартовая точка ветки C#.'},
