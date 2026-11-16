@@ -58,7 +58,7 @@
     range('Цена до, ₽',0,300,150,update);update(150);
   }
   function search() {
-    let step=0;const states=[[1,16,0],[1,16,8],[9,16,12],[9,11,10],[11,11,11]];
+    let step=0;const states=[[1,16,0],[9,16,8],[9,11,12],[11,11,10],[11,11,11]];
     scene.innerHTML='<div class="search-board">'+Array.from({length:16},(_,i)=>`<span class="number-cell">${i+1}</span>`).join('')+'</div>';
     const button=action('Проверить середину',()=>{step=(step+1)%states.length;const [low,high,mid]=states[step];scene.querySelectorAll('.number-cell').forEach((el,i)=>{el.dataset.out=i+1<low||i+1>high;el.dataset.check=i+1===mid;el.dataset.found=step===4&&i+1===11;});button.textContent=step===4?'Ещё раз':'Проверить середину';if(step===4)sparkle(scene.querySelectorAll('.number-cell')[10]);show(step?`Ищем 11. Проверяем ${mid}.`:'Ищем число 11 среди чисел от 1 до 16.',[
       'Можно проверить всё подряд. А можно начать с середины.',
@@ -75,12 +75,12 @@
   }
   function database() {
     let saved=false;
-    scene.innerHTML='<div class="db-board"><div class="object"><small>Объект в программе</small><b>Казань</b><span>Id = 1</span></div><table class="db-table"><thead><tr><th>Id</th><th>Город</th></tr></thead><tbody><tr><td colspan="2">Пока нет записи</td></tr></tbody></table></div>';
+    scene.innerHTML='<div class="db-board"><div class="object"><small>Объект в программе</small><b>Казань</b><span>Name</span></div><table class="db-table"><thead><tr><th>Id</th><th>Город</th></tr></thead><tbody><tr><td colspan="2">Пока нет записи</td></tr></tbody></table></div>';
     const button=action('Сохранить запись',()=>{saved=!saved;scene.querySelector('tbody').innerHTML=saved?'<tr><td>1</td><td>Казань</td></tr>':'<tr><td colspan="2">Пока нет записи</td></tr>';animate(scene.querySelector('tbody'),[{opacity:0,transform:'translateY(-15px)'},{opacity:1,transform:'translateY(0)'}]);button.textContent=saved?'Вернуть пример к началу':'Сохранить запись';show(saved?'context.Cities.Add(city);\ncontext.SaveChanges();':'var city = new City { Name = "Казань" };',saved?'Теперь в таблице есть запись. В настоящем приложении эти команды выполняет EF Core. Здесь показана связь между объектом и строкой таблицы.':'Создан объект в памяти. Само по себе это ещё не запись в базу данных.');});show('var city = new City { Name = "Казань" };','Слева объект, справа таблица. Нажмите кнопку и проследите, что куда попадёт.');
   }
   function prompt() {
     let detailed=false;
-    const simple='Придумай идею бота.',good='Предложи 3 идеи Telegram-бота для небольшой кофейни. Для каждой укажи задачу посетителя и способ проверить спрос без разработки.';
+    const simple='Придумай идею бота.',good='Предложи 3 идеи бота для кофейни. Для каждой укажи задачу посетителя и способ проверить спрос без разработки.';
     scene.innerHTML='<div class="prompt-board"><div class="note"><h3>Запрос</h3><p id="prompt-text"></p></div><div class="note good"><h3>Что теперь понятно</h3><p id="prompt-context"></p></div></div>';
     function update(){scene.querySelector('#prompt-text').textContent=detailed?good:simple;scene.querySelector('#prompt-context').textContent=detailed?'Для кого: кофейня. Что нужно: 3 идеи. Как оформить: задача и проверка спроса.':'Непонятно, кому нужен бот и какую задачу он решает.';show(detailed?'Задача + контекст + формат':'Только общая задача',detailed?'Такой запрос точнее задаёт рамки. Но ответ всё равно нужно проверять. Это пример составления запроса, не ответ ИИ.':'Прежде чем отправлять запрос, подумайте: чего в нём не хватает?');}
     const button=action('Уточнить запрос',()=>{detailed=!detailed;button.textContent=detailed?'Показать общий запрос':'Уточнить запрос';update();animate(scene.querySelector('.good'),[{transform:'scale(.94)'},{transform:'scale(1)'}]);});update();

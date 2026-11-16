@@ -37,7 +37,7 @@ function inspect(p,current,complete=false){
  const old=beforeByLesson.get(p.lesson);
  for(const s of old){const now=current.find(t=>t.id===s.id);assert.ok(now,'Existing step missing '+s.id);nativeInvariant(now,s);const update=p.updates.find(u=>u.id===s.id);assert.ok(update?(sameText(now.block.text,update.text)||(!complete&&hash(now.block.text)===hash(s.block.text))):hash(now.block.text)===hash(s.block.text),'Concurrent edit or unsaved content '+s.id);}
  for(const now of current.filter(s=>!old.some(o=>o.id===s.id))){const addition=p.additions.find(a=>a.position===now.position);assert.ok(addition,'Foreign appended step '+now.id);assert.equal(now.block.name,addition.type);assert.equal(now.cost,0);assert.ok(sameText(now.block.text,addition.text),'Foreign content at appended position '+now.position);const saved=journal.added.find(a=>a.id===now.id);if(!saved){assert.ok(apply&&!verify,'Unjournaled addition; use --apply to recover by matching content');journal.added.push({course:p.course,lesson:p.lesson,id:now.id,position:now.position,role:addition.role,recovered:true});}}
- if(complete){assert.equal(current.length,old.length+p.additions.length,'Final step count '+p.course);for(const a of p.additions)assert.ok(current.some(s=>s.position===a.position&&sameText(s.block.text,a.text)),'Missing addition '+p.course);}
+ if(complete){assert.equal(current.length,old.length+p.additions.length,'Final step count '+p.course);for(const a of p.additions)assert.ok(current.some(s=>s.position===a.position&&sameText(s.block.text,a.text)&&s.is_enabled===true&&s.needs_plan===null),'Missing or inaccessible addition '+p.course);for(const s of current){assert.ok(['ready',1000].includes(s.status),'Step not ready '+s.id);assert.ok(!s.error?.text&&!s.error?.code,'Step error '+s.id);}}
  assert.equal(current.reduce((n,s)=>n+s.cost,0),old.reduce((n,s)=>n+s.cost,0),'Points preserved '+p.course);
 }
 const originals=new Map();
@@ -74,7 +74,9 @@ if(apply){
     journal.added.push({course:p.course,lesson:p.lesson,id:saved.id,position:a.position,role:a.role});await persist();
    }
   }
-  inspect(p,await sources(p.lesson),true);
+  let completed;
+  for(let attempt=0;attempt<20;attempt++){completed=await sources(p.lesson);if(completed.every(s=>!['preparing',10].includes(s.status)))break;await new Promise(resolve=>setTimeout(resolve,800));}
+  inspect(p,completed,true);
   if(!journal.done.includes(p.course)){journal.done.push(p.course);await persist();}
   console.log('Ready '+journal.done.length+'/'+plan.plans.length+': '+p.course+' '+p.title);
  }
