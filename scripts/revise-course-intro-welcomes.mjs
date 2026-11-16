@@ -3,7 +3,9 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {welcomes,greeting,renderWelcome} from './course-intro-welcome-copy.mjs';
-const directory='.local-publication/intro-welcomes-20261116';
+const plainRevision=process.argv.includes('--plain');
+const directory=plainRevision?'.local-publication/intro-plain-brand-20261116':'.local-publication/intro-welcomes-20261116';
+const publicVersion=plainRevision?'20261116-plain':'20261116-welcome';
 const original=JSON.parse(await readFile('.local-publication/intros-20261116/snapshot.json','utf8'));
 const protectedKeys=['title','sections','owner','authors','cover','summary','description','requirements','learning_format','target_audience','workload','acquired_skills','acquired_assets','is_public','is_enabled','is_paid','price','currency_code','is_certificate_issued','certificate_regular_threshold','certificate_distinction_threshold'];
 const excluded=[305666,305734,300562];
@@ -31,25 +33,27 @@ if(process.argv.includes('--prepare')){
   if(!excluded.includes(course.id)){
    assert.equal(first.block.name,'text');assert.equal(first.cost,0);
    if(welcomes[course.id])text=renderWelcome(course.id);
-   else {assert.ok([187192,187189,187191].includes(course.id));text=greeting+'<p>Мы команда WEB HACKER.</p>'+first.block.text;}
+   else {assert.ok([187192,187189,187191].includes(course.id));const body=first.block.text.replace(/^<h2\b[^>]*>👋 Привет![\s\S]*?<\/h2>\s*<p>(?:Мы|На связи) команда WEB HACKER\.<\/p>/,'');text=greeting+'<p>На связи команда WEB HACKER.</p>'+body;}
    if(course.id===289356){const poster=first.block.text.match(/<details><summary>Знакомство с Милой и Тегом<\/summary>[\s\S]*?<\/details>/);if(poster)text+=poster[0];}
    if(course.id===300361){
     const start=first.block.text.search(/<div\b/);assert.ok(start>=0,'Existing Ural theory');
     const tail=first.block.text.slice(start).replace(/^(<div\b[^>]*>)\s*<h2\b[^>]*>[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>/,'$1');
-    text=greeting+'<p>Мы команда WEB HACKER.</p><p>'+welcomes[course.id][0]+'</p>'+tail;
+    text=greeting+'<p>На связи команда WEB HACKER.</p><p>'+welcomes[course.id][0]+'</p>'+tail;
     assert.equal(hash(text.match(/<pre\b[\s\S]*?<\/pre>/g)),hash(first.block.text.match(/<pre\b[\s\S]*?<\/pre>/g)),'Preserved Ural code examples');
    }
+   text=text.replaceAll('Мы команда WEB HACKER.','На связи команда WEB HACKER.');
    assert.ok(!embeds(text).some(u=>u.includes('course-intro.html')),'No game iframe');
    assert.ok(plain(text).startsWith('👋 Привет!'));
-   updates.push({course:course.id,lesson:intro.lesson,id:first.id,text});
+   updates.push({course:course.id,lesson:intro.lesson,id:first.id,position:1,text});
+   if(plainRevision)for(const step of record.steps.filter(s=>s.position!==1&&s.block.name==='text'&&s.cost===0&&s.block.text.includes('Мы команда WEB HACKER.'))){updates.push({course:course.id,lesson:intro.lesson,id:step.id,position:step.position,text:step.block.text.replaceAll('Мы команда WEB HACKER.','На связи команда WEB HACKER.')});}
   }
   index.push({id:course.id,title:course.title.trim(),url:`https://stepik.org/lesson/${intro.lesson}/step/1?unit=${intro.unit}`,html:text});
  }
- assert.equal(updates.length,37);assert.equal(index.length,38);
+ assert.equal(updates.filter(u=>u.position===1).length,37);assert.equal(index.length,38);
  await writeFile(directory+'/before.json',JSON.stringify(before,null,2),{mode:0o600});
  await writeFile(directory+'/plan.json',JSON.stringify({at:new Date().toISOString(),excluded,updates},null,2),{mode:0o600});
  await writeFile('assets/course-intro-index.js','/* Public course openings. Greetings and text only; no game scenes. */\nwindow.COURSE_INTRO_INDEX = '+JSON.stringify(index,null,2)+';\n');
- console.log('Prepared 37 native welcome updates and 38 public previews. No new steps.');process.exit(0);
+ console.log('Prepared 37 welcomes and '+(updates.length-37)+' brand-line corrections. No new steps.');process.exit(0);
 }
 const before=JSON.parse(await readFile(directory+'/before.json','utf8')),plan=JSON.parse(await readFile(directory+'/plan.json','utf8'));
 const apply=process.argv.includes('--apply'),verify=process.argv.includes('--verify');
@@ -60,9 +64,9 @@ function inspect(record,now,complete=false){
 }
 for(let i=0;i<before.intros.length;i+=4)await Promise.all(before.intros.slice(i,i+4).map(async record=>inspect(record,await sources(record.lesson),verify)));
 assert.equal(hash(await courses()),hash(before.courses),'Course settings preserved');
-if(!apply&&!verify){console.log('Preflight passed: update 37 openings only.');process.exit(0);}
+if(!apply&&!verify){console.log('Preflight passed: 37 openings, '+(plan.updates.length-37)+' exact brand-line corrections.');process.exit(0);}
 if(apply){
- for(const file of['course-intro.html','course-intros.html','assets/course-intro-index.js','assets/course-intro-welcome.js']){const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v=20261116-welcome',{signal:AbortSignal.timeout(30000)});assert.ok(r.ok);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Pages ready '+file);}
+ for(const file of['course-intro.html','course-intros.html','assets/course-intro-index.js','assets/course-intro-welcome.js']){const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+publicVersion,{signal:AbortSignal.timeout(30000)});assert.ok(r.ok);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Pages ready '+file);}
  let queue=Promise.resolve();
  async function save(update){
   const record=before.intros.find(i=>i.course===update.course),old=record.steps.find(s=>s.id===update.id),current=await sources(record.lesson);inspect(record,current);let s=current.find(s=>s.id===old.id);
@@ -71,13 +75,14 @@ if(apply){
    catch{s=(await api('step-sources/'+old.id))['step-sources'][0];assert.ok(sameText(s.block.text,update.text),'Save not confirmed; no mutation retry '+old.id);}
    assert.ok(sameText(s.block.text,update.text));
   }
-  inspect(record,await sources(record.lesson),true);
+  inspect(record,await sources(record.lesson));
   if(!journal.saved.includes(update.id))journal.saved.push(update.id);const content=JSON.stringify(journal,null,2);queue=queue.then(()=>writeFile(directory+'/journal.json',content,{mode:0o600}));await queue;
-  console.log('Saved '+journal.saved.length+'/37: '+update.course);
+  console.log('Saved '+journal.saved.length+'/'+plan.updates.length+': '+update.course);
  }
  for(let i=0;i<plan.updates.length;i+=4)await Promise.all(plan.updates.slice(i,i+4).map(save));
 }
 for(let i=0;i<before.intros.length;i+=4)await Promise.all(before.intros.slice(i,i+4).map(async record=>inspect(record,await sources(record.lesson),true)));
+for(let i=0;i<plan.updates.length;i+=12){const chunk=plan.updates.slice(i,i+12),rows=(await api('steps?'+chunk.map(u=>'ids[]='+u.id).join('&'))).steps;for(const u of chunk){const step=rows.find(s=>s.id===u.id);assert.ok(step&&sameText(step.block.text,u.text),'Student-facing content '+u.id);if(plainRevision)assert.ok(!step.block.text.includes('Мы команда WEB HACKER.'),'Old brand line '+u.id);if(u.position===1)assert.ok(!embeds(step.block.text).some(src=>src.includes('course-intro.html')),'No nested welcome '+u.id);}}
 assert.equal(hash(await courses()),hash(before.courses),'Final course settings preserved');
-await writeFile(directory+'/verified.json',JSON.stringify({at:new Date().toISOString(),updated:37,noGameEmbeds:true,greetings:true,allOtherStepsIdsPositionsTasksAndPointsPreserved:true,excluded},null,2),{mode:0o600});
+await writeFile(directory+'/verified.json',JSON.stringify({at:new Date().toISOString(),updated:plan.updates.length,welcomes:37,noGameEmbeds:true,greetings:true,allOtherStepsIdsPositionsTasksAndPointsPreserved:true,excluded},null,2),{mode:0o600});
 console.log('Verified: 37 greetings, no game inserts; all other steps, answers, points and course settings preserved.');

@@ -6,7 +6,7 @@ const origin=process.env.STEPIK_INTRO_URL||'http://localhost:8793';
 const sandbox={window:{}};vm.runInNewContext(await readFile('assets/course-intro-index.js','utf8'),sandbox);
 const items=sandbox.window.COURSE_INTRO_INDEX;
 assert.equal(items.length,38);
-for(const item of items){assert.ok(!/course-intro\.html|course-intro\.js|<button|<canvas/.test(item.html),'No games '+item.id);assert.ok(/Привет|Добро пожаловать/.test(item.html),'Greeting '+item.id);}
+for(const item of items){assert.ok(!/course-intro\.html|course-intro\.js|<button|<canvas/.test(item.html),'No games '+item.id);assert.ok(/Привет|Добро пожаловать/.test(item.html),'Greeting '+item.id);if(item.id!==300562){assert.ok(item.html.includes('На связи команда WEB HACKER.'),'Exact team line '+item.id);assert.ok(!item.html.includes('Мы команда WEB HACKER.'),'No old team line '+item.id);assert.equal((item.html.match(/<h2[^>]*>👋 Привет!/g)||[]).length,1,'One greeting '+item.id);assert.ok(!item.html.includes('У страницы есть обратная сторона'),'No old wrapper');}}
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']});
 const page=await browser.newPage(),errors=[];let checks=0;
 page.on('pageerror',e=>errors.push(e.message));
@@ -32,6 +32,6 @@ try{
  assert.equal(await page.locator('.experience,.primary,canvas,input').count(),0);checks++;
  assert.equal(await page.locator('script[src*="course-intro.js"]').count(),0);checks++;
  assert.equal(errors.length,0,errors.join('; '));checks++;
- await writeFile('.local-publication/intro-welcomes-20261116/qa.json',JSON.stringify({at:new Date().toISOString(),checks,widths:[280,320,390,800,1100],screenshots,errors},null,2),{mode:0o600});
+ await writeFile('.local-publication/intro-plain-brand-20261116/qa.json',JSON.stringify({at:new Date().toISOString(),checks,widths:[280,320,390,800,1100],screenshots,errors},null,2),{mode:0o600});
  console.log(JSON.stringify({checks,screenshots,errors}));
 }finally{await browser.close();}
