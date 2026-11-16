@@ -1,2 +1,55 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Что дальше · Go-шечка</title><link rel="stylesheet" href="assets/go-mini-finale.css"><script type="module" src="assets/go-mini-finale.js"></script></head><body data-view="pro"><main></main><noscript>Спасибо, что учились с нами. Продолжение: <a href="https://stepik.org/course/300562/promo">Go-шечка (pro)</a>. Команда WEB HACKER.</noscript></body></html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Подарок · Go-шечка (pro)</title>
+  <link rel="stylesheet" href="assets/go-mini-pro-gift.css">
+  <script src="assets/go-mini-pro-gift.js" defer></script>
+</head>
+<body>
+  <main class="gift">
+    <div class="gift-art" aria-hidden="true">
+      <div class="halo"></div>
+      <svg class="present" viewBox="0 0 360 330" fill="none">
+        <defs>
+          <linearGradient id="box" x1="82" y1="210" x2="281" y2="312" gradientUnits="userSpaceOnUse"><stop stop-color="#bba4ff"/><stop offset="1" stop-color="#8a5cd4"/></linearGradient>
+          <linearGradient id="ticket" x1="102" y1="62" x2="261" y2="165" gradientUnits="userSpaceOnUse"><stop stop-color="#b3ffe0"/><stop offset="1" stop-color="#5ce7c1"/></linearGradient>
+        </defs>
+        <ellipse cx="180" cy="303" rx="114" ry="13" fill="#91b3c9" opacity=".2"/>
+        <g class="confetti" stroke-width="5" stroke-linecap="round">
+          <path d="m58 106 7 9" stroke="#ffbe69"/><path d="m289 135 10-7" stroke="#a38bff"/>
+          <path d="m282 51 3 12" stroke="#6df4cb"/><path d="m82 50-7 6" stroke="#ff83b8"/>
+          <path d="m52 184-7 4" stroke="#6df4cb"/><path d="m307 210 5 9" stroke="#ffbe69"/>
+          <circle cx="130" cy="29" r="3" fill="#a38bff" stroke="none"/><circle cx="310" cy="86" r="3" fill="#ff83b8" stroke="none"/>
+        </g>
+        <g class="coupon">
+          <rect x="89" y="68" width="182" height="112" rx="18" fill="#abd8ce" transform="rotate(-8 180 124) translate(0 7)"/>
+          <g transform="rotate(-8 180 124)">
+            <rect x="89" y="68" width="182" height="112" rx="18" fill="url(#ticket)"/>
+            <path d="M240 80v88" stroke="#168b75" stroke-dasharray="4 5" opacity=".5"/>
+            <text x="164" y="139" text-anchor="middle" fill="#103c3b" font-family="Arial,sans-serif" font-size="52" font-weight="800">−10%</text>
+          </g>
+        </g>
+        <path d="M85 207h190v74c0 11-9 20-20 20H105c-11 0-20-9-20-20z" fill="url(#box)"/>
+        <path d="M165 207h30v94h-30z" fill="#ffca73"/>
+        <path d="M99 221h54" stroke="#d4c5ff" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+        <g class="lid">
+          <path d="M177 185c-62-4-71-38-46-44 25-6 46 44 46 44Zm7 0c62-4 71-38 46-44-25-6-46 44-46 44Z" stroke="#ffca73" stroke-width="13" stroke-linejoin="round"/>
+          <rect x="76" y="181" width="208" height="36" rx="10" fill="#bba4ff"/>
+          <path d="M165 181h30v36h-30z" fill="#ffca73"/>
+        </g>
+      </svg>
+    </div>
+    <section class="offer" aria-labelledby="gift-title">
+      <h1 id="gift-title"><span>−10%</span><br>на Go-шечку (pro)</h1>
+      <div class="reveal">
+        <input id="promo" value="GOSHECHKA10" readonly spellcheck="false" aria-label="Промокод GOSHECHKA10">
+        <button id="copy" type="button" hidden>Скопировать код <span aria-hidden="true">⧉</span></button>
+        <p id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+      <a class="course-link" href="https://stepik.org/course/300562/promo" target="_blank" rel="noopener noreferrer">Посмотреть курс <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+</body>
+</html>

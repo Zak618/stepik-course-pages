@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const port=Number(process.env.STEPIK_FINALE_PORT||8787);
 if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid preview port');
 const routes=new Map([['/','go-mini-module-06-finale-preview.html'],['/finale','go-mini-module-06-finale-preview.html'],['/curtain','go-mini-module-06-lesson-01-step-13.html'],['/next','go-mini-module-06-lesson-02-step-01.html']]);
-const allowed=new Set([...routes.values(),'assets/go-mini-finale.css','assets/go-mini-finale.js']);
+const allowed=new Set([...routes.values(),'assets/go-mini-finale.css','assets/go-mini-finale.js','assets/go-mini-pro-gift.css','assets/go-mini-pro-gift.js']);
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
 const server=http.createServer({maxHeaderSize:8192},async(req,res)=>{
