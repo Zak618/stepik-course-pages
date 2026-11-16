@@ -3,19 +3,21 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {base,version} from '../../shared/course-introductions/catalog.mjs';
+import {repairMiniStep} from './mini-repairs.mjs';
 const dir='.local-publication/intros-deep-audit-20261116';
 const baseline=JSON.parse(await readFile(dir+'/snapshot.json','utf8'));
 const layout=JSON.parse(await readFile('.local-publication/unified-intros-preview-20261116/layout.json','utf8'));
 const build=JSON.parse(await readFile('.local-publication/unified-intros-preview-20261116/build.json','utf8'));
 assert.equal(layout.version,version);assert.deepEqual(layout.errors,[]);
+const browserAudit=JSON.parse(await readFile(dir+'/browser-audit.json','utf8'));
+assert.equal(browserAudit.version,version);assert.deepEqual(browserAudit.problems,[]);assert.deepEqual(browserAudit.errors,[]);
 const mapping=JSON.parse(await readFile('courses/305666-go-mini/legacy-paths.json','utf8'));
 const token=JSON.parse(await readFile('.env.stepik-webhacker-session','utf8')).access_token;
 const hash=v=>createHash('sha256').update(typeof v==='string'||Buffer.isBuffer(v)?v:JSON.stringify(v)).digest('hex');
 async function api(p,method='GET',body){const r=await fetch('https://stepik.org/api/'+p,{method,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(45000)});if(!r.ok)throw Error(method+' '+p.split('?')[0]+' HTTP '+r.status);return r.json();}
 async function sources(id){const out=[];for(let p=1;p<=20;p++){const d=await api('step-sources?lesson='+id+'&page='+p);out.push(...d['step-sources']);if(!d.meta.has_next)return out.sort((a,b)=>a.position-b.position);}throw Error('Pagination');}
 const stable=s=>({id:s.id,lesson:s.lesson,position:s.position,cost:s.cost,is_enabled:s.is_enabled,needs_plan:s.needs_plan,block:s.block});
-function direct(text){return text.replace(/(<iframe\b[^>]*\bsrc=")([^"]+)(")/g,(all,start,url,end)=>{if(!url.startsWith(base))return all;const tail=url.slice(base.length),file=tail.split(/[?#]/)[0];return mapping[file]?start+base+mapping[file]+tail.slice(file.length)+end:all;});}
-const updates=new Map(baseline.sources.map(s=>{const u=layout.updates.find(u=>u.id===s.id);return[s.id,direct(u?.text??s.block.text)];}));
+const updates=new Map(baseline.sources.map(s=>{const u=layout.updates.find(u=>u.id===s.id);return[s.id,repairMiniStep(s.id,u?.text??s.block.text,mapping)];}));
 const additions=baseline.intros.filter(i=>i.course!==305666).flatMap(i=>{const community=baseline.sources.find(s=>s.lesson===i.lesson&&(s.block.text.match(/<iframe/g)||[]).length===2&&s.block.text.includes('/02-telegram.html')&&s.block.text.includes('/05-rules.html'));if(!community)return[];const course=build.courses.find(c=>c.id===i.course);assert.ok(course);return[{course:i.course,lesson:i.lesson,after:community.id,text:`<div style="font-size:0;margin:0;"><iframe height="${layout.heights[i.course+':rules']}" src="${base}${course.pages.rules}?embed=1&amp;v=${version}" style="border:0;width:100%;margin:0;background:#fff;" width="100%"></iframe></div>`}];});
 assert.equal(additions.length,29);
 let journal={version,added:[],done:[]};try{journal=JSON.parse(await readFile(dir+'/journal.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}assert.equal(journal.version,version);
@@ -29,7 +31,11 @@ function inspect(lesson,current,complete=false){
   // The original sequence is preserved even while the appended new step is moved.
   assert.deepEqual(current.filter(s=>old.some(o=>o.id===s.id)).map(s=>s.id),old.map(s=>s.id));
   const inserted=extra[0]&&extra[0].position===old.find(s=>s.id===addition.after).position+1;
-  for(const s of old){const now=current.find(x=>x.id===s.id);assert.ok(now);const shift=inserted&&s.position>old.find(x=>x.id===addition.after).position?1:0;const want={...stable(s),position:s.position+shift};
+  const owned=extra[0]&&journal.added.some(a=>a.id===extra[0].id&&a.lesson===lesson);
+  for(const s of old){const now=current.find(x=>x.id===s.id);assert.ok(now);const tail=addition&&s.position>old.find(x=>x.id===addition.after).position;
+    const desired=s.position+(inserted&&tail?1:0);
+    if(complete)assert.equal(now.position,desired);else assert.ok(now.position===s.position||(owned&&tail&&now.position===s.position+1),'Foreign reorder '+s.id);
+    const want={...stable(s),position:now.position};
     assert.ok(now.block.text===s.block.text||now.block.text===updates.get(s.id),'Concurrent text edit '+s.id);
     if(complete)assert.equal(now.block.text,updates.get(s.id));
     assert.deepEqual(stable(now),{...want,block:{...s.block,text:now.block.text}},'Protected source changed '+s.id);
@@ -60,6 +66,16 @@ if(apply){
       const after=current.find(s=>s.id===addition.after),position=after.position+1;
       if(added.position!==position)await api('step-sources/'+added.id,'PUT',{stepSource:{lesson:l.id,position,cost:0,block:added.block}});
       current=await sources(l.id);inspect(l.id,current);assert.equal(current.find(s=>s.id===added.id).position,position);
+      // Stepik accepts duplicate numeric positions; it does not shift the tail.
+      // Move existing steps backwards, keeping every original ID and block.
+      for(const old of oldFor(l.id).filter(s=>s.position>=position).reverse()){
+        const fresh=(await api('step-sources/'+old.id))['step-sources'][0];
+        assert.ok(fresh.position===old.position||fresh.position===old.position+1);
+        assert.ok(fresh.block.text===old.block.text||fresh.block.text===updates.get(old.id));
+        assert.deepEqual({...fresh.block,text:old.block.text},old.block);
+        if(fresh.position===old.position)await api('step-sources/'+old.id,'PUT',{stepSource:{lesson:l.id,position:old.position+1,cost:old.cost,block:fresh.block}});
+      }
+      current=await sources(l.id);inspect(l.id,current);
     }
     for(const old of oldFor(l.id).filter(s=>updates.get(s.id)!==s.block.text)){
       const text=updates.get(old.id);let fresh=(await api('step-sources/'+old.id))['step-sources'][0];

@@ -2,13 +2,14 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {base,version} from '../../shared/course-introductions/catalog.mjs';
+import {repairMiniStep} from './mini-repairs.mjs';
 const dir='.local-publication/intros-deep-audit-20261116',origin=process.env.STEPIK_UNIFIED_URL||'http://localhost:8795';
 const snapshot=JSON.parse(await readFile(dir+'/snapshot.json','utf8')),layout=JSON.parse(await readFile('.local-publication/unified-intros-preview-20261116/layout.json','utf8'));
 const map=JSON.parse(await readFile('courses/305666-go-mini/legacy-paths.json','utf8'));
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright-core');
 const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']});
 const context=await browser.newContext({reducedMotion:'reduce'}),jobs=new Map(),errors=[],geometry=[];
-for(const s of snapshot.sources){const text=layout.updates.find(u=>u.id===s.id)?.text||s.block.text;for(const m of text.matchAll(/<iframe\b[^>]*>/g)){
+for(const s of snapshot.sources){const text=repairMiniStep(s.id,layout.updates.find(u=>u.id===s.id)?.text||s.block.text,map);for(const m of text.matchAll(/<iframe\b[^>]*>/g)){
   const src=m[0].match(/src="([^"]+)"/)?.[1],height=Number(m[0].match(/height="(\d+)"/)?.[1]);if(!src?.startsWith(base)||!height)continue;
   let file=src.slice(base.length).replaceAll('&amp;','&'),old=file.split(/[?#]/)[0];if(map[old])file=map[old]+file.slice(old.length);
   jobs.set(file+'|'+height,{file,height,id:s.id});
