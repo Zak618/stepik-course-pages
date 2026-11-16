@@ -60,6 +60,6 @@ for(const [old,next]of Object.entries(mapping)){
   assert.ok(next.startsWith(root+'/')&&!next.includes('..'));
   await readFile(next); // Never generate a redirect to a missing page.
   const url="{{ '/"+next+"' | relative_url }}";
-  await writeFile('compat/go-mini/'+old,`---\nlayout: null\npermalink: /${old}\n---\n<!doctype html>\n<html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${url}"><title>Go-шечка (mini)</title></head><body><a id="next" href="${url}">Открыть урок</a><script>const next=new URL(document.getElementById('next').href);next.search=location.search;next.hash=location.hash;location.replace(next.href);</script></body></html>\n`);
+  await writeFile('compat/go-mini/'+old,`---\nlayout: null\npermalink: /${old}\n---\n<!doctype html>\n<html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Go-шечка (mini)</title><script>const next=new URL('${url}',location.href);next.search=location.search;next.hash=location.hash;location.replace(next.href);</script><noscript><meta http-equiv="refresh" content="0;url=${url}"></noscript></head><body><noscript><a href="${url}">Открыть урок</a></noscript></body></html>\n`);
 }
 console.log(JSON.stringify({moved:oldPages.length,legacyUrls:Object.keys(mapping).length,courseFolder:root,stepikWrites:0}));

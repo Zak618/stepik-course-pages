@@ -23,6 +23,8 @@ for (const c of profiles) {
     html=html.replaceAll('/shared/course-introductions/','shared/course-introductions/');
     html=html.replaceAll('href="/shared/','href="shared/').replaceAll('href="/assets/','href="assets/');
     html=html.replace(/\/preview-interactions\.js\?course=\d+/g,'shared/course-introductions/interactions.js?v='+version);
+    // A new iframe URL alone does not invalidate the browser's cached child CSS.
+    html=html.replace(/((?:href|src)="shared\/course-introductions\/(?:base\.css|embedded\.(?:css|js)|study\.css))(?:\?[^"']*)?"/g,'$1?v='+version+'"');
     html=html.replace('<head>','<head><base href="../../../"><script>window.COURSE_INTRO_CONFIG='+JSON.stringify({id:c.id,title:c.title}).replaceAll('<','\\u003c')+';</script>');
     const file=folder+'/'+files[part];pages[part]=file;
     await output(file,html);
@@ -47,7 +49,7 @@ for (const c of profiles) {
       // bundle links and the Ural lesson content remain byte-for-byte intact.
       if(rest.startsWith(generic))rest=rest.slice(generic.length);
       text=frame('welcome')+rest;
-    }else if(role==='community')text=frame('telegram')+(existingRules?'':'\n\n'+frame('rules'));
+    }else if(role==='community')text=frame('telegram');
     else if(role==='map')text=frame('map');
     else if(role==='practice')text=renderStudyArticle(c);
     else if(role==='rules')text=frame('rules');

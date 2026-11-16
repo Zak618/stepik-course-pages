@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {version,base} from '../../shared/course-introductions/catalog.mjs';
+if(version==='unified-intros-20261116-3'){await import('./publish-repairs.mjs');process.exit(0);}
 const dir='.local-publication/unified-intros-preview-20261116';
 const snapshot=JSON.parse(await readFile(dir+'/snapshot.json','utf8'));
 const build=JSON.parse(await readFile(dir+'/build.json','utf8'));

@@ -9,8 +9,9 @@ process.chdir(root);
 const port = Number(process.env.STEPIK_UNIFIED_PORT || 8795);
 if (!Number.isInteger(port) || port < 1024 || port > 65535) throw Error('Invalid port');
 const {profiles} = await loadPreview();
+const legacy=JSON.parse(await readFile('courses/305666-go-mini/legacy-paths.json','utf8'));
 const files = new Set(['previews/course-introductions/index.html','shared/course-introductions/preview.css','shared/course-introductions/preview.js','shared/course-introductions/study.css','assets/go-mini-intro.css','assets/go-mini-intro.js','assets/go-mini-embed.css','assets/go-mini-embed.js','assets/go-mini-course-catalog.js','shared/course-introductions/base.css','shared/course-introductions/embedded.css','shared/course-introductions/embedded.js','shared/course-introductions/interactions.js']);
-const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png'};
+const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.svg':'image/svg+xml'};
 const server = http.createServer(async(req,res) => {
   const send = (status,type,body) => {res.writeHead(status,{'Content-Type':type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'});res.end(req.method === 'HEAD' ? undefined : body);};
   try {
@@ -27,8 +28,14 @@ const server = http.createServer(async(req,res) => {
       return send(200,types['.html'],await renderPart(course,part));
     }
     const relative = url.pathname === '/' ? 'previews/course-introductions/index.html' : decodeURIComponent(url.pathname).replace(/^\//,'');
+    if(legacy[relative]){
+      let html=await readFile('compat/go-mini/'+relative,'utf8');
+      html=html.replace(/^---\n[\s\S]*?\n---\n/,'').replace(/\{\{ '([^']+)' \| relative_url \}\}/g,'$1');
+      return send(200,types['.html'],html);
+    }
     const cover = /^assets\/course-covers\/(\d+)\.png$/.exec(relative);
-    if (!files.has(relative) && !/^courses\/305666-go-mini\/modules\/01-introduction\/lesson-01-(?:step-0[1-6]|preview)\.html$/.test(relative) && !/^courses\/\d+-[a-z0-9-]+\/introduction\/(?:0[1-7]-[a-z-]+\.html|profile\.js)$/.test(relative) && !(cover && (Number(cover[1])===300562 || profiles.some(c=>c.id===Number(cover[1]))))) return send(404,'text/plain','Not found');
+    const mini=/^courses\/305666-go-mini\/(?:promo\.html|modules\/0[1-6]-[a-z-]+\/[a-z0-9-]+\.html)$/.test(relative)||/^assets\/go-mini-[a-z0-9-]+\.(?:js|css|svg)$/.test(relative);
+    if (!files.has(relative) && !mini && !/^courses\/\d+-[a-z0-9-]+\/introduction\/(?:0[1-7]-[a-z-]+\.html|profile\.js)$/.test(relative) && !(cover && (Number(cover[1])===300562 || profiles.some(c=>c.id===Number(cover[1]))))) return send(404,'text/plain','Not found');
     const absolute = path.resolve(root,relative);
     if (!absolute.startsWith(root+path.sep) || await realpath(absolute)!==absolute || !(await stat(absolute)).isFile()) return send(404,'text/plain','Not found');
     return send(200,types[path.extname(relative)],await readFile(absolute));

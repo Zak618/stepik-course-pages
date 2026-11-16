@@ -24,7 +24,7 @@ body[data-page=roadmap]{min-width:0}
 .embedded .orbit-track--outer{--track-width:min(90vw,calc(100svh - 40px),680px)}
 .embedded .orbit-track--middle{--track-width:min(76vw,calc(100svh - 142px),570px)}
 .embedded .orbit-track--inner{--track-width:min(62vw,calc(100svh - 244px),460px)}
-.embedded .content{padding:20px 12px}
+.embedded .content{padding:20px 12px;background:#fff;border-radius:32px}
 .embedded .content h1{font-size:clamp(28px,6.4vw,64px)}
 .embedded .content .copy{margin-top:18px;font-size:17px}
 .embedded .channel-link{margin-top:22px;min-height:50px}

@@ -16,5 +16,5 @@ export const files = {
   welcome:'01-welcome.html',telegram:'02-telegram.html',survey:'03-about-you.html',
   study:'04-how-to-learn.html',rules:'05-rules.html',map:'06-course-map.html',start:'07-start.html'
 };
-export const version = 'unified-intros-20261116-2';
+export const version = 'unified-intros-20261116-3';
 export const base = 'https://zak618.github.io/stepik-course-pages/';
