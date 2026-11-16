@@ -1,9 +1,11 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {copy,roles} from './course-intro-copy.mjs';
+import {renderWelcome} from './course-intro-welcome-copy.mjs';
 
 const dir='.local-publication/intros-20261116';
 const snapshot=JSON.parse(await readFile(dir+'/snapshot.json','utf8'));
+try{await readFile(dir+'/journal.json');throw Error('Initial rollout is archived. Use revise-course-intro-welcomes.mjs; do not overwrite its publication plan.');}catch(e){if(e.code!=='ENOENT')throw e;}
 const version='20261116-1';
 let layout={heights:{}};
 try{layout=JSON.parse(await readFile(dir+'/layout.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
@@ -16,7 +18,6 @@ const paragraph=text=>`<p>${esc(text)}</p>`;
 const link=(url,label)=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
 const map=`<p><iframe src="${origin}go-mini-module-01-lesson-01-step-05.html?embed=1&amp;v=20261116-universal" width="100%" height="860" title="Карта курсов WEB HACKER" style="border:0;"></iframe></p>`;
 const mapArticle=heading('🧭','Карта курсов')+map;
-const iframe=id=>`<p><iframe src="${origin}course-intro.html?course=${id}&amp;v=${version}" width="100%" height="${layout.heights[id]||610}" title="Интерактивный пример курса" style="border:0;"></iframe></p>`;
 const responsive=html=>html.replace(/<img\b([^>]*)>/gi,(_,attrs)=>'<img'+attrs.replace(/\s(?:width|height|style)="[^"]*"/gi,'')+' style="max-width:100%;height:auto;">').replace(/autoplay=1/g,'autoplay=0');
 const rules=heading('🤝','Как учимся вместе')+'<ul><li>Обсуждаем работу, не человека. Не оскорбляем друг друга.</li><li>Помогаем разобраться, но не публикуем готовые ответы к заданиям.</li><li>В вопросе указываем шаг, свои действия и результат. Для кода сохраняем отступы.</li><li>Нашли неточность? Напишите в комментариях к этому шагу, что именно не сходится.</li></ul>';
 const community=heading('💬','На связи')+paragraph('Мы команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в комментариях к самому шагу, чтобы рядом было условие.')+`<p>${link('https://t.me/webosnovy','Открыть Telegram @webosnovy ↗')}</p>`+rules;
@@ -33,7 +34,7 @@ for(let i=0;i<nextIds.length;i+=12)for(const unit of (await api('units?'+nextIds
 function nextCourse(c){const all=c.sections.flatMap(id=>snapshot.sections.find(s=>s.id===id).units),unit=extraUnits.get(all[1]);return unit?`https://stepik.org/lesson/${unit.lesson}/step/1?unit=${unit.id}`:`https://stepik.org/course/${c.id}/syllabus`;}
 function route(c){const titles=c.sections.map(id=>snapshot.sections.find(s=>s.id===id).title);return heading('🗺','Что будем разбирать')+'<ol>'+titles.map(t=>`<li>${esc(t)}</li>`).join('')+'</ol>';}
 function shortVersion(old){const p=plain(old),match=p.match(/v\s*\.?\s*\d+(?:\.\d+)*/i);return heading('📦','Версии курса')+(match?`<h3 style="color:#187d8c;">${esc(match[0].replace(/\s/g,''))}</h3>`:'')+`<details><summary>История изменений</summary>${responsive(old)}</details>`;}
-function welcome(c){const [scene,title,lead,need]=copy[c.id];profiles[c.id]={title:c.title.trim(),scene};return heading('✨',title)+paragraph(lead)+iframe(c.id)+heading('🎒','Перед началом')+paragraph(need);}
+function welcome(c){profiles[c.id]={title:c.title.trim(),scene:copy[c.id][0]};return renderWelcome(c.id);}
 function start(c){return heading('🚀','Переходим к практике')+paragraph('Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами.')+`<p><a href="${esc(nextCourse(c))}">Открыть следующий урок →</a></p>`;}
 function survey(c){return heading('✍️','С чем начинаем?')+paragraph('Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск, Telegram, знакомые или другой наш курс.')+paragraph('Личные данные не нужны. Нескольких предложений достаточно.');}
 function resources(old){const urls=[...old.matchAll(/(?:href|src)="(https?:[^"\s]+)"/g)].map(m=>m[1].replace(/&amp;/g,'&')).filter(u=>!u.includes('ucarecdn.')&&!u.includes('video_ext.php')&&!u.includes('/embed/'));return heading('📚','Дополнительные материалы')+paragraph('Эти материалы можно открыть отдельно. Для прохождения уроков не нужно смотреть всё сразу.')+(urls.length?'<ul>'+[...new Set(urls)].map((u,i)=>`<li>${link(u,'Материал '+(i+1))}</li>`).join('')+'</ul>':`<details><summary>Открыть материалы</summary>${responsive(old)}</details>`);}
@@ -84,7 +85,7 @@ for(const intro of snapshot.intros){
   if(c.id===300361){
     // This is already a teaching lesson. Keep every explanation and exercise.
     profiles[c.id]={title:c.title.trim(),scene:copy[c.id][0]};
-    update(sources[0],'teaching-welcome',heading('🧳',copy[c.id][1])+paragraph(copy[c.id][3])+iframe(c.id)+responsive(sources[0].block.text)+`<details><summary>Карта курсов</summary>${map}</details><details><summary>Как задать вопрос</summary>${community}</details>`);
+    update(sources[0],'teaching-welcome',welcome(c)+responsive(sources[0].block.text)+`<details><summary>Карта курсов</summary>${map}</details><details><summary>Как задать вопрос</summary>${community}</details>`);
     plans.push(plan);continue;
   }
   if(c.id===300560){
