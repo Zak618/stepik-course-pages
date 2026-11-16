@@ -19,10 +19,15 @@ async function readSources(lesson){const list=[];for(let page=1;page<=20;page++)
 async function each(items,fn){let i=0;await Promise.all(Array.from({length:4},async()=>{while(i<items.length)await fn(items[i++]);}));}
 assert.equal((await api('stepics/1')).stepics[0].user,647088271);
 const intros=snapshot.intros.filter(i=>updates.some(u=>u.course===i.course));
-const original=new Map(snapshot.sources.map(s=>[s.id,s]));
-let journal={version,done:[]};try{journal=JSON.parse(await readFile(dir+'/publication-journal.json','utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
+const rawOriginal=new Map(snapshot.sources.map(s=>[s.id,s]));
+// A follow-up repair may replace the exact previously published text, never an
+// arbitrary fresh edit. Archive the verified layout before rebuilding it.
+let previous={updates:[]};try{previous=JSON.parse(await readFile(dir+'/previous-layout.json','utf8'));assert.notEqual(previous.version,version);}catch(e){if(e.code!=='ENOENT')throw e;}
+const original=new Map(snapshot.sources.map(s=>{const u=previous.updates.find(u=>u.id===s.id);return[s.id,u?{...s,block:{...s.block,text:u.text}}:s];}));
+const journalFile=dir+'/publication-journal-'+version+'.json';
+let journal={version,done:[]};try{journal=JSON.parse(await readFile(journalFile,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 assert.equal(journal.version,version);
-let pending=Promise.resolve();const persist=()=>{pending=pending.then(async()=>{await writeFile(dir+'/publication-journal.tmp',JSON.stringify(journal,null,2),{mode:0o600});await rename(dir+'/publication-journal.tmp',dir+'/publication-journal.json');});return pending;};
+let pending=Promise.resolve();const persist=()=>{pending=pending.then(async()=>{await writeFile(journalFile+'.tmp',JSON.stringify(journal,null,2),{mode:0o600});await rename(journalFile+'.tmp',journalFile);});return pending;};
 function checkList(intro,current){
   const baseline=snapshot.sources.filter(s=>s.lesson===intro.lesson).sort((a,b)=>a.position-b.position);
   assert.deepEqual(current.map(s=>s.id),baseline.map(s=>s.id),'Step order changed '+intro.course);
@@ -39,7 +44,7 @@ if(process.argv.includes('--apply')){
   await each(uploaded,async file=>{const r=await fetch(base+file+'?v='+version,{signal:AbortSignal.timeout(30000)});assert.ok(r.ok&&hash(Buffer.from(await r.arrayBuffer()))===hash(await readFile(file)),'Pages not ready '+file);});
   const results=await Promise.allSettled(intros.map((intro,index)=>({intro,index})).reduce((groups,item)=>{groups[item.index%4].push(item.intro);return groups;},[[],[],[],[]]).map(async group=>{
     for(const intro of group){for(const u of updates.filter(u=>u.course===intro.course)){
-      const old=original.get(u.id);assert.equal(old.block.name,'text');assert.equal(old.cost,0);assert.equal(hash(JSON.stringify(old.block)),u.beforeHash);
+      const old=original.get(u.id);assert.equal(old.block.name,'text');assert.equal(old.cost,0);assert.equal(hash(JSON.stringify(rawOriginal.get(u.id).block)),u.beforeHash);
       const fresh=(await api('step-sources/'+u.id))['step-sources'][0];
       if(fresh.block.text!==u.text){assert.deepEqual(stable(fresh),stable(old),'Concurrent edit '+u.id);await api('step-sources/'+u.id,'PUT',{stepSource:{lesson:old.lesson,position:old.position,cost:old.cost,block:{...old.block,text:u.text}}});}
       const saved=(await api('step-sources/'+u.id))['step-sources'][0];assert.equal(saved.block.text,u.text,'Sanitized text differs '+u.id);assert.equal(saved.status,'ready');assert.ok(!saved.error?.text&&!saved.error?.code);assert.deepEqual(stable(saved),{...stable(old),block:{...old.block,text:u.text}});

@@ -17,7 +17,7 @@ for(const update of build.updates)for(const match of update.text.matchAll(/HEIGH
   const key=['telegram','map'].includes(part)?part:part==='rules'?(course.id===290059?'rules-language':'rules'):course.id+':'+part;
   unique.set(key,{course,part});
 }
-const jobs=[...unique.values()].flatMap(item=>(item.part==='welcome'||item.part==='start'?[280,390,1100]:[320,1100]).map(width=>({...item,width})));
+const jobs=[...unique.values()].flatMap(item=>(item.part==='welcome'||item.part==='start'?[280,390,640,1100]:[320,1100]).map(width=>({...item,width})));
 let index=0;
 try{
   await Promise.all(Array.from({length:4},async()=>{
@@ -43,7 +43,11 @@ try{
         assert.ok((await page.locator('.course-name').innerText()).replace(/\s+/g,' ').includes(course.title));
         assert.equal(await page.locator('.byline').innerText(),'На связи команда WEB HACKER');
       }
-      if(part==='start')assert.ok((await page.locator('#continue-link').getAttribute('href')).includes('stepik.org/'));
+      if(part==='start'){
+        assert.ok((await page.locator('#continue-link').getAttribute('href')).includes('stepik.org/'));
+        const clipped=await page.locator('.go-orbit').evaluateAll(orbits=>orbits.some(el=>{const r=el.getBoundingClientRect(),box=el.closest('main').getBoundingClientRect();return r.top<box.top+5||r.bottom>box.bottom-5||r.left<box.left||r.right>box.right;}));
+        assert.ok(!clipped,'Clipped orbit '+course.id+'/'+width);
+      }
       const key=course.id+':'+part;heights[key]=Math.max(heights[key]||0,height);measurements.push({course:course.id,part,width,height});
       if(width===390&&[135466,300153,290423].includes(course.id))await page.screenshot({path:path.join(screenshots,course.id+'-'+part+'.png'),fullPage:true});
     }
@@ -52,9 +56,30 @@ try{
   const common={};for(const m of measurements)if(['telegram','rules','map'].includes(m.part))common[m.part]=Math.max(common[m.part]||0,m.height);
   for(const course of build.courses)for(const [part,height]of Object.entries(common))heights[course.id+':'+part]=height;
   for(const update of build.updates)for(const match of update.text.matchAll(/HEIGHT_(\w+)/g))assert.ok(heights[update.course+':'+match[1]]);
+  // Recheck the actual final iframe height, not just the larger measuring viewport.
+  for(const course of build.courses)if(heights[course.id+':start']){
+    const page=await context.newPage();
+    for(const width of[280,390,640,1100]){
+      const height=heights[course.id+':start'];await page.setViewportSize({width,height});
+      await page.goto(origin+'/'+course.pages.start+'?embed=1',{waitUntil:'load'});
+      const m=await page.locator('main').evaluate(el=>({top:el.getBoundingClientRect().top,bottom:el.getBoundingClientRect().bottom,viewport:innerHeight,scroll:document.documentElement.scrollHeight-innerHeight}));
+      assert.ok(m.top>=0&&m.bottom<=height+1&&m.scroll<=1,JSON.stringify({course:course.id,width,...m}));
+    }
+    await page.close();
+  }
+  let nativeGuidesChecked=0;
+  const guidePage=await context.newPage();
+  for(const update of build.updates.filter(u=>u.role==='practice'))for(const width of[320,1100]){
+    assert.ok(!/<iframe|<details|HEIGHT_/.test(update.text),'Guide must use native auto-height HTML');
+    await guidePage.setViewportSize({width,height:1000});
+    await guidePage.setContent('<!doctype html><html><body style="margin:0;font-family:Arial,sans-serif">'+update.text+'</body></html>');
+    assert.ok(await guidePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Native guide overflow '+update.course);
+    nativeGuidesChecked++;
+  }
+  await guidePage.close();
   // Keep source formatting and the original next-lesson links; only resolve measured heights.
   const updates=build.updates.map(u=>({...u,text:u.text.replace(/HEIGHT_(\w+)/g,(_,part)=>heights[u.course+':'+part])}));
   assert.deepEqual(errors,[]);
   await writeFile(directory+'/layout.json',JSON.stringify({version:build.version,measurements,heights,updates,screenshots,errors},null,2),{mode:0o600});
-  console.log(JSON.stringify({pagesChecked:measurements.length,updates:updates.length,screenshots,errors}));
+  console.log(JSON.stringify({pagesChecked:measurements.length,nativeGuidesChecked,updates:updates.length,screenshots,errors}));
 }finally{await browser.close();}

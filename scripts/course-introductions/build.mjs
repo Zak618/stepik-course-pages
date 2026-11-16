@@ -2,7 +2,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {loadPreview,renderPart,parts,esc} from './render.mjs';
+import {loadPreview,renderPart,renderStudyArticle,parts,esc} from './render.mjs';
 import {slugs,files,version,base} from '../../shared/course-introductions/catalog.mjs';
 import {welcomes} from '../../shared/course-introductions/copy.mjs';
 const {profiles,snapshot} = await loadPreview();
@@ -41,10 +41,15 @@ for (const c of profiles) {
       let prefix='<h2 style="color:#6742bf;">👋 Привет!</h2><p>На связи команда WEB HACKER.</p>';
       if(!c.package)prefix+='<p>'+esc(welcomes[c.id][0])+'</p>';
       assert.ok(source.block.text.startsWith(prefix),'Unknown welcome boundary '+c.id);
-      text=frame('welcome')+source.block.text.slice(prefix.length);
+      let rest=source.block.text.slice(prefix.length);
+      const generic='<h3 style="color:#187d8c;">Перед началом</h3><p>'+esc(c.needs)+'</p>';
+      // Remove only this exact boilerplate. Real prerequisites, course stories,
+      // bundle links and the Ural lesson content remain byte-for-byte intact.
+      if(rest.startsWith(generic))rest=rest.slice(generic.length);
+      text=frame('welcome')+rest;
     }else if(role==='community')text=frame('telegram')+(existingRules?'':'\n\n'+frame('rules'));
     else if(role==='map')text=frame('map');
-    else if(role==='practice')text=frame('study');
+    else if(role==='practice')text=renderStudyArticle(c);
     else if(role==='rules')text=frame('rules');
     else if(role==='start')text=frame('start');
     if(text)updates.push({course:c.id,lesson:source.lesson,id:source.id,position:source.position,role:source.position===1?'welcome':role,text,beforeHash:hash(JSON.stringify(source.block))});

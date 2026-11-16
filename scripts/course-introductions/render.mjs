@@ -90,13 +90,30 @@ export async function renderPart(course, part) {
 export async function renderInteractions(course) {
   return `window.COURSE_INTRO_CONFIG=${JSON.stringify({id:course.id,title:course.title})};\n` + await readFile('shared/course-introductions/interactions.js', 'utf8');
 }
-function studyPage(c) {
-  const rows = c.package ? c.children.map(child => `<a class="study-item" href="https://stepik.org/course/${child.id}/syllabus" target="_blank" rel="noopener"><span>↗</span><strong>${esc(child.title)}</strong></a>`).join('') : [
+function studyRows(c) {
+  return [
     ['01','Сначала разберите пример','Прочитайте объяснение и попробуйте пример сами. Если что-то непонятно, вернитесь к нему после задания.'],
     ['02',c.id === 290059 ? 'Произносите и пробуйте' : 'Пишите свой код',c.id === 290059 ? 'Произносите новые слова вслух. Составляйте с ними свои фразы.' : 'Не ограничивайтесь чтением. Запускайте примеры, меняйте значения и проверяйте результат.'],
     ['03','Задавайте вопросы','Пишите под нужным шагом. Покажите, что пробовали и что не получилось.']
-  ].map(([n,title,text]) => `<div class="study-item"><span>${n}</span><div><h2>${esc(title)}</h2><p>${esc(text)}</p></div></div>`).join('');
-  const sections = c.sections.filter(t => !/введение|знакомство/i.test(t));
+  ];
+}
+function studyConnection(c) {
   const connection = c.id === 300361 ? `<aside class="study-note"><h2>Это вторая часть путешествия</h2><p>Если условия, циклы, коллекции и функции пока незнакомы, начните с первой части.</p><a href="https://stepik.org/course/300153/promo" target="_blank" rel="noopener">Python: от Калининграда до Казани ↗</a></aside>` : c.id === 277096 ? `<aside class="study-note"><h2>Перед второй частью</h2><p>Нужны темы первого курса. Сам запуск продукта не гарантирует доход.</p><a href="https://stepik.org/course/276638/promo" target="_blank" rel="noopener">ИИ для всех: с нуля до своего продукта ↗</a></aside>` : c.id === 300560 ? `<aside class="study-note"><h2>Станция GREEN-01</h2><p>Будем изучать Go и собирать Station Control. История станции и задачи с кодом остаются частью курса.</p></aside>` : c.id === 289356 ? `<aside class="study-note"><h2>Мила и кот Тег</h2><p>Персонажи и их история остаются в курсе. Вместе будем разбираться в HTML.</p></aside>` : '';
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(c.title)} · Как учиться</title><link rel="stylesheet" href="/assets/go-mini-intro.css"><link rel="stylesheet" href="/shared/course-introductions/study.css"><link rel="stylesheet" href="/assets/go-mini-embed.css"><script src="/assets/go-mini-embed.js"></script>${extraStyle}</head><body><main class="page study-page"><header class="page-head"><p class="preview-context">${esc(c.title)}</p><h1>${c.package ? 'Курсы <span class="gradient">в пакете.</span>' : 'Как будем <span class="gradient">учиться.</span>'}</h1><p class="lede">${esc(c.needs)}</p></header><section class="study-list">${rows}</section>${connection}<details class="study-details"><summary>Что будет на курсе</summary><ol>${sections.map(s => '<li>' + esc(s) + '</li>').join('')}</ol></details>${c.versions.length ? `<details class="study-details"><summary>Версии курса</summary><p>${c.versions.map(esc).join(' · ')}</p></details>` : ''}</main></body></html>`;
+  return connection;
+}
+// Static advice is native Stepik HTML: it grows with the text, with no iframe
+// scrollbar or phone-sized blank area on desktop. The real syllabus is in Stepik.
+export function renderStudyArticle(c) {
+  const title=c.package?'Курсы в пакете.':'Как будем учиться.';
+  const heading='font-size:24px;line-height:1.4;margin:24px 0 10px;color:#24334a;';
+  const paragraph='font-size:18px;line-height:1.7;margin:0 0 20px;color:#5e6f88;';
+  let html=`<h1 style="font-size:34px;line-height:1.2;margin:0 0 20px;color:#6742bf;">${title}</h1><p style="${paragraph}">${esc(c.needs)}</p>`;
+  if(c.package)html+='<ul>'+c.children.map(child=>`<li><a href="https://stepik.org/course/${child.id}/syllabus" rel="noopener noreferrer nofollow">${esc(child.title)}</a></li>`).join('')+'</ul>';
+  else html+=studyRows(c).map(([n,title,text])=>`<h2 style="${heading}"><span style="color:#8e6bda;">${n}.</span> ${esc(title)}</h2><p style="${paragraph}">${esc(text)}</p>`).join('');
+  const connection=studyConnection(c).replace(/<aside[^>]*>/g,'<div>').replaceAll('</aside>','</div>').replaceAll('<h2>',`<h2 style="${heading}">`).replaceAll('<p>',`<p style="${paragraph}">`).replaceAll(' target="_blank" rel="noopener"','');
+  return html+connection.replace(/<a href="([^"]+)">/g,'<a href="$1" rel="noopener noreferrer nofollow">');
+}
+function studyPage(c) {
+  const rows=c.package?c.children.map(child=>`<a class="study-item" href="https://stepik.org/course/${child.id}/syllabus" target="_blank" rel="noopener"><span>↗</span><strong>${esc(child.title)}</strong></a>`).join(''):studyRows(c).map(([n,title,text])=>`<div class="study-item"><span>${n}</span><div><h2>${esc(title)}</h2><p>${esc(text)}</p></div></div>`).join('');
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(c.title)} · Как учиться</title><link rel="stylesheet" href="/assets/go-mini-intro.css"><link rel="stylesheet" href="/shared/course-introductions/study.css"><link rel="stylesheet" href="/assets/go-mini-embed.css"><script src="/assets/go-mini-embed.js"></script>${extraStyle}</head><body data-page="study"><main class="page study-page"><header class="page-head"><p class="preview-context">${esc(c.title)}</p><h1>${c.package?'Курсы <span class="gradient">в пакете.</span>':'Как будем <span class="gradient">учиться.</span>'}</h1><p class="lede">${esc(c.needs)}</p></header><section class="study-list">${rows}</section>${studyConnection(c)}</main></body></html>`;
 }

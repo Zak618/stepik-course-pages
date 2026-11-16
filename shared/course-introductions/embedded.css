@@ -78,7 +78,7 @@ body[data-page=roadmap]{min-width:0}
 .catalog-pagination button:disabled{opacity:.4}
 
 /* Continuing changes the top-level lesson, never the size of this panel. */
-.embedded .launch{height:100svh;min-height:0;padding:22px 20px}
+.embedded .launch{height:auto;min-height:0;padding:28px 20px 24px}
 .embedded .launch-content{width:100%;max-width:760px}
 .embedded .go-art{width:min(100% - 70px,360px);height:116px;margin-bottom:20px}
 .embedded .go-letter{font-size:clamp(44px,7.5vw,65px)}
@@ -87,6 +87,11 @@ body[data-page=roadmap]{min-width:0}
 .embedded .launch .button{margin-top:20px;min-height:50px}
 .embedded .launch-copy{margin-top:14px;font-size:12px}
 .embedded .continue-slider{margin-top:22px}
+
+/* Rotated ellipses must fit inside the illustration, not stick above the frame. */
+.embedded .launch .go-art{width:min(100%,340px);height:220px;margin:0 auto 8px;transform:none}
+.embedded .launch .go-orbit{inset:72px 12px}
+.embedded .launch .go-orbit:nth-child(2){inset:78px 6px}
 
 @media(max-width:800px){
   .embedded .page{width:calc(100% - 32px);padding:18px 0}
@@ -133,4 +138,7 @@ body[data-page=roadmap]{min-width:0}
   .embedded .launch h1{font-size:44px}
   .embedded .launch .lede{margin-top:14px;font-size:15px;line-height:1.55}
   .embedded .launch .button{margin-top:18px}
+  .embedded .launch .go-art{height:190px}
+  .embedded .launch .go-orbit{inset:58px 12px}
+  .embedded .launch .go-orbit:nth-child(2){inset:64px 6px}
 }
