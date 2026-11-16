@@ -1,5 +1,6 @@
 /* Keep the page edge indistinguishable from the white Stepik lesson. */
 html,body{background:#fff}
+body[data-page=roadmap]{min-width:0}
 .launch-glow{display:none}
 .map-panel{background:#fff;border:0;border-radius:0;box-shadow:none}
 .map-viewport{background:#fff;scrollbar-width:none}

@@ -37,7 +37,7 @@ window.INTRO_CATALOG = {
     ]}
   ],
   courses: [
-    {id:305666,title:'Go-шечка (mini)',track:'go',free:true,current:true,description:'Вы сейчас здесь. Начнём с первых команд, переменных, условий, циклов и функций.'},
+    {id:305666,title:'Go-шечка (mini)',track:'go',free:true,description:'Начнём с первых команд, переменных, условий, циклов и функций.'},
     {id:300562,title:'Go-шечка (pro)',track:'go',free:false,description:'Практика Go: от первых программ до сервиса с HTTP, SQL, Docker и микросервисами.'},
     {id:300560,title:'GO Exclusive',track:'go',free:true,description:'Ещё один формат изучения Go: инженерная история, задания, мастерские и самостоятельные миссии. Не обязательная ступень после pro.'},
     {id:214176,title:'Веб-разработка для начинающих',track:'web',free:true,description:'Один из вводных маршрутов в веб-разработку. Подходит для знакомства с направлением.'},

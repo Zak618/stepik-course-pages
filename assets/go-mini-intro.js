@@ -174,7 +174,7 @@
     const marks = {go:'Go',web:'</>',backend:'{ }',tools:'⌘',ai:'✳',fullstack:'WH',other:'Aa'};
     const mark = track => '<span class="track-logo" aria-hidden="true">'+safe(marks[track.id])+'</span>';
     const featured = {go:[305666,300562,300560],web:[135466,191652,200517],backend:[300153,181092,290060],tools:[218158,184095,290054],ai:[276638,277096],fullstack:[183142,187189,187191],other:[290059]};
-    const price = course => course.current ? '<span class="current-tag">Вы здесь</span>' : '<span class="course-price '+(course.free?'free':'')+'">'+(course.free?'Бесплатно':'Платный курс')+'</span>';
+    const price = course => '<span class="course-price '+(course.free?'free':'')+'">'+(course.free?'Бесплатно':'Платный курс')+'</span>';
     const matches = course => (trackId === 'all' || course.track === trackId) && (!freeOnly || course.free) && course.title.toLocaleLowerCase('ru').includes(search.value.trim().toLocaleLowerCase('ru'));
     const filtered = () => catalog.courses.filter(matches);
     function line(x1,y1,x2,y2,color,dashed) {
@@ -248,7 +248,7 @@
       const visible=selected.slice(listPage*pageSize,(listPage+1)*pageSize);
       list.innerHTML=selected.length?'<div class="list-grid">'+visible.map(course=>{
         const t=tracks.get(course.track);
-        return '<button type="button" class="list-course" data-course="'+course.id+'" style="'+styles(t)+'">'+cover(course)+'<span class="list-copy"><span class="list-track">'+safe(t.title)+'</span><strong>'+safe(course.title)+'</strong><small class="'+(course.free?'free':'')+'">'+(course.current?'Вы здесь':course.free?'Бесплатно':'Платный курс')+(saved.has(course.id)?' · В маршруте':'')+'</small></span><span class="list-arrow" aria-hidden="true">'+icon('arrow')+'</span></button>';
+        return '<button type="button" class="list-course" data-course="'+course.id+'" style="'+styles(t)+'">'+cover(course)+'<span class="list-copy"><span class="list-track">'+safe(t.title)+'</span><strong>'+safe(course.title)+'</strong><small class="'+(course.free?'free':'')+'">'+(course.free?'Бесплатно':'Платный курс')+(saved.has(course.id)?' · В маршруте':'')+'</small></span><span class="list-arrow" aria-hidden="true">'+icon('arrow')+'</span></button>';
       }).join('')+'</div>'+(pages>1?'<nav class="catalog-pagination" aria-label="Страницы каталога"><button type="button" data-catalog-page="'+(listPage-1)+'"'+(listPage===0?' disabled':'')+'>← Назад</button><span aria-live="polite">'+(listPage+1)+' / '+pages+'</span><button type="button" data-catalog-page="'+(listPage+1)+'"'+(listPage===pages-1?' disabled':'')+'>Дальше →</button></nav>':''):'<div class="empty-state">Ничего не нашлось. Попробуйте другое название или уберите фильтр.</div>';
       document.querySelector('#result-status').textContent='Найдено: '+selected.length+' '+plural(selected.length,'курс','курса','курсов');
     }
@@ -282,9 +282,9 @@
       document.querySelector('#dialog-description').textContent=course.description;
       document.querySelector('#dialog-track').textContent=tracks.get(course.track).title;
       const tag=document.querySelector('#dialog-price');
-      tag.textContent=course.current?'Вы сейчас здесь':course.free?'Бесплатно':'Платный курс';tag.classList.toggle('free',course.free);
+      tag.textContent=course.free?'Бесплатно':'Платный курс';tag.classList.toggle('free',course.free);
       document.querySelector('#course-link').href='https://stepik.org/course/'+course.id+'/promo';
-      document.querySelector('#course-link').innerHTML=(course.current?'Открыть текущий курс':'Открыть курс')+icon('link');
+      document.querySelector('#course-link').innerHTML='Открыть курс'+icon('link');
       updateSaveButton();
       dialog.showModal();
     }
