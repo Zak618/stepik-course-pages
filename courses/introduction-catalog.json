@@ -1,0 +1,3943 @@
+{
+  "version": "unified-intros-20261116-1",
+  "courses": [
+    {
+      "id": 305666,
+      "title": "Go-шечка (mini)",
+      "track": "go",
+      "trackTitle": "Go",
+      "color": "#178ba9",
+      "mark": "Go",
+      "reference": true,
+      "package": false,
+      "topics": "Мы начнём с первых команд на Go, разберём условия, циклы и функции. В конце соберём небольшой поиск Find.",
+      "needs": "Можно начинать без опыта. Понадобится компьютер.",
+      "firstUrl": "https://stepik.org/lesson/2706554/step/1?unit=2746569",
+      "nextTitle": "Как компьютер представляет информацию",
+      "nextUrl": "https://stepik.org/lesson/2706555/step/1?unit=2746570",
+      "sections": [
+        "Введение",
+        "Основы вычислений",
+        "Основы Go",
+        "Управление потоком",
+        "Функции и данные",
+        "Проект"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 12341638,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12383657,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12384147,
+          "position": 3,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 12384149,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12384150,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12384153,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "go-mini-module-01-lesson-01-step-01.html",
+        "telegram": "go-mini-module-01-lesson-01-step-02.html",
+        "survey": "go-mini-module-01-lesson-01-step-03.html",
+        "rules": "go-mini-module-01-lesson-01-step-04.html",
+        "map": "go-mini-module-01-lesson-01-step-05.html",
+        "start": "go-mini-module-01-lesson-01-step-06.html"
+      }
+    },
+    {
+      "id": 300560,
+      "title": "GO Exclusive",
+      "track": "go",
+      "trackTitle": "Go",
+      "color": "#178ba9",
+      "mark": "Go",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим Go с нуля и соберём Station Control. Будут история о станции GREEN-01, объяснения и задачи с кодом.",
+      "needs": "Можно начинать с нуля. Для практики понадобится компьютер. Установку Go разберём в курсе.",
+      "firstUrl": "https://stepik.org/lesson/2607711/step/1?unit=2647257",
+      "nextTitle": "Почему именно Go?",
+      "nextUrl": "https://stepik.org/lesson/2607712/step/1?unit=2647258",
+      "sections": [
+        "Допуск к системе",
+        "Основы управления",
+        "Данные станции",
+        "Из кода в программу",
+        "Station Control",
+        "Итоги GREEN и следующие уровни"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 11563941,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим Go с нуля и соберём Station Control. Будут история о станции GREEN-01, объяснения и ",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11527359,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · СМЕНА 01 Кружка, которую нельзя поставить на стол Первое, что ты замечаешь на GREEN-01, — кружку. Она висит рядом с пультом на ко",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11543592,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · БОРТОВОЙ ЖУРНАЛ Одна программа вместо россыпи упражнений Вот интерфейс, к которому мы придём. Это пример будущего результата, а н",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11543593,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · БОРТОВОЙ ЖУРНАЛ Как растёт твой доступ TRAINEE: запускаешь Go и выводишь первый сигнал. OPERATOR: программа хранит показатели, пр",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11543594,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · БОРТОВОЙ ЖУРНАЛ Твой рабочий ритм Читай небольшой фрагмент, запускай пример и меняй в нём одну деталь. Перед запуском попробуй пр",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11543595,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · ЗАПИСЬ В ЖУРНАЛЕ Запись в журнале: TRAINEE Теперь у тебя есть задача: собрать собственный Station Control. Никаких неизвестных ко",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11556084,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "GREEN-01 · БОРТОВОЙ ЖУРНАЛ После встречи Лев прикрепляет рядом с монитором пустую карточку смены. В ней пока только название Station Control",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12437784,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 12437786,
+          "position": 9,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/300560-go-exclusive/introduction/01-welcome.html",
+        "telegram": "courses/300560-go-exclusive/introduction/02-telegram.html",
+        "survey": "courses/300560-go-exclusive/introduction/03-about-you.html",
+        "study": "courses/300560-go-exclusive/introduction/04-how-to-learn.html",
+        "rules": "courses/300560-go-exclusive/introduction/05-rules.html",
+        "map": "courses/300560-go-exclusive/introduction/06-course-map.html",
+        "start": "courses/300560-go-exclusive/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290426,
+      "title": "TypeScript (mini)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим TypeScript: типы, интерфейсы, функции и generics. Будем разбирать ошибки и выполнять задания.",
+      "needs": "Нужны уверенный JavaScript ES6+, Node.js и редактор кода.",
+      "firstUrl": "https://stepik.org/lesson/2435445/step/1?unit=2472656",
+      "nextTitle": "Установка и первый взгляд на tsconfig.json",
+      "nextUrl": "https://stepik.org/lesson/2421737/step/1?unit=2458496",
+      "sections": [
+        "Информация о курсе",
+        "Основы и конфигурация",
+        "Типизация объектов и интерфейсы",
+        "Функции и массивы",
+        "Объединения и сужение типов",
+        "Generics (Обобщения)",
+        "Манипуляция типами и утилиты"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10491977,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим TypeScript: типы, интерфейсы, функции и generics. Будем разбирать ошибки и выполнять",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10492019,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10492020,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10492021,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Основы и ко",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10492022,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437793,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290426-typescript-mini/introduction/01-welcome.html",
+        "telegram": "courses/290426-typescript-mini/introduction/02-telegram.html",
+        "survey": "courses/290426-typescript-mini/introduction/03-about-you.html",
+        "study": "courses/290426-typescript-mini/introduction/04-how-to-learn.html",
+        "rules": "courses/290426-typescript-mini/introduction/05-rules.html",
+        "map": "courses/290426-typescript-mini/introduction/06-course-map.html",
+        "start": "courses/290426-typescript-mini/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 289356,
+      "title": "HTML Exclusive",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML: теги, текст, ссылки, картинки и другие элементы страницы. В истории курса нам помогут Мила и кот Тег.",
+      "needs": "Можно начинать с нуля. Знать теги заранее не нужно.",
+      "firstUrl": "https://stepik.org/lesson/2406568/step/1?unit=2442278",
+      "nextTitle": "Что вообще такое HTML?",
+      "nextUrl": "https://stepik.org/lesson/2406538/step/1?unit=2442248",
+      "sections": [
+        "Начало",
+        "Как устроены сайты",
+        "Текст и контент",
+        "Ссылки и картинки",
+        "Списки и структура",
+        "Формы",
+        "Итоги"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 10353320,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML: теги, текст, ссылки, картинки и другие элементы страницы. В истории курса нам ",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 10353418,
+          "position": 2,
+          "type": "free-answer",
+          "cost": 10,
+          "title": "✍️ Как вы узнали о курсе? Нашли через поиск, Telegram, знакомых или другой наш курс? Напишите, что привело вас сюда. Тег тоже спрашивает",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 10474532,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10498628,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10353430,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/289356-html-exclusive/introduction/01-welcome.html",
+        "telegram": "courses/289356-html-exclusive/introduction/02-telegram.html",
+        "survey": "courses/289356-html-exclusive/introduction/03-about-you.html",
+        "study": "courses/289356-html-exclusive/introduction/04-how-to-learn.html",
+        "rules": "courses/289356-html-exclusive/introduction/05-rules.html",
+        "map": "courses/289356-html-exclusive/introduction/06-course-map.html",
+        "start": "courses/289356-html-exclusive/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 214176,
+      "title": "Веб-разработка для начинающих",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе познакомимся с веб-разработкой. Будут объяснения, примеры и практика с кодом.",
+      "needs": "Опыт программирования не нужен. Понадобятся компьютер и браузер.",
+      "firstUrl": "https://stepik.org/lesson/1436317/step/1?unit=1454907",
+      "nextTitle": "Что такое HTML",
+      "nextUrl": "https://stepik.org/lesson/1436318/step/1?unit=1454908",
+      "sections": [
+        "Введение",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Linux",
+        "Системы контроля версий",
+        "Vue",
+        "PHP",
+        "Docker",
+        "Итоги"
+      ],
+      "children": [],
+      "versions": [
+        "v1.1",
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 5973657,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе познакомимся с веб-разработкой. Будут объяснения, примеры и практика с кодом. Перед началом",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 6662399,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "Создано при поддержке компании \" Интаро Софт \" Компания ООО \"Интаро Софт\" существует на рынке веб‑разработки с 2006 года. За время существов",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 6662407,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.1 История изменений Версия курса v1.1 (текущая версия) добавлена теория в раздел 5.2 Работа с файловой системой v1.0 beta",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 6662426,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 12437785,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 12437787,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 12437788,
+          "position": 7,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/214176-web-development/introduction/01-welcome.html",
+        "telegram": "courses/214176-web-development/introduction/02-telegram.html",
+        "survey": "courses/214176-web-development/introduction/03-about-you.html",
+        "study": "courses/214176-web-development/introduction/04-how-to-learn.html",
+        "rules": "courses/214176-web-development/introduction/05-rules.html",
+        "map": "courses/214176-web-development/introduction/06-course-map.html",
+        "start": "courses/214176-web-development/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 193612,
+      "title": "HTML CSS JS (lite)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML, CSS и основы JavaScript. Будут объяснения, примеры и задания.",
+      "needs": "Нужны компьютер, браузер и редактор кода. Опыт разработки не обязателен.",
+      "firstUrl": "https://stepik.org/lesson/1191706/step/1?unit=1204692",
+      "nextTitle": "HTML: основы и теги",
+      "nextUrl": "https://stepik.org/lesson/1191707/step/1?unit=1204693",
+      "sections": [
+        "Общая информация о курсе",
+        "Основы HTML",
+        "Основы CSS",
+        "Основы JavaScript",
+        "Итоговый проект",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v.1.2.3",
+        "v1.2.2",
+        "v1.2.1",
+        "v1.2",
+        "v1.1"
+      ],
+      "inventory": [
+        {
+          "id": 4952940,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML, CSS и основы JavaScript. Будут объяснения, примеры и задания. Перед началом Ну",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 5342611,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 6626212,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "📚 Дополнительные материалы Эти материалы можно открыть отдельно. Для прохождения уроков не нужно смотреть всё сразу. Материал 1 Материал 2",
+          "preserve": false,
+          "treatment": "Материалы курса"
+        },
+        {
+          "id": 5016846,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "⌨️ Где писать код Подойдёт редактор, в котором удобно сохранять файлы и запускать примеры. Если редактор уже есть, менять его ради курса не ",
+          "preserve": false,
+          "treatment": "Подготовка"
+        },
+        {
+          "id": 5016887,
+          "position": 5,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ О вашем опыте Пробовали ли вы эту тему раньше? Что хотите научиться делать и как нашли курс? Можно ответить коротко. Личные данные не нуж",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6537834,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 6646781,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 5016965,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v.1.2.3 История изменений Версии курса v. 1.2.3 - \"Заключение\" (Актуальная версия) - 26.01.2025 (22:00 GMT-3) В данной верси",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 6662456,
+          "position": 9,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/193612-html-css-js-lite/introduction/01-welcome.html",
+        "telegram": "courses/193612-html-css-js-lite/introduction/02-telegram.html",
+        "survey": "courses/193612-html-css-js-lite/introduction/03-about-you.html",
+        "study": "courses/193612-html-css-js-lite/introduction/04-how-to-learn.html",
+        "rules": "courses/193612-html-css-js-lite/introduction/05-rules.html",
+        "map": "courses/193612-html-css-js-lite/introduction/06-course-map.html",
+        "start": "courses/193612-html-css-js-lite/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 191652,
+      "title": "JavaScript (pro)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим JavaScript и работу с веб-страницами. Будем разбирать примеры и писать свои программы.",
+      "needs": "Пригодятся HTML и CSS. Для практики понадобится компьютер.",
+      "firstUrl": "https://stepik.org/lesson/1170261/step/1?unit=1182647",
+      "nextTitle": "Секретная информация",
+      "nextUrl": "https://stepik.org/lesson/1170262/step/1?unit=1182648",
+      "sections": [
+        "Общая информация о курсе",
+        "Секретная информация",
+        "Редактор кода",
+        "Введение в JavaScript",
+        "Основы языка",
+        "Операции",
+        "Ветвления",
+        "Циклы",
+        "Массив",
+        "Множества",
+        "Итоговая контрольная работа №1",
+        "Функции",
+        "Объекты",
+        "Регулярные выражения",
+        "Обработка ошибок",
+        "Итоговая контрольная работа №2",
+        "Основы работы с DOM",
+        "События и обработчики событий",
+        "Асинхронность в JavaScript",
+        "Работа с API",
+        "Работа JSON",
+        "HTML + JS",
+        "Итоговая контрольная работа №3",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4860967,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим JavaScript и работу с веб-страницами. Будем разбирать примеры и писать свои программ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 5809513,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса История изменений Актуальная версия курса: Последнее обновление 08.08.2024",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 4860968,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4860969,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4860970,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4860971,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437790,
+          "position": 7,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/191652-javascript-pro/introduction/01-welcome.html",
+        "telegram": "courses/191652-javascript-pro/introduction/02-telegram.html",
+        "survey": "courses/191652-javascript-pro/introduction/03-about-you.html",
+        "study": "courses/191652-javascript-pro/introduction/04-how-to-learn.html",
+        "rules": "courses/191652-javascript-pro/introduction/05-rules.html",
+        "map": "courses/191652-javascript-pro/introduction/06-course-map.html",
+        "start": "courses/191652-javascript-pro/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 187918,
+      "title": "HTML CSS (mini)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим основы HTML и CSS. Будем добавлять текст и картинки, оформлять страницы и выполнять задания.",
+      "needs": "Можно начинать с нуля. Нужны компьютер, браузер и редактор кода.",
+      "firstUrl": "https://stepik.org/lesson/1134856/step/1?unit=1146479",
+      "nextTitle": "Что такое HTML?",
+      "nextUrl": "https://stepik.org/lesson/1134857/step/1?unit=1146480",
+      "sections": [
+        "Почему этот курс?",
+        "Основы HTML",
+        "Основы CSS",
+        "Первый проект",
+        "Публикация проекта",
+        "Дополнение"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4705207,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим основы HTML и CSS. Будем добавлять текст и картинки, оформлять страницы и выполнять ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 6537835,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4708483,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 5775157,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📚 Дополнительные материалы Эти материалы можно открыть отдельно. Для прохождения уроков не нужно смотреть всё сразу. Открыть материалы Топо",
+          "preserve": false,
+          "treatment": "Материалы курса"
+        },
+        {
+          "id": 6646766,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4708494,
+          "position": 6,
+          "type": "choice",
+          "cost": 0,
+          "title": "",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4708492,
+          "position": 7,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ Почему решили пройти этот курс? Расскажите, зачем вам эти знания. Если курс входит в вашу учебную программу, название учебного заведения ",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4708493,
+          "position": 8,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "🌍 Откуда вы? Из какого вы города или региона? Точный адрес и другие личные данные не нужны. Если не хотите указывать место, так и напишите.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6626208,
+          "position": 9,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/187918-html-css-mini/introduction/01-welcome.html",
+        "telegram": "courses/187918-html-css-mini/introduction/02-telegram.html",
+        "survey": "courses/187918-html-css-mini/introduction/03-about-you.html",
+        "study": "courses/187918-html-css-mini/introduction/04-how-to-learn.html",
+        "rules": "courses/187918-html-css-mini/introduction/05-rules.html",
+        "map": "courses/187918-html-css-mini/introduction/06-course-map.html",
+        "start": "courses/187918-html-css-mini/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 177582,
+      "title": "HTML CSS (lite)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML и CSS. После основных тем сверстаем страницу Nike по макету.",
+      "needs": "Можно начинать без опыта. Понадобятся компьютер, браузер и редактор кода.",
+      "firstUrl": "https://stepik.org/lesson/1014133/step/1?unit=1022053",
+      "nextTitle": "HTML: Знакомство",
+      "nextUrl": "https://stepik.org/lesson/1014134/step/1?unit=1022054",
+      "sections": [
+        "Общая информация о курсе",
+        "HTML",
+        "CSS",
+        "Проект в портфолио",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4191105,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML и CSS. После основных тем сверстаем страницу Nike по макету. Перед началом Можн",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4191232,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4191233,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4271156,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4191234,
+          "position": 5,
+          "type": "choice",
+          "cost": 1,
+          "title": "Нам очень интересно познакомиться с тобой поближе. Укажи, пожалуйста, свой возраст.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4191237,
+          "position": 6,
+          "type": "choice",
+          "cost": 1,
+          "title": "Укажи, пожалуйста, свое образование.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4191725,
+          "position": 7,
+          "type": "choice",
+          "cost": 1,
+          "title": "Изучали ли вы HTML и CSS раньше?",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4191889,
+          "position": 8,
+          "type": "choice",
+          "cost": 1,
+          "title": "Хотели бы вы узнать, как оптимизировать свои веб-страницы для поисковых систем и улучшить их рейтинг?",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4191890,
+          "position": 9,
+          "type": "choice",
+          "cost": 1,
+          "title": "Хотели бы вы научиться создавать эффективные лендинги и увеличивать конверсию своего сайта?",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4191238,
+          "position": 10,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437789,
+          "position": 11,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/177582-html-css-lite/introduction/01-welcome.html",
+        "telegram": "courses/177582-html-css-lite/introduction/02-telegram.html",
+        "survey": "courses/177582-html-css-lite/introduction/03-about-you.html",
+        "study": "courses/177582-html-css-lite/introduction/04-how-to-learn.html",
+        "rules": "courses/177582-html-css-lite/introduction/05-rules.html",
+        "map": "courses/177582-html-css-lite/introduction/06-course-map.html",
+        "start": "courses/177582-html-css-lite/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 170115,
+      "title": "HTML CSS (pro)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML и CSS. Будем верстать по макетам, делать страницы для разных экранов и работать над проектами.",
+      "needs": "Начнём с основ. Нужны компьютер, браузер и редактор кода.",
+      "firstUrl": "https://stepik.org/lesson/923637/step/1?unit=929530",
+      "nextTitle": "Секретная информация",
+      "nextUrl": "https://stepik.org/lesson/1034350/step/1?unit=1042715",
+      "sections": [
+        "Общая информация о курсе",
+        "Секретная информация",
+        "Вливаемся в WEB-разработку",
+        "Редактор кода",
+        "HTML Начало",
+        "HTML Теги",
+        "HTML атрибуты",
+        "CSS Начало",
+        "CSS Основы",
+        "GitHub",
+        "Figma",
+        "Практика HTML и CSS",
+        "Многостраничность",
+        "6 проектов в портфолио",
+        "Полезные материалы",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 3869647,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML и CSS. Будем верстать по макетам, делать страницы для разных экранов и работать",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 3869872,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4195371,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 3869908,
+          "position": 4,
+          "type": "choice",
+          "cost": 1,
+          "title": "Нам очень интересно познакомиться с тобой поближе. Укажи, пожалуйста, свой возраст.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 3869909,
+          "position": 5,
+          "type": "choice",
+          "cost": 1,
+          "title": "Укажи, пожалуйста, свое образование.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 3869912,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 3869915,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437792,
+          "position": 8,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/170115-html-css-pro/introduction/01-welcome.html",
+        "telegram": "courses/170115-html-css-pro/introduction/02-telegram.html",
+        "survey": "courses/170115-html-css-pro/introduction/03-about-you.html",
+        "study": "courses/170115-html-css-pro/introduction/04-how-to-learn.html",
+        "rules": "courses/170115-html-css-pro/introduction/05-rules.html",
+        "map": "courses/170115-html-css-pro/introduction/06-course-map.html",
+        "start": "courses/170115-html-css-pro/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 158971,
+      "title": "JavaScript (lite)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим основы JavaScript: переменные, условия, циклы, массивы и функции. Будет практика с кодом.",
+      "needs": "Пригодятся основы HTML и CSS. JavaScript будем изучать по порядку.",
+      "firstUrl": "https://stepik.org/lesson/1012323/step/1?unit=1020179",
+      "nextTitle": "Секретная информация",
+      "nextUrl": "https://stepik.org/lesson/1033810/step/1?unit=1042175",
+      "sections": [
+        "Общая информация о курсе",
+        "Секретная информация",
+        "Редактор кода",
+        "Введение в JavaScript",
+        "Основы языка",
+        "Операции",
+        "Ветвления",
+        "Циклы",
+        "Массив",
+        "Итоговая контрольная работа №1",
+        "Функции",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4184489,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим основы JavaScript: переменные, условия, циклы, массивы и функции. Будет практика с к",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4188674,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4196909,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4188687,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4188691,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437791,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/158971-javascript-lite/introduction/01-welcome.html",
+        "telegram": "courses/158971-javascript-lite/introduction/02-telegram.html",
+        "survey": "courses/158971-javascript-lite/introduction/03-about-you.html",
+        "study": "courses/158971-javascript-lite/introduction/04-how-to-learn.html",
+        "rules": "courses/158971-javascript-lite/introduction/05-rules.html",
+        "map": "courses/158971-javascript-lite/introduction/06-course-map.html",
+        "start": "courses/158971-javascript-lite/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 135466,
+      "title": "HTML CSS JS",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML, CSS и JavaScript. Будем делать веб-страницы и решать задачи.",
+      "needs": "Начнём с основ. Для практики понадобится компьютер.",
+      "firstUrl": "https://stepik.org/lesson/888791/step/1?unit=893531",
+      "nextTitle": "HTML: краткая информация",
+      "nextUrl": "https://stepik.org/lesson/888955/step/1?unit=893694",
+      "sections": [
+        "Общая информация о курсе",
+        "HTML: введение",
+        "HTML теги",
+        "HTML атрибуты",
+        "CSS: основы",
+        "Работа над проектами",
+        "Javascript: Изучаем язык",
+        "Javascript: Браузер (beta)",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4646858,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML, CSS и JavaScript. Будем делать веб-страницы и решать задачи. Перед началом Нач",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 5352630,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 6537646,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🗺 Что будем разбирать Общая информация о курсе HTML: введение HTML теги HTML атрибуты CSS: основы Работа над проектами Javascript: Изучаем ",
+          "preserve": false,
+          "treatment": "Проект курса"
+        },
+        {
+          "id": 5315068,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📚 Дополнительные материалы Эти материалы можно открыть отдельно. Для прохождения уроков не нужно смотреть всё сразу. Материал 1 Материал 2",
+          "preserve": false,
+          "treatment": "Материалы курса"
+        },
+        {
+          "id": 5774992,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "📚 Дополнительные материалы Эти материалы можно открыть отдельно. Для прохождения уроков не нужно смотреть всё сразу. Открыть материалы Топо",
+          "preserve": false,
+          "treatment": "Материалы курса"
+        },
+        {
+          "id": 4195379,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4647683,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4648618,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "⌨️ Где писать код Подойдёт редактор, в котором удобно сохранять файлы и запускать примеры. Если редактор уже есть, менять его ради курса не ",
+          "preserve": false,
+          "treatment": "Подготовка"
+        },
+        {
+          "id": 3719955,
+          "position": 9,
+          "type": "text",
+          "cost": 0,
+          "title": "🤝 Как учимся вместе Обсуждаем работу, не человека. Не оскорбляем друг друга. Помогаем разобраться, но не публикуем готовые ответы к задания",
+          "preserve": false,
+          "treatment": "Общие правила"
+        },
+        {
+          "id": 3719974,
+          "position": 10,
+          "type": "choice",
+          "cost": 1,
+          "title": "",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 3719976,
+          "position": 11,
+          "type": "choice",
+          "cost": 1,
+          "title": "",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 3719988,
+          "position": 12,
+          "type": "free-answer",
+          "cost": 1,
+          "title": "✍️ Почему решили пройти этот курс? Расскажите, зачем вам эти знания. Если курс входит в вашу учебную программу, название учебного заведения ",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4276165,
+          "position": 13,
+          "type": "free-answer",
+          "cost": 1,
+          "title": "🌍 Откуда вы? Из какого вы города или региона? Точный адрес и другие личные данные не нужны. Если не хотите указывать место, так и напишите.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 3800117,
+          "position": 14,
+          "type": "text",
+          "cost": 0,
+          "title": "🔎 Если что-то не получилось Сравните ожидаемый результат с тем, что вышло у вас. В задаче с кодом прочитайте сообщение об ошибке и проверьт",
+          "preserve": false,
+          "treatment": "Как задать вопрос"
+        },
+        {
+          "id": 3719994,
+          "position": 15,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/135466-html-css-js/introduction/01-welcome.html",
+        "telegram": "courses/135466-html-css-js/introduction/02-telegram.html",
+        "survey": "courses/135466-html-css-js/introduction/03-about-you.html",
+        "study": "courses/135466-html-css-js/introduction/04-how-to-learn.html",
+        "rules": "courses/135466-html-css-js/introduction/05-rules.html",
+        "map": "courses/135466-html-css-js/introduction/06-course-map.html",
+        "start": "courses/135466-html-css-js/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 300361,
+      "title": "Python Exclusive: путешествие по Уралу",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе продолжим изучать Python на задачах о путешествии по Уралу. Будем работать с расписанием, файлами, базой данных и своим приложением.",
+      "needs": "Нужны условия, циклы, коллекции и функции Python. Если эти темы пока незнакомы, начните с первой части.",
+      "firstUrl": "https://stepik.org/lesson/2604772/step/1?unit=2644250",
+      "nextTitle": "Сравниваем варианты и составляем план",
+      "nextUrl": "https://stepik.org/lesson/2604773/step/1?unit=2644251",
+      "sections": [
+        "Пермь. Планируем день в городе",
+        "Кунгур. Расписание и бронирование",
+        "Екатеринбург. Данные, которые не теряются",
+        "Нижний Тагил. Большие списки и удобные инструменты",
+        "Невьянск. Моделируем городские сервисы",
+        "Челябинск. Городская база данных",
+        "Златоуст. Находим путь по карте",
+        "Уфа. Поиск по городским данным",
+        "Оренбург. Даты и расходы поездки",
+        "Магнитогорск. Проверяем и улучшаем программу",
+        "Курган. Обмен данными между сервисами",
+        "Миасс. Собираем приложение путешественника"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 11513879,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе продолжим изучать Python на задачах о путешествии по Уралу. Будем работать с расписанием, ф",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11513880,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "Как хранить сведения о нескольких местах Маша переписала три варианта в заметку. Для каждого есть название, стоимость входа и время, которое",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11513881,
+          "position": 3,
+          "type": "code",
+          "cost": 10,
+          "title": "Сколько всего мы насохраняли Мы открываем общую заметку и видим, что туда уже попало больше мест, чем рассчитывали. Прежде чем выбирать, оце",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11513882,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "Не всё интересное помещается в наше утро Сводка помогает заметить проблему: мы насохраняли занятий на несколько часов, а до обеда свободны т",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11513883,
+          "position": 5,
+          "type": "code",
+          "cost": 10,
+          "title": "Успеваем до обеда Мы договорились выбрать одно занятие до обеда. Покажем Маше все варианты, которые подходят одновременно по деньгам и време",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11513884,
+          "position": 6,
+          "type": "choice",
+          "cost": 5,
+          "title": "Ничего не подошло — программа сломалась? Мы запустили отбор с бюджетом 0 рублей и временем 20 минут. В списке есть бесплатная прогулка на 50",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538550,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "Телефон пора убрать. Сначала разберём список Маша уже надела куртку, а я всё ещё листаю сохранённые места. Оказывается, собрать список проще",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11538551,
+          "position": 8,
+          "type": "code",
+          "cost": 10,
+          "title": "Прогулки без билетов У Маши есть час до встречи. Она просит выписать бесплатные места: время она пока сравнит сама. Я хочу получить аккуратн",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538552,
+          "position": 9,
+          "type": "code",
+          "cost": 10,
+          "title": "Сколько денег потребует весь список Я предлагаю на минуту забыть про расписание и посчитать цену всех сохранённых билетов. Маша смеётся: воз",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538553,
+          "position": 10,
+          "type": "code",
+          "cost": 10,
+          "title": "Ровно на оставшиеся деньги После покупки перекуса бюджет изменился. Мне нужен список доступных по цене мест и остаток после каждого возможно",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538554,
+          "position": 11,
+          "type": "text",
+          "cost": 0,
+          "title": "Почему место не подошло «Нет вариантов» — правильный ответ, но он не помогает понять, что менять. Денег мало? Времени мало? Маша просит объя",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11538555,
+          "position": 12,
+          "type": "code",
+          "cost": 10,
+          "title": "Объясните отказ Маша не хочет заново открывать каждую вкладку. Я добавляю к названию короткую причину, чтобы сразу понять, поможет ли больши",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538556,
+          "position": 13,
+          "type": "code",
+          "cost": 10,
+          "title": "Первые три предложения Список стал длинным. Маша просит показать только первые k подходящих мест, сохранив порядок заметки. Всё подходящее в",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11538557,
+          "position": 14,
+          "type": "code",
+          "cost": 10,
+          "title": "Номера, которые можно отправить сообщением Маша запомнила номера мест в общей заметке. Чтобы не переписывать длинные названия, отправлю ей н",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/300361-python-ural/introduction/01-welcome.html",
+        "telegram": "courses/300361-python-ural/introduction/02-telegram.html",
+        "survey": "courses/300361-python-ural/introduction/03-about-you.html",
+        "study": "courses/300361-python-ural/introduction/04-how-to-learn.html",
+        "rules": "courses/300361-python-ural/introduction/05-rules.html",
+        "map": "courses/300361-python-ural/introduction/06-course-map.html",
+        "start": "courses/300361-python-ural/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 300153,
+      "title": "Python Exclusive: от Калининграда до Казани",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим Python с нуля. Будем решать задачи о поездках из Калининграда в Казань, а в конце соберём «Путевой журнал».",
+      "needs": "Можно начинать без опыта. Всё нужное будем разбирать по ходу курса.",
+      "firstUrl": "https://stepik.org/lesson/2601236/step/1?unit=2640700",
+      "nextTitle": "Что такое программа: учимся говорить с компьютером",
+      "nextUrl": "https://stepik.org/lesson/2601237/step/1?unit=2640701",
+      "sections": [
+        "01 · Билет на маршрут",
+        "02 · Калининград: первые команды",
+        "03 · Псков: числа и расчёты",
+        "04 · Санкт-Петербург: строки",
+        "05 · Тверь: условия и решения",
+        "06 · Москва: цикл for",
+        "07 · Владимир: цикл while",
+        "08 · Нижний Новгород: списки и кортежи",
+        "09 · Чебоксары: словари и множества",
+        "10 · Казань: функции",
+        "11 · Казанская лаборатория",
+        "12 · Финал первой части"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 11488001,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим Python с нуля. Будем решать задачи о поездках из Калининграда в Казань, а в конце со",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11488004,
+          "position": 2,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "Как вы узнали об этом курсе? Мне интересно, что привело вас сюда: рекомендация знакомого, поиск на Stepik, пост, рассылка или что-то другое?",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11488007,
+          "position": 3,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "А зачем Python нужен именно вам? Возможно, вы хотите сменить профессию, разобраться с рабочими задачами, сделать свой проект или просто пров",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11488010,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "От Калининграда до Казани Билет у вас уже есть. Теперь покажу маршрут — не для того, чтобы вы запомнили все остановки, а чтобы было понятно,",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11488013,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "Как заниматься, чтобы действительно разобраться Я бы не советовал проходить этот курс как ленту новостей: прочитать объяснение, быстро посмо",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11488018,
+          "position": 6,
+          "type": "choice",
+          "cost": 5,
+          "title": "Первая договорённость Что делать, если задача не решается с первой попытки?",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 11488022,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "Если код не работает Допустим, вы написали программу, нажали кнопку проверки и вместо ожидаемого ответа получили ошибку. Первое желание — по",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 11488023,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/300153-python-kaliningrad-kazan/introduction/01-welcome.html",
+        "telegram": "courses/300153-python-kaliningrad-kazan/introduction/02-telegram.html",
+        "survey": "courses/300153-python-kaliningrad-kazan/introduction/03-about-you.html",
+        "study": "courses/300153-python-kaliningrad-kazan/introduction/04-how-to-learn.html",
+        "rules": "courses/300153-python-kaliningrad-kazan/introduction/05-rules.html",
+        "map": "courses/300153-python-kaliningrad-kazan/introduction/06-course-map.html",
+        "start": "courses/300153-python-kaliningrad-kazan/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290330,
+      "title": "C#: Основы LINQ",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим LINQ на C#. Будем выбирать, сортировать, группировать и объединять данные.",
+      "needs": "Нужны основы C#, коллекции и знакомство с generics. Пригодится базовое понимание лямбда-выражений.",
+      "firstUrl": "https://stepik.org/lesson/2449401/step/1?unit=2486722",
+      "nextTitle": "Что такое LINQ и зачем он нужен",
+      "nextUrl": "https://stepik.org/lesson/2420269/step/1?unit=2456999",
+      "sections": [
+        "Информация о курсе",
+        "Введение в LINQ и синтаксис запросов",
+        "Базовые операции фильтрации, проекции и сортировки",
+        "Агрегирование, группировка и соединения",
+        "Работа с множествами, разбиением и элементами",
+        "Отложенное и немедленное выполнение",
+        "Расширяемость LINQ и продвинутые провайдеры"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10554924,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим LINQ на C#. Будем выбирать, сортировать, группировать и объединять данные. Перед нач",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10554951,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10554953,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10554954,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Введение в ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10554952,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437794,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290330-csharp-linq/introduction/01-welcome.html",
+        "telegram": "courses/290330-csharp-linq/introduction/02-telegram.html",
+        "survey": "courses/290330-csharp-linq/introduction/03-about-you.html",
+        "study": "courses/290330-csharp-linq/introduction/04-how-to-learn.html",
+        "rules": "courses/290330-csharp-linq/introduction/05-rules.html",
+        "map": "courses/290330-csharp-linq/introduction/06-course-map.html",
+        "start": "courses/290330-csharp-linq/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290261,
+      "title": "C#: Сайт на ASP.NET",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим ASP.NET Core. Будем разбирать запросы, маршруты и контроллеры, а затем работать над веб-приложением.",
+      "needs": "Нужны уверенный C#, основы HTTP и установленный .NET SDK.",
+      "firstUrl": "https://stepik.org/lesson/2433969/step/1?unit=2471128",
+      "nextTitle": "Что такое ASP.NET Core и зачем он нужен",
+      "nextUrl": "https://stepik.org/lesson/2419231/step/1?unit=2455944",
+      "sections": [
+        "Информация о курсе",
+        "Погружение в ASP.NET Core",
+        "Маршрутизация и Middleware",
+        "Контроллеры и представления (MVC)",
+        "Внедрение зависимостей и конфигурация",
+        "Публикация и заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10481539,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим ASP.NET Core. Будем разбирать запросы, маршруты и контроллеры, а затем работать над ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10481745,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10481744,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10481746,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Погружение ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10481743,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437806,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290261-csharp-aspnet/introduction/01-welcome.html",
+        "telegram": "courses/290261-csharp-aspnet/introduction/02-telegram.html",
+        "survey": "courses/290261-csharp-aspnet/introduction/03-about-you.html",
+        "study": "courses/290261-csharp-aspnet/introduction/04-how-to-learn.html",
+        "rules": "courses/290261-csharp-aspnet/introduction/05-rules.html",
+        "map": "courses/290261-csharp-aspnet/introduction/06-course-map.html",
+        "start": "courses/290261-csharp-aspnet/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290177,
+      "title": "React Exclusive",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим React: компоненты, хуки, работу с данными и тестирование. Будем разбирать примеры и устройство приложений.",
+      "needs": "Нужны уверенный JavaScript ES6+, основы TypeScript, HTML, CSS и DOM. Подготовьте Node.js и редактор.",
+      "firstUrl": "https://stepik.org/lesson/2417841/step/1?unit=2454266",
+      "nextTitle": "Что такое React: декларативный подход и Virtual DOM.",
+      "nextUrl": "https://stepik.org/lesson/2417842/step/1?unit=2454267",
+      "sections": [
+        "Введение в экосистему и основы JSX",
+        "Компоненты и Props",
+        "Состояние и управление событиями",
+        "Жизненный цикл и побочные эффекты",
+        "Продвинутые хуки и оптимизация",
+        "Управление глобальным состоянием",
+        "Навигация в приложении",
+        "Взаимодействие с API и данными",
+        "Стилизация и дизайн-системы",
+        "Тестирование и деплой"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10403092,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим React: компоненты, хуки, работу с данными и тестирование. Будем разбирать примеры и ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10531559,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10531562,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10531560,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Введение в экосистему и основы JSX Добавлен мо",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10531561,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437795,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290177-react-exclusive/introduction/01-welcome.html",
+        "telegram": "courses/290177-react-exclusive/introduction/02-telegram.html",
+        "survey": "courses/290177-react-exclusive/introduction/03-about-you.html",
+        "study": "courses/290177-react-exclusive/introduction/04-how-to-learn.html",
+        "rules": "courses/290177-react-exclusive/introduction/05-rules.html",
+        "map": "courses/290177-react-exclusive/introduction/06-course-map.html",
+        "start": "courses/290177-react-exclusive/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290060,
+      "title": "C#: Основы",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим основы C#: переменные, условия, циклы, классы и интерфейсы. Будем разбирать примеры и решать задачи.",
+      "needs": "Опыт программирования не нужен. Достаточно уметь работать с файлами и папками.",
+      "firstUrl": "https://stepik.org/lesson/2441619/step/1?unit=2478855",
+      "nextTitle": "Структура языка",
+      "nextUrl": "https://stepik.org/lesson/2415997/step/1?unit=2452056",
+      "sections": [
+        "Вступление",
+        "Переменные",
+        "Конструкции",
+        "ООП",
+        "Проверка знаний"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10520689,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим основы C#: переменные, условия, циклы, классы и интерфейсы. Будем разбирать примеры ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10520720,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10520724,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10520721,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Введение Добавлен модуль Переменные Добавлен м",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10520722,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437796,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290060-csharp-basics/introduction/01-welcome.html",
+        "telegram": "courses/290060-csharp-basics/introduction/02-telegram.html",
+        "survey": "courses/290060-csharp-basics/introduction/03-about-you.html",
+        "study": "courses/290060-csharp-basics/introduction/04-how-to-learn.html",
+        "rules": "courses/290060-csharp-basics/introduction/05-rules.html",
+        "map": "courses/290060-csharp-basics/introduction/06-course-map.html",
+        "start": "courses/290060-csharp-basics/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 218079,
+      "title": "React (mini)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе познакомимся с React: компонентами, данными и обновлением страницы. Будут примеры и практика.",
+      "needs": "Сначала нужны основы HTML, CSS и JavaScript.",
+      "firstUrl": "https://stepik.org/lesson/1475847/step/1?unit=1495540",
+      "nextTitle": "Введение в Интернет",
+      "nextUrl": "https://stepik.org/lesson/1464225/step/1?unit=1608240",
+      "sections": [
+        "Информация о курсе",
+        "Глава I - Интернет",
+        "Глава II - Редактор кода",
+        "Глава III - Базовый курс JavaScript",
+        "Глава IV - Подготовка среды разработки",
+        "Глава V - React",
+        "Глава VI - Проекты",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0.1"
+      ],
+      "inventory": [
+        {
+          "id": 6117082,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе познакомимся с React: компонентами, данными и обновлением страницы. Будут примеры и практик",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 6131574,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 6131577,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 6131578,
+          "position": 4,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ О вашем опыте Пробовали ли вы эту тему раньше? Что хотите научиться делать и как нашли курс? Можно ответить коротко. Личные данные не нуж",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6131576,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0.1 История изменений Версии курса v 1.0.1 \"Большая лепеха теории и практики\" (Актуальная версия) - 26.01.2025 (23:00 GMT",
+          "preserve": false,
+          "treatment": "История версий"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/218079-react-mini/introduction/01-welcome.html",
+        "telegram": "courses/218079-react-mini/introduction/02-telegram.html",
+        "survey": "courses/218079-react-mini/introduction/03-about-you.html",
+        "study": "courses/218079-react-mini/introduction/04-how-to-learn.html",
+        "rules": "courses/218079-react-mini/introduction/05-rules.html",
+        "map": "courses/218079-react-mini/introduction/06-course-map.html",
+        "start": "courses/218079-react-mini/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 216887,
+      "title": "React (lite)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим React. Будем создавать компоненты, передавать данные и обрабатывать действия пользователя.",
+      "needs": "Нужны HTML, CSS, уверенный JavaScript и Node.js.",
+      "firstUrl": "https://stepik.org/lesson/1502765/step/1?unit=1522893",
+      "nextTitle": "Введение в Интернет",
+      "nextUrl": "https://stepik.org/lesson/1464225/step/1?unit=1483593",
+      "sections": [
+        " Информация о курсе",
+        " Глава I - Интернет",
+        " Глава II - Редактор кода",
+        "Глава III - HTML",
+        "Глава IV - CSS",
+        "Глава V - Git",
+        "Глава VI - JavaScript",
+        "Глава VII - Проекты часть 1",
+        "Глава VIII - Tailwind",
+        "Глава IX - Sass",
+        "Глава X - React",
+        "Глава XI - Проекты часть 2",
+        "Заключение "
+      ],
+      "children": [],
+      "versions": [
+        "v.1.0.1"
+      ],
+      "inventory": [
+        {
+          "id": 6213329,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим React. Будем создавать компоненты, передавать данные и обрабатывать действия пользов",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 6213370,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 6213374,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "⌨️ Где писать код Подойдёт редактор, в котором удобно сохранять файлы и запускать примеры. Если редактор уже есть, менять его ради курса не ",
+          "preserve": false,
+          "treatment": "Подготовка"
+        },
+        {
+          "id": 6213371,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 6213372,
+          "position": 5,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ О вашем опыте Пробовали ли вы эту тему раньше? Что хотите научиться делать и как нашли курс? Можно ответить коротко. Личные данные не нуж",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6213373,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v.1.0.1 История изменений Версии курса v. 1.0.1 - \"Заключение\" (Актуальная версия) - 26.01.2025 (23:00 GMT-3) В данной верси",
+          "preserve": false,
+          "treatment": "История версий"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/216887-react-lite/introduction/01-welcome.html",
+        "telegram": "courses/216887-react-lite/introduction/02-telegram.html",
+        "survey": "courses/216887-react-lite/introduction/03-about-you.html",
+        "study": "courses/216887-react-lite/introduction/04-how-to-learn.html",
+        "rules": "courses/216887-react-lite/introduction/05-rules.html",
+        "map": "courses/216887-react-lite/introduction/06-course-map.html",
+        "start": "courses/216887-react-lite/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 200517,
+      "title": "React (pro)",
+      "track": "web",
+      "trackTitle": "Frontend",
+      "color": "#6175db",
+      "mark": "</>",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим React и работу над веб-приложениями. Будут объяснения, примеры и практика с кодом.",
+      "needs": "Нужны основы HTML, CSS и JavaScript. Если JavaScript пока незнаком, сначала изучите его.",
+      "firstUrl": "https://stepik.org/lesson/1266598/step/1?unit=1280832",
+      "nextTitle": "Введение в Интернет",
+      "nextUrl": "https://stepik.org/lesson/1464225/step/1?unit=1505364",
+      "sections": [
+        "Информация о курсе",
+        "Глава I - Интернет",
+        " Глава II - Редактор кода",
+        "Глава III - HTML",
+        "Глава IV - CSS",
+        "Глава V - Figma",
+        "Глава VI - Верстка макетов",
+        "Глава VII - Git",
+        "Глава VIII - JavaScript",
+        "Глава IX - Проекты часть 1",
+        "Глава X - Tailwind",
+        "Глава XI - Sass",
+        "Глава XII - React",
+        " Глава XIII - Проекты часть 2",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.5",
+        "v1.4",
+        "v1.3",
+        "v1.2",
+        "v1.1"
+      ],
+      "inventory": [
+        {
+          "id": 5258557,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим React и работу над веб-приложениями. Будут объяснения, примеры и практика с кодом. П",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 5945999,
+          "position": 2,
+          "type": "free-answer",
+          "cost": 5,
+          "title": "✍️ Чего ждёте от курса? Какие темы хочется понять лучше? Можно назвать одну или две.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 5946001,
+          "position": 3,
+          "type": "free-answer",
+          "cost": 5,
+          "title": "🎯 Что хотите уметь? Назовите задачу или небольшой проект, ради которого пришли учиться.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 5946004,
+          "position": 4,
+          "type": "free-answer",
+          "cost": 5,
+          "title": "✍️ Как нашли курс? Поиск, Telegram, рекомендация или другой наш курс? Напишите свой вариант.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6041417,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.5 История изменений Версии курса v 1.5 - Internet update 2.0 (последнее обновление) В данной версии было внесены следующи",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 5946005,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 12437797,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/200517-react-pro/introduction/01-welcome.html",
+        "telegram": "courses/200517-react-pro/introduction/02-telegram.html",
+        "survey": "courses/200517-react-pro/introduction/03-about-you.html",
+        "study": "courses/200517-react-pro/introduction/04-how-to-learn.html",
+        "rules": "courses/200517-react-pro/introduction/05-rules.html",
+        "map": "courses/200517-react-pro/introduction/06-course-map.html",
+        "start": "courses/200517-react-pro/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 181396,
+      "title": "Python Exclusive",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе будем применять Python в веб-разработке, автоматизации и машинном обучении. Будут примеры и практические задачи.",
+      "needs": "Нужны основы Python и умение запускать свои программы. Этот курс не начинается с нуля.",
+      "firstUrl": "https://stepik.org/lesson/1064828/step/1?unit=1074535",
+      "nextTitle": "Введение в веб-разработку на Python",
+      "nextUrl": "https://stepik.org/lesson/1064829/step/1?unit=1074536",
+      "sections": [
+        "Начало",
+        "Веб-разработка",
+        "Машинное обучение",
+        "Автоматизация процессов"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4405412,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе будем применять Python в веб-разработке, автоматизации и машинном обучении. Будут примеры и",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4426963,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4429938,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 12437798,
+          "position": 4,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/181396-python-exclusive/introduction/01-welcome.html",
+        "telegram": "courses/181396-python-exclusive/introduction/02-telegram.html",
+        "survey": "courses/181396-python-exclusive/introduction/03-about-you.html",
+        "study": "courses/181396-python-exclusive/introduction/04-how-to-learn.html",
+        "rules": "courses/181396-python-exclusive/introduction/05-rules.html",
+        "map": "courses/181396-python-exclusive/introduction/06-course-map.html",
+        "start": "courses/181396-python-exclusive/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 181092,
+      "title": "PHP (pro)",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим PHP и серверную часть сайта. Будем принимать данные, обрабатывать их и писать свой код.",
+      "needs": "Для веб-примеров пригодятся основы HTML. Для практики нужен компьютер.",
+      "firstUrl": "https://stepik.org/lesson/1059970/step/1?unit=1069415",
+      "nextTitle": "Что такое редактор кода?",
+      "nextUrl": "https://stepik.org/lesson/1079361/step/1?unit=1089609",
+      "sections": [
+        "Общая информация о курсе",
+        "Редактор кода",
+        " PHP Начало",
+        "PHP Основы",
+        "PHP Операторы",
+        "PHP Работа со строками",
+        "PHP Управляющие конструкции",
+        "PHP Массивы",
+        "PHP Функции",
+        " PHP ООП",
+        "PHP Работа с файлами",
+        "HTML + PHP",
+        "SQL Основы",
+        "База данных MySQL",
+        "Вёрстка проектов: HTML + CSS + PHP",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4380294,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим PHP и серверную часть сайта. Будем принимать данные, обрабатывать их и писать свой к",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4380872,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4380875,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4380876,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4380877,
+          "position": 5,
+          "type": "choice",
+          "cost": 1,
+          "title": "Нам очень интересно познакомиться с тобой поближе. Укажи, пожалуйста, свой возраст.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4380878,
+          "position": 6,
+          "type": "choice",
+          "cost": 1,
+          "title": "Укажи, пожалуйста, свое образование.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4380879,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "🤝 Как учимся вместе Обсуждаем работу, не человека. Не оскорбляем друг друга. Помогаем разобраться, но не публикуем готовые ответы к задания",
+          "preserve": false,
+          "treatment": "Общие правила"
+        },
+        {
+          "id": 4380883,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437799,
+          "position": 9,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/181092-php-pro/introduction/01-welcome.html",
+        "telegram": "courses/181092-php-pro/introduction/02-telegram.html",
+        "survey": "courses/181092-php-pro/introduction/03-about-you.html",
+        "study": "courses/181092-php-pro/introduction/04-how-to-learn.html",
+        "rules": "courses/181092-php-pro/introduction/05-rules.html",
+        "map": "courses/181092-php-pro/introduction/06-course-map.html",
+        "start": "courses/181092-php-pro/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 181030,
+      "title": "Python",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим Python с нуля: переменные, условия, циклы, коллекции и функции. Будем писать программы и решать задачи.",
+      "needs": "Опыт программирования не нужен. Для практики понадобится компьютер.",
+      "firstUrl": "https://stepik.org/lesson/1103189/step/1?unit=1114221",
+      "nextTitle": "Что такое Python?",
+      "nextUrl": "https://stepik.org/lesson/1103192/step/1?unit=1114229",
+      "sections": [
+        "Общая информация о курсе",
+        "Python начало",
+        "VS Code и Python",
+        "Основы Python",
+        "Операторы и выражения",
+        "Управляющие структуры",
+        "Списки",
+        "Словари",
+        "Функции",
+        "Обработка ошибок и исключения",
+        "Работа с файлами",
+        "Практические задания",
+        "Практические задания | Часть 2",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [
+        "v0.1.6",
+        "v0.1.5"
+      ],
+      "inventory": [
+        {
+          "id": 5088160,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим Python с нуля: переменные, условия, циклы, коллекции и функции. Будем писать програм",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 5089093,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 5089094,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4583383,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 5089207,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🔎 Если что-то не получилось Сравните ожидаемый результат с тем, что вышло у вас. В задаче с кодом прочитайте сообщение об ошибке и проверьт",
+          "preserve": false,
+          "treatment": "Как задать вопрос"
+        },
+        {
+          "id": 6525461,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v0.1.6 История изменений Версии курса v0.1.6 (Текущая версия) : Исправлены тесты и ошибки в задачах v0.1.5 (Текущая версия) ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 12437801,
+          "position": 7,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/181030-python/introduction/01-welcome.html",
+        "telegram": "courses/181030-python/introduction/02-telegram.html",
+        "survey": "courses/181030-python/introduction/03-about-you.html",
+        "study": "courses/181030-python/introduction/04-how-to-learn.html",
+        "rules": "courses/181030-python/introduction/05-rules.html",
+        "map": "courses/181030-python/introduction/06-course-map.html",
+        "start": "courses/181030-python/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290423,
+      "title": "C#: Работа с базами данных в .NET",
+      "track": "backend",
+      "trackTitle": "Backend",
+      "color": "#278c67",
+      "mark": "{ }",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим работу с базами данных в .NET через Entity Framework Core. Будем добавлять, читать, менять и удалять записи.",
+      "needs": "Нужны уверенный C#, основы SQL и редактор для проектов .NET.",
+      "firstUrl": "https://stepik.org/lesson/2433991/step/1?unit=2471148",
+      "nextTitle": "Что такое Entity Framework Core и зачем он нужен",
+      "nextUrl": "https://stepik.org/lesson/2421601/step/1?unit=2458362",
+      "sections": [
+        "Информация о курсе",
+        "Введение в EF Core и установка",
+        "Подходы к разработке: Code-First и Database-First",
+        "Базовые CRUD-операции",
+        "PostgreSQL и другие open-source базы данных",
+        "Связи между таблицами и навигационные свойства",
+        "Продвинутые запросы и оптимизация",
+        "Интеграция в реальные приложения"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10481846,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим работу с базами данных в .NET через Entity Framework Core. Будем добавлять, читать, ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10483407,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10483406,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10483405,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Введение в ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10483404,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437800,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290423-csharp-databases/introduction/01-welcome.html",
+        "telegram": "courses/290423-csharp-databases/introduction/02-telegram.html",
+        "survey": "courses/290423-csharp-databases/introduction/03-about-you.html",
+        "study": "courses/290423-csharp-databases/introduction/04-how-to-learn.html",
+        "rules": "courses/290423-csharp-databases/introduction/05-rules.html",
+        "map": "courses/290423-csharp-databases/introduction/06-course-map.html",
+        "start": "courses/290423-csharp-databases/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290248,
+      "title": "Алгоритмы и структуры данных",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим алгоритмы и структуры данных. Разберём поиск, сортировки и способы сделать решение быстрее.",
+      "needs": "Нужны циклы, функции, коллекции и основы рекурсии на знакомом языке программирования.",
+      "firstUrl": "https://stepik.org/lesson/2438013/step/1?unit=2475259",
+      "nextTitle": "Вычислительная сложность, асимптотический анализ",
+      "nextUrl": "https://stepik.org/lesson/2419027/step/1?unit=2455740",
+      "sections": [
+        "Информация о курсе",
+        "Анализ алгоритмов",
+        "Простые структуры данных",
+        "Базовые сортировки и поиск",
+        "Запросы на отрезках",
+        "Введение в динамическое программирование",
+        "Базовые строки",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10502737,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим алгоритмы и структуры данных. Разберём поиск, сортировки и способы сделать решение б",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10502764,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10502766,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10502767,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Анализ алго",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10502765,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437804,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290248-algorithms/introduction/01-welcome.html",
+        "telegram": "courses/290248-algorithms/introduction/02-telegram.html",
+        "survey": "courses/290248-algorithms/introduction/03-about-you.html",
+        "study": "courses/290248-algorithms/introduction/04-how-to-learn.html",
+        "rules": "courses/290248-algorithms/introduction/05-rules.html",
+        "map": "courses/290248-algorithms/introduction/06-course-map.html",
+        "start": "courses/290248-algorithms/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290057,
+      "title": "Паттерны ООП",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим паттерны ООП на C#. Для каждого разберём задачу, пример кода и случаи, когда он полезен.",
+      "needs": "Нужны основы C# и ООП: классы, интерфейсы и объекты.",
+      "firstUrl": "https://stepik.org/lesson/2415927/step/1?unit=2451986",
+      "nextTitle": "Введение в паттерны проектирования",
+      "nextUrl": "https://stepik.org/lesson/2415928/step/1?unit=2451987",
+      "sections": [
+        "Введение",
+        "Порождающие паттерны",
+        "Структурные паттерны",
+        "Паттерны поведения",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10395694,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим паттерны ООП на C#. Для каждого разберём задачу, пример кода и случаи, когда он поле",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10501121,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10501123,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10501122,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Введение Добавлен модуль Порождающие паттерны ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10501124,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437802,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290057-oop-patterns/introduction/01-welcome.html",
+        "telegram": "courses/290057-oop-patterns/introduction/02-telegram.html",
+        "survey": "courses/290057-oop-patterns/introduction/03-about-you.html",
+        "study": "courses/290057-oop-patterns/introduction/04-how-to-learn.html",
+        "rules": "courses/290057-oop-patterns/introduction/05-rules.html",
+        "map": "courses/290057-oop-patterns/introduction/06-course-map.html",
+        "start": "courses/290057-oop-patterns/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290054,
+      "title": "Docker (mini)",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе познакомимся с Docker: образами, контейнерами и запуском сервисов. Будут объяснения и практика.",
+      "needs": "Пригодятся командная строка и понимание файлов, процессов и портов. Хорошо, если вы уже запускали небольшую программу.",
+      "firstUrl": "https://stepik.org/lesson/2437922/step/1?unit=2475169",
+      "nextTitle": "WEB HACKER",
+      "nextUrl": "https://stepik.org/lesson/2447861/step/1?unit=2485160",
+      "sections": [
+        "Информация о курсе",
+        "Docker для самых маленьких",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10502369,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе познакомимся с Docker: образами, контейнерами и запуском сервисов. Будут объяснения и практ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10502389,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10502387,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Docker для ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10502386,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437803,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 12437805,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290054-docker-mini/introduction/01-welcome.html",
+        "telegram": "courses/290054-docker-mini/introduction/02-telegram.html",
+        "survey": "courses/290054-docker-mini/introduction/03-about-you.html",
+        "study": "courses/290054-docker-mini/introduction/04-how-to-learn.html",
+        "rules": "courses/290054-docker-mini/introduction/05-rules.html",
+        "map": "courses/290054-docker-mini/introduction/06-course-map.html",
+        "start": "courses/290054-docker-mini/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 277096,
+      "title": "ИИ для всех: от идеи до заработка",
+      "track": "ai",
+      "trackTitle": "Искусственный интеллект",
+      "color": "#9168cf",
+      "mark": "ИИ",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе выберем идею продукта с ИИ, соберём бота и разберём запуск. Обсудим проверку спроса и работу с отзывами.",
+      "needs": "Сначала пройдите первую часть или разберитесь с темами её программы. Сам запуск продукта не гарантирует доход.",
+      "firstUrl": "https://stepik.org/lesson/2254064/step/1?unit=2288039",
+      "nextTitle": "Где искать идеи для ИИ-бота",
+      "nextUrl": "https://stepik.org/lesson/2254065/step/1?unit=2288040",
+      "sections": [
+        "Старт",
+        "Ищем идею",
+        "Инструменты",
+        "Собираем бота",
+        "Прокачиваем",
+        "Запускаем",
+        "Жизнь после запуска"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 9631649,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе выберем идею продукта с ИИ, соберём бота и разберём запуск. Обсудим проверку спроса и работ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 9777362,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧩 Что нужно до старта Сначала пройдите «ИИ для всех: с нуля до своего продукта» или разберитесь с темами его программы. Открыть первую част",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 12437808,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 12437809,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 12437810,
+          "position": 5,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/277096-ai-product-launch/introduction/01-welcome.html",
+        "telegram": "courses/277096-ai-product-launch/introduction/02-telegram.html",
+        "survey": "courses/277096-ai-product-launch/introduction/03-about-you.html",
+        "study": "courses/277096-ai-product-launch/introduction/04-how-to-learn.html",
+        "rules": "courses/277096-ai-product-launch/introduction/05-rules.html",
+        "map": "courses/277096-ai-product-launch/introduction/06-course-map.html",
+        "start": "courses/277096-ai-product-launch/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 276638,
+      "title": "ИИ для всех: с нуля до своего продукта",
+      "track": "ai",
+      "trackTitle": "Искусственный интеллект",
+      "color": "#9168cf",
+      "mark": "ИИ",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе познакомимся с ИИ, научимся составлять запросы и проверять ответы. Затем перейдём к Python и работе над своим продуктом.",
+      "needs": "Опыт разработки не обязателен. Всё нужное будем объяснять по ходу курса.",
+      "firstUrl": "https://stepik.org/lesson/2247924/step/1?unit=2281492",
+      "nextTitle": "Слабый промпт",
+      "nextUrl": "https://stepik.org/lesson/2247925/step/1?unit=2281493",
+      "sections": [
+        "Что такое ИИ?",
+        "Задаем правильный промпт",
+        "Основные проблемы",
+        "Python",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 9605548,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе познакомимся с ИИ, научимся составлять запросы и проверять ответы. Затем перейдём к Python ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 9620597,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 9809956,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🔭 После этого курса Когда закончите первую часть, можно перейти к выбору идеи, сборке бота и запуску продукта. Это отдельный курс. Сейчас н",
+          "preserve": true,
+          "treatment": "Материал сохраняется целиком"
+        },
+        {
+          "id": 9758678,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 12437812,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 12437813,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/276638-ai-basics/introduction/01-welcome.html",
+        "telegram": "courses/276638-ai-basics/introduction/02-telegram.html",
+        "survey": "courses/276638-ai-basics/introduction/03-about-you.html",
+        "study": "courses/276638-ai-basics/introduction/04-how-to-learn.html",
+        "rules": "courses/276638-ai-basics/introduction/05-rules.html",
+        "map": "courses/276638-ai-basics/introduction/06-course-map.html",
+        "start": "courses/276638-ai-basics/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 218158,
+      "title": "GitHub (mini)",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе познакомимся с GitHub. Научимся хранить проект, смотреть изменения и работать с репозиторием.",
+      "needs": "Понадобятся компьютер и аккаунт GitHub.",
+      "firstUrl": "https://stepik.org/lesson/1480667/step/1?unit=1500376",
+      "nextTitle": "Git: Введение в Git и контроль версий",
+      "nextUrl": "https://stepik.org/lesson/1484479/step/1?unit=1504218",
+      "sections": [
+        " Информация о курсе",
+        "Глава I - введение в Git",
+        "Глава II - Основы Git",
+        "Глава III - Продвинутые функции Git"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 6130806,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе познакомимся с GitHub. Научимся хранить проект, смотреть изменения и работать с репозиторие",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 6147909,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 6147910,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "⌨️ Где писать код Подойдёт редактор, в котором удобно сохранять файлы и запускать примеры. Если редактор уже есть, менять его ради курса не ",
+          "preserve": false,
+          "treatment": "Подготовка"
+        },
+        {
+          "id": 6147908,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 6147911,
+          "position": 5,
+          "type": "free-answer",
+          "cost": 1,
+          "title": "✍️ О вашем опыте Пробовали ли вы эту тему раньше? Что хотите научиться делать и как нашли курс? Можно ответить коротко. Личные данные не нуж",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 6147907,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса История изменений Версии курса Если у вас есть идеи как можно было улучшить курс напишите тут в комментариях o(*￣︶￣*)o А пок",
+          "preserve": false,
+          "treatment": "История версий"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/218158-github-mini/introduction/01-welcome.html",
+        "telegram": "courses/218158-github-mini/introduction/02-telegram.html",
+        "survey": "courses/218158-github-mini/introduction/03-about-you.html",
+        "study": "courses/218158-github-mini/introduction/04-how-to-learn.html",
+        "rules": "courses/218158-github-mini/introduction/05-rules.html",
+        "map": "courses/218158-github-mini/introduction/06-course-map.html",
+        "start": "courses/218158-github-mini/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 187192,
+      "title": "Пакет FullStack-Разработчик",
+      "track": "fullstack",
+      "trackTitle": "Комплексные программы",
+      "color": "#ca725e",
+      "mark": "WH",
+      "reference": false,
+      "package": true,
+      "topics": "В пакет входят курсы: HTML CSS (pro), JavaScript (pro), PHP (pro).",
+      "needs": "Открывайте курсы из пакета по порядку. Если уже изучали тему, можно вернуться к ней позже.",
+      "firstUrl": "https://stepik.org/lesson/1129760/step/1?unit=1141267",
+      "nextTitle": "Программа курса",
+      "nextUrl": "https://stepik.org/course/187192/syllabus",
+      "sections": [
+        "Как начать учиться"
+      ],
+      "children": [
+        {
+          "id": 170115,
+          "title": "HTML CSS (pro)"
+        },
+        {
+          "id": 191652,
+          "title": "JavaScript (pro)"
+        },
+        {
+          "id": 181092,
+          "title": "PHP (pro)"
+        }
+      ],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4684054,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. 🧭 Ваши курсы в пакете Курсы открываются отдельно. Начните с первого в списке и возвращайтесь сюда, ",
+          "preserve": false,
+          "treatment": "Состав пакета"
+        },
+        {
+          "id": 12437807,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/187192-fullstack-package/introduction/01-welcome.html",
+        "telegram": "courses/187192-fullstack-package/introduction/02-telegram.html",
+        "survey": "courses/187192-fullstack-package/introduction/03-about-you.html",
+        "study": "courses/187192-fullstack-package/introduction/04-how-to-learn.html",
+        "rules": "courses/187192-fullstack-package/introduction/05-rules.html",
+        "map": "courses/187192-fullstack-package/introduction/06-course-map.html",
+        "start": "courses/187192-fullstack-package/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 187189,
+      "title": "Пакет Frontend-Разработчик",
+      "track": "fullstack",
+      "trackTitle": "Комплексные программы",
+      "color": "#ca725e",
+      "mark": "WH",
+      "reference": false,
+      "package": true,
+      "topics": "В пакет входят курсы: HTML CSS (pro), JavaScript (pro).",
+      "needs": "Открывайте курсы из пакета по порядку. Если уже изучали тему, можно вернуться к ней позже.",
+      "firstUrl": "https://stepik.org/lesson/1129720/step/1?unit=1141235",
+      "nextTitle": "Программа курса",
+      "nextUrl": "https://stepik.org/course/187189/syllabus",
+      "sections": [
+        "Как начать учиться"
+      ],
+      "children": [
+        {
+          "id": 170115,
+          "title": "HTML CSS (pro)"
+        },
+        {
+          "id": 191652,
+          "title": "JavaScript (pro)"
+        }
+      ],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4684010,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. 🧭 Ваши курсы в пакете Курсы открываются отдельно. Начните с первого в списке и возвращайтесь сюда, ",
+          "preserve": false,
+          "treatment": "Состав пакета"
+        },
+        {
+          "id": 12437821,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/187189-frontend-package/introduction/01-welcome.html",
+        "telegram": "courses/187189-frontend-package/introduction/02-telegram.html",
+        "survey": "courses/187189-frontend-package/introduction/03-about-you.html",
+        "study": "courses/187189-frontend-package/introduction/04-how-to-learn.html",
+        "rules": "courses/187189-frontend-package/introduction/05-rules.html",
+        "map": "courses/187189-frontend-package/introduction/06-course-map.html",
+        "start": "courses/187189-frontend-package/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 184095,
+      "title": "SQL (lite)",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим SQL и базы данных MySQL. Будем писать запросы, добавлять, выбирать и менять записи.",
+      "needs": "Опыт работы с базами данных не нужен.",
+      "firstUrl": "https://stepik.org/lesson/1096145/step/1?unit=1106928",
+      "nextTitle": "Знакомство",
+      "nextUrl": "https://stepik.org/lesson/1096127/step/1?unit=1106910",
+      "sections": [
+        "Общая информация о курсе",
+        "SQL Основы",
+        "База данных MySQL",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4556143,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим SQL и базы данных MySQL. Будем писать запросы, добавлять, выбирать и менять записи. ",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4556215,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4556230,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🗺 Что будем разбирать Общая информация о курсе SQL Основы База данных MySQL Финал",
+          "preserve": false,
+          "treatment": "Проект курса"
+        },
+        {
+          "id": 4556227,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4556337,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4556229,
+          "position": 6,
+          "type": "choice",
+          "cost": 1,
+          "title": "Нам очень интересно познакомиться с Вами поближе. Укажите, пожалуйста, свой возраст.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4556231,
+          "position": 7,
+          "type": "choice",
+          "cost": 1,
+          "title": "Укажите, пожалуйста, свое образование.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4556226,
+          "position": 8,
+          "type": "text",
+          "cost": 0,
+          "title": "🔎 Если что-то не получилось Сравните ожидаемый результат с тем, что вышло у вас. В задаче с кодом прочитайте сообщение об ошибке и проверьт",
+          "preserve": false,
+          "treatment": "Как задать вопрос"
+        },
+        {
+          "id": 4556228,
+          "position": 9,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437819,
+          "position": 10,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/184095-sql-lite/introduction/01-welcome.html",
+        "telegram": "courses/184095-sql-lite/introduction/02-telegram.html",
+        "survey": "courses/184095-sql-lite/introduction/03-about-you.html",
+        "study": "courses/184095-sql-lite/introduction/04-how-to-learn.html",
+        "rules": "courses/184095-sql-lite/introduction/05-rules.html",
+        "map": "courses/184095-sql-lite/introduction/06-course-map.html",
+        "start": "courses/184095-sql-lite/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 183142,
+      "title": "FullStack Pro MAX",
+      "track": "fullstack",
+      "trackTitle": "Комплексные программы",
+      "color": "#ca725e",
+      "mark": "WH",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим HTML, CSS, JavaScript, PHP и SQL. Будем делать сайты и решать практические задачи.",
+      "needs": "Курс большой. Идите по порядку и сохраняйте свои работы, чтобы возвращаться к ним между темами.",
+      "firstUrl": "https://stepik.org/lesson/1086996/step/1?unit=1097472",
+      "nextTitle": "Что такое создание сайтов?",
+      "nextUrl": "https://stepik.org/lesson/1086997/step/1?unit=1097473",
+      "sections": [
+        "Общая информация о курсе",
+        "Вливаемся в WEB-разработку",
+        "Редактор кода",
+        "HTML Начало",
+        "HTML Теги",
+        "HTML атрибуты",
+        "CSS Начало",
+        "CSS Основы",
+        "GitHub",
+        "Figma",
+        "Pixso",
+        "Практика HTML и CSS",
+        "Многостраничность",
+        "9 проектов в портфолио",
+        "Введение в JavaScript",
+        "JS Основы языка",
+        "JS Операции",
+        "JS Ветвления",
+        "JS Циклы",
+        "JS Массив",
+        "JS Множества",
+        "JS Итоговая контрольная работа №1",
+        "JS Функции",
+        "JS Объекты",
+        "JS Регулярные выражения",
+        "JS Обработка ошибок",
+        "JS Итоговая контрольная работа №2",
+        "JS Основы работы с DOM",
+        "JS События и обработчики событий",
+        "JS Асинхронность в JavaScript",
+        "JS Работа с API",
+        "JS Работа JSON",
+        "HTML + JS",
+        "JS Итоговая контрольная работа №3",
+        " PHP Начало",
+        "PHP Основы",
+        "PHP Операторы",
+        "PHP Работа со строками",
+        "PHP Управляющие конструкции",
+        "PHP Массивы",
+        "PHP Функции",
+        " PHP ООП",
+        "PHP Работа с файлами",
+        "HTML + PHP",
+        "SQL Основы",
+        "База данных MySQL",
+        "Вёрстка проектов: HTML + CSS + PHP",
+        "2 проекта fullStack в портфолио",
+        "DLC: \"Древний Рим\"",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [
+        "v4.2.3",
+        "v4.2.2",
+        "v4.2.1",
+        "v4.2.0",
+        "v4.1.1",
+        "v4.0.0"
+      ],
+      "inventory": [
+        {
+          "id": 4519347,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим HTML, CSS, JavaScript, PHP и SQL. Будем делать сайты и решать практические задачи. П",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4519348,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4519349,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4643951,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 6329063,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v4.2.3 История изменений Версии курса v4.2.3 (текущая версия) : Добавлены видеоразборы в разделы 31.3 JS: получение данных с",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 4519354,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437818,
+          "position": 7,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/183142-fullstack-pro-max/introduction/01-welcome.html",
+        "telegram": "courses/183142-fullstack-pro-max/introduction/02-telegram.html",
+        "survey": "courses/183142-fullstack-pro-max/introduction/03-about-you.html",
+        "study": "courses/183142-fullstack-pro-max/introduction/04-how-to-learn.html",
+        "rules": "courses/183142-fullstack-pro-max/introduction/05-rules.html",
+        "map": "courses/183142-fullstack-pro-max/introduction/06-course-map.html",
+        "start": "courses/183142-fullstack-pro-max/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 179698,
+      "title": "Git и GitHub",
+      "track": "tools",
+      "trackTitle": "Инструменты и база",
+      "color": "#b57b24",
+      "mark": "⌘",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим Git и GitHub. Будем сохранять изменения, работать с ветками и разбирать совместную работу над проектом.",
+      "needs": "Достаточно уметь работать с файлами. Команды Git разберём в курсе.",
+      "firstUrl": "https://stepik.org/lesson/1044660/step/1?unit=1053234",
+      "nextTitle": "Секретная информация",
+      "nextUrl": "https://stepik.org/lesson/1044661/step/1?unit=1053235",
+      "sections": [
+        "Общая информация о курсе",
+        "Секретная информация",
+        "Git Начало",
+        "Git Основы",
+        "Git контрольная работа",
+        "Финал"
+      ],
+      "children": [],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4315552,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим Git и GitHub. Будем сохранять изменения, работать с ветками и разбирать совместную р",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 4315566,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🛠 Как проходить курс Прочитайте объяснение и разберите пример. Перед действием попробуйте предсказать результат. Повторите пример сами. Пом",
+          "preserve": false,
+          "treatment": "Советы по практике"
+        },
+        {
+          "id": 4315569,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 4315573,
+          "position": 4,
+          "type": "choice",
+          "cost": 1,
+          "title": "Нам очень интересно познакомиться с тобой поближе. Укажи, пожалуйста, свой возраст.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4315574,
+          "position": 5,
+          "type": "choice",
+          "cost": 1,
+          "title": "Укажи, пожалуйста, свое образование.",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        },
+        {
+          "id": 4315575,
+          "position": 6,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 4315576,
+          "position": 7,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437816,
+          "position": 8,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/179698-git-github/introduction/01-welcome.html",
+        "telegram": "courses/179698-git-github/introduction/02-telegram.html",
+        "survey": "courses/179698-git-github/introduction/03-about-you.html",
+        "study": "courses/179698-git-github/introduction/04-how-to-learn.html",
+        "rules": "courses/179698-git-github/introduction/05-rules.html",
+        "map": "courses/179698-git-github/introduction/06-course-map.html",
+        "start": "courses/179698-git-github/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 290059,
+      "title": "Немецкий язык",
+      "track": "other",
+      "trackTitle": "Другие интересы",
+      "color": "#b46d94",
+      "mark": "Aa",
+      "reference": false,
+      "package": false,
+      "topics": "На курсе изучим основы немецкого языка: слова, произношение, грамматику и фразы для простых разговоров.",
+      "needs": "Опыт изучения немецкого не нужен. Полезно произносить новые слова и фразы вслух.",
+      "firstUrl": "https://stepik.org/lesson/2434245/step/1?unit=2471402",
+      "nextTitle": "Алфавит",
+      "nextUrl": "https://stepik.org/lesson/2415973/step/1?unit=2452032",
+      "sections": [
+        "Информация о курсе",
+        "Знакомство с немецким языком",
+        "Введение в грамматику",
+        "Структура предложений",
+        "Заключение"
+      ],
+      "children": [],
+      "versions": [
+        "v1.0"
+      ],
+      "inventory": [
+        {
+          "id": 10484440,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. На курсе изучим основы немецкого языка: слова, произношение, грамматику и фразы для простых разговор",
+          "preserve": false,
+          "treatment": "Общее приветствие"
+        },
+        {
+          "id": 10484505,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "💬 На связи На связи команда WEB HACKER. В Telegram делимся новостями курсов и новыми материалами. Вопрос по уроку лучше оставить в коммента",
+          "preserve": false,
+          "treatment": "Telegram и правила"
+        },
+        {
+          "id": 10484506,
+          "position": 3,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        },
+        {
+          "id": 10484507,
+          "position": 4,
+          "type": "text",
+          "cost": 0,
+          "title": "📦 Версии курса v1.0 История изменений Версии курса v 1.0 (Актуальная версия) Добавлен модуль Информация о курсе Добавлен модуль Знакомство ",
+          "preserve": false,
+          "treatment": "История версий"
+        },
+        {
+          "id": 10484508,
+          "position": 5,
+          "type": "text",
+          "cost": 0,
+          "title": "🚀 Переходим к практике Дальше разберём первую тему. Откройте следующий урок и попробуйте его примеры сами. Открыть следующий урок →",
+          "preserve": false,
+          "treatment": "Переход к урокам"
+        },
+        {
+          "id": 12437817,
+          "position": 6,
+          "type": "free-answer",
+          "cost": 0,
+          "title": "✍️ С чем начинаем? Что хотите научиться делать после курса? Напишите одну задачу, которая вам интересна. И расскажите, как нашли курс: поиск",
+          "preserve": true,
+          "treatment": "Задание сохраняется целиком"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/290059-german/introduction/01-welcome.html",
+        "telegram": "courses/290059-german/introduction/02-telegram.html",
+        "survey": "courses/290059-german/introduction/03-about-you.html",
+        "study": "courses/290059-german/introduction/04-how-to-learn.html",
+        "rules": "courses/290059-german/introduction/05-rules.html",
+        "map": "courses/290059-german/introduction/06-course-map.html",
+        "start": "courses/290059-german/introduction/07-start.html"
+      }
+    },
+    {
+      "id": 187191,
+      "title": "Пакет Backend-Разработчик",
+      "track": "fullstack",
+      "trackTitle": "Комплексные программы",
+      "color": "#ca725e",
+      "mark": "WH",
+      "reference": false,
+      "package": true,
+      "topics": "В пакет входят курсы: HTML CSS (pro), PHP (pro).",
+      "needs": "Открывайте курсы из пакета по порядку. Если уже изучали тему, можно вернуться к ней позже.",
+      "firstUrl": "https://stepik.org/lesson/1129757/step/1?unit=1141263",
+      "nextTitle": "Программа курса",
+      "nextUrl": "https://stepik.org/course/187191/syllabus",
+      "sections": [
+        "Как начать учиться"
+      ],
+      "children": [
+        {
+          "id": 170115,
+          "title": "HTML CSS (pro)"
+        },
+        {
+          "id": 181092,
+          "title": "PHP (pro)"
+        }
+      ],
+      "versions": [],
+      "inventory": [
+        {
+          "id": 4684047,
+          "position": 1,
+          "type": "text",
+          "cost": 0,
+          "title": "👋 Привет! На связи команда WEB HACKER. 🧭 Ваши курсы в пакете Курсы открываются отдельно. Начните с первого в списке и возвращайтесь сюда, ",
+          "preserve": false,
+          "treatment": "Состав пакета"
+        },
+        {
+          "id": 12437822,
+          "position": 2,
+          "type": "text",
+          "cost": 0,
+          "title": "🧭 Карта курсов",
+          "preserve": false,
+          "treatment": "Общая карта"
+        }
+      ],
+      "pages": {
+        "welcome": "courses/187191-backend-package/introduction/01-welcome.html",
+        "telegram": "courses/187191-backend-package/introduction/02-telegram.html",
+        "survey": "courses/187191-backend-package/introduction/03-about-you.html",
+        "study": "courses/187191-backend-package/introduction/04-how-to-learn.html",
+        "rules": "courses/187191-backend-package/introduction/05-rules.html",
+        "map": "courses/187191-backend-package/introduction/06-course-map.html",
+        "start": "courses/187191-backend-package/introduction/07-start.html"
+      }
+    }
+  ],
+  "parts": [
+    [
+      "welcome",
+      "Приветствие"
+    ],
+    [
+      "telegram",
+      "Telegram"
+    ],
+    [
+      "survey",
+      "Знакомство"
+    ],
+    [
+      "study",
+      "Как учиться"
+    ],
+    [
+      "rules",
+      "Правила"
+    ],
+    [
+      "map",
+      "Карта курсов"
+    ],
+    [
+      "start",
+      "Начинаем"
+    ]
+  ],
+  "excluded": [
+    300562,
+    305734
+  ],
+  "publication": true
+}
