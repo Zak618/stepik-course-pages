@@ -105,9 +105,10 @@ function studyConnection(c) {
 // scrollbar or phone-sized blank area on desktop. The real syllabus is in Stepik.
 export function renderStudyArticle(c) {
   const title=c.package?'Курсы в пакете.':'Как будем учиться.';
-  const heading='font-size:24px;line-height:1.4;margin:24px 0 10px;color:#24334a;';
-  const paragraph='font-size:18px;line-height:1.7;margin:0 0 20px;color:#5e6f88;';
-  let html=`<h1 style="font-size:34px;line-height:1.2;margin:0 0 20px;color:#6742bf;">${title}</h1><p style="${paragraph}">${esc(c.needs)}</p>`;
+  // Stepik removes unitless line-height; inherit its readable native spacing.
+  const heading='font-size:24px;margin:24px 0 10px;color:#24334a;';
+  const paragraph='font-size:18px;margin:0 0 20px;color:#5e6f88;';
+  let html=`<h1 style="font-size:34px;margin:0 0 20px;color:#6742bf;">${title}</h1><p style="${paragraph}">${esc(c.needs)}</p>`;
   if(c.package)html+='<ul>'+c.children.map(child=>`<li><a href="https://stepik.org/course/${child.id}/syllabus" rel="noopener noreferrer nofollow">${esc(child.title)}</a></li>`).join('')+'</ul>';
   else html+=studyRows(c).map(([n,title,text])=>`<h2 style="${heading}"><span style="color:#8e6bda;">${n}.</span> ${esc(title)}</h2><p style="${paragraph}">${esc(text)}</p>`).join('');
   const connection=studyConnection(c).replace(/<aside[^>]*>/g,'<div>').replaceAll('</aside>','</div>').replaceAll('<h2>',`<h2 style="${heading}">`).replaceAll('<p>',`<p style="${paragraph}">`).replaceAll(' target="_blank" rel="noopener"','');
