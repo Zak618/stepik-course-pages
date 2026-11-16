@@ -21,14 +21,14 @@ async function sources(){const all=[];for(let page=1;page<=10;page++){const d=aw
 const before=await sources();assert.equal(before.length,10);assert.deepEqual([...before].sort((a,b)=>a.position-b.position).map(s=>s.id),ids);
 for(const source of before){
   const article=plan.articles.find(a=>a.position===source.position);assert.equal(source.block.name,article.block.name,'Existing task type changed; refusing to overwrite');
-  assert.ok(source.block.text.includes(base+`go-mini-module-02-lesson-01-`),'Unrelated content in target lesson');
+  assert.ok(source.block.text.includes(base+`courses/305666-go-mini/modules/02-computing/lesson-01-`),'Unrelated content in target lesson');
   assert.equal(article.cost,source.block.name==='text'?0:10);
 }
 const schema=await api('step-sources','OPTIONS');assert.equal(schema.actions.POST.cost.read_only,false);
 console.log(JSON.stringify({account:current,lesson:2706555,steps:10,graded:4,points:40,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
 // Verify the exact approved files, not merely HTTP 200 or a stale CDN copy.
-for(const file of [...Array.from({length:10},(_,i)=>`go-mini-module-02-lesson-01-v2-step-${String(i+1).padStart(2,'0')}.html`),'assets/go-mini-information-v2.js','assets/go-mini-information-v2-content.js','assets/go-mini-information-v2.css','assets/go-mini-information-v2-embed.css']){
+for(const file of [...Array.from({length:10},(_,i)=>`courses/305666-go-mini/modules/02-computing/lesson-01-v2-step-${String(i+1).padStart(2,'0')}.html`),'assets/go-mini-information-v2.js','assets/go-mini-information-v2-content.js','assets/go-mini-information-v2.css','assets/go-mini-information-v2-embed.css']){
   const response=await fetch(base+file+'?v='+plan.version);assert.equal(response.status,200,`Page not live: ${file}`);
   assert.equal(createHash('sha256').update(await response.text()).digest('hex'),createHash('sha256').update(await readFile(file)).digest('hex'),`CDN content mismatch: ${file}`);
 }

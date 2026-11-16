@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 export const origin=process.env.STEPIK_PREVIEW_ORIGIN||'http://localhost:8768';
-export const file=n=>`go-mini-module-02-lesson-02-step-${String(n).padStart(2,'0')}.html`;
+export const file=n=>`courses/305666-go-mini/modules/02-computing/lesson-02-step-${String(n).padStart(2,'0')}.html`;
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']};
 export async function closeDialogs(page){for(const d of await page.locator('dialog[open]').all())await d.locator('button').last().click();}
 export async function setOrder(page,host,keys){for(let target=0;target<keys.length;target++){let index=(await page.locator(host+' li').evaluateAll(nodes=>nodes.map(n=>n.dataset.command))).indexOf(keys[target]);while(index>target){await page.locator(`${host} [data-move="${keys[target]}"][data-direction="-1"]`).click();index--;}}}

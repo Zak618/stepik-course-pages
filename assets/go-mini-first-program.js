@@ -5,7 +5,7 @@
   const parameters=new URLSearchParams(location.search),embedded=parameters.get('panel')==='scene';
   if(embedded)document.documentElement.classList.add('first-fragment');
   const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const file=n=>`go-mini-module-03-lesson-01-step-${String(n).padStart(2,'0')}.html`;
+  const file=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-01-step-${String(n).padStart(2,'0')}.html`;
   const program=(body,imports=true)=>`package main\n\n${imports?'import "fmt"\n\n':''}func main() {\n${body}\n}\n`;
   const literal=s=>JSON.stringify(s).replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
   const sourceHighlight=s=>escape(s).replace(/(&quot;[^\n]*?&quot;)/g,'<span class="code-string">$1</span>').replace(/\b(package|import|func)\b/g,'<span class="code-key">$1</span>').replace(/fmt\.(Println|Print)/g,'<span class="code-call">fmt.$1</span>');

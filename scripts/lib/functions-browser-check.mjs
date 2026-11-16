@@ -5,13 +5,13 @@ export default async function checkBrowser({steps,tasks,origin,verify}){
  const page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true}),errors=[],external=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(origin)&&!r.url().startsWith('data:'))external.push(r.url());});
  const screenshots=await mkdtemp('/tmp/go-mini-functions-qa-');
- const scene=async(n,only=false)=>{await page.goto(`${origin}/go-mini-module-05-lesson-01-step-${String(n).padStart(2,'0')}.html${only?'?panel=scene':''}`);await page.waitForSelector('.world');};
+ const scene=async(n,only=false)=>{await page.goto(`${origin}/courses/305666-go-mini/modules/05-functions-and-data/lesson-01-step-${String(n).padStart(2,'0')}.html${only?'?panel=scene':''}`);await page.waitForSelector('.world');};
  const settled=async selector=>page.waitForFunction(s=>!document.querySelector(s).disabled,selector);
  const geometry=async label=>{const m=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-innerWidth,clipped:[...document.querySelectorAll('.fn-port,.code-strip,.fn-value,.scene-code,button')].filter(e=>e.scrollWidth>e.clientWidth+2).map(e=>e.className)}));verify(m.overflow<=1&&!m.clipped.length,'Geometry '+label+': '+JSON.stringify(m));};
  try{
   for(const width of [320,390,768,1024,1440]){
    await page.setViewportSize({width,height:1000});
-   for(let n=1;n<=steps.length;n++){await page.goto(`${origin}/go-mini-module-05-lesson-01-step-${String(n).padStart(2,'0')}.html`);await page.waitForSelector('h1');verify(await page.locator('h1').textContent()===steps[n-1].title,'Title '+n);await geometry(width+'/'+n);}
+   for(let n=1;n<=steps.length;n++){await page.goto(`${origin}/courses/305666-go-mini/modules/05-functions-and-data/lesson-01-step-${String(n).padStart(2,'0')}.html`);await page.waitForSelector('h1');verify(await page.locator('h1').textContent()===steps[n-1].title,'Title '+n);await geometry(width+'/'+n);}
    for(const[i,s]of steps.entries())if(s.kind==='scene'){await scene(i+1,true);await geometry('scene '+width+'/'+s.scene);verify(await page.locator('.world').evaluate(e=>e.getBoundingClientRect().width)>=Math.min(width,1024)-1,'Full width '+width+'/'+s.scene);if(width===390||width===1024)await page.locator('.world').screenshot({path:`${screenshots}/${s.scene}-${width}.png`});}
   }
   await page.setViewportSize({width:1024,height:1000});

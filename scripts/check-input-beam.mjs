@@ -7,7 +7,7 @@ const browser=await chromium.launch(browserOptions),page=await browser.newPage({
 const screenshots=await mkdtemp('/tmp/input-beam-'),errors=[];page.on('pageerror',e=>errors.push(e.message));let checks=0,maxDistance=0;
 try{
  for(const width of [320,640,1024]){
-  await page.setViewportSize({width,height:900});await page.goto(origin+'/go-mini-module-03-lesson-03-step-01.html?panel=scene&r=beam-3');await page.waitForSelector('#sky-send');await page.fill('#sky-input','функции');await page.click('#sky-send');
+  await page.setViewportSize({width,height:900});await page.goto(origin+'/courses/305666-go-mini/modules/03-go-basics/lesson-03-step-01.html?panel=scene&r=beam-3');await page.waitForSelector('#sky-send');await page.fill('#sky-input','функции');await page.click('#sky-send');
   await page.evaluate(()=>{window.beamAnimation=document.querySelector('#sky-message').getAnimations()[0];window.beamAnimation.pause();});
   for(const fraction of [0,.125,.25,.375,.5,.625,.75,.875,.9999]){
    await page.evaluate(fraction=>{window.beamAnimation.currentTime=1700*fraction;},fraction);

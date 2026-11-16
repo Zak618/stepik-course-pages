@@ -7,7 +7,7 @@ const page = await browser.newPage({viewport:{width:1280,height:900}});
 const errors=[];page.on('pageerror',error=>errors.push(error.message));
 let checks=0;
 function equal(actual,expected){assert.equal(actual,expected);checks++;}
-async function go(step){await page.goto(`${origin}/go-mini-module-02-lesson-01-step-${String(step).padStart(2,'0')}.html`);await page.locator('.explanation').waitFor();}
+async function go(step){await page.goto(`${origin}/courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(step).padStart(2,'0')}.html`);await page.locator('.explanation').waitFor();}
 async function text(selector){return page.locator(selector).innerText();}
 async function submit(value){await page.locator('#answer').fill(value);await page.locator('#answer-form').evaluate(form=>form.requestSubmit());}
 try {

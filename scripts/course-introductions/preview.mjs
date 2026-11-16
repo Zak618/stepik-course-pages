@@ -28,7 +28,7 @@ const server = http.createServer(async(req,res) => {
     }
     const relative = url.pathname === '/' ? 'previews/course-introductions/index.html' : decodeURIComponent(url.pathname).replace(/^\//,'');
     const cover = /^assets\/course-covers\/(\d+)\.png$/.exec(relative);
-    if (!files.has(relative) && !/^courses\/\d+-[a-z0-9-]+\/introduction\/(?:0[1-7]-[a-z-]+\.html|profile\.js)$/.test(relative) && !(cover && (Number(cover[1])===300562 || profiles.some(c=>c.id===Number(cover[1]))))) return send(404,'text/plain','Not found');
+    if (!files.has(relative) && !/^courses\/305666-go-mini\/modules\/01-introduction\/lesson-01-(?:step-0[1-6]|preview)\.html$/.test(relative) && !/^courses\/\d+-[a-z0-9-]+\/introduction\/(?:0[1-7]-[a-z-]+\.html|profile\.js)$/.test(relative) && !(cover && (Number(cover[1])===300562 || profiles.some(c=>c.id===Number(cover[1]))))) return send(404,'text/plain','Not found');
     const absolute = path.resolve(root,relative);
     if (!absolute.startsWith(root+path.sep) || await realpath(absolute)!==absolute || !(await stat(absolute)).isFile()) return send(404,'text/plain','Not found');
     return send(200,types[path.extname(relative)],await readFile(absolute));

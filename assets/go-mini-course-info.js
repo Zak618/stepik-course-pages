@@ -1,7 +1,7 @@
 // Public editorial source. No settings, credentials or course visibility changes.
 export const target={course:305666,account:647088271,title:'Go-шечка (mini)'};
 export const version='promo-20261115-1';
-export const files=['go-mini-course-promo.html','assets/go-mini-course-promo.css','assets/go-mini-course-promo.js'];
+export const files=['courses/305666-go-mini/promo.html','assets/go-mini-course-promo.css','assets/go-mini-course-promo.js'];
 export const frameHeight=490;
 export const fields={
  summary:'Первый курс по Go для тех, кто ещё не программировал. Разберём основы на простых примерах, попробуем интерактивные опыты и соберём свой поисковик — Go-шечка Find.',
@@ -21,7 +21,7 @@ export const fields={
 <h3>Ваш проект — Go-шечка Find.</h3>
 <p>Это небольшой поисковик для записей. Он принимает команды, ищет по названиям и добавляет новые записи. Если пользователь ввёл что-то не так, программа объясняет ошибку и продолжает работать.</p>
 <p>Ниже можно попробовать поиск. В курсе вы напишете свой вариант на Go.</p>
-<div style="font-size:0;margin:0;"><iframe src="https://zak618.github.io/stepik-course-pages/go-mini-course-promo.html?v=${version}" title="Попробуйте Go-шечку Find" width="100%" height="${frameHeight}" style="border:0;width:100%;background:#fff;margin:0;"></iframe></div>
+<div style="font-size:0;margin:0;"><iframe src="https://zak618.github.io/stepik-course-pages/courses/305666-go-mini/promo.html?v=${version}" title="Попробуйте Go-шечку Find" width="100%" height="${frameHeight}" style="border:0;width:100%;background:#fff;margin:0;"></iframe></div>
 <p>Мы соберём Find по частям. Сначала выведем текст, потом прочитаем запрос, проверим записи и добавим команды. К финалу у вас будет своя работающая программа.</p>
 <h3>Код будете писать вы.</h3>
 <p>В курсе есть подробные объяснения, интерактивные опыты, тесты и задачи на Go. Первые задачи идут с заготовками. Дальше подсказок становится меньше: вы сами решаете, какие команды нужны программе.</p>

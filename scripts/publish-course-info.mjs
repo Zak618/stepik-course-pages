@@ -20,7 +20,7 @@ let journal;try{journal=JSON.parse(await readFile('.local-publication/course-inf
 if(journal)assert.equal(journal.planHash,planHash,'Editorial source differs from publication journal');
 function verify(c){
  for(const key of keys){if(['description','target_audience','requirements','learning_format'].includes(key))assert.equal(readable(c[key]),readable(fields[key]),'Content: '+key);else assert.deepEqual(c[key],fields[key],'Field: '+key);}
- const iframe=c.description.match(/<iframe\b[^>]*>/g)||[];assert.equal(iframe.length,1,'Stepik removed the embed');assert.ok(iframe[0].includes('https://zak618.github.io/stepik-course-pages/go-mini-course-promo.html'));assert.ok(iframe[0].includes(`height="${frameHeight}"`));
+ const iframe=c.description.match(/<iframe\b[^>]*>/g)||[];assert.equal(iframe.length,1,'Stepik removed the embed');assert.ok(iframe[0].includes('https://zak618.github.io/stepik-course-pages/courses/305666-go-mini/promo.html'));assert.ok(iframe[0].includes(`height="${frameHeight}"`));
 }
 if(verifyOnly){assert.ok(journal);verify(before);assert.deepEqual(pick(before,protectedKeys),journal.protected);assert.equal(hash(JSON.stringify(await curriculum(before))),journal.curriculumHash,'Curriculum changed');console.log('All 8 editorial fields, iframe, protected settings and all lessons verified');process.exit(0);}
 if(journal){verify(before);console.log('Already saved; use --verify for a full read-only check');process.exit(0);}

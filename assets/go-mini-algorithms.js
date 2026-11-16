@@ -5,7 +5,7 @@
   const embedded=new URLSearchParams(location.search).get('panel')==='scene';
   if(embedded)document.documentElement.classList.add('algorithm-fragment');
   const escape=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const file=n=>`go-mini-module-02-lesson-02-step-${String(n).padStart(2,'0')}.html`;
+  const file=n=>`courses/305666-go-mini/modules/02-computing/lesson-02-step-${String(n).padStart(2,'0')}.html`;
   const records=[{title:'Циклы в Go',text:'Повторяем команды.'},{title:'Список покупок',text:'Хлеб, молоко, яблоки.'},{title:'Функции в Go',text:'Группируем команды.'},{title:'Цикл без конца',text:'Проверяем условие.'}];
   const search=(query,collection=records)=>{const q=query.trim().toLocaleLowerCase('ru');return q?collection.filter(r=>(r.title+' '+r.text).toLocaleLowerCase('ru').includes(q)):[];};
   const motion=()=>!matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -34,7 +34,7 @@
     const $=s=>root.querySelector(s),$$=s=>[...root.querySelectorAll(s)];
     const listen=(s,type,fn)=>$$(s).forEach(node=>node.addEventListener(type,fn,{signal:abort.signal}));
     const scene=`<div class="algorithm-scene" aria-label="Интерактивный опыт">${scenes[step]()}</div>`;
-    root.innerHTML=embedded?scene:`<header class="lesson-header"><p class="lesson-kicker">Алгоритмы <span>${String(step).padStart(2,'0')} / 09</span></p><h1>${data.title}</h1><p class="lesson-intro">${data.intro}</p></header><div class="algorithm-flow"><article class="story story-before">${data.before}</article>${scene}<article class="story">${data.after}</article></div><nav class="lesson-bottom" aria-label="Переход между шагами">${step>1?`<a href="${preview?'#'+String(step-1).padStart(2,'0'):file(step-1)}">← Назад</a>`:'<span>Команда WEB HACKER</span>'}${step<9?`<a class="button" href="${preview?'#'+String(step+1).padStart(2,'0'):file(step+1)}">Дальше →</a>`:'<a href="go-mini-module-02-lesson-02-preview.html#01">К началу урока ↗</a>'}</nav>`;
+    root.innerHTML=embedded?scene:`<header class="lesson-header"><p class="lesson-kicker">Алгоритмы <span>${String(step).padStart(2,'0')} / 09</span></p><h1>${data.title}</h1><p class="lesson-intro">${data.intro}</p></header><div class="algorithm-flow"><article class="story story-before">${data.before}</article>${scene}<article class="story">${data.after}</article></div><nav class="lesson-bottom" aria-label="Переход между шагами">${step>1?`<a href="${preview?'#'+String(step-1).padStart(2,'0'):file(step-1)}">← Назад</a>`:'<span>Команда WEB HACKER</span>'}${step<9?`<a class="button" href="${preview?'#'+String(step+1).padStart(2,'0'):file(step+1)}">Дальше →</a>`:'<a href="courses/305666-go-mini/modules/02-computing/lesson-02-preview.html#01">К началу урока ↗</a>'}</nav>`;
     document.querySelectorAll('#algorithm-nav a').forEach((link,i)=>{if(i+1===step)link.setAttribute('aria-current','step');else link.removeAttribute('aria-current');});
     const picker=document.getElementById('algorithm-picker');if(picker)picker.value=String(step).padStart(2,'0');
     const open=document.getElementById('algorithm-open');if(open)open.href=file(step);

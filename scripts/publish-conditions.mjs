@@ -50,7 +50,7 @@ let cases=0;for(const a of plan.articles.filter(a=>a.block.name==='code')){const
 console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existingSteps:existing.length,plannedSteps:20,points:110,openInputCases:cases,otherLessons: Object.keys(untouched).length,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
 // Fail before creating any Stepik step if one static dependency is stale.
-await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-conditions[\w.-]*\.(js|css)|go-mini-module-04-lesson-01-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
+await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-conditions[\w.-]*\.(js|css)|courses\/305666-go-mini\/modules\/04-control-flow\/lesson-01-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/conditions-before-${Date.now()}.json`,JSON.stringify({lesson,structure:beforeStructure,sources:existing,untouched},null,2));
 for(const article of plan.articles){

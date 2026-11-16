@@ -15,13 +15,13 @@ const course=(await api('courses/305666')).courses[0];assert.equal(course.owner,
 const lesson=(await api('lessons/2706555')).lessons[0];assert.equal(lesson.owner,identity);assert.ok(lesson.courses.includes(305666));assert.ok(lesson.units.includes(2746570));
 // GitHub Pages must be ready before the lesson acquires any embeds.
 const base='https://zak618.github.io/stepik-course-pages/';
-for(const file of [...Array.from({length:10},(_,i)=>`go-mini-module-02-lesson-01-step-${String(i+1).padStart(2,'0')}.html`),'assets/go-mini-information-story.js','assets/go-mini-information.js','assets/go-mini-information.css']){
+for(const file of [...Array.from({length:10},(_,i)=>`courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(i+1).padStart(2,'0')}.html`),'assets/go-mini-information-story.js','assets/go-mini-information.js','assets/go-mini-information.css']){
   const response=await fetch(base+file+'?v='+plan.version);assert.equal(response.status,200,`Page not live: ${file}`);
   const text=await response.text();if(file.includes('story')){assert.ok(text.includes('Go-шечка Find'));assert.ok(!text.includes('GoSearch'));}
 }
 async function getSources(){const all=[];for(let page=1;page<=20;page++){const data=await api(`step-sources?lesson=2706555&page=${page}`);all.push(...data['step-sources']);if(!data.meta?.has_next)return all;}throw new Error('Unexpected pagination');}
 const existing=await getSources();
-for(const source of existing){assert.ok(source.position>=1&&source.position<=10);assert.ok(source.block.text.includes(base+`go-mini-module-02-lesson-01-step-${String(source.position).padStart(2,'0')}.html`),'Unrelated step exists; refusing to replace it');}
+for(const source of existing){assert.ok(source.position>=1&&source.position<=10);assert.ok(source.block.text.includes(base+`courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(source.position).padStart(2,'0')}.html`),'Unrelated step exists; refusing to replace it');}
 assert.equal(new Set(existing.map(source=>source.position)).size,existing.length,'Duplicate positions');
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/stepik-before-${Date.now()}.json`,JSON.stringify({lesson,sources:existing},null,2));

@@ -4,7 +4,7 @@
   const frame=document.getElementById('lesson-frame');
   const list=document.getElementById('step-list');
   let observer, current=0;
-  const path=n=>`go-mini-module-02-lesson-01-step-${String(n).padStart(2,'0')}.html`;
+  const path=n=>`courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(n).padStart(2,'0')}.html`;
   list.innerHTML=titles.map((title,i)=>`<a class="step-link" href="#${String(i+1).padStart(2,'0')}"><span>${String(i+1).padStart(2,'0')}</span>${title}</a>`).join('');
   function show(){
     const parsed=Number(location.hash.slice(1));const number=Number.isInteger(parsed)&&parsed>=1&&parsed<=10?parsed:1;

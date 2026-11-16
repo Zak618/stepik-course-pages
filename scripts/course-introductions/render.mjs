@@ -66,7 +66,7 @@ export async function renderPart(course, part) {
   if (!definition) throw Error('Unknown part');
   if (part === 'study') return studyPage(course);
   let html = await template(definition[2]);
-  if (course.reference) return readFile('go-mini-module-01-lesson-01-step-' + definition[2] + '.html', 'utf8');
+  if (course.reference) return readFile('courses/305666-go-mini/modules/01-introduction/lesson-01-step-' + definition[2] + '.html', 'utf8');
   if (part === 'welcome') {
     const name = esc(course.title).replace(/(\([^)]*\))/g, '<small>$1</small>');
     html = html.replace(/<p class="course-name">[\s\S]*?<\/p>/, '<p class="course-name">' + name + '</p>');

@@ -1,7 +1,7 @@
 import {steps,tasks} from './go-mini-loops-content.js';
 import {mountWorld,escapeHTML as E} from './go-mini-loops-worlds.js';
 const main=document.querySelector('main'),preview=document.body.dataset.preview==='true',params=new URLSearchParams(location.search),sceneOnly=params.get('panel')==='scene';
-const file=n=>`go-mini-module-04-lesson-02-step-${String(n).padStart(2,'0')}.html`;
+const file=n=>`courses/305666-go-mini/modules/04-control-flow/lesson-02-step-${String(n).padStart(2,'0')}.html`;
 const read=(key,fallback='')=>{try{return localStorage.getItem('go-loops:'+key)??fallback;}catch{return fallback;}};
 const save=(key,value)=>{try{localStorage.setItem('go-loops:'+key,value);}catch{}};
 let current=Math.min(steps.length,Math.max(1,Number(params.get('step')||document.body.dataset.step)||1)),controller,noMotion=read('motion')==='off';

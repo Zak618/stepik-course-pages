@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 export const origin=process.env.STEPIK_FIRST_PROGRAM_ORIGIN||'http://localhost:8769';
-export const file=n=>`go-mini-module-03-lesson-01-step-${String(n).padStart(2,'0')}.html`;
+export const file=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-01-step-${String(n).padStart(2,'0')}.html`;
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']};
 export const frameSteps=[1,2,4,5,7];
 export function sceneGeometry(){

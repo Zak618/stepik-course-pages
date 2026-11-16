@@ -38,7 +38,7 @@ for(const id of [...new Set(outline.units.map(u=>u.lesson))].filter(id=>!plan.ar
 console.log(JSON.stringify({mode:apply?'apply':'read-only preflight',account:plan.account,append:plan.articles.map(a=>({lesson:a.lesson,position:a.position,existing:initial[a.lesson].length})),pointsUnchanged:originalPoints,otherLessons:Object.keys(untouched).length},null,2));
 if(!apply)process.exit(0);
 for(const file of plan.files){
- assert.ok(/^(assets\/go-mini-finale\.(js|css)|go-mini-module-06-(finale-preview|lesson-01-step-13|lesson-02-step-01)\.html)$/.test(file));
+ assert.ok(/^(assets\/go-mini-finale\.(js|css)|courses\/305666-go-mini\/modules\/06-project\/(finale-preview|lesson-01-step-13|lesson-02-step-01)\.html)$/.test(file));
  const expected=hash(await readFile(file));let ready=false;
  for(let i=0;i<4;i++){const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});if(r.ok&&hash(Buffer.from(await r.arrayBuffer()))===expected){ready=true;break;}await new Promise(r=>setTimeout(r,1000));}
  assert.ok(ready,'Pages not ready: '+file);

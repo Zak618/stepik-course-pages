@@ -82,12 +82,12 @@
         }
       ],
       "pages": {
-        "welcome": "go-mini-module-01-lesson-01-step-01.html",
-        "telegram": "go-mini-module-01-lesson-01-step-02.html",
-        "survey": "go-mini-module-01-lesson-01-step-03.html",
-        "rules": "go-mini-module-01-lesson-01-step-04.html",
-        "map": "go-mini-module-01-lesson-01-step-05.html",
-        "start": "go-mini-module-01-lesson-01-step-06.html"
+        "welcome": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-01.html",
+        "telegram": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-02.html",
+        "survey": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-03.html",
+        "rules": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-04.html",
+        "map": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-05.html",
+        "start": "courses/305666-go-mini/modules/01-introduction/lesson-01-step-06.html"
       }
     },
     {

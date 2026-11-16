@@ -8,7 +8,7 @@ const page=await browser.newPage({viewport:{width:1440,height:1050},reducedMotio
 const errors=[];page.on('pageerror',e=>errors.push(e.message));let checks=0;
 const equal=(a,b)=>{assert.equal(a,b);checks++;};
 const text=selector=>page.locator(selector).textContent().then(s=>s.trim());
-async function go(n,panel=false){await page.goto(`${origin}/go-mini-module-02-lesson-02-step-${String(n).padStart(2,'0')}.html${panel?'?panel=scene':''}`);await page.locator('.algorithm-scene').waitFor();}
+async function go(n,panel=false){await page.goto(`${origin}/courses/305666-go-mini/modules/02-computing/lesson-02-step-${String(n).padStart(2,'0')}.html${panel?'?panel=scene':''}`);await page.locator('.algorithm-scene').waitFor();}
 async function submitQuiz(value){if(await page.locator('#quiz-number').count())await page.locator('#quiz-number').fill(value);else if(value!==null)await page.locator(`[name=answer][value="${value}"]`).check();await page.locator('#quiz-form').evaluate(f=>f.requestSubmit());}
 async function setOrder(host,keys){for(let target=0;target<keys.length;target++){let index=(await page.locator(host+' li').evaluateAll(nodes=>nodes.map(n=>n.dataset.command))).indexOf(keys[target]);while(index>target){await page.locator(`${host} [data-move="${keys[target]}"][data-direction="-1"]`).click();index--;}}}
 try{

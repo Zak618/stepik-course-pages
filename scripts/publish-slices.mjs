@@ -53,7 +53,7 @@ for(const n of [20,21,22])assert.equal(plan.articles[n-1].block.source.templates
 assert.equal(cases,148);
 console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existingSteps:existing.length,plannedSteps:22,points:140,openInputCases:cases,otherLessons:Object.keys(untouched).length,mode:apply?'apply':'read-only preflight'},null,2));
 if(!apply)process.exit(0);
-await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-slices[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|go-mini-module-05-lesson-02-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
+await Promise.all(plan.files.map(async file=>{assert.ok(/^(assets\/go-mini-slices[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|courses\/305666-go-mini\/modules\/05-functions-and-data\/lesson-02-[\w-]+\.html)$/.test(file));const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'Pages not ready: '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Stale Pages: '+file);}));
 await mkdir('.local-publication',{recursive:true});
 await writeFile(`.local-publication/slices-before-${Date.now()}.json`,JSON.stringify({lesson,structure:beforeStructure,sources:existing,untouched},null,2));
 journal.version=plan.version;

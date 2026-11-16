@@ -12,7 +12,7 @@
   const plural=(n,one,few,many)=>n%100>=11&&n%100<=14?many:n%10===1?one:n%10>=2&&n%10<=4?few:many;
   const weights=[16,8,4,2,1];
   const motion=()=>!matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const file=n=>`go-mini-module-02-lesson-01-v2-step-${String(n).padStart(2,'0')}.html`;
+  const file=n=>`courses/305666-go-mini/modules/02-computing/lesson-01-v2-step-${String(n).padStart(2,'0')}.html`;
   const glyphs=text=>typeof Intl.Segmenter==='function'?[...new Intl.Segmenter('ru',{granularity:'grapheme'}).segment(text)].map(s=>s.segment):Array.from(text);
   let generation=0,frame=0,abort=new AbortController();
   const monitor=(side,inside)=>`<div class="computer ${side}"><div class="monitor"><div class="monitor-camera" aria-hidden="true"></div><div class="monitor-screen">${inside}</div><div class="monitor-chin" aria-hidden="true">●</div></div><div class="monitor-neck" aria-hidden="true"></div><div class="monitor-foot" aria-hidden="true"></div><div class="keyboard" aria-hidden="true"></div></div>`;
@@ -51,7 +51,7 @@
     else if([3,9].includes(step))flow=`<div class="duo-layout">${story(sections.slice(0,2).join(''),'duo-story')}${experiment}</div>`+story(sections.slice(2).join('')+extra);
     else if(step===5)flow=`<div class="duo-layout workshop-layout">${experiment}${story(sections[0],'duo-story')}</div>`+story(sections.slice(1).join('')+extra);
     else flow=experiment+story(data.body+extra);
-    root.innerHTML=`<header class="lesson-header"><p class="lesson-kicker">Основы вычислений <span>${String(step).padStart(2,'0')} / 10</span></p>${data.welcome?`<p class="welcome-line">${data.welcome}</p>`:''}<h1>${data.title}</h1><p class="lesson-question">${data.question}</p><p class="lesson-intro">${data.intro}</p></header><div class="lesson-flow">${flow}</div><nav class="lesson-bottom" aria-label="Переход между шагами">${step>1?`<a href="${go(step-1)}">← Назад</a>`:'<span>Команда WEB HACKER</span>'}${step<10?`<a class="button" href="${go(step+1)}">Дальше →</a>`:'<a href="go-mini-module-02-lesson-01-v2-preview.html">К началу урока ↗</a>'}</nav>`;
+    root.innerHTML=`<header class="lesson-header"><p class="lesson-kicker">Основы вычислений <span>${String(step).padStart(2,'0')} / 10</span></p>${data.welcome?`<p class="welcome-line">${data.welcome}</p>`:''}<h1>${data.title}</h1><p class="lesson-question">${data.question}</p><p class="lesson-intro">${data.intro}</p></header><div class="lesson-flow">${flow}</div><nav class="lesson-bottom" aria-label="Переход между шагами">${step>1?`<a href="${go(step-1)}">← Назад</a>`:'<span>Команда WEB HACKER</span>'}${step<10?`<a class="button" href="${go(step+1)}">Дальше →</a>`:'<a href="courses/305666-go-mini/modules/02-computing/lesson-01-v2-preview.html">К началу урока ↗</a>'}</nav>`;
     if(step===10){
       const task=document.createElement('aside');task.className='find-task';task.setAttribute('aria-labelledby','find-task-title');
       task.innerHTML='<h2 id="find-task-title">Найдём заметки про циклы.</h2><p>В поле уже есть слово <strong>цикл</strong>. Нажмите «Найти» и посмотрите, какие записи попадут в папку. А что произойдёт, если поискать пиццу?</p>';

@@ -9,7 +9,7 @@ const errors=[];page.on('pageerror',error=>errors.push(error.message));
 let checks=0;
 const equal=(actual,expected)=>{assert.equal(actual,expected);checks++;};
 const text=selector=>page.locator(selector).textContent().then(value=>value.trim());
-async function go(step){await page.goto(`${origin}/go-mini-module-02-lesson-01-v2-step-${String(step).padStart(2,'0')}.html`);await page.locator('.story').first().waitFor();}
+async function go(step){await page.goto(`${origin}/courses/305666-go-mini/modules/02-computing/lesson-01-v2-step-${String(step).padStart(2,'0')}.html`);await page.locator('.story').first().waitFor();}
 async function submit(value){await page.locator('#answer').fill(value);await page.locator('#answer-form').evaluate(form=>form.requestSubmit());}
 try{
   await page.goto(origin+'/information-v2');await page.locator('#send').waitFor();await page.screenshot({path:screenshots+'/preview.png'});

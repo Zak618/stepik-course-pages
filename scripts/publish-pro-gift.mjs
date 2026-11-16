@@ -22,7 +22,7 @@ const end = original.indexOf('<h2', start);
 assert.ok(start > 0 && end > start && original.slice(start, end).includes('GOSHECHKA10'));
 const prefix = original.slice(0, start).replace('v=finale-20261115-1', 'v=city-restored-20261116-1');
 const suffix = original.slice(end);
-const ticket = `<div style="font-size:0;margin:0;"><iframe height="230" src="${root}go-mini-pro-ticket.html?v=${version}" style="border:0;width:100%;margin:0;background:#fff;" width="100%"></iframe></div>`;
+const ticket = `<div style="font-size:0;margin:0;"><iframe height="230" src="${root}courses/305666-go-mini/modules/06-project/pro-ticket.html?v=${version}" style="border:0;width:100%;margin:0;background:#fff;" width="100%"></iframe></div>`;
 const text = prefix + ticket + '\n\n' + suffix;
 assert.ok(text.includes('Find работает.') && text.includes('Спасибо, что были с нами.'));
 assert.equal((text.match(/<iframe/g) || []).length, 2);
@@ -44,7 +44,7 @@ if (!process.argv.includes('--apply') && !process.argv.includes('--verify')) {
   console.log(JSON.stringify({mode: 'preflight', step: old.id, cost: old.cost, height: 230, originalPrefixRestored: true, originalSuffixRestored: true}));
   process.exit(0);
 }
-for (const file of ['go-mini-module-06-lesson-02-step-01.html', 'go-mini-pro-ticket.html', 'assets/go-mini-pro-gift.css', 'assets/go-mini-pro-gift.js']) {
+for (const file of ['courses/305666-go-mini/modules/06-project/lesson-02-step-01.html', 'courses/305666-go-mini/modules/06-project/pro-ticket.html', 'assets/go-mini-pro-gift.css', 'assets/go-mini-pro-gift.js']) {
   const r = await fetch(root + file + '?v=' + version, {signal: AbortSignal.timeout(30000)});
   assert.ok(r.ok && hash(Buffer.from(await r.arrayBuffer())) === hash(await readFile(file)), 'Pages not ready: ' + file);
 }

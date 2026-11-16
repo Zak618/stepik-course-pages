@@ -16,7 +16,7 @@ const plain=html=>html.replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/\
 const heading=(icon,title)=>`<h2 style="color:#6742bf;">${icon} ${esc(title)}</h2>`;
 const paragraph=text=>`<p>${esc(text)}</p>`;
 const link=(url,label)=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
-const map=`<p><iframe src="${origin}go-mini-module-01-lesson-01-step-05.html?embed=1&amp;v=20261116-universal" width="100%" height="860" title="Карта курсов WEB HACKER" style="border:0;"></iframe></p>`;
+const map=`<p><iframe src="${origin}courses/305666-go-mini/modules/01-introduction/lesson-01-step-05.html?embed=1&amp;v=20261116-universal" width="100%" height="860" title="Карта курсов WEB HACKER" style="border:0;"></iframe></p>`;
 const mapArticle=heading('🧭','Карта курсов')+map;
 const responsive=html=>html.replace(/<img\b([^>]*)>/gi,(_,attrs)=>'<img'+attrs.replace(/\s(?:width|height|style)="[^"]*"/gi,'')+' style="max-width:100%;height:auto;">').replace(/autoplay=1/g,'autoplay=0');
 const rules=heading('🤝','Как учимся вместе')+'<ul><li>Обсуждаем работу, не человека. Не оскорбляем друг друга.</li><li>Помогаем разобраться, но не публикуем готовые ответы к заданиям.</li><li>В вопросе указываем шаг, свои действия и результат. Для кода сохраняем отступы.</li><li>Нашли неточность? Напишите в комментариях к этому шагу, что именно не сходится.</li></ul>';

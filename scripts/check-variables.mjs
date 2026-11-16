@@ -35,7 +35,7 @@ for(const code of [
   'package main\nimport "fmt"\n//go:linkname main.main os.Exit\nfunc main(){fmt.Println("x")}',
   program('fmt.Printf("%s", "x")'),program('fmt.Println(fmt.Sprint("x"))')
 ]){const r=await api(code);check(!r.ok&&r.phase==='limit','Disallowed syntax rejected');}
-for(const location of ['/.env','/.env.stepik','/README.md','/scripts/preview-variables.mjs','/assets/go-mini-first-program.js','/go-mini-module-03-lesson-01-preview.html']){
+for(const location of ['/.env','/.env.stepik','/README.md','/scripts/preview-variables.mjs','/assets/go-mini-first-program.js','/courses/305666-go-mini/modules/03-go-basics/lesson-01-preview.html']){
   const r=await fetch(base+location);check(r.status===404,`Serving allowlist ${location}`);
 }
 check((await fetch(base+'/api/variables/run')).status===405,'POST required');
@@ -85,7 +85,7 @@ try{
   await go(10);await page.check('input[value="0"]');await page.click('button[type=submit]');check((await page.locator('#quiz-feedback').innerText()).includes('В какой момент'),'Quiz wrong');await page.check('input[value="1"]');await page.click('button[type=submit]');check((await page.locator('#quiz-feedback').innerText()).startsWith('Верно.'),'Quiz correct');
   await page.emulateMedia({reducedMotion:'reduce'});await go(1);await page.click('#query-send');check(await page.locator('.flight').count()===0,'Reduced motion no flying tickets');await page.setViewportSize({width:390,height:900});for(const n of[1,3,5,7,9,11,13,16]){await go(n);if(n===11)await page.click('#drawer-open');await geometry(`Mobile state ${n}`);await page.screenshot({path:path.join(shots,`${String(n).padStart(2,'0')}-mobile.png`),fullPage:true});}
   for(const n of[6,8,16]){await go(n);await page.fill('#code-source',tasks[n].solution);await page.click('#code-run');await page.waitForFunction(()=>document.querySelector('#code-verdict')?.textContent.includes('Программа выполнена'));check(await page.locator('#code-artifact').isVisible(),`Mobile task ${n} output visible`);await geometry(`Mobile task ${n} output`);await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(shots,`${n}-mobile-output.png`),fullPage:true});}
-  await page.goto(base+'/go-mini-module-03-lesson-02-step-09.html');await page.click('#copy-next');check(await page.locator('#copy-saved').innerText()==='циклы','Separate page works');
+  await page.goto(base+'/courses/305666-go-mini/modules/03-go-basics/lesson-02-step-09.html');await page.click('#copy-next');check(await page.locator('#copy-saved').innerText()==='циклы','Separate page works');
   check(errors.length===0,`Browser errors: ${errors.join('\n')}`);check(external.length===0,'No external requests');
   console.log(JSON.stringify({checks,errors,externalRequests:external.length,screenshots:shots,steps:16,codeTasks:8,plannedPoints:90},null,2));
 }finally{await context.close();await browser.close();}

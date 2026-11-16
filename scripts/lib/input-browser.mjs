@@ -2,8 +2,8 @@ export const origin=process.env.STEPIK_INPUT_URL||'http://localhost:8773';
 export const version='input-20261114-publish-1';
 export const target={course:305666,lesson:2706561,unit:2746576,account:647088271,title:'Ввод данных'};
 export const frameSteps=[1,3,5,7,9,11];
-export const filename=n=>`go-mini-module-03-lesson-03-step-${String(n).padStart(2,'0')}.html`;
-export const files=['go-mini-module-03-lesson-03-preview.html',...Array.from({length:12},(_,i)=>filename(i+1)),...['.css','-embed-v2.css','-wide.css','-replacements.js','.js','-content.js','-worlds.js'].map(s=>'assets/go-mini-input'+s)];
+export const filename=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-03-step-${String(n).padStart(2,'0')}.html`;
+export const files=['courses/305666-go-mini/modules/03-go-basics/lesson-03-preview.html',...Array.from({length:12},(_,i)=>filename(i+1)),...['.css','-embed-v2.css','-wide.css','-replacements.js','.js','-content.js','-worlds.js'].map(s=>'assets/go-mini-input'+s)];
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']};
 export function geometry(){
  const root=document.querySelector('main'),scene=root.querySelector('.world');let inkBottom=0;

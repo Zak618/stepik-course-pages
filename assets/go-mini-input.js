@@ -9,7 +9,7 @@ let controller;
 const key='go-mini-input-drafts-v1';
 const getStore=()=>{try{return JSON.parse(localStorage.getItem(key)||'{}');}catch{return {};}};
 const save=(k,value)=>{try{localStorage.setItem(key,JSON.stringify({...getStore(),[k]:value}));}catch{}};
-const filename=n=>`go-mini-module-03-lesson-03-step-${String(n).padStart(2,'0')}.html`;
+const filename=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-03-step-${String(n).padStart(2,'0')}.html`;
 const codeBlock=s=>`<pre class="go-snippet"><code>${esc(s)}</code></pre>`;
 function shell(){
  document.body.innerHTML=`${preview?`<header class="preview-header"><div class="brand"><b>Go-шечка</b> mini</div><span class="mini-label">Ввод данных · локальный просмотр</span><div class="header-actions"><button id="phone-toggle" aria-pressed="false">Ширина телефона</button><button id="motion-toggle" aria-pressed="false">Без анимаций</button></div></header>`:''}<div class="${preview?'preview-layout':'standalone-layout'}">${preview?'<aside class="sidebar" aria-label="Шаги урока"><p class="side-title">Ввод данных</p><nav class="step-list"></nav></aside>':''}<main class="lesson" id="input-lesson"></main></div>`;

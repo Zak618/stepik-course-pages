@@ -6,7 +6,7 @@ import path from 'node:path';
 const origin=process.env.STEPIK_FINALE_URL||'http://localhost:8787';
 const base='https://zak618.github.io/stepik-course-pages/';
 const version='finale-20261115-1';
-const files=['go-mini-module-06-finale-preview.html','go-mini-module-06-lesson-01-step-13.html','go-mini-module-06-lesson-02-step-01.html','assets/go-mini-finale.js','assets/go-mini-finale.css'];
+const files=['courses/305666-go-mini/modules/06-project/finale-preview.html','courses/305666-go-mini/modules/06-project/lesson-01-step-13.html','courses/305666-go-mini/modules/06-project/lesson-02-step-01.html','assets/go-mini-finale.js','assets/go-mini-finale.css'];
 const targets=[{lesson:2706569,unit:2746584,title:'Итоговый проект',position:13,file:files[1]},{lesson:2713291,unit:2753290,title:'Что дальше',position:1,file:files[2]}];
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'/tmp/stepik-v2-tools-M279ew/node_modules/playwright-core/index.mjs');
 const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']});

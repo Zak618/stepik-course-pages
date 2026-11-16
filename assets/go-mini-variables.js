@@ -7,7 +7,7 @@ const preview = document.body.dataset.preview === 'true';
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const $ = selector => root.querySelector(selector);
 const $$ = selector => [...root.querySelectorAll(selector)];
-const filename = n => `go-mini-module-03-lesson-02-step-${String(n).padStart(2, '0')}.html`;
+const filename = n => `courses/305666-go-mini/modules/03-go-basics/lesson-02-step-${String(n).padStart(2, '0')}.html`;
 const all = Object.fromEntries(Array.from({length:16}, (_, i) => [i+1, articles[i+1] || tasks[i+1] || quiz[i+1]]));
 const drafts = new Map();
 const solved = new Set();

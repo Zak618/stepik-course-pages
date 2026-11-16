@@ -5,7 +5,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright-core');
 const origin=process.env.STEPIK_PREVIEW_ORIGIN||'http://localhost:8767';
 const published='https://zak618.github.io/stepik-course-pages/';
 const version='information-v2-spacing-20261114';
-const file=n=>`go-mini-module-02-lesson-01-v2-step-${String(n).padStart(2,'0')}.html`;
+const file=n=>`courses/305666-go-mini/modules/02-computing/lesson-01-v2-step-${String(n).padStart(2,'0')}.html`;
 const panels=n=>['scene',...(n===6?['carry']:n===9?['rgb']:[])];
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
 const page=await browser.newPage({reducedMotion:'reduce'});

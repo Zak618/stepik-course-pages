@@ -48,11 +48,11 @@ const server=http.createServer(async(req,res)=>{
       active=true;try{const answer=JSON.parse(await execute(runner,[],JSON.stringify({code:data.code})));json(res,200,answer);}finally{active=false;}return;
     }
     if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}
-    const relative=['/','/first-program','/first-program/'].includes(url.pathname)?'go-mini-module-03-lesson-01-preview.html':decodeURIComponent(url.pathname).replace(/^\/+/, '');
-    if(!/^(go-mini-module-03-lesson-01-(preview|step-(0[1-9]|10))\.html|assets\/go-mini-first-program(-content|-model|-embed)?\.(css|js))$/.test(relative)){res.writeHead(404);res.end('Not found');return;}
+    const relative=['/','/first-program','/first-program/'].includes(url.pathname)?'courses/305666-go-mini/modules/03-go-basics/lesson-01-preview.html':decodeURIComponent(url.pathname).replace(/^\/+/, '');
+    if(!/^(courses\/305666-go-mini\/modules\/03-go-basics\/lesson-01-(preview|step-(0[1-9]|10))\.html|assets\/go-mini-first-program(-content|-model|-embed)?\.(css|js))$/.test(relative)){res.writeHead(404);res.end('Not found');return;}
     const file=path.resolve(root,relative),resolved=await realpath(file);
     if(!resolved.startsWith(root+path.sep)){res.writeHead(404);res.end();return;}
-    res.writeHead(200,{'Content-Type':types[path.extname(file)],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:${port} http://127.0.0.1:${port}`});
+    res.writeHead(200,{'Content-Type':types[path.extname(file)],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'self' http://localhost:${port} http://127.0.0.1:${port}`});
     res.end(req.method==='HEAD'?undefined:await readFile(file));
   }catch(e){if(!res.headersSent)json(res,500,{ok:false,phase:'server',diagnostic:'Локальный запуск не завершился. Попробуйте ещё раз.'});else res.end();}
 });

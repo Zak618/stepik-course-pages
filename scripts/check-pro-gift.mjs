@@ -28,7 +28,7 @@ async function scratch(p) {
 try {
   for (const width of [280, 320, 350, 390, 580, 581, 640, 1024, 1360]) {
     await page.setViewportSize({width, height: 230});
-    await page.goto(origin + '/go-mini-pro-ticket.html');
+    await page.goto(origin + '/courses/305666-go-mini/modules/06-project/pro-ticket.html');
     await page.waitForSelector('#cover:not([hidden])');
     ok(await page.locator('#copy').isHidden(), 'Copy appears only after scratching');
     const size = await page.evaluate(() => ({x: document.documentElement.scrollWidth - innerWidth, height: document.querySelector('main').getBoundingClientRect().height}));

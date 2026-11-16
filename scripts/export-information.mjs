@@ -10,7 +10,7 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/u
 const page=await browser.newPage();
 const heights={};const failures=[];
 page.on('pageerror',error=>failures.push(error.message));
-const filename=step=>`go-mini-module-02-lesson-01-step-${String(step).padStart(2,'0')}.html`;
+const filename=step=>`courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(step).padStart(2,'0')}.html`;
 async function exercise(step,panel){
   if(panel==='scene'){
     if(step===1)await page.locator('#message').fill('🤖'.repeat(12));

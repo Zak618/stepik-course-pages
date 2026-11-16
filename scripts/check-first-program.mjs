@@ -15,7 +15,7 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/u
 const context=await browser.newContext({viewport:{width:1440,height:1050},reducedMotion:'reduce',bypassCSP:true});
 const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
 const text=s=>page.locator(s).textContent();
-const file=n=>`go-mini-module-03-lesson-01-step-${String(n).padStart(2,'0')}.html`;
+const file=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-01-step-${String(n).padStart(2,'0')}.html`;
 const open=async n=>{await page.goto(origin+'/'+file(n));await page.locator('.scene').waitFor();};
 const run=async(selector)=>{await page.locator(selector).click();await page.waitForFunction(s=>{const b=document.querySelector(s);return b&&!b.disabled;},selector,{timeout:30000});};
 const program=body=>`package main\n\nimport "fmt"\n\nfunc main(){\n${body}\n}\n`;
@@ -59,6 +59,6 @@ try{
   const source={window:{}};vm.runInNewContext(await readFile('assets/go-mini-first-program-content.js','utf8'),source);const tasks=Array.from(source.window.FirstProgramContent).filter(s=>s?.assessment).map(s=>s.assessment);equal(tasks.length,5);equal(tasks.reduce((sum,t)=>sum+t.cost,0),50);equal(tasks.filter(t=>t.type==='code').length,2);assert.ok(source.window.FirstProgramContent[5].after.includes('Go\\nFind'));checks++;
   equal(requests.filter(u=>!u.startsWith(origin)).length,0);
   // Portable HTML remains readable without the server; it never pretends to run Go.
-  await page.goto(pathToFileURL(path.resolve('go-mini-module-03-lesson-01-preview.html')).href);await page.locator('#greeting-run').click();await page.waitForFunction(()=>!document.querySelector('#greeting-run').disabled);equal(await text('#greeting-output'),'Привет, Go!\n');await page.locator('#first-nav a[href="#03"]').click();await page.locator('#quiz-question').waitFor();equal(await page.locator('#quiz-form').count(),1);
+  await page.goto(pathToFileURL(path.resolve('courses/305666-go-mini/modules/03-go-basics/lesson-01-preview.html')).href);await page.locator('#greeting-run').click();await page.waitForFunction(()=>!document.querySelector('#greeting-run').disabled);equal(await text('#greeting-output'),'Привет, Go!\n');await page.locator('#first-nav a[href="#03"]').click();await page.locator('#quiz-question').waitFor();equal(await page.locator('#quiz-form').count(),1);
   equal(errors,[]);console.log(JSON.stringify({checks,errors,screenshots,externalRequests:0,codeTasks:2,totalCost:50},null,2));
 }finally{await browser.close();}

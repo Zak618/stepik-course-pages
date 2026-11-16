@@ -69,7 +69,7 @@ try {
 } catch (error) { await cleanup(); throw error; }
 
 const hosts = new Set([`localhost:${port}`, `127.0.0.1:${port}`]);
-const allowedFile = /^(?:go-mini-module-03-lesson-02-(?:preview|step-(?:0[1-9]|1[0-6]))\.html|assets\/go-mini-variables(?:-[a-z0-9]+)*\.(?:js|css))$/;
+const allowedFile = /^(?:courses\/305666-go-mini\/modules\/03-go-basics\/lesson-02-(?:preview|step-(?:0[1-9]|1[0-6]))\.html|assets\/go-mini-variables(?:-[a-z0-9]+)*\.(?:js|css))$/;
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8' };
 const commonHeaders = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
 const answer = (res, status, diagnostic, phase = 'request') => json(res, status, { ok: false, stdout: '', diagnostic, phase });
@@ -117,7 +117,7 @@ server = http.createServer(async (req, res) => {
     let relative;
     try {
       relative = ['/', '/variables', '/variables/'].includes(url.pathname)
-        ? 'go-mini-module-03-lesson-02-preview.html' : decodeURIComponent(url.pathname).replace(/^\//, '');
+        ? 'courses/305666-go-mini/modules/03-go-basics/lesson-02-preview.html' : decodeURIComponent(url.pathname).replace(/^\//, '');
     } catch { answer(res, 400, 'Некорректный адрес.'); return; }
     if (!allowedFile.test(relative)) { answer(res, 404, 'Файл не найден.'); return; }
     let resolved;
@@ -128,7 +128,7 @@ server = http.createServer(async (req, res) => {
     const content = req.method === 'HEAD' ? undefined : await readFile(resolved);
     res.writeHead(200, {
       ...commonHeaders, 'Content-Type': types[path.extname(relative)],
-      'Content-Security-Policy': `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self' http://localhost:${port} http://127.0.0.1:${port}`,
+      'Content-Security-Policy': `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self' http://localhost:${port} http://127.0.0.1:${port}`,
     });
     res.end(content);
   } catch {

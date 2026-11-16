@@ -31,7 +31,7 @@ try{
     const courier=await page.locator('.delivery-courier').evaluate(el=>{const t=el.transform.baseVal.consolidate().matrix,p=document.querySelector('#delivery-path'),end=p.getPointAtLength(p.getTotalLength());return Math.hypot(t.e-end.x,t.f-end.y);});
     ok(courier<1,'Courier ends on the road');await page.screenshot({path:path.join(screenshots,'pro-'+width+'.png'),fullPage:true});
   }
-  for(const url of['/curtain','/next','/go-mini-module-06-lesson-01-step-13.html','/go-mini-module-06-lesson-02-step-01.html']){const r=await page.goto(origin+url);ok(r.status()===200,'Standalone '+url);}
+  for(const url of['/curtain','/next','/courses/305666-go-mini/modules/06-project/lesson-01-step-13.html','/courses/305666-go-mini/modules/06-project/lesson-02-step-01.html']){const r=await page.goto(origin+url);ok(r.status()===200,'Standalone '+url);}
   ok((await context.request.get(origin+'/.env.stepik')).status()===404,'Credentials refused');
   ok((await context.request.get(origin+'/assets/go-mini-project.js')).status()===404,'Other files refused');
   ok((await context.request.post(origin+'/finale')).status()===405,'Read-only server');

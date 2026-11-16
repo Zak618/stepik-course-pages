@@ -9,7 +9,7 @@
   const bytes = (text) => [...new TextEncoder().encode(text)];
   const binary = (value, size = 8) => value.toString(2).padStart(size, '0');
   const escape = (text) => String(text).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-  const path = (number) => `go-mini-module-02-lesson-01-step-${String(number).padStart(2, '0')}.html`;
+  const path = (number) => `courses/305666-go-mini/modules/02-computing/lesson-01-step-${String(number).padStart(2, '0')}.html`;
   const feedback = (text, success = false) => { const node = $('#feedback'); node.textContent = text; node.className = `feedback ${success ? 'success' : 'error'}`; };
   const fixedBits = (value, count = 5) => [...binary(value, count)].map((bit, index) => `<span class="fixed-bit ${bit === '1' ? 'on' : ''}">${bit}<small>вес ${2 ** (count - index - 1)}</small></span>`).join('');
   const range = (max, label) => `<label class="range-line"><span>0</span><input id="number-range" type="range" min="0" max="${max}" aria-label="${label}"><span>${max}</span></label>`;
@@ -68,7 +68,7 @@
   const story = window.GoMiniInformationStory?.[step];
   if (!pages[step] || !story || !root) return;
   const page = {...pages[step], ...story};
-  root.innerHTML = `<header class="lesson-head"><div class="step-meta"><b>Go-шечка (mini)</b><span>${String(step).padStart(2,'0')} / 10</span></div><h1>${page.title}</h1><p class="lead">${page.lead}</p></header><div class="story-opening">${page.opening}</div><section class="scene" aria-label="Интерактивный эксперимент">${page.scene}</section><section class="explanation" aria-label="Разбор">${page.theory}<details class="read-more"><summary>${page.moreTitle}</summary><div class="inside">${page.more}</div></details></section><nav class="step-navigation" aria-label="Шаги урока">${step > 1 ? `<a href="${path(step-1)}">← Назад</a>` : '<span>Команда WEB HACKER</span>'}${step < 10 ? `<a href="${path(step+1)}">Следующий шаг →</a>` : `<a href="go-mini-module-02-lesson-01-preview.html" target="_top">К обзору урока ↗</a>`}</nav>`;
+  root.innerHTML = `<header class="lesson-head"><div class="step-meta"><b>Go-шечка (mini)</b><span>${String(step).padStart(2,'0')} / 10</span></div><h1>${page.title}</h1><p class="lead">${page.lead}</p></header><div class="story-opening">${page.opening}</div><section class="scene" aria-label="Интерактивный эксперимент">${page.scene}</section><section class="explanation" aria-label="Разбор">${page.theory}<details class="read-more"><summary>${page.moreTitle}</summary><div class="inside">${page.more}</div></details></section><nav class="step-navigation" aria-label="Шаги урока">${step > 1 ? `<a href="${path(step-1)}">← Назад</a>` : '<span>Команда WEB HACKER</span>'}${step < 10 ? `<a href="${path(step+1)}">Следующий шаг →</a>` : `<a href="courses/305666-go-mini/modules/02-computing/lesson-01-preview.html" target="_top">К обзору урока ↗</a>`}</nav>`;
 
   $('#answer')?.addEventListener('input',()=>{ $('#feedback').textContent=''; });
   $$('input[name=meaning]').forEach(input=>input.addEventListener('change',()=>{

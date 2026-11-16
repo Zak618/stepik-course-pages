@@ -47,7 +47,7 @@ console.log(JSON.stringify({mode:apply?'apply':verify?'verify':'preflight',cours
 if(!apply&&!verify)process.exit(0);
 if(apply){
  // Hosting must contain the exact reviewed files before Stepik can reference them.
- for(const file of['course-intro.html','assets/course-intro.js','assets/course-intro.css','assets/course-intro-profiles.js','go-mini-module-01-lesson-01-step-05.html']){const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.ok(r.ok,'Pages status '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Pages not deployed '+file);}
+ for(const file of['course-intro.html','assets/course-intro.js','assets/course-intro.css','assets/course-intro-profiles.js','courses/305666-go-mini/modules/01-introduction/lesson-01-step-05.html']){const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});assert.ok(r.ok,'Pages status '+file);assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(await readFile(file)),'Pages not deployed '+file);}
  await persist();
  async function publish(p){
   let current=await sources(p.lesson);inspect(p,current);

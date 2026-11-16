@@ -1,7 +1,7 @@
 import {steps,tasks} from './go-mini-errors-content.js';
 import {mountWorld,escapeHTML as E} from './go-mini-errors-worlds.js?v=errors-20261115-publish-1';
 const main=document.querySelector('main'),preview=document.body.dataset.preview==='true',params=new URLSearchParams(location.search),sceneOnly=params.get('panel')==='scene';
-const file=n=>`go-mini-module-05-lesson-03-step-${String(n).padStart(2,'0')}.html`;
+const file=n=>`courses/305666-go-mini/modules/05-functions-and-data/lesson-03-step-${String(n).padStart(2,'0')}.html`;
 const read=(key,fallback='')=>{try{return localStorage.getItem('go-errors:'+key)??fallback;}catch{return fallback;}};
 const save=(key,value)=>{try{localStorage.setItem('go-errors:'+key,value);}catch{}};
 let current=Math.min(steps.length,Math.max(1,Number(params.get('step')||document.body.dataset.step)||1)),controller,noMotion=read('motion')==='off';

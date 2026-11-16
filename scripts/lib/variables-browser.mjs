@@ -2,8 +2,8 @@ export const origin=process.env.STEPIK_VARIABLES_URL||'http://localhost:8771';
 export const version='variables-20261114-publish-1';
 export const target={course:305666,lesson:2706560,unit:2746575,account:647088271,title:'Переменные, типы и операции'};
 export const frameSteps=[1,3,5,7,9,11,13];
-export const filename=n=>`go-mini-module-03-lesson-02-step-${String(n).padStart(2,'0')}.html`;
-export const files=['go-mini-module-03-lesson-02-preview.html',...Array.from({length:16},(_,i)=>filename(i+1)),...['.css','-v2.css','-embed.css','-clarity.css','.js','-content.js','-tasks.js','-worlds.js'].map(s=>'assets/go-mini-variables'+s)];
+export const filename=n=>`courses/305666-go-mini/modules/03-go-basics/lesson-02-step-${String(n).padStart(2,'0')}.html`;
+export const files=['courses/305666-go-mini/modules/03-go-basics/lesson-02-preview.html',...Array.from({length:16},(_,i)=>filename(i+1)),...['.css','-v2.css','-embed.css','-clarity.css','.js','-content.js','-tasks.js','-worlds.js'].map(s=>'assets/go-mini-variables'+s)];
 export const browserOptions={executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--no-proxy-server']};
 export function geometry(){
   const root=document.querySelector('main'),scene=root.querySelector('.world');let inkBottom=0;

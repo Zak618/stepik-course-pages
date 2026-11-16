@@ -47,7 +47,7 @@ console.log(JSON.stringify({account,lesson:lesson.id,title:lesson.title,existing
 if(!apply)process.exit(0);
 // CDN readiness checks are GET-only; mutations below are never blindly retried.
 async function checkPage(file){
- assert.ok(/^(assets\/go-mini-project[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|go-mini-module-06-lesson-01-[\w-]+\.html)$/.test(file));
+ assert.ok(/^(assets\/go-mini-project[\w.-]*\.(js|css)|assets\/go-mini-conditions\.css|courses\/305666-go-mini\/modules\/06-project\/lesson-01-[\w-]+\.html)$/.test(file));
  const expected=hash(await readFile(file));
  for(let attempt=0;attempt<4;attempt++){
   const r=await fetch('https://zak618.github.io/stepik-course-pages/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});

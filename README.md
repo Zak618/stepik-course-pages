@@ -6,7 +6,7 @@
 
 | Папка | Что внутри |
 | --- | --- |
-| [courses/](courses/README.md) | Готовые введения, отдельная папка для каждого курса |
+| [courses/](courses/README.md) | Введения по курсам; [Go-шечка mini](courses/305666-go-mini/README.md) целиком, по модулям |
 | [shared/course-introductions/](shared/course-introductions/README.md) | Общие шаблоны, тексты и оформление |
 | [previews/course-introductions/](previews/course-introductions/index.html) | Просмотр введений для автора |
 | [scripts/course-introductions/](scripts/course-introductions/) | Чтение данных, сборка, проверка и публикация |
@@ -14,7 +14,8 @@
 
 Страницы каждого курса лежат в `courses/<ID>-<название>/introduction/`.
 Редактируйте общие шаблоны и `copy.mjs`, а не готовые HTML.
-Старые страницы mini оставлены в корне, чтобы не ломать ссылки из Stepik.
+Страницы mini находятся в `courses/305666-go-mini/modules/`, внутри папки каждого модуля.
+Старые ссылки из Stepik работают через [перенаправления](compat/README.md).
 
 ## Локальный просмотр
 

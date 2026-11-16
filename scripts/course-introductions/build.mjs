@@ -13,7 +13,7 @@ const generated = [],courses = [],updates = [];
 async function output(file,text) {await mkdir(file.slice(0,file.lastIndexOf('/')),{recursive:true});await writeFile(file,text);generated.push(file);}
 const assets = {'assets/go-mini-intro.css':'shared/course-introductions/base.css','assets/go-mini-embed.css':'shared/course-introductions/embedded.css','assets/go-mini-embed.js':'shared/course-introductions/embedded.js'};
 for (const c of profiles) {
-  if (c.reference) {courses.push({...c,pages:Object.fromEntries(parts.filter(p=>p[2]).map(p=>[p[0],'go-mini-module-01-lesson-01-step-'+p[2]+'.html']))});continue;}
+  if (c.reference) {courses.push({...c,pages:Object.fromEntries(parts.filter(p=>p[2]).map(p=>[p[0],'courses/305666-go-mini/modules/01-introduction/lesson-01-step-'+p[2]+'.html']))});continue;}
   assert.ok(slugs[c.id]);
   const folder = `courses/${c.id}-${slugs[c.id]}/introduction`;
   const pages = {};
@@ -53,6 +53,6 @@ for (const c of profiles) {
 assert.equal(courses.filter(c=>!c.reference).length,37);
 assert.ok(!courses.some(c=>[300562,305734].includes(c.id)));
 await output('courses/introduction-catalog.json',JSON.stringify({version,courses,parts:parts.map(p=>p.slice(0,2)),excluded:[300562,305734],publication:true},null,2));
-await output('courses/README.md','# Введения курсов\n\nКаждая папка названа по ID Stepik и короткому названию курса.\nВ introduction находятся готовые страницы; вручную их править не нужно.\n[Общие шаблоны и команды](../shared/course-introductions/README.md).\n\n| Курс | Папка |\n| --- | --- |\n'+courses.filter(c=>!c.reference).map(c=>'| '+c.title+' | ['+c.id+'-'+slugs[c.id]+']('+c.id+'-'+slugs[c.id]+'/introduction/README.md) |').join('\n')+'\n\nGo-шечка mini служит образцом и не меняется. Go pro и Go Pro MAX исключены.\nСтарые корневые страницы сохранены, чтобы не ломать уже опубликованные ссылки.\n');
+await output('courses/README.md','# Курсы\n\nКаждая папка названа по ID Stepik и короткому названию курса.\nВ introduction находятся готовые страницы; вручную их править не нужно.\n[Общие шаблоны и команды](../shared/course-introductions/README.md).\n\n[Go-шечка mini: все страницы по модулям](305666-go-mini/README.md).\n\n| Курс | Папка |\n| --- | --- |\n'+courses.filter(c=>!c.reference).map(c=>'| '+c.title+' | ['+c.id+'-'+slugs[c.id]+']('+c.id+'-'+slugs[c.id]+'/introduction/README.md) |').join('\n')+'\n\nGo-шечка mini служит образцом для введений. Go pro и Go Pro MAX исключены из их общей сборки.\nСтарые ссылки mini работают через [перенаправления](../compat/README.md).\n');
 await writeFile(directory+'/build.json',JSON.stringify({version,generated,updates,courses:courses.filter(c=>!c.reference).map(c=>({id:c.id,title:c.title,pages:c.pages})),protectedTasks:snapshot.sources.filter(s=>s.block.name!=='text').length,structureUnchanged:true},null,2),{mode:0o600});
 console.log(JSON.stringify({courses:37,generated:generated.length,updates:updates.length,protectedTasks:snapshot.sources.filter(s=>s.block.name!=='text').length,stepikWrites:0}));

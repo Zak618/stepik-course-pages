@@ -29,12 +29,12 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/u
 const page=await browser.newPage({reducedMotion:'reduce',bypassCSP:true}),errors=[],external=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(origin)&&!r.url().startsWith('data:'))external.push(r.url());});
 const screenshots=await mkdtemp('/tmp/go-mini-conditions-qa-');
 const sceneSteps=steps.flatMap((s,i)=>s.kind==='scene'?[[i+1,s.scene]]:[]);
-const scene=async(n,only=false)=>{await page.goto(`${origin}/go-mini-module-04-lesson-01-step-${String(n).padStart(2,'0')}.html${only?'?panel=scene':''}`);await page.waitForSelector('.world');};
+const scene=async(n,only=false)=>{await page.goto(`${origin}/courses/305666-go-mini/modules/04-control-flow/lesson-01-step-${String(n).padStart(2,'0')}.html${only?'?panel=scene':''}`);await page.waitForSelector('.world');};
 async function geometry(label){const m=await page.evaluate(()=>{const scene=document.querySelector('.world');return{x:document.documentElement.scrollWidth-innerWidth,scene:scene?.getBoundingClientRect().width||0,root:document.querySelector('main').getBoundingClientRect().width,clipped:[...document.querySelectorAll('.rule,.floor-screen,.find-result,.flow-item')].filter(e=>e.scrollWidth>e.clientWidth+2).map(e=>e.className)};});verify(m.x<=1,`Horizontal overflow: ${label}: ${JSON.stringify(m)}`);verify(!m.clipped.length,`Clipping: ${label}: ${JSON.stringify(m)}`);}
 try{
  for(const width of [320,390,768,1024,1440]){
  await page.setViewportSize({width,height:1000});
- for(let n=1;n<=steps.length;n++){await page.goto(`${origin}/go-mini-module-04-lesson-01-step-${String(n).padStart(2,'0')}.html`);await page.waitForSelector('h1');verify((await page.locator('h1').textContent())===steps[n-1].title,`Title ${n}`);await geometry(`${width}/${n}`);}
+ for(let n=1;n<=steps.length;n++){await page.goto(`${origin}/courses/305666-go-mini/modules/04-control-flow/lesson-01-step-${String(n).padStart(2,'0')}.html`);await page.waitForSelector('h1');verify((await page.locator('h1').textContent())===steps[n-1].title,`Title ${n}`);await geometry(`${width}/${n}`);}
  for(const [n,name]of sceneSteps){await scene(n,true);await geometry(`frame ${width}/${name}`);const w=await page.locator('.world').evaluate(e=>e.getBoundingClientRect().width);verify(w>=Math.min(1024,width)-1,`Full width ${width}/${name}: ${w}`);if(width===390||width===1024)await page.locator('.world').screenshot({path:`${screenshots}/${name}-${width}.png`});}
  }
  await page.setViewportSize({width:1024,height:1000});

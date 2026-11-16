@@ -7,7 +7,7 @@ import {constants} from 'node:fs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const port=Number(process.env.STEPIK_FINALE_PORT||8787);
 if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid preview port');
-const routes=new Map([['/','go-mini-module-06-finale-preview.html'],['/finale','go-mini-module-06-finale-preview.html'],['/curtain','go-mini-module-06-lesson-01-step-13.html'],['/next','go-mini-module-06-lesson-02-step-01.html'],['/ticket','go-mini-pro-ticket.html']]);
+const routes=new Map([['/','courses/305666-go-mini/modules/06-project/finale-preview.html'],['/finale','courses/305666-go-mini/modules/06-project/finale-preview.html'],['/curtain','courses/305666-go-mini/modules/06-project/lesson-01-step-13.html'],['/next','courses/305666-go-mini/modules/06-project/lesson-02-step-01.html'],['/ticket','courses/305666-go-mini/modules/06-project/pro-ticket.html']]);
 const allowed=new Set([...routes.values(),'assets/go-mini-finale.css','assets/go-mini-finale.js','assets/go-mini-pro-gift.css','assets/go-mini-pro-gift.js']);
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
@@ -23,7 +23,7 @@ const server=http.createServer({maxHeaderSize:8192},async(req,res)=>{
     const absolute=path.join(root,relative);if(await realpath(absolute)!==absolute)return end(404,'Not found');
     const handle=await open(absolute,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);let body;
     try{const stat=await handle.stat();if(!stat.isFile()||stat.size>1024*1024)return end(404,'Not found');if(req.method==='GET'){const buffer=Buffer.alloc(stat.size+1);let bytes=0;while(bytes<buffer.length){const part=await handle.read(buffer,bytes,buffer.length-bytes,bytes);if(!part.bytesRead)break;bytes+=part.bytesRead;}if(bytes>stat.size)return end(413,'Too large');body=buffer.subarray(0,bytes);}}finally{await handle.close();}
-    res.writeHead(200,{...headers,'Content-Type':mime[path.extname(relative)],'Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'`});res.end(body);
+    res.writeHead(200,{...headers,'Content-Type':mime[path.extname(relative)],'Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'`});res.end(body);
   }catch{if(!res.headersSent)end(404,'Not found');else res.end();}
 });
 server.maxConnections=32;server.requestTimeout=10000;server.headersTimeout=10000;server.keepAliveTimeout=3000;
