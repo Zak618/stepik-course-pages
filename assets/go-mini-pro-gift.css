@@ -1,27 +1,28 @@
 :root{font-family:Arial,Helvetica,sans-serif;color:#235078;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:#fff}
-.gift{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-height:220px;max-width:680px;margin:0 auto;padding:16px;border:1px solid #e1edf5;border-radius:20px;background:radial-gradient(ellipse at 50% 80%,#d8fff1,transparent 66%),linear-gradient(135deg,#eefaff,#f3edff);overflow:hidden}
+.gift{display:flex;align-items:center;justify-content:center;max-width:680px;margin:0 auto;padding:16px 12px;border:1px solid #e1edf5;border-radius:20px;background:radial-gradient(ellipse at 50% 80%,#d8fff1,transparent 66%),linear-gradient(135deg,#eefaff,#f3edff)}
 .ticket{display:flex;width:100%;max-width:600px;min-height:104px;background:#fff;border:1px solid #dfd3f2;border-radius:16px;box-shadow:0 6px 18px #53788f0a;position:relative}
 .ticket-stub{flex:0 0 100px;display:flex;align-items:center;justify-content:center;border-right:2px dashed #d4c2ef;color:#7a42c8;font-weight:800;font-size:32px;background:#f4eeff;border-radius:15px 0 0 15px}
-.ticket-code{position:relative;min-width:0;flex:1;display:flex;align-items:center;justify-content:center;margin:14px;border-radius:12px;overflow:hidden;background:#f7fcff}
-#promo{display:block;border:0;background:transparent;border-radius:8px;color:#235078;width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:700;font-size:clamp(19px,3.1vw,30px);letter-spacing:1px;line-height:1.4;padding:16px 4px;text-align:center;cursor:text;caret-color:transparent}
+.ticket-code{position:relative;min-width:0;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin:14px;border-radius:12px;overflow:hidden;background:#f7fcff}
+#promo{display:block;border:0;background:transparent;border-radius:8px;color:#235078;width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:700;font-size:clamp(19px,3.1vw,26px);letter-spacing:1px;line-height:1.3;padding:0 4px;text-align:center;cursor:text;caret-color:transparent}
 #promo::selection{background:#d6c0ff;color:#235078}
 #cover{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none;transition:opacity .35s ease}
 #cover[hidden]{display:none}
 .ticket-code.revealed #cover{opacity:0;pointer-events:none}
-.actions{width:100%;max-width:300px;min-height:68px;margin-top:12px}
-button{font:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:42px;padding:9px 14px;border:0;border-radius:10px;color:#fff;background:#7a42c8;cursor:pointer;transition:background .18s,transform .18s}
+.actions{display:none;width:100%;max-width:240px}
+.revealed .actions{display:block}
+button{font:inherit;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:32px;padding:5px 6px;border:0;border-radius:8px;color:#fff;background:#7a42c8;cursor:pointer;transition:background .18s,transform .18s}
 button:hover{background:#6833b2;transform:translateY(-1px)}
 button:active{transform:translateY(1px)}
 button[hidden]{display:none}
-button span{font-size:23px;line-height:1}
+button span{font-size:18px;line-height:1}
 :focus-visible{outline:3px solid #8854d2;outline-offset:4px}
-#copy-status{min-height:18px;font-size:13px;line-height:18px;margin:6px 0 0;color:#24665d;text-align:center}
+#copy-status{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @keyframes code-arrives{from{transform:translateY(6px) scale(.98)}to{transform:none}}
 .revealed #promo{animation:code-arrives .4s ease-out}
 @media(max-width:580px){
- .gift{padding:14px 12px;border-radius:18px}
+ .gift{border-radius:18px}
  .ticket-stub{flex-basis:78px;font-size:28px}
  .ticket-code{margin:10px}
  #promo{font-size:clamp(17px,5.2vw,25px);letter-spacing:.5px}

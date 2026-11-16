@@ -132,10 +132,11 @@
     }
     if (copied) {
       status.textContent = 'Скопировано!';
-      button.innerHTML = 'Скопировать код <span aria-hidden="true">✓</span>';
+      button.innerHTML = 'Скопировано <span aria-hidden="true">✓</span>';
       button.focus({preventScroll: true});
     } else {
       status.textContent = 'Выделите код и скопируйте его.';
+      button.textContent = 'Скопируйте вручную';
       code.focus({preventScroll: true});
       code.select();
     }

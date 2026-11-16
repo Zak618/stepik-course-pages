@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Промокод · Go-шечка (pro)</title>
-  <link rel="stylesheet" href="assets/go-mini-pro-gift.css?v=inset-1">
-  <script src="assets/go-mini-pro-gift.js?v=inset-1" defer></script>
+  <link rel="stylesheet" href="assets/go-mini-pro-gift.css?v=compact-2">
+  <script src="assets/go-mini-pro-gift.js?v=compact-2" defer></script>
 </head>
 <body>
   <main class="gift">
@@ -14,11 +14,11 @@
       <div class="ticket-code">
         <input id="promo" value="GOSHECHKA10" readonly spellcheck="false" aria-label="Промокод GOSHECHKA10">
         <canvas id="cover" hidden tabindex="0" role="button" aria-label="Сотрите покрытие мышью или пальцем. Нажмите Enter, чтобы открыть код с клавиатуры."></canvas>
+        <div class="actions">
+          <button id="copy" type="button" hidden>Скопировать код <span aria-hidden="true">⧉</span></button>
+          <p id="copy-status" role="status" aria-live="polite"></p>
+        </div>
       </div>
-    </div>
-    <div class="actions">
-      <button id="copy" type="button" hidden>Скопировать код <span aria-hidden="true">⧉</span></button>
-      <p id="copy-status" role="status" aria-live="polite"></p>
     </div>
   </main>
 </body>
