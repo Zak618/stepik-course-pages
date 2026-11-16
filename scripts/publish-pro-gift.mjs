@@ -13,7 +13,9 @@ assert.equal(old.block.name, 'text');
 assert.equal(before.sources['step-sources'].length, 1);
 const version = 'ticket-20261116-1';
 const root = 'https://zak618.github.io/stepik-course-pages/';
-const text = `<div style="font-size:0;line-height:0;margin:0;"><iframe src="${root}go-mini-module-06-lesson-02-step-01.html?v=${version}" title="Билет со скидкой 10% на Go-шечку (pro)" width="100%" height="420" allow="clipboard-write" style="border:0;width:100%;margin:0;background:#fff;"></iframe></div>`;
+// Stepik strips allow/title and zero line-height, and orders iframe attributes.
+// Clipboard copying therefore also supports the legacy, user-activated path.
+const text = `<div style="font-size:0;margin:0;"><iframe height="420" src="${root}go-mini-module-06-lesson-02-step-01.html?v=${version}" style="border:0;width:100%;margin:0;background:#fff;" width="100%"></iframe></div>`;
 const token = JSON.parse(await readFile('.env.stepik-webhacker-session', 'utf8')).access_token;
 async function api(p, method = 'GET', body) {
   const r = await fetch('https://stepik.org/api/' + p, {method, headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'}, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(30000)});
