@@ -44,30 +44,33 @@ function verify(saved){
     else if(key!=='description')assert.deepEqual(saved[key],fields[key],'Saved '+key);
   }
   assert.equal((saved.description.match(/<iframe\b/g)||[]).length,1,'Interactive description retained');
-  assert.ok(saved.description.includes('/'+folder+'/embed.html?v='+plan.version));
-  assert.ok(saved.description.includes(plan.description.match(/height:(calc\([^;]+);/)[1]),'Responsive frame height retained');
+  assert.ok(saved.description.includes('/'+folder+'/project.html?v='+plan.version));
+  assert.ok(saved.description.includes('height:360px'),'Compact frame height retained');
+  assert.ok(!saved.description.includes('embed.html')&&!saved.description.includes('WEB HACKER'),'No full-page iframe or footer');
+  const readable=value=>value.replace(/<[^>]*>/g,'').replace(/\s+/g,'');
+  assert.equal(readable(saved.description),readable(fields.description),'Native text retained');
 }
 assert.equal((await api('stepics/1')).stepics[0].user,647088271);
 const before=await course();assert.equal(before.owner,360771622);assert.ok(before.actions.edit_course);
 assert.equal(before.sections.length,28);assert.equal(before.total_units,158);
-let release;try{release=JSON.parse(await readFile(privateDir+'/release-before.json','utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
+let release;try{release=JSON.parse(await readFile(privateDir+'/release-2-before.json','utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
 if(verifyOnly||release){
   assert.ok(release);verify(before);assert.deepEqual(pick(before,protectedKeys),pick(release.course,protectedKeys));
   assert.deepEqual(await curriculum(before),release.curriculum);
   console.log('Description, all 8 fields, access, settings and 158 lessons verified.');process.exit(0);
 }
-const baseline=JSON.parse(await readFile(privateDir+'/before.json','utf8'));
+const baseline=JSON.parse(await readFile(privateDir+'/verified.json','utf8')).fields;
 for(const key of keys)assert.deepEqual(before[key],baseline[key],'Course edited since approval: '+key);
 console.log(JSON.stringify({mode:apply?'apply':'read-only preflight',course:305734,fields:keys,modules:28,lessons:158}));
 if(!apply)process.exit(0);
-for(const file of ['embed.html','styles.css','interactions.js']){
+for(const file of ['project.html','project.css','project.js']){
   const response=await fetch('https://zak618.github.io/stepik-course-pages/'+folder+'/'+file+'?v='+plan.version,{signal:AbortSignal.timeout(30000)});
   assert.ok(response.ok&&hash(Buffer.from(await response.arrayBuffer()))===hash(await readFile(folder+'/'+file)),'Hosting not ready: '+file);
 }
 const outline=await curriculum(before);
 const fresh=await course();assert.deepEqual(pick(fresh,[...keys,...protectedKeys,'update_date']),pick(before,[...keys,...protectedKeys,'update_date']),'Concurrent course edit');
 await mkdir(privateDir,{recursive:true});
-await writeFile(privateDir+'/release-before.json',JSON.stringify({course:before,curriculum:outline,fields,version:plan.version},null,2),{mode:0o600,flag:'wx'});
+await writeFile(privateDir+'/release-2-before.json',JSON.stringify({course:before,curriculum:outline,fields,version:plan.version},null,2),{mode:0o600,flag:'wx'});
 // Exactly one scoped mutation. Never retry an ambiguous write automatically.
 await api('courses/305734','PUT',{course:{title:before.title,...fields}});
 const after=await course();verify(after);

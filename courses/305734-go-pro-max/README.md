@@ -25,9 +25,11 @@ node scripts/go-pro-max-promo/publish.mjs --verify
 node scripts/go-pro-max-promo/check-native.mjs --live
 ```
 
-Перед `--apply` загрузите файлы `promo/` в GitHub Pages. `embed.html` показывает
-утверждённую страницу без панели локального просмотра. `publication.json`
-задаёт высоту вставки для разных экранов. Меняются только восемь полей описания.
+Перед `--apply` загрузите файлы `promo/` в GitHub Pages. Текст описания размещается
+обычным HTML в Stepik, без большого вложенного окна. Только компактная анимация
+`project.html` находится во фрейме высотой 360 px. `project.css` и `project.js`
+задают её оформление и поведение. `publication.json` содержит готовое описание.
+`check-native.mjs` проверяет и вставку, и внешние блоки Stepik. Меняются только поля описания.
 Исходный снимок и результаты лежат в игнорируемой `.local-publication/`.
 
 ```sh
