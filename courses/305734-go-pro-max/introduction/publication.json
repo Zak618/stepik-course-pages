@@ -1,0 +1,627 @@
+{
+  "version": "go-max-intro-20261120-1",
+  "pages": [
+    {
+      "part": "welcome",
+      "title": "Приветствие",
+      "file": "01-welcome.html",
+      "source": 12250852,
+      "type": "text",
+      "samples": [
+        {
+          "width": 280,
+          "height": 720
+        },
+        {
+          "width": 290,
+          "height": 720
+        },
+        {
+          "width": 320,
+          "height": 720
+        },
+        {
+          "width": 350,
+          "height": 720
+        },
+        {
+          "width": 360,
+          "height": 720
+        },
+        {
+          "width": 390,
+          "height": 720
+        },
+        {
+          "width": 430,
+          "height": 720
+        },
+        {
+          "width": 480,
+          "height": 720
+        },
+        {
+          "width": 520,
+          "height": 720
+        },
+        {
+          "width": 580,
+          "height": 720
+        },
+        {
+          "width": 581,
+          "height": 720
+        },
+        {
+          "width": 640,
+          "height": 650
+        },
+        {
+          "width": 738,
+          "height": 650
+        },
+        {
+          "width": 760,
+          "height": 650
+        },
+        {
+          "width": 761,
+          "height": 650
+        },
+        {
+          "width": 820,
+          "height": 650
+        },
+        {
+          "width": 960,
+          "height": 650
+        },
+        {
+          "width": 1024,
+          "height": 650
+        },
+        {
+          "width": 1100,
+          "height": 650
+        },
+        {
+          "width": 1198,
+          "height": 650
+        },
+        {
+          "width": 1366,
+          "height": 650
+        }
+      ]
+    },
+    {
+      "part": "telegram",
+      "title": "На связи",
+      "file": "02-telegram.html",
+      "source": 12376579,
+      "type": "text",
+      "samples": [
+        {
+          "width": 280,
+          "height": 1011
+        },
+        {
+          "width": 290,
+          "height": 1011
+        },
+        {
+          "width": 320,
+          "height": 942
+        },
+        {
+          "width": 335,
+          "height": 916
+        },
+        {
+          "width": 350,
+          "height": 862
+        },
+        {
+          "width": 360,
+          "height": 862
+        },
+        {
+          "width": 375,
+          "height": 864
+        },
+        {
+          "width": 390,
+          "height": 803
+        },
+        {
+          "width": 430,
+          "height": 803
+        },
+        {
+          "width": 480,
+          "height": 803
+        },
+        {
+          "width": 520,
+          "height": 803
+        },
+        {
+          "width": 580,
+          "height": 775
+        },
+        {
+          "width": 581,
+          "height": 791
+        },
+        {
+          "width": 610,
+          "height": 793
+        },
+        {
+          "width": 640,
+          "height": 762
+        },
+        {
+          "width": 738,
+          "height": 743
+        },
+        {
+          "width": 760,
+          "height": 745
+        },
+        {
+          "width": 761,
+          "height": 643
+        },
+        {
+          "width": 790,
+          "height": 649
+        },
+        {
+          "width": 820,
+          "height": 628
+        },
+        {
+          "width": 960,
+          "height": 613
+        },
+        {
+          "width": 1024,
+          "height": 617
+        },
+        {
+          "width": 1100,
+          "height": 621
+        },
+        {
+          "width": 1198,
+          "height": 621
+        },
+        {
+          "width": 1366,
+          "height": 621
+        }
+      ]
+    },
+    {
+      "part": "map",
+      "title": "Карта курсов",
+      "file": "03-course-map.html",
+      "source": 12376578,
+      "type": "text",
+      "samples": [
+        {
+          "width": 280,
+          "height": 900
+        },
+        {
+          "width": 290,
+          "height": 900
+        },
+        {
+          "width": 320,
+          "height": 900
+        },
+        {
+          "width": 350,
+          "height": 900
+        },
+        {
+          "width": 360,
+          "height": 900
+        },
+        {
+          "width": 390,
+          "height": 900
+        },
+        {
+          "width": 430,
+          "height": 900
+        },
+        {
+          "width": 480,
+          "height": 900
+        },
+        {
+          "width": 520,
+          "height": 900
+        },
+        {
+          "width": 580,
+          "height": 900
+        },
+        {
+          "width": 581,
+          "height": 900
+        },
+        {
+          "width": 640,
+          "height": 820
+        },
+        {
+          "width": 738,
+          "height": 820
+        },
+        {
+          "width": 760,
+          "height": 820
+        },
+        {
+          "width": 761,
+          "height": 820
+        },
+        {
+          "width": 820,
+          "height": 820
+        },
+        {
+          "width": 960,
+          "height": 820
+        },
+        {
+          "width": 1024,
+          "height": 820
+        },
+        {
+          "width": 1100,
+          "height": 820
+        },
+        {
+          "width": 1198,
+          "height": 820
+        },
+        {
+          "width": 1366,
+          "height": 820
+        }
+      ]
+    },
+    {
+      "part": "experience",
+      "title": "Знакомство",
+      "file": "04-about-you.html",
+      "source": 12250853,
+      "type": "free-answer",
+      "samples": [
+        {
+          "width": 280,
+          "height": 1151
+        },
+        {
+          "width": 290,
+          "height": 1116
+        },
+        {
+          "width": 320,
+          "height": 916
+        },
+        {
+          "width": 335,
+          "height": 918
+        },
+        {
+          "width": 350,
+          "height": 867
+        },
+        {
+          "width": 360,
+          "height": 867
+        },
+        {
+          "width": 375,
+          "height": 869
+        },
+        {
+          "width": 390,
+          "height": 839
+        },
+        {
+          "width": 430,
+          "height": 787
+        },
+        {
+          "width": 455,
+          "height": 789
+        },
+        {
+          "width": 480,
+          "height": 762
+        },
+        {
+          "width": 520,
+          "height": 757
+        },
+        {
+          "width": 580,
+          "height": 729
+        },
+        {
+          "width": 581,
+          "height": 718
+        },
+        {
+          "width": 640,
+          "height": 718
+        },
+        {
+          "width": 689,
+          "height": 723
+        },
+        {
+          "width": 738,
+          "height": 694
+        },
+        {
+          "width": 760,
+          "height": 695
+        },
+        {
+          "width": 761,
+          "height": 730
+        },
+        {
+          "width": 820,
+          "height": 733
+        },
+        {
+          "width": 960,
+          "height": 742
+        },
+        {
+          "width": 1024,
+          "height": 745
+        },
+        {
+          "width": 1100,
+          "height": 749
+        },
+        {
+          "width": 1198,
+          "height": 749
+        },
+        {
+          "width": 1366,
+          "height": 749
+        }
+      ]
+    },
+    {
+      "part": "goal",
+      "title": "Ваша цель",
+      "file": "05-your-goal.html",
+      "source": 12250854,
+      "type": "free-answer",
+      "samples": [
+        {
+          "width": 280,
+          "height": 1001
+        },
+        {
+          "width": 290,
+          "height": 980
+        },
+        {
+          "width": 305,
+          "height": 987
+        },
+        {
+          "width": 320,
+          "height": 937
+        },
+        {
+          "width": 350,
+          "height": 946
+        },
+        {
+          "width": 355,
+          "height": 950
+        },
+        {
+          "width": 360,
+          "height": 876
+        },
+        {
+          "width": 375,
+          "height": 882
+        },
+        {
+          "width": 390,
+          "height": 788
+        },
+        {
+          "width": 430,
+          "height": 776
+        },
+        {
+          "width": 455,
+          "height": 785
+        },
+        {
+          "width": 480,
+          "height": 767
+        },
+        {
+          "width": 520,
+          "height": 779
+        },
+        {
+          "width": 580,
+          "height": 769
+        },
+        {
+          "width": 581,
+          "height": 730
+        },
+        {
+          "width": 640,
+          "height": 730
+        },
+        {
+          "width": 738,
+          "height": 707
+        },
+        {
+          "width": 749,
+          "height": 713
+        },
+        {
+          "width": 760,
+          "height": 686
+        },
+        {
+          "width": 761,
+          "height": 733
+        },
+        {
+          "width": 820,
+          "height": 724
+        },
+        {
+          "width": 890,
+          "height": 752
+        },
+        {
+          "width": 960,
+          "height": 756
+        },
+        {
+          "width": 1024,
+          "height": 779
+        },
+        {
+          "width": 1100,
+          "height": 806
+        },
+        {
+          "width": 1198,
+          "height": 806
+        },
+        {
+          "width": 1366,
+          "height": 806
+        }
+      ]
+    },
+    {
+      "part": "start",
+      "title": "Что впереди",
+      "file": "06-start.html",
+      "source": 12376577,
+      "type": "text",
+      "samples": [
+        {
+          "width": 280,
+          "height": 939
+        },
+        {
+          "width": 290,
+          "height": 925
+        },
+        {
+          "width": 305,
+          "height": 927
+        },
+        {
+          "width": 320,
+          "height": 875
+        },
+        {
+          "width": 335,
+          "height": 877
+        },
+        {
+          "width": 350,
+          "height": 815
+        },
+        {
+          "width": 360,
+          "height": 815
+        },
+        {
+          "width": 390,
+          "height": 815
+        },
+        {
+          "width": 430,
+          "height": 815
+        },
+        {
+          "width": 480,
+          "height": 815
+        },
+        {
+          "width": 520,
+          "height": 815
+        },
+        {
+          "width": 580,
+          "height": 774
+        },
+        {
+          "width": 581,
+          "height": 580
+        },
+        {
+          "width": 640,
+          "height": 580
+        },
+        {
+          "width": 738,
+          "height": 586
+        },
+        {
+          "width": 760,
+          "height": 587
+        },
+        {
+          "width": 761,
+          "height": 596
+        },
+        {
+          "width": 820,
+          "height": 599
+        },
+        {
+          "width": 960,
+          "height": 607
+        },
+        {
+          "width": 1024,
+          "height": 611
+        },
+        {
+          "width": 1100,
+          "height": 615
+        },
+        {
+          "width": 1198,
+          "height": 615
+        },
+        {
+          "width": 1366,
+          "height": 615
+        }
+      ]
+    }
+  ]
+}

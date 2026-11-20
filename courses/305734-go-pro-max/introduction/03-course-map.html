@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head><base href="../../../"><script>window.COURSE_INTRO_CONFIG={id:305734,title:"Go-шечка Pro MAX"};</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Интерактивная карта курсов WEB HACKER: выберите направление и соберите свой маршрут.">
+  <title>Карта курсов WEB HACKER</title>
+  <link rel="stylesheet" href="shared/course-introductions/base.css?v=20261113-compact">
+  <link rel="stylesheet" href="shared/course-introductions/embedded.css">
+  <script src="shared/course-introductions/embedded.js"></script>
+  <script defer src="courses/305734-go-pro-max/introduction/course-map-catalog.js?v=20261116-universal"></script>
+  <script defer src="shared/course-introductions/interactions.js?v=unified-intros-20261116-3"></script>
+<style>
+body{min-width:0!important} .course-name{overflow-wrap:anywhere} .intro{min-width:0}
+.embedded .course-name{font-size:clamp(30px,5.8vw,70px);line-height:1.12}
+.embedded .course-copy{font-size:18px;line-height:1.65;max-width:730px}
+.page-head .lede,.embedded .page-head .lede{font-size:18px;line-height:1.65}
+.embedded .source-label{font-size:16px}.embedded .rule-body{font-size:17px}
+.go-letter{max-width:100%;overflow-wrap:anywhere}.preview-context{color:#718097;font-size:14px;margin:0 0 22px;line-height:1.5}
+@media(max-width:600px){.embedded .intro h1{font-size:clamp(30px,8vw,44px)}.embedded .course-copy{font-size:17px}.embedded .course-name{font-size:clamp(29px,8vw,44px)}.page-head h1{overflow-wrap:anywhere}.embedded .source-label{font-size:15px}}
+</style></head>
+<body data-page="roadmap">
+  <main class="page roadmap-page">
+    <header class="page-head roadmap-top">
+      <div><h1>Карта <span class="gradient">курсов.</span></h1><p class="lede">Выберите своё направление.</p></div>
+      <span class="catalog-count" id="catalog-count">Курсы WEB HACKER</span>
+    </header>
+    <div class="roadmap-toolbar">
+      <label class="search"><span data-icon="search"></span><span class="sr-only">Найти курс по названию</span><input id="course-search" type="search" placeholder="Найти свой курс…" autocomplete="off"></label>
+      <div class="view-toggle" role="group" aria-label="Отображение курсов"><button type="button" data-view="map" aria-pressed="true">Карта</button><button type="button" data-view="list" aria-pressed="false">Все курсы</button></div>
+      <button type="button" class="filter-button" id="free-filter" aria-pressed="false">Только бесплатные</button>
+    </div>
+    <div class="track-filters" id="track-filters" role="group" aria-label="Направления обучения"></div>
+    <section class="map-panel" aria-label="Карта курсов">
+      <div class="map-viewport" id="map-viewport" tabindex="0" aria-label="Карта: выберите направление. Доступны прокрутка и изменение масштаба."><div class="map-space" id="map-space"><div class="map-world" id="map-world"></div></div></div>
+      <div class="catalog-list" id="catalog-list" hidden></div>
+      <footer class="map-caption" id="map-caption"><p>Нажмите на ветку или курс · Карту можно перетаскивать</p><div class="zoom-controls"><button type="button" id="zoom-out" aria-label="Уменьшить карту"><span data-icon="minus"></span></button><span class="zoom-value" id="zoom-value">100%</span><button type="button" id="zoom-in" aria-label="Увеличить карту"><span data-icon="plus"></span></button><button type="button" class="fit" id="fit-map">Уместить</button></div></footer>
+    </section>
+    <p class="sr-only" id="result-status" role="status" aria-live="polite"></p>
+    <details class="route-tray"><summary><span>Мой маршрут <span id="saved-count">0</span></span><span data-icon="bookmark"></span></summary><div class="saved-route" id="saved-route"></div></details>
+    <noscript><p class="note">Для интерактивной карты включите JavaScript. Все опубликованные курсы доступны в <a href="https://stepik.org/users/647088271/teach" target="_blank" rel="noopener noreferrer">профиле WEB HACKER на Stepik</a>.</p></noscript>
+  </main>
+  <dialog class="course-dialog" id="course-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Закрыть карточку"><span data-icon="close"></span></button>
+    <div class="dialog-art" id="dialog-art"></div>
+    <p class="eyebrow" id="dialog-track"></p><h2 id="dialog-title"></h2><span class="dialog-tag" id="dialog-price"></span><p id="dialog-description"></p>
+    <div class="dialog-actions"><a class="button" id="course-link" target="_blank" rel="noopener noreferrer">Открыть курс</a><button class="button secondary" id="save-course" type="button" aria-pressed="false">В мой маршрут</button></div>
+  </dialog>
+</body>
+</html>
