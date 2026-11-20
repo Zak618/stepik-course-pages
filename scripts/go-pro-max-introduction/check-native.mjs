@@ -14,10 +14,11 @@ await context.route('https://stepik.org/api/**', async route => {
 const page = await context.newPage();
 const results = [];
 try {
-  for (const width of [1366,390]) {
+  for (const width of [1366,800,390]) {
     await page.setViewportSize({width,height:1100});
     for (let index = 0; index < pages.length; index++) {
       const definition = pages[index];
+      if(width===800 && !['experience','goal'].includes(definition.part)) continue;
       await page.goto(`https://stepik.org/lesson/${lesson}/step/${index+1}?unit=${unit}`,{waitUntil:'domcontentloaded',timeout:45000});
       const element = page.locator('iframe[src*="' + folder + '/' + definition.file + '"]');
       await element.waitFor({timeout:30000});
@@ -29,6 +30,7 @@ try {
       if (definition.part === 'start') await frame.locator('#build-project').click();
       const metrics = await frame.evaluate(() => ({width:innerWidth,height:innerHeight,x:document.documentElement.scrollWidth-innerWidth,y:document.documentElement.scrollHeight-innerHeight,contentHeight:document.querySelector('main').getBoundingClientRect().height}));
       assert.ok(metrics.x<=1 && metrics.y<=1,definition.part + ' native overflow at ' + width + ': ' + JSON.stringify(metrics));
+      assert.ok(metrics.height - metrics.contentHeight < 160,definition.part + ' excessive empty area at ' + width);
       const text = await frame.locator('body').innerText();
       assert.ok(!/[—–]/.test(text),'Dash in native lesson');
       if (definition.type === 'free-answer') assert.equal(await frame.locator('textarea,#copy-answer').count(),0);
