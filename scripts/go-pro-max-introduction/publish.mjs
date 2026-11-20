@@ -26,11 +26,14 @@ const sources = async () => {
 };
 assert.equal((await api('stepics/1')).stepics[0].user,647088271);
 const currentCourse = (await api('courses/' + course)).courses[0];
-assert.equal(currentCourse.owner,647088271);
+const inventory = JSON.parse(await readFile('.local-publication/intros-20261116/snapshot.json','utf8'));
+assert.equal(currentCourse.owner,inventory.courses.find(value=>value.id===course).owner);
+assert.ok(currentCourse.actions.edit_course);
 const currentLesson = (await api('lessons/' + lesson)).lessons[0];
 assert.ok(currentLesson.actions.edit_lesson);
 assert.ok(currentLesson.courses.includes(course));
 const baseline = JSON.parse(await readFile('.local-publication/go-pro-max-intro-20261120/snapshot.json','utf8'));
+assert.equal(currentLesson.owner,baseline.lessons.find(value=>value.id===lesson).owner);
 let release;
 try {release = JSON.parse(await readFile(privateDir + '/before.json','utf8'));}
 catch(error) {if(error.code !== 'ENOENT') throw error;}
