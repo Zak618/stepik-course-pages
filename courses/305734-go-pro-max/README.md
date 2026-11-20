@@ -2,6 +2,34 @@
 
 Шесть интерактивных шагов [введения в Stepik](https://stepik.org/lesson/2700348/step/1?unit=2740161).
 
+Локальное описание находится в `promo/`. Запуск:
+
+```sh
+node scripts/go-pro-max-promo/build.mjs
+node scripts/go-pro-max-promo/preview.mjs
+```
+
+Просмотр описания: <http://localhost:8797/>. На вкладке «Поля Stepik» остальные
+тексты карточки. Исходник в `promo/content.mjs`,
+оформление в `promo/styles.css`. Учтены новые разделы Vue и полный проект.
+
+Описание публикуется отдельно от уроков:
+
+```sh
+node scripts/go-pro-max-promo/layout.mjs
+node scripts/go-pro-max-promo/check.mjs
+node scripts/go-pro-max-promo/check-native.mjs
+node scripts/go-pro-max-promo/publish.mjs
+node scripts/go-pro-max-promo/publish.mjs --apply
+node scripts/go-pro-max-promo/publish.mjs --verify
+node scripts/go-pro-max-promo/check-native.mjs --live
+```
+
+Перед `--apply` загрузите файлы `promo/` в GitHub Pages. `embed.html` показывает
+утверждённую страницу без панели локального просмотра. `publication.json`
+задаёт высоту вставки для разных экранов. Меняются только восемь полей описания.
+Исходный снимок и результаты лежат в игнорируемой `.local-publication/`.
+
 ```sh
 node scripts/go-pro-max-introduction/build.mjs
 node scripts/go-pro-max-introduction/preview.mjs
