@@ -23,12 +23,14 @@ ID шагов, задания и баллы сохраняются. Общая �
 
 ```sh
 node scripts/go-pro-max-introduction/layout.mjs
+node scripts/go-pro-max-introduction/native-layout.mjs
 node scripts/go-pro-max-introduction/publish.mjs
 node scripts/go-pro-max-introduction/publish.mjs --apply
 node scripts/go-pro-max-introduction/publish.mjs --verify
 ```
 
 Для браузерной проверки нужен Playwright Core. Его путь задаётся в `PLAYWRIGHT_MODULE`.
-`layout.mjs` подбирает высоту вставок по ширине экрана и создаёт `publication.json`.
+`layout.mjs` измеряет страницы. `native-layout.mjs` учитывает боковую панель Stepik
+и подбирает совместимые высоты вставок в `publication.json`.
 Перед `--apply` загрузите страницы в GitHub Pages. Снимки и проверки остаются
 в игнорируемой `.local-publication/go-pro-max-intro-release-20261120/`.
