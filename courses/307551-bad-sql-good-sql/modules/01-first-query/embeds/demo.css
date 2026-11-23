@@ -27,3 +27,9 @@ html,body{margin:0;padding:0;min-height:0;background:transparent}
 .embed-root .type-stage{min-height:195px;padding:17px}
 .embed-root .segmented button{flex:1;padding-left:8px;padding-right:8px}
 .embed-root .error-explanation{min-height:100px}
+@media(max-width:300px){
+ .embed-root>.demo{padding:10px}
+ .embed-root .table-wrap th,.embed-root .table-wrap td,.embed-root .two-tables th,.embed-root .two-tables td{padding-left:4px;padding-right:4px}
+ .embed-root .segmented{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+ .embed-root .segmented button{min-width:0;padding-left:2px;padding-right:2px;font-size:.875rem}
+}
