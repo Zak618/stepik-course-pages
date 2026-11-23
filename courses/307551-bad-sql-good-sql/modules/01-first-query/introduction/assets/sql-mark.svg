@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+ <defs>
+  <linearGradient id="a" x1="35" y1="30" x2="148" y2="162" gradientUnits="userSpaceOnUse"><stop stop-color="#DBBCFF"/><stop offset=".43" stop-color="#9B6CE9"/><stop offset="1" stop-color="#6141BA"/></linearGradient>
+  <linearGradient id="b" x1="52" y1="27" x2="132" y2="93" gradientUnits="userSpaceOnUse"><stop stop-color="#F1DFFF"/><stop offset="1" stop-color="#AF8AF0"/></linearGradient>
+  <linearGradient id="c" x1="35" y1="68" x2="140" y2="135" gradientUnits="userSpaceOnUse"><stop stop-color="#B18AF0"/><stop offset="1" stop-color="#6848BC"/></linearGradient>
+  <filter id="s" x="0" y="0" width="180" height="200" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#6440AD" flood-opacity=".16"/></filter>
+ </defs>
+ <ellipse cx="92" cy="157" rx="57" ry="9" fill="#ECE5F9"/>
+ <g filter="url(#s)" transform="rotate(-12 90 90)">
+  <path d="M34 106v24c0 15 25 26 56 26s56-11 56-26v-24" fill="url(#a)"/><ellipse cx="90" cy="106" rx="56" ry="25" fill="url(#b)"/>
+  <path d="M34 73v24c0 15 25 26 56 26s56-11 56-26V73" fill="url(#c)"/><ellipse cx="90" cy="73" rx="56" ry="25" fill="url(#b)"/>
+  <path d="M34 41v24c0 15 25 26 56 26s56-11 56-26V41" fill="url(#a)"/>
+  <ellipse cx="90" cy="41" rx="56" ry="25" fill="url(#b)" stroke="#DAC4FA" stroke-width="1.5"/>
+  <path d="M45 51c15 11 39 15 57 13M44 85c8 6 20 10 31 11M44 118c8 6 20 10 31 11" stroke="#E3CCFF" stroke-opacity=".56" stroke-width="2" stroke-linecap="round"/>
+ </g>
+</svg>
