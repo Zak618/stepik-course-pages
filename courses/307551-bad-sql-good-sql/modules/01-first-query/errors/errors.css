@@ -1,0 +1,31 @@
+@import url('../select/select.css');
+.error-lab{max-width:740px;margin:0 auto;padding:8px 3px 12px;font-size:1rem;color:#302b39}
+.error-stages{display:flex;gap:14px;align-items:center;padding:2px 0 18px;font-size:.875rem;color:#83748e}
+.error-stages span{padding-bottom:6px;border-bottom:2px solid #e7dfee;flex:1}
+.error-stages .is-active{color:#9c4d67;border-color:#c58b9f}.error-stages .is-passed{color:#27785e;border-color:#9ed9bd}
+.repair-query{margin:0;padding:18px 16px;border:1px solid #e0d2ed;border-radius:12px;background:#faf7ff;font:1.25rem/1.8 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#624487}
+.from-slot{display:inline-flex;min-width:62px;align-items:center;justify-content:center;margin-right:10px;vertical-align:baseline;height:32px;border-radius:5px;position:relative}
+.from-slot.missing{border:1px dashed #bc92c4;background:#f3e9f8}
+.from-slot.missing:after{content:'';width:5px;height:5px;border-radius:50%;background:#ba8ac0;box-shadow:8px 0 #ba8ac0,-8px 0 #ba8ac0;animation:slot-focus 2.8s ease-in-out 3}
+.from-slot.filled{background:#e2f4eb;color:#26785d}
+.query-table{position:relative;display:inline-block}.query-table:after{content:'';position:absolute;left:0;right:0;bottom:1px;height:2px;background:#b582c2;transform:scaleX(0);transform-origin:left;animation:query-read 2.8s ease-in-out 3}
+.error-lab[data-state=ready] .query-table:after{animation:none;transform:scaleX(1);background:#91cdb3}
+.repair-schema{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 15px;font:.875rem/1.45 Consolas,monospace;color:#82708e}
+.repair-schema span{border:1px solid #e3d8ee;border-radius:6px;padding:5px 8px}.repair-schema .is-found{background:#eef9f3;border-color:#b8decb;color:#2a785f}
+.mysql-message{padding:15px 16px;border-left:3px solid #c695aa;background:#fcf6f8;border-radius:0 9px 9px 0;min-width:0}
+.mysql-message>strong{display:block;font:600 .9375rem/1.5 Consolas,monospace;color:#96516a;margin-bottom:7px}
+.mysql-message>code{display:block;font:.9375rem/1.6 Consolas,monospace;color:#664f5f;overflow-wrap:anywhere;white-space:pre-wrap}
+.error-lab[data-state=ready] .mysql-message{background:#f0faf5;border-color:#91cdb3}
+.error-lab[data-state=ready] .mysql-message>strong,.error-lab[data-state=ready] .mysql-message>code{color:#26745a}
+.repair-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px}
+.repair-hint{font-size:.875rem;line-height:1.55;color:#7c6a88;min-width:0}
+.repair-action{border:0;border-radius:8px;background:#7952bd;color:#fff;padding:11px 15px;min-height:43px;font:1rem/1.4 Arial,sans-serif;flex-shrink:0}
+.repair-action:disabled{opacity:.6;cursor:wait}
+.raw-message{margin:15px 0 25px;font-size:.9375rem;color:#78618b}.raw-message summary{cursor:pointer}.raw-message pre{font:.875rem/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#faf7fd;border:1px solid #e6dcef;padding:14px;border-radius:9px}
+.mysql-error-note{font:.9375rem/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#945169;background:#fcf6f8;border-left:3px solid #cb9bac;padding:14px 16px;margin:12px 0}
+.sql-diagnostic:empty{display:none}.native-content .raw-message p{margin-left:0}
+@keyframes slot-focus{0%,60%,100%{opacity:.45}25%{opacity:1}}
+@keyframes query-read{0%,16%,100%{transform:scaleX(0)}34%,70%{transform:scaleX(1)}}
+@media(max-width:520px){.repair-query{font-size:1.125rem;padding:14px 11px}.repair-actions{align-items:flex-start;flex-direction:column;gap:10px;margin-top:13px}.repair-action{align-self:flex-end;font-size:.9375rem}.repair-schema{margin:10px 0 12px;gap:6px}.repair-schema span{padding:4px 7px}.mysql-message{padding:12px 11px}.mysql-message>code{font-size:.875rem}.error-stages{padding-bottom:13px;gap:8px}.repair-hint{min-height:22px}.from-slot{min-width:56px;margin-right:8px}}
+@media(prefers-reduced-motion:reduce){.query-table:after{animation:none;transform:scaleX(1)}.from-slot.missing:after{animation:none}}
+@media(max-width:520px){.error-lab{padding-top:5px;padding-bottom:8px}.error-stages{padding-bottom:10px}.repair-query{padding-top:12px;padding-bottom:12px;line-height:1.7}.mysql-message{padding-top:10px;padding-bottom:10px}.repair-actions{margin-top:10px}}
