@@ -12,8 +12,7 @@ if (rename) {
     const alias = aliases[select.value], header = rename.querySelector('[data-renamed] th');
     header.textContent = alias;
     rename.querySelector('[data-rename-query]').textContent = alias === 'name' ? 'SELECT name\nFROM products;' : 'SELECT name AS ' + alias + '\nFROM products;';
-    rename.querySelector('[data-alias-path]').textContent = alias === 'name' ? 'name → name' : 'name → ' + alias;
-    rename.querySelector('[data-rename-status]').textContent = alias === 'name' ? 'Без AS заголовок совпадает с исходным именем. Товары те же.' : 'Новый заголовок. Те же четыре товара. В products поле по-прежнему называется name.';
+    rename.querySelector('[data-rename-status]').textContent = alias === 'name' ? 'Заголовок совпадает с полем name.' : 'В products остаётся поле name.';
     if (animate) animateHeader(header);
   };
   select.addEventListener('change', () => render(true)); render(false);
