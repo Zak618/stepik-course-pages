@@ -48,6 +48,23 @@ try{
         assert.equal(link.href,link.free?'https://stepik.org/course/'+link.id+'/promo':'https://stepik.org/a/'+link.id);
         assert.equal(link.target,'_blank');assert.ok(link.rel.includes('noopener'));
       }
+      assert.equal(links.filter(link=>link.id===305734).length,1);
+      const goMax=await evaluate(`(()=>{
+        const search=document.querySelector('#course-search');
+        search.value='';search.dispatchEvent(new Event('input',{bubbles:true}));
+        document.querySelector('#track-filters [data-track="go"]').click();
+        const nodes=document.querySelectorAll('.course-node[data-course="305734"]');
+        if(nodes.length!==1)throw Error('Go Pro MAX missing from Go branch');
+        nodes[0].click();
+        const img=nodes[0].querySelector('img');
+        return new Promise(resolve=>{
+          const inspect=()=>resolve({title:document.querySelector('#dialog-title').textContent,href:document.querySelector('#course-link').href,cover:img.naturalWidth,optional:window.INTRO_CATALOG.tracks.find(t=>t.id==='go').stages.find(s=>s.courses.includes(305734)).optional});
+          if(img.complete)inspect();else{img.onload=inspect;img.onerror=inspect;}
+        });
+      })()`);
+      assert.equal(goMax.title,'Go-шечка Pro MAX');
+      assert.equal(goMax.href,'https://stepik.org/course/305734/promo');
+      assert.ok(goMax.cover>0);assert.equal(goMax.optional,true);
       results.push({file,width,courses:links.length,paid:links.filter(c=>!c.free).length});
     }
     for(const width of [1280,1100,1099,800,769,768,760,620,390,320]){

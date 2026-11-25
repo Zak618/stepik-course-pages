@@ -176,7 +176,7 @@ const previewCourseTitle=introConfig.title;
     const cover = course => '<span class="cover-frame"><img class="course-cover" src="assets/course-covers/'+course.id+'.png" alt="" width="160" height="160" decoding="async"></span>';
     const marks = {go:'Go',web:'</>',backend:'{ }',tools:'⌘',ai:'✳',fullstack:'WH',other:'Aa'};
     const mark = track => '<span class="track-logo" aria-hidden="true">'+safe(marks[track.id])+'</span>';
-    const featured = {go:[305666,300562,300560],web:[135466,191652,200517],backend:[300153,181092,290060],tools:[218158,184095,290054],ai:[276638,277096],fullstack:[183142,187189,187191],other:[290059]};
+    const featured = {go:[305666,300562,305734],web:[135466,191652,200517],backend:[300153,181092,290060],tools:[218158,184095,290054],ai:[276638,277096],fullstack:[183142,187189,187191],other:[290059]};
     const price = course => '<span class="course-price '+(course.free?'free':'')+'">'+(course.free?'Бесплатно':'Платный курс')+'</span>';
     const matches = course => (trackId === 'all' || course.track === trackId) && (!freeOnly || course.free) && course.title.toLocaleLowerCase('ru').includes(search.value.trim().toLocaleLowerCase('ru'));
     const filtered = () => catalog.courses.filter(matches);
