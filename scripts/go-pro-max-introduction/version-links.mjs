@@ -20,9 +20,9 @@ export function updateVersionFrame(text,revision) {
   const headings = [...text.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)]
     .map(match => normalizeVersion(match[1].replace(/<[^>]*>/g,'').replaceAll('&nbsp;',' ').trim())).filter(Boolean);
   // Existing URL settings take priority. Legacy links start with the native history.
-  const options = versionOptions(frame.url.search,{current:headings[0],history:headings.slice(1)});
+  const options = versionOptions(frame.url.search,{current:headings[0]});
   frame.url.searchParams.set('version',options.current);
-  frame.url.searchParams.set('history',options.history.join(','));
+  frame.url.searchParams.delete('history');
   frame.url.searchParams.set('v',revision);
   return text.replace(frame.raw,escapeAttribute(frame.url.href));
 }

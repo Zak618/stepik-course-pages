@@ -6,7 +6,7 @@
   "source": 12600204,
   "suggestedPosition": 6,
   "title": "Версии курса",
-  "revision": "950d81f940d9",
+  "revision": "2c828e658e18",
   "frameHeight": 240,
-  "text": "<iframe height=\"240\" src=\"https://zak618.github.io/stepik-course-pages/courses/305734-go-pro-max/introduction/versions/picture.html?version=1.0&amp;history=&amp;v=950d81f940d9\" style=\"width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;\" width=\"100%\"></iframe>\n<div style=\"margin:0 0 24px;\"><h3 style=\"font-size:20px;color:#6550b7;margin:0 0 8px;\">v1.0</h3><p style=\"margin:0 0 10px;\">Первый выпуск курса.</p><ul style=\"margin:0;\"><li style=\"margin:6px 0;\">Go, HTTP API, Git, SQL, PostgreSQL и Docker.</li><li style=\"margin:6px 0;\">Vue и проект сервиса доставки с каталогом, корзиной и заказами.</li><li style=\"margin:6px 0;\">Интерактивные примеры, задачи и проверка кода тестами.</li></ul></div>"
+  "text": "<iframe height=\"240\" src=\"https://zak618.github.io/stepik-course-pages/courses/305734-go-pro-max/introduction/versions/picture.html?version=1.0&amp;v=2c828e658e18\" style=\"width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;\" width=\"100%\"></iframe>\n<div style=\"margin:0 0 24px;\"><h3 style=\"font-size:20px;color:#6550b7;margin:0 0 8px;\">v1.0</h3><p style=\"margin:0 0 10px;\">Первый выпуск курса.</p><ul style=\"margin:0;\"><li style=\"margin:6px 0;\">Go, HTTP API, Git, SQL, PostgreSQL и Docker.</li><li style=\"margin:6px 0;\">Vue и проект сервиса доставки с каталогом, корзиной и заказами.</li><li style=\"margin:6px 0;\">Интерактивные примеры, задачи и проверка кода тестами.</li></ul></div>"
 }

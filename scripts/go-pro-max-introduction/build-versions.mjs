@@ -16,11 +16,11 @@ const hash = createHash('sha256').update(JSON.stringify(releases));
 for (const file of ['picture.css', 'picture.js', 'version-options.mjs']) hash.update(await readFile(new URL(file, directory)));
 const document = (title, head, body) => `<!doctype html>\n<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>${head}</head><body>${body}</body></html>\n`;
 const currentVersion = escape(releases[0].version);
-// В полёте только номера из истории. Будущие выпуски не выдумываем.
+// Главная и плывущие карточки используют один номер из адреса фрейма.
 const flyingCards = Array.from({length:5}, (_, index) => {
   return '<div class="release-flight flight-' + index + '" aria-hidden="true"><div class="release-ticket"><i></i><span></span><b>✧</b></div></div>';
 }).join('');
-const picture = `<section class="release-picture" data-current-version="${currentVersion}" data-version-history="${escape(releases.map(release=>release.version).join(','))}" tabindex="0" role="img" aria-label="Летящие карточки версий курса. Наведите указатель или установите фокус, чтобы остановить движение.">
+const picture = `<section class="release-picture" data-current-version="${currentVersion}" tabindex="0" role="img" aria-label="Летящие карточки версий курса. Наведите указатель или установите фокус, чтобы остановить движение.">
   <div class="release-art">
     <div class="release-aura" aria-hidden="true"></div>
     <svg class="release-ribbons" viewBox="0 0 900 240" preserveAspectRatio="none" aria-hidden="true">
@@ -53,7 +53,7 @@ const pictureHtml = document('Go-шечка Pro MAX · версии', `<link rel
 // Only attributes/styles preserved by Stepik's native text sanitizer.
 const history = releases.map(release => `<div style="margin:0 0 24px;"><h3 style="font-size:20px;color:#6550b7;margin:0 0 8px;">v${escape(release.version)}</h3><p style="margin:0 0 10px;">${escape(release.summary)}</p><ul style="margin:0;">${release.changes.map(change => `<li style="margin:6px 0;">${escape(change)}</li>`).join('')}</ul></div>`).join('\n');
 const frame = src => `<iframe height="240" src="${escape(src)}" style="width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;" width="100%"></iframe>`;
-const parameters = new URLSearchParams({version:releases[0].version,history:releases.slice(1).map(release=>release.version).join(','),v:revision});
+const parameters = new URLSearchParams({version:releases[0].version,v:revision});
 const text = frame(`${base}${folder}/versions/picture.html?${parameters}`) + '\n' + history;
 const previewStyle = `<style>*{box-sizing:border-box}body{margin:0;background:#fff;color:#25334c;font:18px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:950px;margin:auto;padding:28px 24px}iframe{max-width:100%}li{padding-left:3px}@media(max-width:520px){main{padding:16px 12px;font-size:16px}}</style>`;
 await writeFile(new URL('picture.html', directory), pictureHtml);

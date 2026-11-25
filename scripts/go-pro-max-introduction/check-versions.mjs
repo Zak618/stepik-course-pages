@@ -77,6 +77,7 @@ try {
     return animations.length > 0 && animations.every(animation=>animation.playState==='paused');
   },null,{timeout:3000});
   assert.deepEqual(await frame.evaluate(() => [...document.querySelectorAll('.release-main-ticket strong')].map(node=>node.textContent)),[currentVersion]);
+  assert.deepEqual(await frame.locator('.release-ticket span').allTextContents(),Array(5).fill(currentVersion));
   await writeFile(privateDir + '/native-layout.json',JSON.stringify({stepikWrites:0,hostBytesVerified:true,routedVerifiedAssets:true,results,animation:true,focusPause:true,pageErrors:errors},null,2),{mode:0o600});
   console.log(JSON.stringify({nativeStep:state.source,widths:results.length,noInnerScroll:true,animation:true,pageErrors:errors.length}));
 } finally {
