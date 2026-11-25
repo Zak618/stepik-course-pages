@@ -23,6 +23,7 @@
 @media(max-width:620px){.project-demo{height:470px;padding:14px 12px}.order-preview{padding:9px 10px}.system-node{width:70px}.system-node strong{font-size:13px}.system-node small{font-size:11px}.system-scene{height:122px;margin-bottom:8px}.response-panel{padding:8px 10px;min-height:68px}.demo-status{font-size:13px;min-height:42px}.telegram-core{width:64px;height:64px;border-radius:20px}.telegram-core svg{width:36px;height:36px}.news-card{font-size:12px;padding:7px 11px}}
 /* Compact automatic recap, no controls. */
 .project-demo{height:280px;padding:18px 20px 16px}
+.course-card-top{display:table}.course-card-top img{max-width:none}.course-card-top td{min-width:0}
 .system-scene{height:130px;margin:10px 0 8px}
 .system-node,.system-node.node-go,.system-node.node-sql{top:24px}
 .wires{top:18px;height:122px}

@@ -2,6 +2,8 @@
 
 Шесть интерактивных шагов [введения в Stepik](https://stepik.org/lesson/2700348/step/1?unit=2740161).
 
+[Финальный модуль](modules/29-finale/README.md) добавлен [в Stepik](https://stepik.org/lesson/2744253/step/1?unit=2784768). Локальный просмотр на <http://localhost:8810/>. Один урок с итогами, свободным ответом, Telegram и вариантами продолжения.
+
 Локальное описание находится в `promo/`. Запуск:
 
 ```sh

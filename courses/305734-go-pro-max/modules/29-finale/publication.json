@@ -1,0 +1,16 @@
+{
+  "course": 305734,
+  "account": "webhacker",
+  "section": 790553,
+  "modulePosition": 29,
+  "lesson": 2744253,
+  "unit": 2784768,
+  "publishedOn": "2026-11-25",
+  "url": "https://stepik.org/lesson/2744253/step/1?unit=2784768",
+  "steps": [
+    {"id": 12593823, "position": 1, "type": "text", "cost": 0},
+    {"id": 12593824, "position": 2, "type": "free-answer", "cost": 0},
+    {"id": 12593825, "position": 3, "type": "text", "cost": 0},
+    {"id": 12593826, "position": 4, "type": "text", "cost": 0}
+  ]
+}
