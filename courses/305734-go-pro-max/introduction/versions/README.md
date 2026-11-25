@@ -1,7 +1,7 @@
 # Версии курса
 
-Локальный черновик нового шага введения. В Stepik пока не опубликован.
-Место в уроке: перед шагом «Что впереди».
+[Шестой шаг введения в Stepik](https://stepik.org/lesson/2700348/step/6?unit=2740161),
+перед «Что впереди». ID шага `12600204` сохранён в `step.json`.
 
 ```sh
 node scripts/go-pro-max-introduction/build-versions.mjs
@@ -21,4 +21,17 @@ node scripts/go-pro-max-introduction/preview-versions.mjs
 `index.html` и `publication.json` создаются при сборке, вручную их менять не нужно.
 В `publication.json` подготовлен текст для Stepik. Только иллюстрация находится
 во фрейме высотой 240 px. История версий идёт обычным текстом под ней.
-Публикация этого черновика требует отдельного подтверждения.
+
+Обновление версии после сборки:
+
+1. Загрузите новые файлы в GitHub Pages.
+2. Выполните `node scripts/go-pro-max-introduction/publish-versions.mjs --apply`.
+3. Выполните `node scripts/go-pro-max-introduction/publish-versions.mjs --verify`.
+
+Браузерная проверка: `node scripts/go-pro-max-introduction/check-versions.mjs`.
+Для неё нужен Playwright Core; путь задаётся через `PLAYWRIGHT_MODULE`.
+
+Без флага скрипт только проверяет готовность. Повторная публикация обновляет тот же
+шаг, не создаёт новый. Остальные шесть шагов, ответы и баллы не меняются.
+Если GitHub Pages не обновился после push, запустите его сборку и дождитесь загрузки
+файлов. Проверка хостинга не позволит опубликовать ссылку на старую анимацию.

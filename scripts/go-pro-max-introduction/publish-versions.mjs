@@ -1,7 +1,9 @@
 // A separate native text step; never rewrite the six existing introduction blocks.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFile} from 'node:child_process';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
+import {promisify} from 'node:util';
 import {course, lesson, unit, folder, base} from './config.mjs';
 import {pages} from '../../courses/305734-go-pro-max/introduction/content.mjs';
 
@@ -86,9 +88,10 @@ if (!apply && !verify) {
   process.exit(0);
 }
 const hash = value => createHash('sha256').update(value).digest('hex');
+const run = promisify(execFile);
 await Promise.all(['picture.html','picture.css','picture.js'].map(async file => {
-  const response = await fetch(base + directory + '/' + file + '?v=' + plan.revision, {signal:AbortSignal.timeout(30000)});
-  assert.ok(response.ok && hash(Buffer.from(await response.arrayBuffer())) === hash(await readFile(directory + '/' + file)), 'Файлы ещё не готовы на хостинге: ' + file);
+  const {stdout} = await run('curl', ['--fail','--silent','--show-error','--location','--max-time','30',base + directory + '/' + file + '?v=' + plan.revision], {encoding:'buffer'});
+  assert.equal(hash(stdout),hash(await readFile(directory + '/' + file)), 'Файлы ещё не готовы на хостинге: ' + file);
 }));
 if (apply) {
   await mkdir(privateDir, {recursive:true,mode:0o700});

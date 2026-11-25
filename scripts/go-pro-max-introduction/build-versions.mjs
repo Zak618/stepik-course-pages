@@ -51,8 +51,9 @@ const picture = `<section class="release-picture" tabindex="0" role="img" aria-l
 </section>`;
 const revision = hash.update(picture).digest('hex').slice(0, 12);
 const pictureHtml = document('Go-шечка Pro MAX · версии', `<link rel="stylesheet" href="picture.css?v=${revision}"><script src="picture.js?v=${revision}" defer></script>`, picture);
-const history = releases.map(release => `<div style="margin:0 0 24px;"><h3 style="font-size:20px;line-height:1.4;color:#6550b7;margin:0 0 8px;">v${escape(release.version)}</h3><p style="margin:0 0 10px;">${escape(release.summary)}</p><ul style="margin:0;padding-left:24px;">${release.changes.map(change => `<li style="margin:6px 0;">${escape(change)}</li>`).join('')}</ul></div>`).join('\n');
-const frame = src => `<iframe src="${src}" title="Летящие карточки версий курса" width="100%" height="240" style="display:block;width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;"></iframe>`;
+// Only attributes/styles preserved by Stepik's native text sanitizer.
+const history = releases.map(release => `<div style="margin:0 0 24px;"><h3 style="font-size:20px;color:#6550b7;margin:0 0 8px;">v${escape(release.version)}</h3><p style="margin:0 0 10px;">${escape(release.summary)}</p><ul style="margin:0;">${release.changes.map(change => `<li style="margin:6px 0;">${escape(change)}</li>`).join('')}</ul></div>`).join('\n');
+const frame = src => `<iframe height="240" src="${src}" style="width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;" width="100%"></iframe>`;
 const text = frame(`${base}${folder}/versions/picture.html?v=${revision}`) + '\n' + history;
 const previewStyle = `<style>*{box-sizing:border-box}body{margin:0;background:#fff;color:#25334c;font:18px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:950px;margin:auto;padding:28px 24px}iframe{max-width:100%}li{padding-left:3px}@media(max-width:520px){main{padding:16px 12px;font-size:16px}}</style>`;
 await writeFile(new URL('picture.html', directory), pictureHtml);
