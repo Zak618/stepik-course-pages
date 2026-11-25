@@ -18,7 +18,7 @@ for(const file of maps){
 }
 const server=createServer(async(req,res)=>{
   const file=new URL(req.url,'http://localhost').pathname.slice(1);
-  if(!pages.has(file)&&!(/^(assets|shared\/course-introductions)\/[a-zA-Z0-9/_.-]+\.(js|css|png)$/.test(file)&&!file.includes('..'))&&file!=='courses/305734-go-pro-max/introduction/course-map-catalog.js'){
+  if(!pages.has(file)&&!(/^(assets|shared\/course-introductions)\/[a-zA-Z0-9/_.-]+\.(js|css|png)$/.test(file)&&!file.includes('..'))&&!/^courses\/305734-go-pro-max\/modules\/29-finale\/(?:finale.css|embeds\/courses\.(?:html|css))$/.test(file)&&file!=='courses/305734-go-pro-max/introduction/course-map-catalog.js'){
     res.writeHead(404);res.end();return;
   }
   try{const data=await readFile(file);res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.png')?'image/png':'text/html');res.end(data);}
@@ -50,8 +50,13 @@ try{
       }
       results.push({file,width,courses:links.length,paid:links.filter(c=>!c.free).length});
     }
-    await load(origin+'/'+finale);
-    assert.deepEqual(await evaluate('[...document.querySelectorAll(".gpmx-finale-course-card a")].map(a=>a.href)'),['https://stepik.org/a/200517','https://stepik.org/a/200517','https://stepik.org/a/183142','https://stepik.org/a/183142']);
+    for(const width of [1280,1100,1099,800,769,768,760,620,390,320]){
+      await viewport(width);await load(origin+'/'+finale);
+      const metrics=await evaluate(`(()=>{const frame=document.querySelector('iframe'),doc=frame.contentDocument;return {links:[...doc.querySelectorAll('.gpmx-finale-course-card a')].map(a=>a.href),overflow:doc.documentElement.scrollWidth>frame.clientWidth||doc.documentElement.scrollHeight>frame.clientHeight,gap:frame.clientHeight-doc.querySelector('main').getBoundingClientRect().bottom,outerOverflow:document.documentElement.scrollWidth>innerWidth,images:[...doc.images].every(i=>i.complete&&i.naturalWidth>0)};})()`);
+      assert.deepEqual(metrics.links,['https://stepik.org/a/200517','https://stepik.org/a/200517','https://stepik.org/a/183142','https://stepik.org/a/183142']);
+      assert.equal(metrics.overflow,false,JSON.stringify({width,...metrics}));assert.equal(metrics.outerOverflow,false);assert.equal(metrics.images,true);
+      assert.ok(metrics.gap>=0&&metrics.gap<85,JSON.stringify({width,...metrics}));
+    }
     assert.deepEqual(exceptions,[]);
   });
 }finally{await new Promise(resolve=>server.close(resolve));}

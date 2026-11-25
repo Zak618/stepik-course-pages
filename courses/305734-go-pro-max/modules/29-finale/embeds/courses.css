@@ -1,0 +1,9 @@
+:root{font-family:Arial,Helvetica,sans-serif;color:#334660;color-scheme:light;background:#fff}
+*{box-sizing:border-box}html,body{margin:0;min-width:240px}body{line-height:1.65}main{padding:2px 0}
+.gpmx-finale-course-card{border-radius:16px;overflow-wrap:break-word}
+.gpmx-finale-course-card:last-child{margin-bottom:0!important}
+.gpmx-finale-course-card img{display:block;border-radius:12px}
+.gpmx-finale-course-card h2{line-height:1.4;font-weight:600;letter-spacing:-.02em}
+a{color:#536dc5;text-underline-offset:4px;text-decoration:none}
+a:hover{text-decoration:underline}a:focus-visible{outline:3px solid #8bc9ef;outline-offset:3px}
+.gpmx-finale-course-link{font-size:15px}

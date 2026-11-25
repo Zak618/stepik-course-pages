@@ -59,6 +59,7 @@ export const faq = [
 const escape = value => String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export const paragraphs = values => values.map(value=>`<p>${escape(value)}</p>`).join('');
 export const list = values => `<ul>${values.map(value=>`<li>${escape(value)}</li>`).join('')}</ul>`;
+export const aiHelp = '<div style="padding:18px 20px;margin:24px 0;background-color:#f4f1ff;border-left:3px solid #8970df;"><p style="color:#6b50bd;margin:0 0 8px;"><strong>ИИ-помощник в комментариях</strong></p><p style="color:#45536e;margin:0;">Если что-то не получается, задайте вопрос под уроком. ИИ-помощник поможет разобраться в теме или ошибке в коде.</p></div>';
 
 export function projectArt() {
   return `<div class="project-visual" data-stage="0">
@@ -76,7 +77,7 @@ export function projectArt() {
   </div>`;
 }
 
-export function renderDescription() {
+function renderDescriptionBase() {
   return `<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><p class="course-label">Go-шечка <b>Pro MAX</b></p><h1 id="hero-title">Сначала Go.<br><span>Потом своё приложение.</span></h1><p class="hero-lede">Напишем сервер на Go, подключим PostgreSQL и добавим интерфейс на Vue. Соберём доставку с каталогом, корзиной и заказами.</p><div class="hero-actions"><a class="button" href="#project">Что будем собирать</a><a class="text-link" href="#program">Посмотреть темы</a></div><div class="tech-tags" aria-label="Основные технологии"><span>Go</span><span class="vue-tag">Vue</span><span>PostgreSQL</span><span>Docker</span></div></div><div class="hero-art" aria-hidden="true"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="hero-core"><span>Go</span><b>+</b><span class="vue-core">Vue</span></div><div class="float-card float-api"><span>{ }</span><strong>Сервер</strong><small>Go</small></div><div class="float-card float-ui"><span>▦</span><strong>Интерфейс</strong><small>Vue</small></div><div class="float-card float-db"><span>▤</span><strong>Данные</strong><small>PostgreSQL</small></div><span class="hero-spark spark-one">✦</span><span class="hero-spark spark-two">✦</span></div></section>
     <div class="course-facts"><div><strong>${facts.modules}</strong><span>модулей</span></div><div><strong>${facts.lessons}</strong><span>уроков</span></div><p>От первой программы<br> до интерфейса и сервера.</p></div>
     <section class="project-section section" id="project"><header class="section-head"><p class="eyebrow">Ваш проект</p><h2>Ваш сервис доставки.<br><span>С интерфейсом и сервером.</span></h2><p>Покупатель выбирает еду, оформляет заказ и видит его статус. Оператор принимает заказ и отправляет его в доставку. Обе стороны работают с одним сервисом.</p></header>${projectArt()}<div class="project-parts"><div><h3>Каталог и корзина</h3><p>Товары, поиск и количество. Корзина хранится на сервере.</p></div><div><h3>Вход и заказы</h3><p>Сессии, права, история и кабинет оператора.</p></div><div><h3>Проверка ошибок</h3><p>Товар закончился, запрос повторился или ответ потерялся. Разберём и такие случаи.</p></div></div></section>
@@ -87,7 +88,9 @@ export function renderDescription() {
     `;
 }
 
-export function nativeDescription() {
+export function renderDescription() { return renderDescriptionBase() + aiHelp; }
+export function nativeDescription() { return nativeDescriptionBase().replace('<p style="color:#65748d;">',aiHelp+'<p style="color:#65748d;">'); }
+function nativeDescriptionBase() {
   const heading = text => `<h2 style="color:#4f64ca;font-size:28px;">${text}</h2>`;
   const frame='<iframe height="360" src="https://zak618.github.io/stepik-course-pages/courses/305734-go-pro-max/promo/project.html?v=go-max-promo-20261120-2" style="border:0;width:100%;height:360px;margin:0;" width="100%"></iframe>';
   return heading('Сначала Go. Потом своё приложение.') + paragraphs(['Напишем сервер на Go, подключим PostgreSQL и добавим интерфейс на Vue. Соберём доставку с каталогом, корзиной и заказами.']) + `<p><strong style="color:#7758d7;">${facts.modules} модулей · ${facts.lessons} уроков</strong></p>` + heading('Ваш сервис доставки') + paragraphs(['Покупатель выбирает еду, оформляет заказ и видит его статус. Оператор принимает заказ и отправляет его в доставку. Обе стороны работают с одним сервисом.']) + '<div style="font-size:0;margin:0;">'+frame+'</div>' + heading('Что изучим') + topics.map(([,title,text])=>`<details style="margin:12px 0;"><summary style="color:#238b87;"><strong>${escape(title)}</strong></summary><p>${escape(text)}</p></details>`).join('') + heading('Как будем учиться') + paragraphs(['Разбираем тему на примерах и сразу пишем код. В интерактивах можно менять значения и смотреть на результат.','Задачи на Go и SQL проверяет Stepik. Код интерфейса и итоговый проект проверяете на компьютере по инструкциям и с помощью тестов.','В проекте есть заготовки и этапы работы. Вы дописываете нужные части, проверяете их и собираете приложение целиком.']) + '<p style="color:#65748d;">'+escape(faq[2][1])+'</p>';
