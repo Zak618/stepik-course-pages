@@ -39,5 +39,6 @@ node scripts/go-pro-max-introduction/check-versions.mjs
 ```
 
 Без флага публикатор ничего не меняет. Браузерной проверке нужен Playwright Core;
-его путь задаётся через `PLAYWRIGHT_MODULE`. Если хостинг не обновился после push,
-запустите сборку GitHub Pages вручную. Ссылки на старые файлы не публикуются.
+его путь задаётся через `PLAYWRIGHT_MODULE`. После push дождитесь успешного
+workflow `Publish course pages` в GitHub Actions. Его можно запустить вручную.
+Ссылки на старые файлы не публикуются.
