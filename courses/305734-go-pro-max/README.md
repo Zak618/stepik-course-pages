@@ -3,6 +3,7 @@
 Семь шагов [введения в Stepik](https://stepik.org/lesson/2700348/step/1?unit=2740161).
 
 [Версии курса](introduction/versions/README.md) находятся [в шестом шаге](https://stepik.org/lesson/2700348/step/6?unit=2740161), перед «Что впереди». Локальный просмотр: <http://localhost:8812/>.
+Номер на анимации и старые версии меняются в адресе фрейма прямо в Stepik, без GitHub.
 
 [Финальный модуль](modules/29-finale/README.md) добавлен [в Stepik](https://stepik.org/lesson/2744253/step/1?unit=2784768). Локальный просмотр на <http://localhost:8810/>. Один урок с итогами, свободным ответом, Telegram и вариантами продолжения.
 

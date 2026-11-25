@@ -6,6 +6,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {course, lesson, unit, folder, base} from './config.mjs';
 import {pages} from '../../courses/305734-go-pro-max/introduction/content.mjs';
+import {readVersionFrame,updateVersionFrame} from './version-links.mjs';
 
 const apply = process.argv.includes('--apply');
 const verify = process.argv.includes('--verify');
@@ -20,7 +21,7 @@ assert.equal(state.position, 6);
 assert.equal(plan.suggestedPosition, state.position);
 assert.equal(plan.frameHeight, 240);
 assert.equal(plan.source, state.source, 'Сначала выполните build-versions.mjs');
-assert.ok(plan.text.includes(base + directory + '/picture.html?v=' + plan.revision));
+assert.equal(readVersionFrame(plan.text).url.searchParams.get('v'),plan.revision);
 const session = JSON.parse(await readFile('.stepik-accounts/647088271/session.json', 'utf8'));
 async function api(path, method = 'GET', body) {
   assert.ok(method === 'GET' || apply, 'Запись только с --apply');
@@ -61,6 +62,10 @@ if (!addedId) {
 }
 assert.deepEqual(existing.filter(source => source.id !== addedId).map(source => source.id), pages.map(page => page.source), 'Изменился порядок или состав урока');
 const before = journal?.originals || existing.filter(source => source.id !== addedId);
+// The native history is now edited in Stepik. Updating assets must never restore
+// the original example history from releases.mjs over the author's changes.
+const currentVersionStep = existing.find(source => source.id === addedId);
+const targetText = currentVersionStep ? updateVersionFrame(currentVersionStep.block.text,plan.revision) : plan.text;
 function inspect(current, complete = false) {
   assert.deepEqual(current.filter(source => source.id !== addedId).map(source => source.id), pages.map(page => page.source));
   assert.equal(current.length, pages.length + (addedId ? 1 : 0));
@@ -77,7 +82,7 @@ function inspect(current, complete = false) {
     assert.ok(addedId, 'Шаг версий ещё не создан');
     const saved = current.find(source => source.id === addedId);
     assert.equal(saved.position, state.position); assert.equal(saved.cost, 0);
-    assert.equal(saved.block.name, 'text'); assert.equal(saved.block.text, plan.text);
+    assert.equal(saved.block.name, 'text'); assert.equal(saved.block.text, targetText);
     assert.equal(saved.status, 'ready');
     assert.deepEqual(current.map(source => source.position), [1,2,3,4,5,6,7]);
   }
@@ -89,7 +94,7 @@ if (!apply && !verify) {
 }
 const hash = value => createHash('sha256').update(value).digest('hex');
 const run = promisify(execFile);
-await Promise.all(['picture.html','picture.css','picture.js'].map(async file => {
+await Promise.all(['picture.html','picture.css','picture.js','version-options.mjs'].map(async file => {
   const {stdout} = await run('curl', ['--fail','--silent','--show-error','--location','--max-time','30',base + directory + '/' + file + '?v=' + plan.revision], {encoding:'buffer'});
   assert.equal(hash(stdout),hash(await readFile(directory + '/' + file)), 'Файлы ещё не готовы на хостинге: ' + file);
 }));
@@ -101,7 +106,7 @@ if (apply) {
     await writeFile(privateDir + '/journal.json',JSON.stringify(journal,null,2),{mode:0o600});
   }
   if (!addedId) {
-    const saved = (await api('step-sources','POST',{stepSource:{lesson,position:pages.length+1,cost:0,block:{name:'text',source:{},text:plan.text}}}))['step-sources'][0];
+    const saved = (await api('step-sources','POST',{stepSource:{lesson,position:pages.length+1,cost:0,block:{name:'text',source:{},text:targetText}}}))['step-sources'][0];
     addedId = saved.id;
     journal.source = addedId;
     await writeFile(privateDir + '/journal.json',JSON.stringify(journal,null,2),{mode:0o600});
@@ -119,19 +124,20 @@ if (apply) {
   }
   const fresh = (await api('step-sources/' + addedId))['step-sources'][0];
   assert.equal(fresh.lesson,lesson); assert.equal(fresh.block.name,'text'); assert.equal(fresh.cost,0);
-  if (fresh.position !== state.position || fresh.block.text !== plan.text) {
-    await api('step-sources/' + addedId,'PUT',{stepSource:{lesson,position:state.position,cost:0,block:{...fresh.block,text:plan.text}}});
+  if (currentVersionStep) assert.deepEqual(stable(fresh),stable(currentVersionStep),'Шаг версий изменён во время публикации');
+  if (fresh.position !== state.position || fresh.block.text !== targetText) {
+    await api('step-sources/' + addedId,'PUT',{stepSource:{lesson,position:state.position,cost:0,block:{...fresh.block,text:targetText}}});
   }
 }
 const saved = await sources();
 inspect(saved,true);
-assert.equal((await api('steps/' + addedId)).steps[0].block.text,plan.text);
+assert.equal((await api('steps/' + addedId)).steps[0].block.text,targetText);
 const lessonAfter = (await api('lessons/' + lesson)).lessons[0];
 assert.deepEqual(lessonAfter.steps,saved.map(source => source.id));
 for (const key of ['owner','title','courses','units','cover_url','is_comments_enabled','is_exam_without_progress','is_public','language']) assert.deepEqual(lessonAfter[key],lessonBefore[key]);
 const courseAfter = (await api('courses/' + course)).courses[0];
 for (const key of ['owner','title','description','sections','is_public','is_enabled','is_paid','price','currency_code','certificate','certificate_regular_threshold','certificate_distinction_threshold','acquired_skills','acquired_assets']) assert.deepEqual(courseAfter[key],courseBefore[key]);
-const result = {course,lesson,unit,source:addedId,position:state.position,revision:plan.revision,steps:7,originalBlocksUnchanged:6,nativeAnswersPreserved:2,pointsPreserved:true,url:`https://stepik.org/lesson/${lesson}/step/${state.position}?unit=${unit}`};
+const result = {course,lesson,unit,source:addedId,position:state.position,revision:plan.revision,steps:7,originalBlocksUnchanged:6,nativeHistoryPreserved:true,nativeAnswersPreserved:2,pointsPreserved:true,url:`https://stepik.org/lesson/${lesson}/step/${state.position}?unit=${unit}`};
 if (apply) {
   await writeFile(directory + '/step.json',JSON.stringify({...state,source:addedId},null,2)+'\n');
   await writeFile(privateDir + '/verified.json',JSON.stringify(result,null,2),{mode:0o600});

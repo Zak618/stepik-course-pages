@@ -3,6 +3,23 @@ const scene = document.querySelector('.release-art');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 let frame = null;
 
+// Dynamic import also works with previously published classic-script HTML.
+import('./version-options.mjs').then(({versionOptions}) => {
+  const versions = versionOptions(location.search, {
+    current:picture.dataset.currentVersion || document.querySelector('.release-main-ticket strong').textContent,
+    history:(picture.dataset.versionHistory || '').split(','),
+  });
+  const label = 'v' + versions.current;
+  document.querySelector('.release-main-ticket strong').textContent = label;
+  picture.style.setProperty('--release-version-font', Math.min(62,300 / label.length) + 'px');
+  picture.setAttribute('aria-label', 'Летящие карточки версий курса. Текущая версия ' + label + '. Наведите указатель или установите фокус, чтобы остановить движение.');
+  const flyingVersions = versions.history.length ? versions.history : [versions.current];
+  document.querySelectorAll('.release-ticket span').forEach((node,index) => {
+    node.textContent = 'v' + flyingVersions[index % flyingVersions.length];
+    node.style.fontSize = Math.min(27,135 / node.textContent.length) + 'px';
+  });
+});
+
 function resetTilt() {
   cancelAnimationFrame(frame);
   frame = null;

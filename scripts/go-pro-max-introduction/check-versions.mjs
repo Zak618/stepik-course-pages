@@ -5,17 +5,21 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {base,folder} from './config.mjs';
-import {releases} from '../../courses/305734-go-pro-max/introduction/versions/releases.mjs';
+import {readVersionFrame} from './version-links.mjs';
+import {versionOptions} from '../../courses/305734-go-pro-max/introduction/versions/version-options.mjs';
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright-core');
 const directory = folder + '/versions';
 const plan = JSON.parse(await readFile(directory + '/publication.json','utf8'));
 const state = JSON.parse(await readFile(directory + '/step.json','utf8'));
-const currentVersion = 'v' + releases[0].version;
 assert.ok(state.source, 'Сначала опубликуйте шаг');
 const token = JSON.parse(await readFile('.stepik-accounts/647088271/session.json','utf8')).access_token;
+const response = await fetch('https://stepik.org/api/step-sources/' + state.source,{headers:{Authorization:'Bearer ' + token},signal:AbortSignal.timeout(20000)});
+assert.ok(response.ok);
+const source = (await response.json())['step-sources'][0];
+const currentVersion = 'v' + versionOptions(readVersionFrame(source.block.text).url.search).current;
 const run = promisify(execFile), assets = new Map();
 const hash = value => createHash('sha256').update(value).digest('hex');
-for (const file of ['picture.html','picture.css','picture.js']) {
+for (const file of ['picture.html','picture.css','picture.js','version-options.mjs']) {
   const {stdout} = await run('curl',['--fail','--silent','--show-error','--location','--max-time','30',base + directory + '/' + file + '?v=' + plan.revision],{encoding:'buffer'});
   assert.equal(hash(stdout),hash(await readFile(directory + '/' + file)),'Hosting mismatch: ' + file);
   assets.set(file,stdout);
@@ -30,7 +34,7 @@ await context.route('https://stepik.org/api/**',route => route.request().method(
 await context.route(base + directory + '/**',async route => {
   const file = new URL(route.request().url()).pathname.split('/').pop();
   assert.ok(assets.has(file));
-  await route.fulfill({body:assets.get(file),contentType:file.endsWith('.css')?'text/css':file.endsWith('.js')?'text/javascript':'text/html'});
+  await route.fulfill({body:assets.get(file),contentType:file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'text/javascript'});
 });
 const page = await context.newPage(), results = [], errors = [];
 page.on('pageerror',error => errors.push(error.message));

@@ -13,15 +13,14 @@ for (const release of releases) {
   if (!/^\d+\.\d+(?:\.\d+)?$/.test(release.version) || !release.summary || !release.changes?.length) throw Error('Проверьте версию и список изменений');
 }
 const hash = createHash('sha256').update(JSON.stringify(releases));
-for (const file of ['picture.css', 'picture.js']) hash.update(await readFile(new URL(file, directory)));
+for (const file of ['picture.css', 'picture.js', 'version-options.mjs']) hash.update(await readFile(new URL(file, directory)));
 const document = (title, head, body) => `<!doctype html>\n<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>${head}</head><body>${body}</body></html>\n`;
 const currentVersion = escape(releases[0].version);
 // В полёте только номера из истории. Будущие выпуски не выдумываем.
 const flyingCards = Array.from({length:5}, (_, index) => {
-  const version = escape(releases[index % releases.length].version);
-  return '<div class="release-flight flight-' + index + '" aria-hidden="true"><div class="release-ticket"><i></i><span>v' + version + '</span><b>✧</b></div></div>';
+  return '<div class="release-flight flight-' + index + '" aria-hidden="true"><div class="release-ticket"><i></i><span></span><b>✧</b></div></div>';
 }).join('');
-const picture = `<section class="release-picture" tabindex="0" role="img" aria-label="Летящие карточки версий курса. Текущая версия v${currentVersion}. Наведите указатель или установите фокус, чтобы остановить движение.">
+const picture = `<section class="release-picture" data-current-version="${currentVersion}" data-version-history="${escape(releases.map(release=>release.version).join(','))}" tabindex="0" role="img" aria-label="Летящие карточки версий курса. Наведите указатель или установите фокус, чтобы остановить движение.">
   <div class="release-art">
     <div class="release-aura" aria-hidden="true"></div>
     <svg class="release-ribbons" viewBox="0 0 900 240" preserveAspectRatio="none" aria-hidden="true">
@@ -39,7 +38,7 @@ const picture = `<section class="release-picture" tabindex="0" role="img" aria-l
         <div class="release-backplate"></div>
         <div class="release-main-ticket">
           <div class="release-ticket-dots"><i></i><i></i><i></i></div>
-          <strong>v${currentVersion}</strong>
+          <strong></strong>
           <svg class="release-orbit-star" viewBox="0 0 32 32"><path d="M16 0c0 11 5 16 16 16-11 0-16 5-16 16C16 21 11 16 0 16 11 16 16 11 16 0Z"/></svg>
           <div class="release-ticket-line"><i></i><i></i></div>
         </div>
@@ -53,10 +52,11 @@ const revision = hash.update(picture).digest('hex').slice(0, 12);
 const pictureHtml = document('Go-шечка Pro MAX · версии', `<link rel="stylesheet" href="picture.css?v=${revision}"><script src="picture.js?v=${revision}" defer></script>`, picture);
 // Only attributes/styles preserved by Stepik's native text sanitizer.
 const history = releases.map(release => `<div style="margin:0 0 24px;"><h3 style="font-size:20px;color:#6550b7;margin:0 0 8px;">v${escape(release.version)}</h3><p style="margin:0 0 10px;">${escape(release.summary)}</p><ul style="margin:0;">${release.changes.map(change => `<li style="margin:6px 0;">${escape(change)}</li>`).join('')}</ul></div>`).join('\n');
-const frame = src => `<iframe height="240" src="${src}" style="width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;" width="100%"></iframe>`;
-const text = frame(`${base}${folder}/versions/picture.html?v=${revision}`) + '\n' + history;
+const frame = src => `<iframe height="240" src="${escape(src)}" style="width:100%;height:240px;border:0;margin:0 0 24px;background:#fff;" width="100%"></iframe>`;
+const parameters = new URLSearchParams({version:releases[0].version,history:releases.slice(1).map(release=>release.version).join(','),v:revision});
+const text = frame(`${base}${folder}/versions/picture.html?${parameters}`) + '\n' + history;
 const previewStyle = `<style>*{box-sizing:border-box}body{margin:0;background:#fff;color:#25334c;font:18px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:950px;margin:auto;padding:28px 24px}iframe{max-width:100%}li{padding-left:3px}@media(max-width:520px){main{padding:16px 12px;font-size:16px}}</style>`;
 await writeFile(new URL('picture.html', directory), pictureHtml);
-await writeFile(new URL('index.html', directory), document('Версии курса · локальный черновик', previewStyle, `<main>${frame(`picture.html?v=${revision}`)}${history}</main>`));
+await writeFile(new URL('index.html', directory), document('Версии курса · локальный черновик', previewStyle, `<main>${frame(`picture.html?${parameters}`)}${history}</main>`));
 await writeFile(new URL('publication.json', directory), JSON.stringify({draft:!step.source, course, lesson, unit, source:step.source, suggestedPosition:step.position, title:'Версии курса', revision, frameHeight:240, text}, null, 2)+'\n');
 console.log(`Версии курса v${releases[0].version}: ${fileURLToPath(directory)}index.html`);
