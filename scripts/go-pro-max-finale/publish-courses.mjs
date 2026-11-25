@@ -40,7 +40,8 @@ else{
   const fresh=await course(),freshSources=await sources();assert.equal(fresh.description,current.description);assert.deepEqual(freshSources.map(s=>s.block),old.map(s=>s.block));
   await writeFile(dir+'/external-cards-before.json',JSON.stringify(release,null,2),{mode:0o600,flag:'wx'});
   const s=old[3];await api('step-sources/12593826','PUT',{stepSource:{lesson:s.lesson,position:s.position,cost:s.cost,block:{...s.block,text:release.stepText}}});
-  await api('courses/305734','PUT',{course:{title:fresh.title,description:release.description}});
+  // Stepik PUT clears these arrays when omitted, even on an editorial update.
+  await api('courses/305734','PUT',{course:{title:fresh.title,description:release.description,acquired_skills:fresh.acquired_skills,acquired_assets:fresh.acquired_assets}});
 }
 current=await course();old=await sources();
 for(const key of settings)assert.deepEqual(current[key],release.course[key],'Changed course field '+key);
