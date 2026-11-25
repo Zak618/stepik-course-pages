@@ -283,7 +283,7 @@
       document.querySelector('#dialog-track').textContent=tracks.get(course.track).title;
       const tag=document.querySelector('#dialog-price');
       tag.textContent=course.free?'Бесплатно':'Платный курс';tag.classList.toggle('free',course.free);
-      document.querySelector('#course-link').href='https://stepik.org/course/'+course.id+'/promo';
+      document.querySelector('#course-link').href=course.free?'https://stepik.org/course/'+course.id+'/promo':'https://stepik.org/a/'+course.id;
       document.querySelector('#course-link').innerHTML='Открыть курс'+icon('link');
       updateSaveButton();
       dialog.showModal();
