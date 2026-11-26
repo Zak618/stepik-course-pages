@@ -9,11 +9,19 @@ const snapshot=JSON.parse(await readFile(dir+'/snapshot.json','utf8'));
 assert.equal(snapshot.account,647088271);
 const inputs=['card.html','card.css','card.js','offer.mjs'];
 const hash=createHash('sha256');for(const file of inputs)hash.update(file).update(await readFile(folder+'/'+file));
-const revision=hash.digest('hex').slice(0,12);
+const assetRevision=hash.digest('hex').slice(0,12);
+const assetsOnly=process.argv.includes('--assets-only');
+let previous;
+if(assetsOnly)previous=JSON.parse(await readFile(dir+'/plan.json','utf8'));
+else{
+  let exists=false;try{await readFile(dir+'/journal.json');exists=true;}catch(error){if(error.code!=='ENOENT')throw error;}
+  assert.ok(!exists,'Campaign already started. Use --assets-only for an asset repair, not a new plan.');
+}
+const revision=previous?.revision||assetRevision;
 const source=await readFile(folder+'/card.html','utf8');
 for(const [audience,variant] of Object.entries(variants)){
   let html=source.replace('<html lang="ru">','<html lang="ru" class="is-embedded" data-audience="'+audience+'">')
-    .replace('href="card.css"','href="card.css?v='+revision+'"').replace('src="card.js"','src="card.js?v='+revision+'"')
+    .replace('href="card.css"','href="card.css?v='+assetRevision+'"').replace('src="card.js"','src="card.js?v='+assetRevision+'"')
     .replace('id="discount">−10%','id="discount">−'+variant.discount+'%').replace('value="GOSHECHKAMAX"','value="'+variant.code+'"');
   await writeFile(folder+'/offer-'+variant.discount+'.html',html);
 }
@@ -38,5 +46,6 @@ assert.equal(targets.filter(t=>t.discount===20).length,4);
 assert.ok(!targets.some(t=>t.course===305734));
 assert.equal(new Set(targets.filter(t=>t.lesson).map(t=>t.lesson)).size,74);
 const assets=[...inputs.filter(file=>file!=='card.html'),'offer-10.html','offer-20.html'].map(file=>folder+'/'+file).concat('assets/course-covers/305734.png');
-await writeFile(dir+'/plan.json',JSON.stringify({account:647088271,revision,frameHeight:400,assets,targets},null,2),{mode:0o600});
+if(previous){assert.deepEqual(targets,previous.targets,'Asset repair cannot change Stepik content or positions');assert.deepEqual(assets,previous.assets);}
+await writeFile(dir+'/plan.json',JSON.stringify({account:647088271,revision,assetRevision,frameHeight:400,assets,targets},null,2),{mode:0o600});
 console.log(JSON.stringify({courses:39,newSteps:75,newLessons:1,discount20:4,revision,stepikWrites:0}));

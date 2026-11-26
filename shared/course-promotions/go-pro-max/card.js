@@ -15,6 +15,12 @@ document.querySelector('.course-link').href = offer.url;
 
 const ctx = canvas.getContext('2d',{willReadFrequently:true});
 let revealed = false, pointer = null, last = null, lastCheck = 0;
+const strokes=[];
+function drawStroke(from,to,width,height){
+  ctx.globalCompositeOperation='destination-out';ctx.strokeStyle='#000';
+  ctx.lineWidth=Math.max(28,Math.min(42,height*.6));ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();ctx.moveTo(from.x*width,from.y*height);ctx.lineTo(to.x*width+.01,to.y*height);ctx.stroke();
+}
 
 function reveal() {
   if (revealed) return;
@@ -37,17 +43,10 @@ function paint() {
   if (!width || !height) return;
   const dpr = Math.min(devicePixelRatio || 1,2);
   if (canvas.width === Math.round(width*dpr) && canvas.height === Math.round(height*dpr)) return;
-  let previous;
-  if (canvas.dataset.painted) {
-    previous = document.createElement('canvas');
-    previous.width = canvas.width; previous.height = canvas.height;
-    previous.getContext('2d').drawImage(canvas,0,0);
-  }
   canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr);
   ctx.setTransform(dpr,0,0,dpr,0,0);
   ctx.globalCompositeOperation = 'source-over';
-  if (previous) ctx.drawImage(previous,0,0,width,height);
-  else {
+  {
     const foil = ctx.createLinearGradient(0,0,width,height);
     for (const [stop,color] of [[0,'#d4daed'],[.25,'#f0eafb'],[.52,'#c7c6e4'],[.77,'#e5ddf7'],[1,'#d9deef']]) foil.addColorStop(stop,color);
     ctx.fillStyle = foil; ctx.fillRect(0,0,width,height);
@@ -57,17 +56,15 @@ function paint() {
     ctx.font = '600 ' + (width<205?12:14) + 'px Arial';
     ctx.fillText('Сотрите покрытие',width/2,height/2);
   }
+  for(const stroke of strokes)drawStroke(stroke.from,stroke.to,width,height);
   canvas.dataset.painted = 'true';
 }
 
 function erase(event) {
   const rect = canvas.getBoundingClientRect();
-  const point = {x:event.clientX-rect.left,y:event.clientY-rect.top};
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.strokeStyle = '#000';
-  ctx.lineWidth = Math.max(28,Math.min(42,rect.height*.6));
-  ctx.lineCap = 'round';ctx.lineJoin = 'round';
-  ctx.beginPath();ctx.moveTo(last?.x??point.x,last?.y??point.y);ctx.lineTo(point.x+.01,point.y);ctx.stroke();
+  const point = {x:(event.clientX-rect.left)/rect.width,y:(event.clientY-rect.top)/rect.height};
+  const stroke={from:last||point,to:point};strokes.push(stroke);
+  drawStroke(stroke.from,stroke.to,rect.width,rect.height);
   last = point;
 }
 

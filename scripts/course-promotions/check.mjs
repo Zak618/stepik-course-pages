@@ -45,6 +45,10 @@ try{
   }
   await page.goto(url('go'));await page.locator('#scratch').press('Enter');
   assert.equal(await page.locator('#copy').evaluate(el=>el===document.activeElement),true);
+  await page.setViewportSize({width:1000,height:600});await page.goto(url('general'));
+  await page.setViewportSize({width:358,height:600});
+  await page.waitForFunction(()=>document.querySelector('#scratch').width===Math.round(document.querySelector('.ticket-code').clientWidth*Math.min(devicePixelRatio,2)));
+  assert.match(await page.locator('#scratch').evaluate(canvas=>canvas.getContext('2d').font),/1[24]px Arial/,'Resize must redraw readable foil text, not scale the old label');
   const denied=await context.newPage();
   await denied.addInitScript(()=>{Object.defineProperty(navigator,'clipboard',{value:{writeText:()=>Promise.reject(Error('Denied'))}});document.execCommand=()=>false;});
   await denied.goto(url('general'));await denied.locator('#scratch').press('Space');await denied.locator('#copy').click();
