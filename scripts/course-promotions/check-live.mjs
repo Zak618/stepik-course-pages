@@ -31,7 +31,7 @@ await context.route(base+'**',async route=>{
   const type=path.endsWith('.png')?'image/png':path.endsWith('.html')?'text/html':path.endsWith('.css')?'text/css':'text/javascript';
   return route.fulfill({body:assets.get(path),contentType:type});
 });
-const page=await context.newPage(),records=[],widgetErrors=[];
+const page=await context.newPage(),records=[],copyResults=[],widgetErrors=[];
 page.on('pageerror',error=>{if(error.stack?.includes('/course-promotions/'))widgetErrors.push(error.message);});
 try{
   for(const target of targets){
@@ -57,9 +57,14 @@ try{
     await frame.locator('#scratch').press('Enter');
     assert.equal(await frame.locator('#copy').isVisible(),true);
     assert.equal(await frame.locator('#promo').getAttribute('aria-hidden'),null);
+    await frame.locator('#copy').click();
+    await frame.waitForFunction(()=>['Скопировано ✓','Выделить код'].includes(document.querySelector('#copy span').textContent));
+    const copyResult=await frame.evaluate(()=>{const code=document.querySelector('#promo');return {automatic:document.querySelector('#copy span').textContent==='Скопировано ✓',selected:code.selectionStart===0&&code.selectionEnd===code.value.length};});
+    assert.ok(copyResult.automatic||copyResult.selected,'Clipboard success or usable manual fallback');
+    copyResults.push({key:target.key,...copyResult});
     console.log('Native ready '+target.key+' '+target.discount+'%');
   }
   assert.deepEqual(widgetErrors,[]);
-  await writeFile(dir+'/native-checks-'+courses.join('-')+'.json',JSON.stringify({records,hostBytesVerified:true,moduleMimeVerified:true,routedVerifiedAssets:true,widgetErrors,stepikWrites:0},null,2),{mode:0o600});
+  await writeFile(dir+'/native-checks-'+courses.join('-')+'.json',JSON.stringify({records,copyResults,hostBytesVerified:true,moduleMimeVerified:true,routedVerifiedAssets:true,widgetErrors,stepikWrites:0},null,2),{mode:0o600});
   console.log(JSON.stringify({courses,views:records.length,stepikWrites:0,noScroll:true,whiteBackground:true}));
 }finally{await context.unrouteAll({behavior:'ignoreErrors'});await browser.close();}

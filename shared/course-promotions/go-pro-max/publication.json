@@ -1,0 +1,759 @@
+{
+  "course": 305734,
+  "revision": "caadc6994129",
+  "assetRevision": "2d02afb8c415",
+  "verifiedAt": "2026-11-26T05:03:35.098Z",
+  "discounts": {
+    "general": {
+      "discount": 10,
+      "code": "GOSHECHKAMAX"
+    },
+    "go": {
+      "discount": 20,
+      "code": "GOSHECHKAMAX20"
+    }
+  },
+  "courses": [
+    {
+      "id": 305666,
+      "title": "Go-шечка (mini)",
+      "discount": 20,
+      "introduction": {
+        "source": 12608043,
+        "lesson": 2706554,
+        "unit": 2746569,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2706554/step/6?unit=2746569"
+      },
+      "final": {
+        "source": 12608044,
+        "lesson": 2713291,
+        "unit": 2753290,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2713291/step/2?unit=2753290"
+      }
+    },
+    {
+      "id": 300562,
+      "title": "Go-шечка (pro)",
+      "discount": 20,
+      "introduction": {
+        "source": 12608045,
+        "lesson": 2607481,
+        "unit": 2647025,
+        "position": 10,
+        "url": "https://stepik.org/lesson/2607481/step/10?unit=2647025"
+      },
+      "final": {
+        "source": 12608046,
+        "lesson": 2607571,
+        "unit": 2647115,
+        "position": 11,
+        "url": "https://stepik.org/lesson/2607571/step/11?unit=2647115"
+      }
+    },
+    {
+      "id": 300560,
+      "title": "GO Exclusive",
+      "discount": 10,
+      "introduction": {
+        "source": 12608047,
+        "lesson": 2607711,
+        "unit": 2647257,
+        "position": 10,
+        "url": "https://stepik.org/lesson/2607711/step/10?unit=2647257"
+      },
+      "final": {
+        "source": 12608048,
+        "lesson": 2632771,
+        "unit": 2672793,
+        "position": 4,
+        "url": "https://stepik.org/lesson/2632771/step/4?unit=2672793"
+      }
+    },
+    {
+      "id": 300153,
+      "title": "Python Exclusive: от Калининграда до Казани",
+      "discount": 10,
+      "introduction": {
+        "source": 12608049,
+        "lesson": 2601236,
+        "unit": 2640700,
+        "position": 8,
+        "url": "https://stepik.org/lesson/2601236/step/8?unit=2640700"
+      },
+      "final": {
+        "source": 12608050,
+        "lesson": 2601283,
+        "unit": 2640747,
+        "position": 31,
+        "url": "https://stepik.org/lesson/2601283/step/31?unit=2640747"
+      }
+    },
+    {
+      "id": 290426,
+      "title": "TypeScript (mini)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608051,
+        "lesson": 2435445,
+        "unit": 2472656,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2435445/step/6?unit=2472656"
+      },
+      "final": {
+        "source": 12608052,
+        "lesson": 2421754,
+        "unit": 2458513,
+        "position": 9,
+        "url": "https://stepik.org/lesson/2421754/step/9?unit=2458513"
+      }
+    },
+    {
+      "id": 290177,
+      "title": "React Exclusive",
+      "discount": 10,
+      "introduction": {
+        "source": 12608053,
+        "lesson": 2417841,
+        "unit": 2454266,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2417841/step/6?unit=2454266"
+      },
+      "final": {
+        "source": 12608054,
+        "lesson": 2417881,
+        "unit": 2454306,
+        "position": 9,
+        "url": "https://stepik.org/lesson/2417881/step/9?unit=2454306"
+      }
+    },
+    {
+      "id": 289356,
+      "title": "HTML Exclusive",
+      "discount": 10,
+      "introduction": {
+        "source": 12608055,
+        "lesson": 2406568,
+        "unit": 2442278,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2406568/step/6?unit=2442278"
+      },
+      "final": {
+        "source": 12608056,
+        "lesson": 2406564,
+        "unit": 2442274,
+        "position": 3,
+        "url": "https://stepik.org/lesson/2406564/step/3?unit=2442274"
+      }
+    },
+    {
+      "id": 218079,
+      "title": "React (mini)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608057,
+        "lesson": 1475847,
+        "unit": 1495540,
+        "position": 7,
+        "url": "https://stepik.org/lesson/1475847/step/7?unit=1495540"
+      },
+      "final": {
+        "source": 12608058,
+        "lesson": 1612257,
+        "unit": 1634038,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1612257/step/4?unit=1634038"
+      }
+    },
+    {
+      "id": 216887,
+      "title": "React (lite)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608059,
+        "lesson": 1502765,
+        "unit": 1522893,
+        "position": 8,
+        "url": "https://stepik.org/lesson/1502765/step/8?unit=1522893"
+      },
+      "final": {
+        "source": 12608060,
+        "lesson": 1612293,
+        "unit": 1634074,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1612293/step/4?unit=1634074"
+      }
+    },
+    {
+      "id": 214176,
+      "title": "Веб-разработка для начинающих",
+      "discount": 10,
+      "introduction": {
+        "source": 12608061,
+        "lesson": 1436317,
+        "unit": 1454907,
+        "position": 9,
+        "url": "https://stepik.org/lesson/1436317/step/9?unit=1454907"
+      },
+      "final": {
+        "source": 12608062,
+        "lesson": 1613248,
+        "unit": 1635053,
+        "position": 2,
+        "url": "https://stepik.org/lesson/1613248/step/2?unit=1635053"
+      }
+    },
+    {
+      "id": 200517,
+      "title": "React (pro)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608063,
+        "lesson": 1266598,
+        "unit": 1280832,
+        "position": 9,
+        "url": "https://stepik.org/lesson/1266598/step/9?unit=1280832"
+      },
+      "final": {
+        "source": 12608064,
+        "lesson": 1612267,
+        "unit": 1634047,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1612267/step/4?unit=1634047"
+      }
+    },
+    {
+      "id": 193612,
+      "title": "HTML CSS JS (lite)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608065,
+        "lesson": 1191706,
+        "unit": 1204692,
+        "position": 10,
+        "url": "https://stepik.org/lesson/1191706/step/10?unit=1204692"
+      },
+      "final": {
+        "source": 12608066,
+        "lesson": 1612237,
+        "unit": 1634018,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1612237/step/4?unit=1634018"
+      }
+    },
+    {
+      "id": 191652,
+      "title": "JavaScript (pro)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608068,
+        "lesson": 1170261,
+        "unit": 1182647,
+        "position": 7,
+        "url": "https://stepik.org/lesson/1170261/step/7?unit=1182647"
+      },
+      "final": {
+        "source": 12608069,
+        "lesson": 1170334,
+        "unit": 1182720,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1170334/step/4?unit=1182720"
+      }
+    },
+    {
+      "id": 187918,
+      "title": "HTML CSS (mini)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608070,
+        "lesson": 1134856,
+        "unit": 1146479,
+        "position": 10,
+        "url": "https://stepik.org/lesson/1134856/step/10?unit=1146479"
+      },
+      "final": {
+        "source": 12608071,
+        "lesson": 1142593,
+        "unit": 1154289,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1142593/step/3?unit=1154289"
+      }
+    },
+    {
+      "id": 181396,
+      "title": "Python Exclusive",
+      "discount": 10,
+      "introduction": {
+        "source": 12608072,
+        "lesson": 1064828,
+        "unit": 1074535,
+        "position": 6,
+        "url": "https://stepik.org/lesson/1064828/step/6?unit=1074535"
+      },
+      "final": {
+        "source": 12608073,
+        "lesson": 1064909,
+        "unit": 1074615,
+        "position": 5,
+        "url": "https://stepik.org/lesson/1064909/step/5?unit=1074615"
+      }
+    },
+    {
+      "id": 181030,
+      "title": "Python",
+      "discount": 10,
+      "introduction": {
+        "source": 12608074,
+        "lesson": 1103189,
+        "unit": 1114221,
+        "position": 9,
+        "url": "https://stepik.org/lesson/1103189/step/9?unit=1114221"
+      },
+      "final": {
+        "source": 12608075,
+        "lesson": 1103402,
+        "unit": 1114441,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1103402/step/3?unit=1114441"
+      }
+    },
+    {
+      "id": 177582,
+      "title": "HTML CSS (lite)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608076,
+        "lesson": 1014133,
+        "unit": 1022053,
+        "position": 11,
+        "url": "https://stepik.org/lesson/1014133/step/11?unit=1022053"
+      },
+      "final": {
+        "source": 12608077,
+        "lesson": 1014170,
+        "unit": 1022090,
+        "position": 7,
+        "url": "https://stepik.org/lesson/1014170/step/7?unit=1022090"
+      }
+    },
+    {
+      "id": 170115,
+      "title": "HTML CSS (pro)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608078,
+        "lesson": 923637,
+        "unit": 929530,
+        "position": 8,
+        "url": "https://stepik.org/lesson/923637/step/8?unit=929530"
+      },
+      "final": {
+        "source": 12608079,
+        "lesson": 923729,
+        "unit": 929622,
+        "position": 3,
+        "url": "https://stepik.org/lesson/923729/step/3?unit=929622"
+      }
+    },
+    {
+      "id": 158971,
+      "title": "JavaScript (lite)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608080,
+        "lesson": 1012323,
+        "unit": 1020179,
+        "position": 6,
+        "url": "https://stepik.org/lesson/1012323/step/6?unit=1020179"
+      },
+      "final": {
+        "source": 12608081,
+        "lesson": 1033792,
+        "unit": 1042160,
+        "position": 4,
+        "url": "https://stepik.org/lesson/1033792/step/4?unit=1042160"
+      }
+    },
+    {
+      "id": 135466,
+      "title": "HTML CSS JS",
+      "discount": 10,
+      "introduction": {
+        "source": 12608006,
+        "lesson": 888791,
+        "unit": 893531,
+        "position": 14,
+        "url": "https://stepik.org/lesson/888791/step/14?unit=893531"
+      },
+      "final": {
+        "source": 12608007,
+        "lesson": 903844,
+        "unit": 909038,
+        "position": 4,
+        "url": "https://stepik.org/lesson/903844/step/4?unit=909038"
+      }
+    },
+    {
+      "id": 300361,
+      "title": "Python Exclusive: путешествие по Уралу",
+      "discount": 10,
+      "introduction": {
+        "source": 12608082,
+        "lesson": 2604772,
+        "unit": 2644250,
+        "position": 15,
+        "url": "https://stepik.org/lesson/2604772/step/15?unit=2644250"
+      },
+      "final": {
+        "source": 12608083,
+        "lesson": 2608618,
+        "unit": 2648176,
+        "position": 14,
+        "url": "https://stepik.org/lesson/2608618/step/14?unit=2648176"
+      }
+    },
+    {
+      "id": 290423,
+      "title": "C#: Работа с базами данных в .NET",
+      "discount": 10,
+      "introduction": {
+        "source": 12608084,
+        "lesson": 2433991,
+        "unit": 2471148,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2433991/step/6?unit=2471148"
+      },
+      "final": {
+        "source": 12608085,
+        "lesson": 2421656,
+        "unit": 2458417,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2421656/step/2?unit=2458417"
+      }
+    },
+    {
+      "id": 290330,
+      "title": "C#: Основы LINQ",
+      "discount": 10,
+      "introduction": {
+        "source": 12608086,
+        "lesson": 2449401,
+        "unit": 2486722,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2449401/step/6?unit=2486722"
+      },
+      "final": {
+        "source": 12608087,
+        "lesson": 2420292,
+        "unit": 2457022,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2420292/step/6?unit=2457022"
+      }
+    },
+    {
+      "id": 290261,
+      "title": "C#: Сайт на ASP.NET",
+      "discount": 10,
+      "introduction": {
+        "source": 12608088,
+        "lesson": 2433969,
+        "unit": 2471128,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2433969/step/6?unit=2471128"
+      },
+      "final": {
+        "source": 12608089,
+        "lesson": 2419250,
+        "unit": 2455963,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2419250/step/2?unit=2455963"
+      }
+    },
+    {
+      "id": 290248,
+      "title": "Алгоритмы и структуры данных",
+      "discount": 10,
+      "introduction": {
+        "source": 12608090,
+        "lesson": 2438013,
+        "unit": 2475259,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2438013/step/6?unit=2475259"
+      },
+      "final": {
+        "source": 12608091,
+        "lesson": 2419039,
+        "unit": 2455752,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2419039/step/2?unit=2455752"
+      }
+    },
+    {
+      "id": 290060,
+      "title": "C#: Основы",
+      "discount": 10,
+      "introduction": {
+        "source": 12608092,
+        "lesson": 2441619,
+        "unit": 2478855,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2441619/step/6?unit=2478855"
+      },
+      "final": {
+        "source": 12608093,
+        "lesson": 2416011,
+        "unit": 2452070,
+        "position": 7,
+        "url": "https://stepik.org/lesson/2416011/step/7?unit=2452070"
+      }
+    },
+    {
+      "id": 290059,
+      "title": "Немецкий язык",
+      "discount": 10,
+      "introduction": {
+        "source": 12608094,
+        "lesson": 2434245,
+        "unit": 2471402,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2434245/step/6?unit=2471402"
+      },
+      "final": {
+        "source": 12608095,
+        "lesson": 2415984,
+        "unit": 2452043,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2415984/step/2?unit=2452043"
+      }
+    },
+    {
+      "id": 290057,
+      "title": "Паттерны ООП",
+      "discount": 10,
+      "introduction": {
+        "source": 12608096,
+        "lesson": 2415927,
+        "unit": 2451986,
+        "position": 6,
+        "url": "https://stepik.org/lesson/2415927/step/6?unit=2451986"
+      },
+      "final": {
+        "source": 12608097,
+        "lesson": 2415955,
+        "unit": 2452014,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2415955/step/2?unit=2452014"
+      }
+    },
+    {
+      "id": 290054,
+      "title": "Docker (mini)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608098,
+        "lesson": 2437922,
+        "unit": 2475169,
+        "position": 5,
+        "url": "https://stepik.org/lesson/2437922/step/5?unit=2475169"
+      },
+      "final": {
+        "source": 12608099,
+        "lesson": 2415892,
+        "unit": 2451951,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2415892/step/2?unit=2451951"
+      }
+    },
+    {
+      "id": 277096,
+      "title": "ИИ для всех: от идеи до заработка",
+      "discount": 10,
+      "introduction": {
+        "source": 12608100,
+        "lesson": 2254064,
+        "unit": 2288039,
+        "position": 7,
+        "url": "https://stepik.org/lesson/2254064/step/7?unit=2288039"
+      },
+      "final": {
+        "source": 12608101,
+        "lesson": 2254074,
+        "unit": 2288049,
+        "position": 3,
+        "url": "https://stepik.org/lesson/2254074/step/3?unit=2288049"
+      }
+    },
+    {
+      "id": 276638,
+      "title": "ИИ для всех: с нуля до своего продукта",
+      "discount": 10,
+      "introduction": {
+        "source": 12608102,
+        "lesson": 2247924,
+        "unit": 2281492,
+        "position": 8,
+        "url": "https://stepik.org/lesson/2247924/step/8?unit=2281492"
+      },
+      "final": {
+        "source": 12608103,
+        "lesson": 2251964,
+        "unit": 2285888,
+        "position": 2,
+        "url": "https://stepik.org/lesson/2251964/step/2?unit=2285888"
+      }
+    },
+    {
+      "id": 218158,
+      "title": "GitHub (mini)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608104,
+        "lesson": 1480667,
+        "unit": 1500376,
+        "position": 8,
+        "url": "https://stepik.org/lesson/1480667/step/8?unit=1500376"
+      },
+      "final": {
+        "source": 12608106,
+        "lesson": 2746626,
+        "unit": 2787244,
+        "position": 1,
+        "url": "https://stepik.org/lesson/2746626/step/1?unit=2787244"
+      }
+    },
+    {
+      "id": 187192,
+      "title": "Пакет FullStack-Разработчик",
+      "discount": 10,
+      "introduction": {
+        "source": 12608107,
+        "lesson": 1129760,
+        "unit": 1141267,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129760/step/3?unit=1141267"
+      },
+      "final": {
+        "source": 12608107,
+        "lesson": 1129760,
+        "unit": 1141267,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129760/step/3?unit=1141267"
+      }
+    },
+    {
+      "id": 187191,
+      "title": "Пакет Backend-Разработчик",
+      "discount": 10,
+      "introduction": {
+        "source": 12608108,
+        "lesson": 1129757,
+        "unit": 1141263,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129757/step/3?unit=1141263"
+      },
+      "final": {
+        "source": 12608108,
+        "lesson": 1129757,
+        "unit": 1141263,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129757/step/3?unit=1141263"
+      }
+    },
+    {
+      "id": 187189,
+      "title": "Пакет Frontend-Разработчик",
+      "discount": 10,
+      "introduction": {
+        "source": 12608109,
+        "lesson": 1129720,
+        "unit": 1141235,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129720/step/3?unit=1141235"
+      },
+      "final": {
+        "source": 12608109,
+        "lesson": 1129720,
+        "unit": 1141235,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1129720/step/3?unit=1141235"
+      }
+    },
+    {
+      "id": 184095,
+      "title": "SQL (lite)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608110,
+        "lesson": 1096145,
+        "unit": 1106928,
+        "position": 10,
+        "url": "https://stepik.org/lesson/1096145/step/10?unit=1106928"
+      },
+      "final": {
+        "source": 12608111,
+        "lesson": 1096146,
+        "unit": 1106929,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1096146/step/3?unit=1106929"
+      }
+    },
+    {
+      "id": 183142,
+      "title": "FullStack Pro MAX",
+      "discount": 10,
+      "introduction": {
+        "source": 12608112,
+        "lesson": 1086996,
+        "unit": 1097472,
+        "position": 7,
+        "url": "https://stepik.org/lesson/1086996/step/7?unit=1097472"
+      },
+      "final": {
+        "source": 12608114,
+        "lesson": 1088720,
+        "unit": 1099245,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1088720/step/3?unit=1099245"
+      }
+    },
+    {
+      "id": 181092,
+      "title": "PHP (pro)",
+      "discount": 10,
+      "introduction": {
+        "source": 12608115,
+        "lesson": 1059970,
+        "unit": 1069415,
+        "position": 8,
+        "url": "https://stepik.org/lesson/1059970/step/8?unit=1069415"
+      },
+      "final": {
+        "source": 12608116,
+        "lesson": 1060000,
+        "unit": 1069445,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1060000/step/3?unit=1069445"
+      }
+    },
+    {
+      "id": 179698,
+      "title": "Git и GitHub",
+      "discount": 10,
+      "introduction": {
+        "source": 12608117,
+        "lesson": 1044660,
+        "unit": 1053234,
+        "position": 8,
+        "url": "https://stepik.org/lesson/1044660/step/8?unit=1053234"
+      },
+      "final": {
+        "source": 12608118,
+        "lesson": 1044662,
+        "unit": 1053236,
+        "position": 3,
+        "url": "https://stepik.org/lesson/1044662/step/3?unit=1053236"
+      }
+    }
+  ]
+}
