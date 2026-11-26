@@ -49,6 +49,7 @@ try{
         assert.equal(link.target,'_blank');assert.ok(link.rel.includes('noopener'));
       }
       assert.equal(links.filter(link=>link.id===305734).length,1);
+      assert.equal(links.find(link=>link.id===305734).free,false);
       const goMax=await evaluate(`(()=>{
         const search=document.querySelector('#course-search');
         search.value='';search.dispatchEvent(new Event('input',{bubbles:true}));
@@ -63,8 +64,9 @@ try{
         });
       })()`);
       assert.equal(goMax.title,'Go-шечка Pro MAX');
-      assert.equal(goMax.href,'https://stepik.org/course/305734/promo');
+      assert.equal(goMax.href,'https://stepik.org/a/305734');
       assert.ok(goMax.cover>0);assert.equal(goMax.optional,true);
+      assert.equal(await evaluate(`(()=>{document.querySelector('#dialog-close').click();document.querySelector('#free-filter').click();return document.querySelectorAll('[data-course="305734"]').length;})()`),0,'Paid Go Pro MAX must not appear among free courses');
       results.push({file,width,courses:links.length,paid:links.filter(c=>!c.free).length});
     }
     for(const width of [1280,1100,1099,800,769,768,760,620,390,320]){

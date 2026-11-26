@@ -1,7 +1,7 @@
-/* Public Stepik catalogue checked 2026-11-13. Go Pro MAX added and checked 2026-11-25. */
+/* Public Stepik catalogue checked 2026-11-13. Go Pro MAX paid status checked 2026-11-26. */
 window.INTRO_CATALOG = {
   checkedAt: '2026-11-13',
-  updatedAt: '2026-11-25',
+  updatedAt: '2026-11-26',
   tracks: [
     {id:'go',title:'Go',symbol:'go',color:'#178ba9',tint:'#eaf8fc',line:'#cce8ef',description:'От первой программы к собственному сервису.',stages:[
       {title:'Ваш первый Go-код',note:'Начните здесь',courses:[305666]},
@@ -40,7 +40,7 @@ window.INTRO_CATALOG = {
   courses: [
     {id:305666,title:'Go-шечка (mini)',track:'go',free:true,description:'Начнём с первых команд, переменных, условий, циклов и функций.'},
     {id:300562,title:'Go-шечка (pro)',track:'go',free:false,description:'Практика Go: от первых программ до сервиса с HTTP, SQL, Docker и микросервисами.'},
-    {id:305734,title:'Go-шечка Pro MAX',track:'go',free:true,description:'Go, Vue, PostgreSQL, Git и Docker. От первых программ до своего сервиса доставки с каталогом, корзиной и заказами. Отдельная программа с основ, проходить pro перед ней не нужно.'},
+    {id:305734,title:'Go-шечка Pro MAX',track:'go',free:false,description:'Go, Vue, PostgreSQL, Git и Docker. От первых программ до своего сервиса доставки с каталогом, корзиной и заказами. Отдельная программа с основ, проходить pro перед ней не нужно.'},
     {id:300560,title:'GO Exclusive',track:'go',free:true,description:'Ещё один формат изучения Go: инженерная история, задания, мастерские и самостоятельные миссии. Не обязательная ступень после pro.'},
     {id:214176,title:'Веб-разработка для начинающих',track:'web',free:true,description:'Один из вводных маршрутов в веб-разработку. Подходит для знакомства с направлением.'},
     {id:187918,title:'HTML CSS (mini)',track:'web',free:true,description:'Вводный формат знакомства со структурой страниц и их оформлением.'},
